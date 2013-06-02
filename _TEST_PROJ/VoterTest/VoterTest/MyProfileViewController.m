@@ -95,7 +95,7 @@
    
 /*    
     [UIView transitionWithView:self.view duration:0.5
-                       options:UIViewAnimationOptionLayoutSubviews      
+                       options:UIViewAnimationOptionOverrideInheritedCurve //UIViewAnimationOptionLayoutSubviews
                     animations:^{ topView_.frame = frame;  }     
                     completion:NULL]; 
 */
@@ -104,7 +104,7 @@
     [UIView animateWithDuration:<#(NSTimeInterval)#> delay:<#(NSTimeInterval)#> options:<#(UIViewAnimationOptions)#> animations:<#^(void)animations#> completion:<#^(BOOL finished)completion#>
 */  
     
-    [UIView animateWithDuration:0.5 animations:^{topView_.frame = frame;}];
+//    [UIView animateWithDuration:0.5 animations:^{topView_.frame = frame;}];
 }
 
 
