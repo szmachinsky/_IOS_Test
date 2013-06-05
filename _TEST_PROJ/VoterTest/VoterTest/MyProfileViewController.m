@@ -104,7 +104,7 @@
     [UIView animateWithDuration:<#(NSTimeInterval)#> delay:<#(NSTimeInterval)#> options:<#(UIViewAnimationOptions)#> animations:<#^(void)animations#> completion:<#^(BOOL finished)completion#>
 */  
     
-//    [UIView animateWithDuration:0.5 animations:^{topView_.frame = frame;}];
+    [UIView animateWithDuration:0.5 animations:^{topView_.frame = frame;}];
 }
 
 
