@@ -168,7 +168,13 @@
 - (void)orientationChanged:(NSNotification	*)note
 {
     // Log the constant that represents the current orientation
-    NSLog(@"orientationChanged:	%d", [[note	object]	orientation]);
+//    NSLog(@"orientationChanged:	%d", [[note	object]	orientation]);
+    NSLog(@"orientationChanged to:	%d  current is:%d", [[note	object]	orientation], self.interfaceOrientation);
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    NSLog(@"did rotate from:%d  to:%d", fromInterfaceOrientation, self.interfaceOrientation);
 }
 
 
