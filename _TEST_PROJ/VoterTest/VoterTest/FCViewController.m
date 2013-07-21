@@ -85,10 +85,10 @@
 //===============================================================================
 - (void)fbDidLogin:(NSString*)token expDate:(NSDate*)date 
 {
-#ifdef DEBUG
+//#ifdef DEBUG
     NSLog(@"-delegate:token:%@",token);
     NSLog(@"-delegate:date:%@",date);    
-#endif
+//#endif
     [fbSession_ facebookGetInfo];    
 }
 
@@ -96,11 +96,11 @@
 {
     NSString *email = [result valueForKey:@"email"];
     NSString *name = [result valueForKey:@"name"];    
-#ifdef DEBUG
+//#ifdef DEBUG
     NSLog(@"delegate:token:%@",token);
     NSLog(@"delegate:date:%@",date);   
     NSLog(@"(%@)(%@)",email,name);     
-#endif
+//#endif
 //    self.username = name;
 //    self.email = email;
 //    [infoTableView_ reloadData];

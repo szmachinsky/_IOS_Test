@@ -25,13 +25,30 @@ static NSString* kAppId = @"331663473546996";
 @synthesize delegate = delegate_;
 @synthesize result = result_;
 
-- (id)initWithDelegate:(id<FBSeccionDelegate>) delegate; 
+/*
+"read_stream",
+"offline_access",
+"read_friendlists",
+"user_relationships",
+"user_likes",
+"user_about_me",
+"user_birthday",
+"user_activities",
+"friends_relationships",
+"user_relationship_details",
+"friends_relationship_details",
+"friends_birthday",
+"user_videos",
+"video_upload"
+*/
+
+- (id)initWithDelegate:(id<FBSeccionDelegate>) delegate;
 {
     self = [super init];
     if (self) {
         self.delegate = delegate;
 //      self.permissions = [NSArray arrayWithObjects:@"read_stream", @"offline_access", nil];   
-        self.permissions = [NSArray arrayWithObjects:@"offline_access", nil];       
+        self.permissions = [NSArray arrayWithObjects:@"offline_access",@"read_stream",@"user_about_me", nil];
         self.result = [[NSMutableDictionary alloc] initWithCapacity:5];
     }
     return self;
@@ -100,11 +117,13 @@ static NSString* kAppId = @"331663473546996";
     // result - NSDictionary
     [[UserInfo sharedInstance] releaseNetworkActivityIndicator];        
     NSDictionary *res = (NSDictionary*)result;
-#ifdef DEBUG
+//#ifdef DEBUG
     NSLog(@"++request didLoad:%@",res);
-#endif
+//#endif
     NSString *email = [res valueForKey:@"email"];
     NSString *name = [res valueForKey:@"name"];
+    NSString *photoURL = [res valueForKey:@"picture"];
+//    NSLog(@"photoURL:%@", [element objectForKey:@"picture"]);
 //    NSString *token =  facebook_.accessToken;
 //    NSDate *date = facebook_.expirationDate;
 #ifdef DEBUG
