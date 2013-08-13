@@ -707,7 +707,7 @@
 }
 
 - (IBAction)pressGoTo3:(id)sender {
-    //55.756492 37.622222  MINSK
+    //53.8879 27.6111  MINSK
     CLLocation *loc = [[CLLocation alloc] initWithLatitude:53.8879 longitude:27.6111];
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(loc.coordinate, 1000, 1000);
     [mapView_ setRegion:region animated:YES];
