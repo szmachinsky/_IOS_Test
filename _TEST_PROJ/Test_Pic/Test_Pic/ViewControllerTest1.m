@@ -174,8 +174,8 @@
     [panGesture setDelegate:self];
     [piece addGestureRecognizer:panGesture];
     
-//    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showResetMenu:)];
-//    [piece addGestureRecognizer:longPressGesture];
+    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showResetMenu:)];
+    [piece addGestureRecognizer:longPressGesture];
     
 //    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc]
 //                                  initWithTarget:self
@@ -273,10 +273,13 @@ NSString *pathInTmpDir(NSString	*fileName)
     if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
         UIMenuController *menuController = [UIMenuController sharedMenuController];
         UIMenuItem *resetMenuItem = [[UIMenuItem alloc] initWithTitle:@"Reset" action:@selector(resetPiece:)];
+//        UIMenuItem *resetMenuItem2 = [[UIMenuItem alloc] initWithTitle:@"Reset2" action:@selector(resetPiece:)];
+//        UIMenuItem *resetMenuItem3 = [[UIMenuItem alloc] initWithTitle:@"Reset3" action:@selector(resetPiece:)];
         CGPoint location = [gestureRecognizer locationInView:[gestureRecognizer view]];
         
         [self becomeFirstResponder];
         [menuController setMenuItems:[NSArray arrayWithObject:resetMenuItem]];
+//        [menuController setMenuItems:[NSArray arrayWithObjects:resetMenuItem,resetMenuItem2,resetMenuItem3,nil]];
         [menuController setTargetRect:CGRectMake(location.x, location.y, 0, 0) inView:[gestureRecognizer view]];
         [menuController setMenuVisible:YES animated:YES];
         
