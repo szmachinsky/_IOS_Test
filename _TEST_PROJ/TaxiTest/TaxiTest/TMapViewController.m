@@ -1063,6 +1063,27 @@
 }
 
 
+- (void)geoPathFrom:(CLLocationCoordinate2D)coordFrom to:(CLLocationCoordinate2D)coordTo
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *place1 = [NSString stringWithFormat:@"%f,%f",coordFrom.latitude,coordFrom.longitude];
+        NSString *place2 = [NSString stringWithFormat:@"%f,%f",coordTo.latitude,coordTo.longitude];
+        NSString *requestUrl = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/directions/json?origin=%@&destination=%@&language=ru&sensor=false",place1,place2];
+        NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:requestUrl]
+                                                           cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                                       timeoutInterval:60];
+        NSError *error = nil;
+        NSLog(@"route from (%@) to (%@)", place1,place2);
+        NSData *data = [NSURLConnection sendSynchronousRequest:req returningResponse:nil error:&error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self fetchedDataRoutes:data goTo:NO];
+        });
+    });
+    
+}
+
+
+
 - (void)fetchedDataGeocoder:(NSData *)data goTo:(BOOL)goOk
 {
     NSError *error = nil;
@@ -1096,27 +1117,6 @@
         
     }
 }
-
-
-- (void)geoPathFrom:(CLLocationCoordinate2D)coordFrom to:(CLLocationCoordinate2D)coordTo
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{        
-        NSString *place1 = [NSString stringWithFormat:@"%f,%f",coordFrom.latitude,coordFrom.longitude];
-        NSString *place2 = [NSString stringWithFormat:@"%f,%f",coordTo.latitude,coordTo.longitude];
-        NSString *requestUrl = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/directions/json?origin=%@&destination=%@&language=ru&sensor=false",place1,place2];
-        NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:requestUrl] 
-                                                           cachePolicy:NSURLRequestReturnCacheDataElseLoad 
-                                                       timeoutInterval:60];          
-        NSError *error = nil;
-        NSLog(@"route from (%@) to (%@)", place1,place2);
-        NSData *data = [NSURLConnection sendSynchronousRequest:req returningResponse:nil error:&error];       
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self fetchedDataRoutes:data goTo:NO];
-        });                                
-    });    
-    
-}
-
 
 
 - (void)geokodingForAddress:(NSString*)addr
