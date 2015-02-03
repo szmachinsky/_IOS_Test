@@ -17,6 +17,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    CGRect fr = [[UIScreen mainScreen] bounds];
+    NSLog(@"X=%f Y=%f",fr.size.width,fr.size.height);
+    
     return YES;
 }
 

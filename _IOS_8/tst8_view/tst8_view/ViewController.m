@@ -30,7 +30,7 @@
 {
     CGRect f1 = self.view.frame;
     CGRect f2 = self.label.frame;
-    //    NSLog(@"(%@)(%@)",f1,f2);
+//    NSLog(@"FRAMES=(%@)(%@)",f1,f2);
     f1 = CGRectZero;
 }
 

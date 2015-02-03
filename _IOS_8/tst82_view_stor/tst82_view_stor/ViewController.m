@@ -31,8 +31,7 @@
     [super viewDidAppear:animated];
     NSLog(@"viewDidAppear:ViewController");
     
-    [self performSelector:@selector(initControl) withObject:nil afterDelay:0.0];
-    
+    [self performSelector:@selector(initControl) withObject:nil afterDelay:0.0];    
 }
 
 - (void)initControl
