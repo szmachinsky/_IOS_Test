@@ -28,6 +28,7 @@
 		D50B5FD11A2244F000AC0713 /* CustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50B5FD01A2244F000AC0713 /* CustomView.xib */; };
 		D58CB5601A0D3BCB00041966 /* LoadFiles_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D58CB55E1A0D3BCB00041966 /* LoadFiles_VC.m */; };
 		D58CB5611A0D3BCB00041966 /* LoadFiles_VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58CB55F1A0D3BCB00041966 /* LoadFiles_VC.xib */; };
+		D58E68D21A82A79500D07313 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D58E68D11A82A79500D07313 /* Images.xcassets */; };
 		D5DDB26E19F41497003AEDE9 /* Test2_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DDB26C19F41497003AEDE9 /* Test2_VC.m */; };
 		D5DDB26F19F41497003AEDE9 /* Test2_VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DDB26D19F41497003AEDE9 /* Test2_VC.xib */; };
 		D5DDB27519F416BC003AEDE9 /* Test3_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DDB27319F416BC003AEDE9 /* Test3_VC.m */; };
@@ -66,6 +67,7 @@
 		D58CB55D1A0D3BCB00041966 /* LoadFiles_VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadFiles_VC.h; sourceTree = "<group>"; };
 		D58CB55E1A0D3BCB00041966 /* LoadFiles_VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadFiles_VC.m; sourceTree = "<group>"; };
 		D58CB55F1A0D3BCB00041966 /* LoadFiles_VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadFiles_VC.xib; sourceTree = "<group>"; };
+		D58E68D11A82A79500D07313 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D5DDB26B19F41497003AEDE9 /* Test2_VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test2_VC.h; sourceTree = "<group>"; };
 		D5DDB26C19F41497003AEDE9 /* Test2_VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test2_VC.m; sourceTree = "<group>"; };
 		D5DDB26D19F41497003AEDE9 /* Test2_VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Test2_VC.xib; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				D508502319F3139400857C18 /* MasterViewController.xib */,
 				D508501419F3139400857C18 /* AppDelegate.h */,
 				D508501519F3139400857C18 /* AppDelegate.m */,
+				D58E68D11A82A79500D07313 /* Images.xcassets */,
 				D508500C19F3139400857C18 /* Supporting Files */,
 			);
 			path = test_nav_xib;
@@ -275,6 +278,7 @@
 				D508501019F3139400857C18 /* InfoPlist.strings in Resources */,
 				D508501819F3139400857C18 /* Default.png in Resources */,
 				D508501A19F3139400857C18 /* Default@2x.png in Resources */,
+				D58E68D21A82A79500D07313 /* Images.xcassets in Resources */,
 				D508501C19F3139400857C18 /* Default-568h@2x.png in Resources */,
 				D5083C2B19F3F7C900C8F00C /* Test1_VC.xib in Resources */,
 				D50B5FD11A2244F000AC0713 /* CustomView.xib in Resources */,
@@ -396,6 +400,8 @@
 		D508502C19F3139400857C18 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "test_nav_xib/test_nav_xib-Prefix.pch";
 				INFOPLIST_FILE = "test_nav_xib/test_nav_xib-Info.plist";
@@ -409,6 +415,8 @@
 		D508502D19F3139400857C18 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "test_nav_xib/test_nav_xib-Prefix.pch";
 				INFOPLIST_FILE = "test_nav_xib/test_nav_xib-Info.plist";
