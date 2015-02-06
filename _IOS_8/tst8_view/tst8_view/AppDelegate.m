@@ -21,6 +21,9 @@
     CGRect fr = [[UIScreen mainScreen] bounds];
     NSLog(@"X=%f Y=%f",fr.size.width,fr.size.height);
     
+    float x = [[UIScreen mainScreen] scale];
+    NSLog(@"SCALE=%f",x);
+    
     return YES;
 }
 
