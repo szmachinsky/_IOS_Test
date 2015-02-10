@@ -57,8 +57,8 @@
     
     NSString *s1 = DOCUMENTS; //[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];//NSDocumentDirectory; //DOCUMENTS; //
     NSLog(@"/%@/",s1);
-    NSString *s2 = NSHomeDirectory();
-    NSLog(@"/%@/",s2);
+//    NSString *s2 = NSHomeDirectory();
+    NSLog(@"app_path=/%@/",NSHomeDirectory());
     
    return YES;
 }

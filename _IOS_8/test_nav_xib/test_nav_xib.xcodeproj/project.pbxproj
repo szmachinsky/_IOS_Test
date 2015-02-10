@@ -26,6 +26,10 @@
 		D508F4331A23507500C3776B /* YandexTest_VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D508F4311A23507500C3776B /* YandexTest_VC.xib */; };
 		D50B5FCF1A2244D200AC0713 /* CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D50B5FCE1A2244D200AC0713 /* CustomView.m */; };
 		D50B5FD11A2244F000AC0713 /* CustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D50B5FD01A2244F000AC0713 /* CustomView.xib */; };
+		D58ADFD61A8A9BD7004D9E91 /* TstNew1_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D58ADFD41A8A9BD7004D9E91 /* TstNew1_VC.m */; };
+		D58ADFD71A8A9BD7004D9E91 /* TstNew1_VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58ADFD51A8A9BD7004D9E91 /* TstNew1_VC.xib */; };
+		D58ADFDA1A8A9C16004D9E91 /* TstNew2_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D58ADFD91A8A9C16004D9E91 /* TstNew2_VC.m */; };
+		D58ADFDC1A8AA5C6004D9E91 /* TstNew2_VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58ADFDB1A8AA5C6004D9E91 /* TstNew2_VC.xib */; };
 		D58CB5601A0D3BCB00041966 /* LoadFiles_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D58CB55E1A0D3BCB00041966 /* LoadFiles_VC.m */; };
 		D58CB5611A0D3BCB00041966 /* LoadFiles_VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D58CB55F1A0D3BCB00041966 /* LoadFiles_VC.xib */; };
 		D58E68D21A82A79500D07313 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D58E68D11A82A79500D07313 /* Images.xcassets */; };
@@ -64,6 +68,12 @@
 		D50B5FCD1A2244D200AC0713 /* CustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomView.h; sourceTree = "<group>"; };
 		D50B5FCE1A2244D200AC0713 /* CustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomView.m; sourceTree = "<group>"; };
 		D50B5FD01A2244F000AC0713 /* CustomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomView.xib; sourceTree = "<group>"; };
+		D58ADFD31A8A9BD7004D9E91 /* TstNew1_VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TstNew1_VC.h; sourceTree = "<group>"; };
+		D58ADFD41A8A9BD7004D9E91 /* TstNew1_VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TstNew1_VC.m; sourceTree = "<group>"; };
+		D58ADFD51A8A9BD7004D9E91 /* TstNew1_VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TstNew1_VC.xib; sourceTree = "<group>"; };
+		D58ADFD81A8A9C16004D9E91 /* TstNew2_VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TstNew2_VC.h; sourceTree = "<group>"; };
+		D58ADFD91A8A9C16004D9E91 /* TstNew2_VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TstNew2_VC.m; sourceTree = "<group>"; };
+		D58ADFDB1A8AA5C6004D9E91 /* TstNew2_VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TstNew2_VC.xib; sourceTree = "<group>"; };
 		D58CB55D1A0D3BCB00041966 /* LoadFiles_VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadFiles_VC.h; sourceTree = "<group>"; };
 		D58CB55E1A0D3BCB00041966 /* LoadFiles_VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadFiles_VC.m; sourceTree = "<group>"; };
 		D58CB55F1A0D3BCB00041966 /* LoadFiles_VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadFiles_VC.xib; sourceTree = "<group>"; };
@@ -93,6 +103,7 @@
 		D5083C2519F3F53F00C8F00C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D58ADFD21A8A9B84004D9E91 /* Test_New */,
 				D508F42E1A23502C00C3776B /* YandexTest_VC */,
 				D58CB55C1A0D3B8C00041966 /* LoadFiles_VC */,
 				D5DDB27119F4169E003AEDE9 /* Test3_VC */,
@@ -179,6 +190,19 @@
 				D508F4311A23507500C3776B /* YandexTest_VC.xib */,
 			);
 			name = YandexTest_VC;
+			sourceTree = "<group>";
+		};
+		D58ADFD21A8A9B84004D9E91 /* Test_New */ = {
+			isa = PBXGroup;
+			children = (
+				D58ADFD31A8A9BD7004D9E91 /* TstNew1_VC.h */,
+				D58ADFD41A8A9BD7004D9E91 /* TstNew1_VC.m */,
+				D58ADFD51A8A9BD7004D9E91 /* TstNew1_VC.xib */,
+				D58ADFD81A8A9C16004D9E91 /* TstNew2_VC.h */,
+				D58ADFD91A8A9C16004D9E91 /* TstNew2_VC.m */,
+				D58ADFDB1A8AA5C6004D9E91 /* TstNew2_VC.xib */,
+			);
+			name = Test_New;
 			sourceTree = "<group>";
 		};
 		D58CB55C1A0D3B8C00041966 /* LoadFiles_VC */ = {
@@ -280,6 +304,7 @@
 				D508501A19F3139400857C18 /* Default@2x.png in Resources */,
 				D58E68D21A82A79500D07313 /* Images.xcassets in Resources */,
 				D508501C19F3139400857C18 /* Default-568h@2x.png in Resources */,
+				D58ADFD71A8A9BD7004D9E91 /* TstNew1_VC.xib in Resources */,
 				D5083C2B19F3F7C900C8F00C /* Test1_VC.xib in Resources */,
 				D50B5FD11A2244F000AC0713 /* CustomView.xib in Resources */,
 				D508502519F3139400857C18 /* MasterViewController.xib in Resources */,
@@ -288,6 +313,7 @@
 				D5DDB27619F416BC003AEDE9 /* Test3_VC.xib in Resources */,
 				D508502819F3139400857C18 /* DetailViewController.xib in Resources */,
 				D5DDB26F19F41497003AEDE9 /* Test2_VC.xib in Resources */,
+				D58ADFDC1A8AA5C6004D9E91 /* TstNew2_VC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,7 +324,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D58ADFD61A8A9BD7004D9E91 /* TstNew1_VC.m in Sources */,
 				D508501219F3139400857C18 /* main.m in Sources */,
+				D58ADFDA1A8A9C16004D9E91 /* TstNew2_VC.m in Sources */,
 				D508501619F3139400857C18 /* AppDelegate.m in Sources */,
 				D5083C2A19F3F7C900C8F00C /* Test1_VC.m in Sources */,
 				D5DDB26E19F41497003AEDE9 /* Test2_VC.m in Sources */,

@@ -12,6 +12,8 @@
 #import "Test1_VC.h"
 #import "Test2_VC.h"
 #import "Test3_VC.h"
+#import "TstNew1_VC.h"
+#import "TstNew2_VC.h"
 
 #import "LoadFiles_VC.h"
 #import "YandexTest_VC.h"
@@ -38,7 +40,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    def_rows = 5;
+    def_rows = 6;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
@@ -117,6 +119,11 @@
             NSLog(@"-----%@-----",cell.textLabel.text);
             break;
             
+        case 5:
+            cell.textLabel.text = @"NEW_1_2";
+            NSLog(@"-----%@-----",cell.textLabel.text);
+            break;
+            
         default:
             object = _objects[ind - def_rows];
             cell.textLabel.text = [object description];
@@ -182,8 +189,13 @@
         YandexTest_VC *vc = [[YandexTest_VC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
-   
-    if (indexPath.row > 4) {
+    if (indexPath.row == 5) {
+//        TstNew1_VC *vc = [[TstNew1_VC alloc] init];
+        TstNew2_VC *vc = [[TstNew2_VC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+  
+    if (indexPath.row > 5) {
         if (!self.detailViewController) {
             self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
         }
