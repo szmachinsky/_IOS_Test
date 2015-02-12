@@ -32,7 +32,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"_TEST_03_";
+    NSLog(@"viewDidLoad");
+   self.navigationItem.title = @"_TEST_03_";
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -52,6 +53,20 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     NSLog(@"viewDidDisappear");
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"viewWillAppear");
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSLog(@"viewDidAppear");
+}
+
+- (void)viewDidLayoutSubviews
+{
+    NSLog(@"viewDidLayoutSubviews");
 }
 
 -(void)dealloc{
