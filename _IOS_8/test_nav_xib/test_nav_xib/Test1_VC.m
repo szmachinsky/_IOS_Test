@@ -35,7 +35,12 @@
 }
 */
 
-
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    NSLog(@"-??-dev_viewDidLayoutSubviews");
+}
 
 
 

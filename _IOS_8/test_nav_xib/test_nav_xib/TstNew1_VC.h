@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TstNew1_VC : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UIButton *button;
 
 @end

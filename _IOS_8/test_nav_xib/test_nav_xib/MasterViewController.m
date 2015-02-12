@@ -190,8 +190,8 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     if (indexPath.row == 5) {
-//        TstNew1_VC *vc = [[TstNew1_VC alloc] init];
-        TstNew2_VC *vc = [[TstNew2_VC alloc] init];
+        TstNew1_VC *vc = [[TstNew1_VC alloc] init];
+//        TstNew2_VC *vc = [[TstNew2_VC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
   

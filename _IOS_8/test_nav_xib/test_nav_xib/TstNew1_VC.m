@@ -28,6 +28,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(BOOL)shouldAutorotate
+{
+    NSLog(@"-ask-dev_shouldAutorotate");
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    NSLog(@"-ask-dev_supportedInterfaceOrientations");
+    return UIInterfaceOrientationMaskPortrait |
+    UIInterfaceOrientationMaskLandscapeLeft |
+    UIInterfaceOrientationMaskLandscapeRight;
+//    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft;
+    //    return UIInterfaceOrientationMaskPortrait;
+}
+
 /*
 #pragma mark - Navigation
 
@@ -37,5 +54,21 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)pressButton:(id)sender {
+    static int i = 0;
+   if (++i % 2) {
+        [self.view sendSubviewToBack:self.button];
+    } else {
+        [self.view bringSubviewToFront:self.button];
+    }
+    
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock: ^{
+     }];
+
+}
+
+
 
 @end

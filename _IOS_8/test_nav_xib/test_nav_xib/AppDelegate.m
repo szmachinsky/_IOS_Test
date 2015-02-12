@@ -15,23 +15,24 @@
 
 @interface UINavigationController (RotationIOS6)
 //@property (nonatomic,retain) id voidVar;
-//- (BOOL)shouldAutorotate;
+- (BOOL)shouldAutorotate;
 - (NSUInteger)supportedInterfaceOrientations;
 @end
 
 
 @implementation UINavigationController (RotationIOS6)
 //@dynamic voidVar;
-//-(BOOL)shouldAutorotate
-//{
-//    NSLog(@"-2-Main_shouldAutorotate");
-//    return [self.topViewController shouldAutorotate];
-//}
+-(BOOL)shouldAutorotate
+{
+    NSLog(@"-2-Main_shouldAutorotate");
+    return [self.topViewController shouldAutorotate];
+}
 
 -(NSUInteger)supportedInterfaceOrientations
 {
     NSLog(@"-3-Main_supportedInterfaceOrientations");
-    return [self.topViewController supportedInterfaceOrientations];
+    NSUInteger ui = [self.topViewController supportedInterfaceOrientations];
+    return ui;
 }
 @end
 
