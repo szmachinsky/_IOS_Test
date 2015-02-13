@@ -69,6 +69,44 @@
 
 }
 
+- (IBAction)pressBut1:(id)sender {
+    CGRect b1 = self.view1.bounds;
+    CGRect f1 = self.view1.frame;
+    CGRect f2 = self.view2.frame;
+    CGPoint c1 = self.view1.center;
+    CGPoint c2 = self.view2.center;
+    
+    b1.origin.x +=10;
+    b1.origin.y +=10;
+    self.view1.bounds = b1;
+    
+    CGRect f11 = self.view1.frame;
+    CGRect f22 = self.view2.frame;
+    CGPoint c11 = self.view1.center;
+    CGPoint c22 = self.view2.center;
+    b1 = CGRectZero;
+}
+
+- (IBAction)pressBut2:(id)sender {
+//    CGRect b2 = self.view2.bounds;
+//    CGRect f1 = self.view1.frame;
+//    CGRect f2 = self.view2.frame;
+//    
+//    b2.size.width +=10;
+//    b2.size.height +=10;
+//    self.view2.bounds = b2;
+//    
+//    f1 = self.view1.frame;
+//    f2 = self.view2.frame;
+    
+//    self.view1.transform = CGAffineTransformMakeRotation(45 * M_PI/180.0);
+    
+    self.view2.transform = CGAffineTransformMakeTranslation(100, 0);
+    self.view2.transform = CGAffineTransformRotate(self.view2.transform, 45 * M_PI/180.0);
+    
+    
+    
+}
 
 
 @end
