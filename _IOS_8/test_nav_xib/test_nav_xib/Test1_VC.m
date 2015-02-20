@@ -39,14 +39,14 @@
 {
     [super viewDidLayoutSubviews];
     
-    NSLog(@"-??-dev_viewDidLayoutSubviews");
+    NSLog(@"d1-??-dev_viewDidLayoutSubviews");
 }
 
 
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    NSLog(@"-01-dev_willRotateToInterfaceOrientation %d %f",toInterfaceOrientation,duration);
+    NSLog(@"d1-01-dev_willRotateToInterfaceOrientation %d %f",toInterfaceOrientation,duration);
     self.view.backgroundColor = [UIColor redColor];
     
 }
@@ -54,13 +54,13 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
                                          duration:(NSTimeInterval)duration
 {
-    NSLog(@"-02-dev_willAnimateRotationToInterfaceOrientation %d %f",toInterfaceOrientation,duration);
+    NSLog(@"d1-02-dev_willAnimateRotationToInterfaceOrientation %d %f",toInterfaceOrientation,duration);
     self.view.backgroundColor = [UIColor blueColor];
 }
 
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-     NSLog(@"-03-dev_didRotateFromInterfaceOrientation %d",toInterfaceOrientation);
+     NSLog(@"d1-03-dev_didRotateFromInterfaceOrientation %d",toInterfaceOrientation);
     self.view.backgroundColor = [UIColor greenColor];
 }
 
@@ -68,19 +68,23 @@
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    NSLog(@"-3-dev_supportedInterfaceOrientations");
-    return UIInterfaceOrientationMaskPortrait |
-    UIInterfaceOrientationMaskLandscapeLeft |
-    UIInterfaceOrientationMaskLandscapeRight;
+    NSLog(@"d1---dev_supportedInterfaceOrientations");
+    
+    return UIInterfaceOrientationMaskPortrait;
+    
+//    return UIInterfaceOrientationMaskPortrait |
+//    UIInterfaceOrientationMaskLandscapeLeft |
+//    UIInterfaceOrientationMaskLandscapeRight;
+//    
 //    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft;
 //    return UIInterfaceOrientationMaskPortrait;
 }
 
-//-(BOOL)shouldAutorotate
-//{
-//    NSLog(@"-2-dev_shouldAutorotate");
-//    return YES;
-//}
+-(BOOL)shouldAutorotate
+{
+    NSLog(@"d1--dev_shouldAutorotate");
+    return YES;
+}
 
 
 

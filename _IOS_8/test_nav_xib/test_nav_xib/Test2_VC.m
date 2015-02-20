@@ -35,4 +35,10 @@
 }
 */
 
+- (NSUInteger)supportedInterfaceOrientations
+{
+    NSLog(@"d2---dev_supportedInterfaceOrientations");
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 @end

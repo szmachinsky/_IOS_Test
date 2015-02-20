@@ -13,6 +13,8 @@
 
 //#define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
 
+/*
+
 @interface UINavigationController (RotationIOS6)
 //@property (nonatomic,retain) id voidVar;
 - (BOOL)shouldAutorotate;
@@ -35,8 +37,26 @@
     return ui;
 }
 @end
+*/
 
 
+@implementation UINavigationController (OrientationSettings_IOS6)
+
+-(BOOL)shouldAutorotate {
+    NSLog(@"-1-Main_shouldAutorotate");
+    return [[self.viewControllers lastObject] shouldAutorotate];
+}
+
+-(NSUInteger)supportedInterfaceOrientations {
+    NSLog(@"-2-Main_supportedInterfaceOrientations");
+   return [[self.viewControllers lastObject] supportedInterfaceOrientations];
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    NSLog(@"-3-Main_preferredInterfaceOrientationForPresentation");
+    return [[self.viewControllers lastObject] preferredInterfaceOrientationForPresentation];
+}
+@end
 
 
 
@@ -63,6 +83,25 @@
     
    return YES;
 }
+
+
+-(NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+{
+    UIViewController *presentedViewController = window.rootViewController.presentedViewController;
+    if (presentedViewController) {
+        NSLog(@"-!!!-Main_supportedInterfaceOrientationsForWindow:%@",NSStringFromClass([presentedViewController class]));
+    }
+    return UIInterfaceOrientationMaskPortrait;
+//    return ([presentedViewController supportedInterfaceOrientations]);
+    
+//    if (presentedViewController) {
+//        if ([presentedViewController isKindOfClass:[UIActivityViewController class]] || [presentedViewController isKindOfClass:[UIAlertController class]]) {
+//            return UIInterfaceOrientationMaskPortrait;
+//        }
+//    }
+    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
