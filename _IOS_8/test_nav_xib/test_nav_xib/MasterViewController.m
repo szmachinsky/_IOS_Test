@@ -77,7 +77,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger col = def_rows + _objects.count;
-    NSLog(@"row count = %ld",(long)col);
+//    NSLog(@"row count = %ld",(long)col);
     return (def_rows + _objects.count);
 }
 
@@ -102,7 +102,7 @@
             NSLog(@"-----%@-----",cell.textLabel.text);
             break;
         case 1:
-            cell.textLabel.text = @"Test2_VC";
+            cell.textLabel.text = @"Test2_VC - Act Sheet";
             NSLog(@"-----%@-----",cell.textLabel.text);
             break;
         case 2:

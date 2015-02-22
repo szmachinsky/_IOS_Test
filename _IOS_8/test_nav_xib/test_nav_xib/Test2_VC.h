@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Test2_VC : UIViewController
+@interface Test2_VC : UIViewController <UIActionSheetDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *button1;
+@property (weak, nonatomic) IBOutlet UIButton *button2;
+@property (weak, nonatomic) IBOutlet UIButton *button3;
 
 @end

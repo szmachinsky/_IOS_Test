@@ -70,12 +70,12 @@
 {
     NSLog(@"d1---dev_supportedInterfaceOrientations");
     
-    return UIInterfaceOrientationMaskPortrait;
+//    return UIInterfaceOrientationMaskPortrait;
     
-//    return UIInterfaceOrientationMaskPortrait |
-//    UIInterfaceOrientationMaskLandscapeLeft |
-//    UIInterfaceOrientationMaskLandscapeRight;
-//    
+    return UIInterfaceOrientationMaskPortrait |
+    UIInterfaceOrientationMaskLandscapeLeft |
+    UIInterfaceOrientationMaskLandscapeRight;
+//
 //    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft;
 //    return UIInterfaceOrientationMaskPortrait;
 }

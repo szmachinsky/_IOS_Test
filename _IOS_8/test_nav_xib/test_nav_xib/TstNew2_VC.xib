@@ -24,7 +24,7 @@
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="0.72069671654782208" blue="0.80411431041529302" alpha="1" colorSpace="calibratedRGB"/>
-            <point key="canvasLocation" x="439" y="220"/>
+            <point key="canvasLocation" x="177" y="235"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

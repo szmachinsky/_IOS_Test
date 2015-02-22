@@ -64,6 +64,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSLog(@"---0----");
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 
@@ -91,7 +92,7 @@
     if (presentedViewController) {
         NSLog(@"-!!!-Main_supportedInterfaceOrientationsForWindow:%@",NSStringFromClass([presentedViewController class]));
     }
-    return UIInterfaceOrientationMaskPortrait;
+//    return UIInterfaceOrientationMaskPortrait;
 //    return ([presentedViewController supportedInterfaceOrientations]);
     
 //    if (presentedViewController) {
@@ -118,11 +119,16 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    NSLog(@"---1----");
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    NSLog(@"---2----");
+    NSNotification *anote = [NSNotification notificationWithName:@"kRefreshAfterBackgroundState" object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:anote];
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
