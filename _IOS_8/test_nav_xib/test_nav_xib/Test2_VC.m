@@ -24,7 +24,9 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"_TEST_02_";
     
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Refrech) name:@"kRefreshAfterBackgroundState" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Refrech) name:@"kRefreshAfterBackgroundState" object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleOrientationChangeNotification:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,28 +101,39 @@
 //                                                     otherButtonItems:@[@"Item1",@"Item2"]];
     
     UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self
-                                                    cancelButtonTitle:@"Cancel"
+                                                    cancelButtonTitle:@"Cancel1"
                                                destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"Item1",@"Item2",nil];
-                                  
-    [actionSheet showInView:self.view];
+                                                    otherButtonTitles:@"Item11",@"Item12",nil];
+//    int i = act_Sheet.actionSheetStyle;
+//    act_Sheet.actionSheetStyle = UIActionSheetStyleAutomatic;
+    [actionSheet showInView:self.navigationController.view];
+    
     act_Sheet = actionSheet;
 }
 
 
 - (IBAction)pressButton2:(UIButton *)sender {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"My Alert"
-                                                                   message:@"This is an alert."
-                                                            preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"My Alert"
+//                                                                   message:@"This is an alert."
+//                                                            preferredStyle:UIAlertControllerStyleAlert];
+//    
+//    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+//                                                          handler:^(UIAlertAction * action) {}];
+//    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
+//                                                          handler:^(UIAlertAction * action) {}];
+//    
+//    [alert addAction:defaultAction];
+//    [alert addAction:cancelAction];
+//    [self presentViewController:alert animated:YES completion:nil];
     
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * action) {}];
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
-                                                          handler:^(UIAlertAction * action) {}];
+    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self
+                                                    cancelButtonTitle:@"Cancel2"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Item21",@"Item22",nil];
     
-    [alert addAction:defaultAction];
-    [alert addAction:cancelAction];
-    [self presentViewController:alert animated:YES completion:nil];
+    [actionSheet showInView:self.view];
+    act_Sheet = actionSheet;
+    
 }
 
 - (IBAction)pressButton3:(UIButton *)sender {
@@ -140,7 +153,12 @@
     [alert addAction:defaultAction2];
     [alert addAction:canceltAction];
 
+//    [self presentViewController:alert animated:YES completion:nil];
+    [self setModalPresentationStyle:UIModalPresentationPopover];
+    [alert.popoverPresentationController setSourceView:sender];
+    
     [self presentViewController:alert animated:YES completion:nil];
+    
     act_Alert = alert;
 }
 
@@ -148,24 +166,48 @@
 -(void)Refrech
 {
     NSLog(@"kRefreshAfterBackgroundState");
-    [self performSelector:@selector(after) withObject:nil afterDelay:1.5];
-//    [act_Sheet setNeedsDisplay];
-//    [act_Sheet setNeedsLayout];
-//    [act_Sheet setNeedsUpdateConstraints];
+//    [self performSelector:@selector(after) withObject:nil afterDelay:1.0];
+//    act_Sheet.hidden = YES;
+    
+//  [act_Sheet setNeedsDisplay];
+//  [self.view setNeedsLayout];
+//  [act_Sheet setNeedsLayout];
+//  [act_Sheet setNeedsUpdateConstraints];
+    
+//    [self.navigationController.view setNeedsLayout];
+    
+    [super viewWillLayoutSubviews];
+
+    
+    [act_Sheet showInView:self.navigationController.view];
     
     
-//    [act_Alert viewDidAppear:NO];
+//  [act_Alert viewDidAppear:NO];
     
 }
 
 -(void)after
 {
     NSLog(@"after");
- //   [act_Sheet setNeedsDisplay];
+ // [act_Sheet setNeedsDisplay];
  //   [act_Sheet setNeedsLayout];
-    [act_Sheet setNeedsUpdateConstraints];
+    
+ //   act_Sheet.hidden = NO;
+//    [act_Sheet setNeedsLayout];
+//  [self.view setNeedsLayout]; vknkdnkfv  dkjndv  dsvkjvsv sdvsdv  d d
+
+    
+//    [act_Sheet dismissWithClickedButtonIndex:2 animated:NO];
+//    [self pressButton2:nil];
+    
+ //   [act_Sheet setNeedsUpdateConstraints];
     
 }
 
+-(void)handleOrientationChangeNotification:(NSNotification *)notification
+{
+    NSLog(@"handleOrientationChangeNotification111");
+//    UIDeviceOrientation currentDeviceOrientation =  [[UIDevice currentDevice] orientation];
+}
 
 @end

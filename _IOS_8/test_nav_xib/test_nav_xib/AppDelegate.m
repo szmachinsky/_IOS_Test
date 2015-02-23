@@ -86,22 +86,22 @@
 }
 
 
--(NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
-{
-    UIViewController *presentedViewController = window.rootViewController.presentedViewController;
-    if (presentedViewController) {
-        NSLog(@"-!!!-Main_supportedInterfaceOrientationsForWindow:%@",NSStringFromClass([presentedViewController class]));
-    }
-//    return UIInterfaceOrientationMaskPortrait;
-//    return ([presentedViewController supportedInterfaceOrientations]);
-    
+//-(NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+//{
+//    UIViewController *presentedViewController = window.rootViewController.presentedViewController;
 //    if (presentedViewController) {
-//        if ([presentedViewController isKindOfClass:[UIActivityViewController class]] || [presentedViewController isKindOfClass:[UIAlertController class]]) {
-//            return UIInterfaceOrientationMaskPortrait;
-//        }
+//        NSLog(@"-!!!-Main_supportedInterfaceOrientationsForWindow:%@",NSStringFromClass([presentedViewController class]));
 //    }
-    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
-}
+////    return UIInterfaceOrientationMaskPortrait;
+////    return ([presentedViewController supportedInterfaceOrientations]);
+//    
+////    if (presentedViewController) {
+////        if ([presentedViewController isKindOfClass:[UIActivityViewController class]] || [presentedViewController isKindOfClass:[UIAlertController class]]) {
+////            return UIInterfaceOrientationMaskPortrait;
+////        }
+////    }
+//    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+//}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -120,15 +120,42 @@
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     NSLog(@"---1----");
+//    NSNotification *anote1 = [NSNotification notificationWithName:@"kRefreshAfterBackgroundState" object:nil userInfo:nil];
+//    [[NSNotificationCenter defaultCenter] postNotification:anote1];
+    
+    
+//    NSNotification *anote2 = [NSNotification notificationWithName:UIDeviceOrientationDidChangeNotification object:nil userInfo:nil];
+//    [[NSNotificationCenter defaultCenter] postNotification:anote2];
+    
+
 }
+
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     NSLog(@"---2----");
-    NSNotification *anote = [NSNotification notificationWithName:@"kRefreshAfterBackgroundState" object:nil userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:anote];
+    
+    NSNotification *anote1 = [NSNotification notificationWithName:@"kRefreshAfterBackgroundState" object:nil userInfo:nil];
+    [[NSNotificationCenter defaultCenter] postNotification:anote1];
+    
+    
+    for (UIWindow *window in [UIApplication sharedApplication].windows) { //zs
+        NSLog(@"-setNeedsLayout-");
+        [window setNeedsLayout];
+ //       [window setNeedsDisplay];
+    }
+//    [self performSelector:@selector(action) withObject:nil afterDelay:1.0];
+}
 
+-(void)action
+{
+    for (UIWindow *window in [UIApplication sharedApplication].windows) { //zs
+        NSLog(@"-setNeedsLayout-");
+        //        [window setNeedsLayout];
+        [window setNeedsDisplay];
+    }
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
