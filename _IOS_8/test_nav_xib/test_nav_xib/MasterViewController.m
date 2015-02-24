@@ -44,6 +44,12 @@
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
+    
+    NSLog(@"test - NSLog");
+    _NSLog(@"test - _NSLog");
+    _NSLog0(@"test - _NSLog0");
+    printf("test1 %d\n",def_rows);
+    printf("test2 %d\n",def_rows);
 }
 
 - (void)didReceiveMemoryWarning
@@ -131,6 +137,12 @@
             break;
     }
     
+    cell.textLabel.alpha = 0.0;
+    [UIView animateWithDuration:3.0
+                     animations:^{
+                         cell.textLabel.alpha = 1.0;
+                     } completion:nil];
+
     
     return cell;
 }

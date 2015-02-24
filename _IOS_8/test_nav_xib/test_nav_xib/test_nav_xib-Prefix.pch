@@ -15,3 +15,33 @@
 
 #define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
 
+//=================== DEBUG_LOG ==================
+#define _DEB__LOG_ 0
+
+#if _DEB__LOG_  //in debug mode = 1
+    #define _DEBUG__NSLOG
+    #define _DEBUG__MSG
+    #define _DEBUG__MSG0
+#else           //in release mode = 0
+//  #define _DEBUG__NSLOG
+  #define _DEBUG__MSG
+  #define _DEBUG__MSG0
+#endif
+
+#ifdef _DEBUG__MSG
+#define _NSLog(...)  NSLog(__VA_ARGS__)
+#else
+#define _NSLog(...)
+#endif
+
+#ifdef _DEBUG__MSG0
+#define _NSLog0(...)  NSLog(__VA_ARGS__)
+#else
+#define _NSLog0(...)
+#endif
+
+#ifndef _DEBUG__NSLOG
+#define NSLog(...)    ((void)0)
+#endif
+//=====================================
+
