@@ -141,7 +141,7 @@
     
     
     for (UIWindow *window in [UIApplication sharedApplication].windows) { //zs
-        NSLog(@"-setNeedsLayout-");
+        NSLog(@"-setNeedsLayout1-");
         [window setNeedsLayout];
  //       [window setNeedsDisplay];
     }
@@ -151,7 +151,7 @@
 -(void)action
 {
     for (UIWindow *window in [UIApplication sharedApplication].windows) { //zs
-        NSLog(@"-setNeedsLayout-");
+        NSLog(@"-setNeedsLayout2-");
         //        [window setNeedsLayout];
         [window setNeedsDisplay];
     }

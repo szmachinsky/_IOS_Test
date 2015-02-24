@@ -128,6 +128,7 @@
         case 5:
             cell.textLabel.text = @"NEW_1_2";
             NSLog(@"-----%@-----",cell.textLabel.text);
+            [self performSelector:@selector(delayed) withObject:nil afterDelay:1.0];
             break;
             
         default:
@@ -137,15 +138,25 @@
             break;
     }
     
-    cell.textLabel.alpha = 0.0;
-    [UIView animateWithDuration:3.0
+    cell.textLabel.alpha = 0.2;
+    [UIView animateWithDuration:0.0
                      animations:^{
+                         NSLog(@"anim beg");
                          cell.textLabel.alpha = 1.0;
-                     } completion:nil];
+                     } completion:^(BOOL finished) {
+                         NSLog(@"%d %f",finished,cell.textLabel.alpha);
+                     }];
+    
 
+    NSLog(@"cell end");
     
     return cell;
 }
+ -(void)delayed
+{
+    NSLog(@"del");
+}
+
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {

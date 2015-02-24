@@ -16,7 +16,7 @@
 #define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
 
 //=================== DEBUG_LOG ==================
-#define _DEB__LOG_ 0
+#define _DEB__LOG_ 1
 
 #if _DEB__LOG_  //in debug mode = 1
     #define _DEBUG__NSLOG
