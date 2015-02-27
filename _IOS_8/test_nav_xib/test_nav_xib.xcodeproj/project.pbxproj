@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23EA78471A9F013900EACAE4 /* NSObject+Dealloc.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EA78451A9F013900EACAE4 /* NSObject+Dealloc.m */; };
+		23EA78481A9F013900EACAE4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 23EA78461A9F013900EACAE4 /* README.md */; };
 		D5083C2A19F3F7C900C8F00C /* Test1_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5083C2819F3F7C900C8F00C /* Test1_VC.m */; };
 		D5083C2B19F3F7C900C8F00C /* Test1_VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5083C2919F3F7C900C8F00C /* Test1_VC.xib */; };
 		D508500619F3139400857C18 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D508500519F3139400857C18 /* UIKit.framework */; };
@@ -40,6 +42,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23EA78441A9F013900EACAE4 /* NSObject+Dealloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Dealloc.h"; sourceTree = "<group>"; };
+		23EA78451A9F013900EACAE4 /* NSObject+Dealloc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Dealloc.m"; sourceTree = "<group>"; };
+		23EA78461A9F013900EACAE4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D5083C2719F3F7C900C8F00C /* Test1_VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test1_VC.h; sourceTree = "<group>"; };
 		D5083C2819F3F7C900C8F00C /* Test1_VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test1_VC.m; sourceTree = "<group>"; };
 		D5083C2919F3F7C900C8F00C /* Test1_VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Test1_VC.xib; sourceTree = "<group>"; };
@@ -100,6 +105,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23EA78421A9F00ED00EACAE4 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				23EA78431A9F00FA00EACAE4 /* Dealloc */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		23EA78431A9F00FA00EACAE4 /* Dealloc */ = {
+			isa = PBXGroup;
+			children = (
+				23EA78441A9F013900EACAE4 /* NSObject+Dealloc.h */,
+				23EA78451A9F013900EACAE4 /* NSObject+Dealloc.m */,
+				23EA78461A9F013900EACAE4 /* README.md */,
+			);
+			name = Dealloc;
+			sourceTree = "<group>";
+		};
 		D5083C2519F3F53F00C8F00C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +176,7 @@
 		D508500B19F3139400857C18 /* test_nav_xib */ = {
 			isa = PBXGroup;
 			children = (
+				23EA78421A9F00ED00EACAE4 /* Utils */,
 				D5083C2519F3F53F00C8F00C /* Controllers */,
 				D508502019F3139400857C18 /* DetailViewController.h */,
 				D508502119F3139400857C18 /* DetailViewController.m */,
@@ -334,6 +358,8 @@
 				D50B5FCF1A2244D200AC0713 /* CustomView.m in Sources */,
 				D508501F19F3139400857C18 /* MasterViewController.m in Sources */,
 				D5DDB27519F416BC003AEDE9 /* Test3_VC.m in Sources */,
+				23EA78481A9F013900EACAE4 /* README.md in Sources */,
+				23EA78471A9F013900EACAE4 /* NSObject+Dealloc.m in Sources */,
 				D508502219F3139400857C18 /* DetailViewController.m in Sources */,
 				D508F4321A23507500C3776B /* YandexTest_VC.m in Sources */,
 			);

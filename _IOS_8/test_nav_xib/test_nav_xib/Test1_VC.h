@@ -10,4 +10,6 @@
 
 @interface Test1_VC : UIViewController
 
+//- (NSString *)deallocDescription; //custom dealloc message!!!!
+
 @end

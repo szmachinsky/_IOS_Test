@@ -10,6 +10,9 @@
 
 #import "MasterViewController.h"
 
+#import "NSObject+Dealloc.h"
+#import "Test1_VC.h"
+
 
 //#define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
 
@@ -82,8 +85,23 @@
 //    NSString *s2 = NSHomeDirectory();
     NSLog(@"app_path=/%@/",NSHomeDirectory());
     
+    [Test1_VC RP_toggleSwizzDealloc]; //set custom dealloc!!!
+    
+    
    return YES;
 }
+
+
+//-(NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
+//{
+//    NSString *viewControllerClassName = [NSString stringWithUTF8String:object_getClassName(window.rootViewController)];
+//    if ([viewControllerClassName isEqualToString:@"UINavigationController"])   {
+//        return UIInterfaceOrientationMaskPortrait;
+//    }
+//    else {
+//        return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+//    }
+//}
 
 
 //-(NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
@@ -143,8 +161,12 @@
     for (UIWindow *window in [UIApplication sharedApplication].windows) { //zs
         NSLog(@"-setNeedsLayout1-");
         [window setNeedsLayout];
- //       [window setNeedsDisplay];
+ //     [window setNeedsDisplay];
     }
+    
+    NSLog(@"-setNeedsLayout2-");
+    [self.window.rootViewController.view setNeedsLayout];
+    
 //    [self performSelector:@selector(action) withObject:nil afterDelay:1.0];
 }
 

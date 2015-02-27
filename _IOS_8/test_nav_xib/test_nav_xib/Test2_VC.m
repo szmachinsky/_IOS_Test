@@ -7,6 +7,7 @@
 //
 
 #import "Test2_VC.h"
+#import <objc/runtime.h>
 
 @interface Test2_VC ()
 
@@ -72,9 +73,15 @@
 - (NSUInteger)supportedInterfaceOrientations
 {
     NSLog(@"d2---dev_supportedInterfaceOrientations");
-//  return UIInterfaceOrientationMaskPortrait;
+//   return UIInterfaceOrientationMaskPortrait;
     return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
 }
+
+//-(BOOL)shouldAutorotate
+//{
+//    NSLog(@"d2--dev_shouldAutorotate");
+//    return YES;
+//}
 
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -134,6 +141,7 @@
     [actionSheet showInView:self.view];
     act_Sheet = actionSheet;
     
+    [self showAllMethods];
 }
 
 - (IBAction)pressButton3:(UIButton *)sender {
@@ -163,10 +171,59 @@
 }
 
 
+-(void)showAllMethods
+{
+    void                    * iterator = 0;
+    struct objc_method_list * methodList;
+    
+    //
+    // Each call to class_nextMethodList returns one methodList
+    //
+    
+    Class cls = [UIActionSheet class];
+//    methodList = class_nextMethodList( cl, &iterator  );
+//    
+//    while ( methodList != nil )
+//    {
+//        // …do something with the method list here…
+//        
+//        methodList = class_nextMethodList ( cl, &iterator  );
+//    }
+    
+//    unsigned int count = 0;
+//    
+//    Method *m =  class_copyMethodList (cls,&count);
+//    Method m1 =m[0];
+//    Method m2 =m[1];
+  
+    
+    //SomeClass * t = [[SomeClass alloc] init];
+    
+    int i=0;
+    unsigned int mc = 0;
+    Method * mlist = class_copyMethodList(object_getClass(act_Sheet), &mc);
+//    Method * mlist = class_copyMethodList(cls, &mc);
+   NSLog(@"%d methods", mc);
+    for(i=0;i<mc;i++) {
+        NSLog(@"Method no #%d: %s", i, sel_getName(method_getName(mlist[i])));
+    }
+    
+    i = 1; //actionSheetStyle
+    
+//    [act_Sheet actionSheetStyle];
+//    
+//    unsigned int num = 0;
+//    Method *m = (Method *)class_copyMethodList((Class)object_getClass(act_Sheet), &num);
+//    for(int i=0;i<num;i++) {
+//        (void)NSLog(@"%s",(char *)sel_getName((SEL)method_getName(m[i])));
+//    }
+    
+}
+
 -(void)Refrech
 {
     NSLog(@"kRefreshAfterBackgroundState");
-//    [self performSelector:@selector(after) withObject:nil afterDelay:1.0];
+    [self performSelector:@selector(after) withObject:nil afterDelay:3.0];
 //    act_Sheet.hidden = YES;
     
 //  [act_Sheet setNeedsDisplay];
@@ -176,19 +233,22 @@
     
 //    [self.navigationController.view setNeedsLayout];
     
-    [super viewWillLayoutSubviews];
+//    [super viewWillLayoutSubviews];
 
     
-    [act_Sheet showInView:self.navigationController.view];
+//    [act_Sheet showInView:self.navigationController.view];
     
     
 //  [act_Alert viewDidAppear:NO];
+    
+    
+//    [act_Sheet showInView:self.view];
     
 }
 
 -(void)after
 {
-    NSLog(@"after");
+    NSLog(@"after-beg");
  // [act_Sheet setNeedsDisplay];
  //   [act_Sheet setNeedsLayout];
     
@@ -196,12 +256,17 @@
 //    [act_Sheet setNeedsLayout];
 //  [self.view setNeedsLayout]; vknkdnkfv  dkjndv  dsvkjvsv sdvsdv  d d
 
-    
-//    [act_Sheet dismissWithClickedButtonIndex:2 animated:NO];
-//    [self pressButton2:nil];
+    NSInteger cancButt = act_Sheet.cancelButtonIndex;
+    [act_Sheet dismissWithClickedButtonIndex:cancButt animated:NO]; //delete and show again!!!
+ //   [self pressButton2:nil];
     
  //   [act_Sheet setNeedsUpdateConstraints];
+//    CGRect f1 = act_Sheet.frame;
+//    CGRect f2 = self.view.bounds;
     
+    
+    
+    NSLog(@"after-end");    
 }
 
 -(void)handleOrientationChangeNotification:(NSNotification *)notification
@@ -209,5 +274,6 @@
     NSLog(@"handleOrientationChangeNotification111");
 //    UIDeviceOrientation currentDeviceOrientation =  [[UIDevice currentDevice] orientation];
 }
+
 
 @end

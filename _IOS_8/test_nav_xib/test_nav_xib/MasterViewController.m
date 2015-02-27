@@ -45,11 +45,11 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     
-    NSLog(@"test - NSLog");
-    _NSLog(@"test - _NSLog");
-    _NSLog0(@"test - _NSLog0");
-    printf("test1 %d\n",def_rows);
-    printf("test2 %d\n",def_rows);
+//    NSLog(@"test - NSLog");
+//    _NSLog(@"test - _NSLog");
+//    _NSLog0(@"test - _NSLog0");
+//    printf("test1 %d\n",def_rows);
+//    printf("test2 %d\n",def_rows);
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,7 +104,7 @@
     NSLog(@">>got cell_%ld",(long)ind);
     switch (ind) {
         case 0:
-            cell.textLabel.text = @"Test1_VC";
+            cell.textLabel.text = @"Test1_VC - Dealloc";
             NSLog(@"-----%@-----",cell.textLabel.text);
             break;
         case 1:
@@ -138,11 +138,11 @@
             break;
     }
     
-    cell.textLabel.alpha = 0.2;
-    [UIView animateWithDuration:0.0
+    cell.textLabel.alpha = 0.1;
+    [UIView animateWithDuration:2.0
                      animations:^{
                          NSLog(@"anim beg");
-                         cell.textLabel.alpha = 1.0;
+                         cell.textLabel.alpha = 0.9;
                      } completion:^(BOOL finished) {
                          NSLog(@"%d %f",finished,cell.textLabel.alpha);
                      }];

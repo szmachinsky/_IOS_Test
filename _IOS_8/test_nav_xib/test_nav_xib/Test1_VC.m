@@ -14,6 +14,15 @@
 
 @implementation Test1_VC
 
+- (NSString *)deallocDescription{ //custom dealloc message!!!!
+    return @"DEALLOC_TEST1_VC";
+}
+
+-(void)dealloc
+{
+    NSLog(@"real dealloc TEST1_VC");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
