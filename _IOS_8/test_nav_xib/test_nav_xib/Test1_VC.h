@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Test1_VC : UIViewController
+@interface Test1_VC : UIViewController <UIGestureRecognizerDelegate>
 
 //- (NSString *)deallocDescription; //custom dealloc message!!!!
 
