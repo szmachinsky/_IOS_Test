@@ -54,7 +54,7 @@
     [newManagedObject setValue:[NSDate date] forKey:t_Stamp];
     
     [newManagedObject setValue:@"new detail1" forKey:@"detail_1"];
-    [newManagedObject setValue:@"new detail2" forKey:@"detail_2"];
+//    [newManagedObject setValue:@"new detail2" forKey:@"detail_2"];
     
     // Save the context.
     NSError *error = nil;

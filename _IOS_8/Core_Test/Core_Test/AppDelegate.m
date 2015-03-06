@@ -76,6 +76,8 @@
     
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     
+//  _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    
     if (!_managedObjectModel) {
         NSLog(@"WRONG MODEL");
         abort();

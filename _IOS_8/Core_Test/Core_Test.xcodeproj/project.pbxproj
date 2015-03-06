@@ -17,6 +17,7 @@
 		2369800C1AA86873009CC9F3 /* Core_Test.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2369800A1AA86873009CC9F3 /* Core_Test.xcdatamodeld */; };
 		236980101AA87B5A009CC9F3 /* Detail_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2369800E1AA87B5A009CC9F3 /* Detail_VC.m */; };
 		236980111AA87B5A009CC9F3 /* Detail_VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2369800F1AA87B5A009CC9F3 /* Detail_VC.xib */; };
+		23DB20991AA9DC3F0090805D /* NewEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DB20981AA9DC3F0090805D /* NewEvent.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,8 @@
 		236980121AA8811C009CC9F3 /* Core_Test 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core_Test 2.xcdatamodel"; sourceTree = "<group>"; };
 		236980131AA891C5009CC9F3 /* Core_Test.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core_Test.pch; sourceTree = "<group>"; };
 		236980141AA89FA7009CC9F3 /* Core_Test 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core_Test 3.xcdatamodel"; sourceTree = "<group>"; };
+		23DB20971AA9DC3F0090805D /* NewEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewEvent.h; path = Core_Test/NewEvent.h; sourceTree = "<group>"; };
+		23DB20981AA9DC3F0090805D /* NewEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewEvent.m; path = Core_Test/NewEvent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +76,8 @@
 		23697FD11AA85B67009CC9F3 = {
 			isa = PBXGroup;
 			children = (
+				23DB20971AA9DC3F0090805D /* NewEvent.h */,
+				23DB20981AA9DC3F0090805D /* NewEvent.m */,
 				23697FDC1AA85B67009CC9F3 /* Core_Test */,
 				23697FFC1AA85B67009CC9F3 /* Core_TestTests */,
 				23697FDB1AA85B67009CC9F3 /* Products */,
@@ -240,6 +245,7 @@
 				236980101AA87B5A009CC9F3 /* Detail_VC.m in Sources */,
 				23697FE31AA85B67009CC9F3 /* AppDelegate.m in Sources */,
 				23697FE01AA85B67009CC9F3 /* main.m in Sources */,
+				23DB20991AA9DC3F0090805D /* NewEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,6 +442,7 @@
 				236980051AA85B67009CC9F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		236980061AA85B67009CC9F3 /* Build configuration list for PBXNativeTarget "Core_TestTests" */ = {
 			isa = XCConfigurationList;
@@ -444,6 +451,7 @@
 				236980081AA85B67009CC9F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
