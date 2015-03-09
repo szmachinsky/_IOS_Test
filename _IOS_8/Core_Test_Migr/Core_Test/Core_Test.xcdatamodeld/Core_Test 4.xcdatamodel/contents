@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="MigrEvent" representedClassName="MigrEvent" elementID="Event">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="MigrEvent" representedClassName="MigrEvent" elementID="NewEvent">
         <attribute name="detail_1" optional="YES" attributeType="String" defaultValueString="def-1" syncable="YES"/>
         <attribute name="detail_2" optional="YES" attributeType="String" defaultValueString="def-2" syncable="YES"/>
         <attribute name="f" optional="YES" attributeType="Float" defaultValueString="2" syncable="YES"/>

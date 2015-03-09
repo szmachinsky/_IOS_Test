@@ -18,12 +18,14 @@
     
     NSString *str = [NSString stringWithFormat:@"N1:%@",[sInstance valueForKey:@"detail_1"]];
     [newObj setValue:str forKey:@"detail_1"];
+    
     str = [NSString stringWithFormat:@"N2:%@",[sInstance valueForKey:@"detail_2"]];
     [newObj setValue:str forKey:@"detail_2"];
+    
     [newObj setValue:[sInstance valueForKey:@"when"] forKey:@"when"];
     
     // new values
-    [newObj setValue:@20.f forKey:@"f"];
+    [newObj setValue:@25.f forKey:@"f"];
 //  [newObj setValue:@3456 forKey:@"x"];
     
     // Set up the association between the Circle and the Ellipse for the migration manager

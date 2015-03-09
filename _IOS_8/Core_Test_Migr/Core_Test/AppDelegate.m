@@ -103,7 +103,7 @@
     NSDictionary *options = nil;
     
     NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:NSSQLiteStoreType URL:storeURL error:&error];
-//  NSManagedObjectModel *destinationModel = [_persistentStoreCoordinator managedObjectModel];
+//    NSManagedObjectModel *destinationModel = [_persistentStoreCoordinator managedObjectModel];
     NSManagedObjectModel *destinationModel = [self managedObjectModel];
     BOOL pscCompatible = [destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
     
@@ -126,7 +126,7 @@
     
     
 #if _CORE_VERSION == 5
-    if(pscCompatible) // Custom Migration is needed
+    if(!pscCompatible) // Custom Migration is needed
     {
         NSURL *newStoreURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test-Temp.sqlite"];
         
