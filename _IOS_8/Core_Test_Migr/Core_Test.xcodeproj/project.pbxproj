@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		234107C21AAED8CB00218394 /* Model_3_to_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 234107C11AAED8CB00218394 /* Model_3_to_4.xcmappingmodel */; };
 		23697FE01AA85B67009CC9F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 23697FDF1AA85B67009CC9F3 /* main.m */; };
 		23697FE31AA85B67009CC9F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 23697FE21AA85B67009CC9F3 /* AppDelegate.m */; };
 		23697FE91AA85B67009CC9F3 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23697FE81AA85B67009CC9F3 /* MasterViewController.m */; };
@@ -20,7 +21,6 @@
 		23AAC3E41AADA85700F7D0DC /* Migration_3_4.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3E31AADA85700F7D0DC /* Migration_3_4.m */; };
 		23AAC3EA1AADC0C400F7D0DC /* NewEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3E91AADC0C400F7D0DC /* NewEvent.m */; };
 		23AAC3F11AADE9D000F7D0DC /* MigrationManager_4_5.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3F01AADE9D000F7D0DC /* MigrationManager_4_5.m */; };
-		D58BB23C1AAE43F6003DB253 /* Model_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = D58BB23B1AAE43F6003DB253 /* Model_3_4.xcmappingmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		234107C11AAED8CB00218394 /* Model_3_to_4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_3_to_4.xcmappingmodel; sourceTree = "<group>"; };
 		23697FDA1AA85B67009CC9F3 /* Core_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Core_Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23697FDE1AA85B67009CC9F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23697FDF1AA85B67009CC9F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -62,7 +63,6 @@
 		23AAC3EF1AADE9D000F7D0DC /* MigrationManager_4_5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MigrationManager_4_5.h; sourceTree = "<group>"; };
 		23AAC3F01AADE9D000F7D0DC /* MigrationManager_4_5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MigrationManager_4_5.m; sourceTree = "<group>"; };
 		23AAC3F21AADE9E200F7D0DC /* Core_Test 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core_Test 5.xcdatamodel"; sourceTree = "<group>"; };
-		D58BB23B1AAE43F6003DB253 /* Model_3_4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_3_4.xcmappingmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,11 +153,11 @@
 		23AAC3DD1AADA55700F7D0DC /* Migration */ = {
 			isa = PBXGroup;
 			children = (
-				D58BB23B1AAE43F6003DB253 /* Model_3_4.xcmappingmodel */,
 				23AAC3E21AADA85700F7D0DC /* Migration_3_4.h */,
 				23AAC3E31AADA85700F7D0DC /* Migration_3_4.m */,
 				23AAC3EF1AADE9D000F7D0DC /* MigrationManager_4_5.h */,
 				23AAC3F01AADE9D000F7D0DC /* MigrationManager_4_5.m */,
+				234107C11AAED8CB00218394 /* Model_3_to_4.xcmappingmodel */,
 			);
 			name = Migration;
 			sourceTree = "<group>";
@@ -264,7 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2369800C1AA86873009CC9F3 /* Core_Test.xcdatamodeld in Sources */,
-				D58BB23C1AAE43F6003DB253 /* Model_3_4.xcmappingmodel in Sources */,
+				234107C21AAED8CB00218394 /* Model_3_to_4.xcmappingmodel in Sources */,
 				23AAC3EA1AADC0C400F7D0DC /* NewEvent.m in Sources */,
 				23AAC3F11AADE9D000F7D0DC /* MigrationManager_4_5.m in Sources */,
 				23AAC3E41AADA85700F7D0DC /* Migration_3_4.m in Sources */,
