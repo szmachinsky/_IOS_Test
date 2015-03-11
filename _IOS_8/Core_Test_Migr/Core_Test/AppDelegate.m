@@ -67,8 +67,8 @@
         return _managedObjectModel;
     }
     
-//  NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Core_Test" withExtension:@"momd"];
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:CORE_NAME withExtension:@"momd"]; //@"Core_Test"
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Core_Test" withExtension:@"momd"];
+//  NSURL *modelURL = [[NSBundle mainBundle] URLForResource:CORE_NAME withExtension:@"momd"]; //@"Core_Test"
     NSLog(@"URL=%@",modelURL);
     
     if (!modelURL) {
@@ -99,8 +99,10 @@
     
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"];
+    NSLog(@"storeURL=%@",storeURL);
     NSError *error = nil;
     NSDictionary *options = nil;
+    
     
     NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:NSSQLiteStoreType URL:storeURL error:&error];
 //    NSManagedObjectModel *destinationModel = [_persistentStoreCoordinator managedObjectModel];
@@ -134,17 +136,40 @@
         
         NSManagedObjectModel *sourceModel = [NSManagedObjectModel mergedModelFromBundles:nil forStoreMetadata:sourceMetadata];
         
-        MigrationManager_4_5 *migrationManager = [[MigrationManager_4_5 alloc] initWithSourceModel:sourceModel destinationModel:destinationModel];
+        NSURL *modelURL1 = [[NSBundle mainBundle]
+                            URLForResource:@"Core_Test 4"
+                            withExtension:@"mom"  subdirectory:@"Core_Test.momd"];
+        sourceModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL1];
         
-        NSMappingModel *mappingModel = [NSMappingModel inferredMappingModelForSourceModel:sourceModel destinationModel:destinationModel error:&error];
-        if(mappingModel == nil) {
+        NSURL *modelURL2 = [[NSBundle mainBundle]
+                            URLForResource:@"Core_Test 5"
+                            withExtension:@"mom"  subdirectory:@"Core_Test.momd"];
+        destinationModel:destinationModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL2];
+       
+        
+        NSMappingModel *mappingModel1 = [NSMappingModel inferredMappingModelForSourceModel:sourceModel destinationModel:destinationModel error:&error];
+        if(mappingModel1 == nil) {
             NSLog(@"Could not find a mapping model");
             abort();
         }
-        if(![migrationManager migrateStoreFromURL:storeURL type:NSSQLiteStoreType
-                                          options:nil withMappingModel:mappingModel
-                                 toDestinationURL:newStoreURL destinationType:NSSQLiteStoreType
-                               destinationOptions:nil error:&error])
+        
+        NSURL *migrationModelUrl = [[NSBundle mainBundle] URLForResource:@"Model_4_5" withExtension:@"cdm"];
+        NSMappingModel *mappingModel2 = [[NSMappingModel alloc] initWithContentsOfURL:migrationModelUrl];
+        
+        MigrationManager_4_5 *myMigrationManager = [[MigrationManager_4_5 alloc] initWithSourceModel:sourceModel destinationModel:destinationModel];
+        
+//        NSMigrationManager *migrationManager = [[NSMigrationManager alloc] initWithSourceModel:sourceModel destinationModel:destinationModel];
+        
+        
+        BOOL ok = [myMigrationManager migrateStoreFromURL:storeURL
+                                                   type:NSSQLiteStoreType
+                                                options:nil
+                                       withMappingModel:mappingModel1
+                                       toDestinationURL:newStoreURL
+                                        destinationType:NSSQLiteStoreType
+                                     destinationOptions:nil
+                                                  error:&error];
+        if(!ok)
         {
             // Deal with error
             NSLog(@"Error migrating %@, %@", error, [error userInfo]);
@@ -161,7 +186,8 @@
         else if(![fm moveItemAtURL:newStoreURL toURL:storeURL error:&error])
         {
             NSLog(@"Error putting the new store in place");
-            abort(); }
+            abort();
+        }
         else if(![fm removeItemAtURL:backupURL error:&error])
                 {
                     NSLog(@"Error getting rid of the old store");

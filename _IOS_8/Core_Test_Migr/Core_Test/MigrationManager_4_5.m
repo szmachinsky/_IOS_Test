@@ -15,13 +15,19 @@
     [super associateSourceInstance:sourceInstance withDestinationInstance:destinationInstance forEntityMapping:entityMapping];
     NSString *name = [entityMapping destinationEntityName];
     
-    if([name compare:@"MigrEvent"] == NSOrderedSame || [name compare:@"MigrEvent"] == NSOrderedSame) {
+    if([name compare:@"MigrEvent"] == NSOrderedSame || [name compare:@"MigrEvent"] == NSOrderedSame)
+    {
         // Generate UUID
 //        CFUUIDRef theUUID = CFUUIDCreate(NULL);
 //        CFStringRef string = CFUUIDCreateString(NULL, theUUID); CFRelease(theUUID);
 //        NSString *uuid = (__bridge NSString *)string;
+        NSString *sss = [sourceInstance valueForKey:@"detail_1"];
+        NSLog(@"migrate for = %@",sss);
         
-        [destinationInstance setValue:@"+Custom migration!!!" forKey:@"new detail1"]; }
+        [destinationInstance setValue:@"+Custom1!!!" forKey:@"detail_1"];
+        [destinationInstance setValue:@"+Custom2!!!" forKey:@"detail_2"];
+        [destinationInstance setValue:@"+Cust-field" forKey:@"field"];
+    }
 }
 
 @end

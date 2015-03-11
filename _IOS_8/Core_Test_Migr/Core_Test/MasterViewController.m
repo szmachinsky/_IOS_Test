@@ -146,10 +146,14 @@
 #endif
     NSString *str = [NSString stringWithFormat:@"(%@)(%@)",str1,str2];
     
-#if _CORE_VERSION == 4
+#if _CORE_VERSION >= 4
     NSNumber *val1 = [object valueForKey:@"x"];
     NSNumber *val2 = [object valueForKey:@"f"];
-    str = [NSString stringWithFormat:@"%@ %d %.2f",str,[val1 integerValue],[val2 floatValue]];
+    str = [NSString stringWithFormat:@"%@ %d %.1f",str,[val1 integerValue],[val2 floatValue]];
+#endif
+#if _CORE_VERSION == 5
+    NSString *str3 = [object valueForKey:@"field"];
+    str = [NSString stringWithFormat:@"%@ (%@)",str,str3];
 #endif
 
     

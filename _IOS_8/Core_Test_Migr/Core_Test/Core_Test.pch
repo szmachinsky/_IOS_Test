@@ -21,7 +21,7 @@
 #import <CoreData/CoreData.h>
 #endif
 
-#define _CORE_VERSION 4
+#define _CORE_VERSION 5
 # define CORE_NAME  @"Core_Test"
 
 
