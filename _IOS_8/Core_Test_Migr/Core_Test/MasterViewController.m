@@ -52,9 +52,20 @@
     // If appropriate, configure the new managed object.
     // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
     [newManagedObject setValue:[NSDate date] forKey:t_Stamp];
+ 
     
-    [newManagedObject setValue:@"new detail1" forKey:@"detail_1"];
+#if _CORE_VERSION == 3
+    [newManagedObject setValue:@"3-detail1" forKey:@"detail_1"];
+#endif
     
+#if _CORE_VERSION == 4
+    [newManagedObject setValue:@"4-detail1" forKey:@"detail_1"];
+#endif
+
+#if _CORE_VERSION == 5
+    [newManagedObject setValue:@"5-detail1" forKey:@"detail_1"];
+#endif
+
     
 //    [newManagedObject setValue:@"new detail2" forKey:@"detail_2"];
 #if _CORE_VERSION == 4

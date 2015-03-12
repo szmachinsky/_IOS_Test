@@ -77,8 +77,7 @@
     }
     
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    
-//    _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+//  _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
     
 //    _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil forStoreMetadata:nil];
     if (!_managedObjectModel) {
@@ -105,28 +104,32 @@
     
     
     NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:NSSQLiteStoreType URL:storeURL error:&error];
-//    NSManagedObjectModel *destinationModel = [_persistentStoreCoordinator managedObjectModel];
+//  NSManagedObjectModel *destinationModel = [_persistentStoreCoordinator managedObjectModel];
     NSManagedObjectModel *destinationModel = [self managedObjectModel];
-    BOOL pscCompatible = [destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
+    BOOL pscCompatible = (sourceMetadata == nil) || [destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
     
-#if _CORE_VERSION < 5
+#if _CORE_VERSION == 4
     if(!pscCompatible) // Migration is needed
     {
+#if _CORE_VERSION <= 3
         options = @{NSInferMappingModelAutomaticallyOption: @YES, NSMigratePersistentStoresAutomaticallyOption: @YES};
 //      NSDictionary *options = @{
 //                               NSMigratePersistentStoresAutomaticallyOption:@YES
 //                               ,NSInferMappingModelAutomaticallyOption:@YES
-//                               ,NSSQLitePragmasOption: @{@"journal_mode": @"DELETE"}
+//                               ,NSSQLitePragmasOption: @{@"journal_mode": @"WAL"} //"DELETE"
 //                               };
         
+#endif
+        
+        
 #if _CORE_VERSION == 4
-        NSDictionary *options_mig = @{NSMigratePersistentStoresAutomaticallyOption: @YES}; //HARD MIGRATION!!!
-        options = options_mig;
+//        options = @{NSInferMappingModelAutomaticallyOption: @YES, NSMigratePersistentStoresAutomaticallyOption: @YES};
+        options = @{NSMigratePersistentStoresAutomaticallyOption: @YES}; //with Migration policy
 #endif
      }
 #endif
     
-    
+
 #if _CORE_VERSION == 5
     if(!pscCompatible) // Custom Migration is needed
     {
@@ -136,15 +139,15 @@
         
         NSManagedObjectModel *sourceModel = [NSManagedObjectModel mergedModelFromBundles:nil forStoreMetadata:sourceMetadata];
         
-        NSURL *modelURL1 = [[NSBundle mainBundle]
-                            URLForResource:@"Core_Test 4"
-                            withExtension:@"mom"  subdirectory:@"Core_Test.momd"];
-        sourceModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL1];
-        
-        NSURL *modelURL2 = [[NSBundle mainBundle]
-                            URLForResource:@"Core_Test 5"
-                            withExtension:@"mom"  subdirectory:@"Core_Test.momd"];
-        destinationModel:destinationModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL2];
+//        NSURL *modelURL1 = [[NSBundle mainBundle]
+//                            URLForResource:@"Core_Test 4"
+//                            withExtension:@"mom"  subdirectory:@"Core_Test.momd"];
+//        sourceModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL1];
+//        
+//        NSURL *modelURL2 = [[NSBundle mainBundle]
+//                            URLForResource:@"Core_Test 5"
+//                            withExtension:@"mom"  subdirectory:@"Core_Test.momd"];
+//        destinationModel:destinationModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL2];
        
         
         NSMappingModel *mappingModel1 = [NSMappingModel inferredMappingModelForSourceModel:sourceModel destinationModel:destinationModel error:&error];
@@ -153,7 +156,7 @@
             abort();
         }
         
-        NSURL *migrationModelUrl = [[NSBundle mainBundle] URLForResource:@"Model_4_5" withExtension:@"cdm"];
+        NSURL *migrationModelUrl = [[NSBundle mainBundle] URLForResource:@"Model_3_5" withExtension:@"cdm"];
         NSMappingModel *mappingModel2 = [[NSMappingModel alloc] initWithContentsOfURL:migrationModelUrl];
         
         MigrationManager_4_5 *myMigrationManager = [[MigrationManager_4_5 alloc] initWithSourceModel:sourceModel destinationModel:destinationModel];
@@ -194,10 +197,12 @@
                 }
     }
 #endif
-    
+
     
 
 //  _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+//    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:destinationModel]; //for 5
+
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:destinationModel]; //for 5
 
      NSString *failureReason = @"There was an error creating or loading the application's saved data.";

@@ -18,6 +18,8 @@
 		2369800C1AA86873009CC9F3 /* Core_Test.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2369800A1AA86873009CC9F3 /* Core_Test.xcdatamodeld */; };
 		236980101AA87B5A009CC9F3 /* Detail_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2369800E1AA87B5A009CC9F3 /* Detail_VC.m */; };
 		236980111AA87B5A009CC9F3 /* Detail_VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2369800F1AA87B5A009CC9F3 /* Detail_VC.xib */; };
+		2390C0981AB18730008B5F85 /* Migration_4_5.m in Sources */ = {isa = PBXBuildFile; fileRef = 2390C0971AB18730008B5F85 /* Migration_4_5.m */; };
+		2390C09A1AB194FA008B5F85 /* Model_3_5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2390C0991AB194FA008B5F85 /* Model_3_5.xcmappingmodel */; };
 		23AAC3E41AADA85700F7D0DC /* Migration_3_4.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3E31AADA85700F7D0DC /* Migration_3_4.m */; };
 		23AAC3EA1AADC0C400F7D0DC /* NewEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3E91AADC0C400F7D0DC /* NewEvent.m */; };
 		23AAC3F11AADE9D000F7D0DC /* MigrationManager_4_5.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3F01AADE9D000F7D0DC /* MigrationManager_4_5.m */; };
@@ -56,6 +58,9 @@
 		236980121AA8811C009CC9F3 /* Core_Test 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core_Test 2.xcdatamodel"; sourceTree = "<group>"; };
 		236980131AA891C5009CC9F3 /* Core_Test.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Core_Test.pch; sourceTree = "<group>"; };
 		236980141AA89FA7009CC9F3 /* Core_Test 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core_Test 3.xcdatamodel"; sourceTree = "<group>"; };
+		2390C0961AB18730008B5F85 /* Migration_4_5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Migration_4_5.h; sourceTree = "<group>"; };
+		2390C0971AB18730008B5F85 /* Migration_4_5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Migration_4_5.m; sourceTree = "<group>"; };
+		2390C0991AB194FA008B5F85 /* Model_3_5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_3_5.xcmappingmodel; sourceTree = "<group>"; };
 		23AAC3D41AAD944900F7D0DC /* Core_Test 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core_Test 4.xcdatamodel"; sourceTree = "<group>"; };
 		23AAC3E21AADA85700F7D0DC /* Migration_3_4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Migration_3_4.h; sourceTree = "<group>"; };
 		23AAC3E31AADA85700F7D0DC /* Migration_3_4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Migration_3_4.m; sourceTree = "<group>"; };
@@ -155,8 +160,11 @@
 		23AAC3DD1AADA55700F7D0DC /* Migration */ = {
 			isa = PBXGroup;
 			children = (
+				2390C0991AB194FA008B5F85 /* Model_3_5.xcmappingmodel */,
 				23E58E3F1AAF49E800791501 /* Model_4_5.xcmappingmodel */,
 				234107C11AAED8CB00218394 /* Model_3_to_4.xcmappingmodel */,
+				2390C0961AB18730008B5F85 /* Migration_4_5.h */,
+				2390C0971AB18730008B5F85 /* Migration_4_5.m */,
 				23AAC3E21AADA85700F7D0DC /* Migration_3_4.h */,
 				23AAC3E31AADA85700F7D0DC /* Migration_3_4.m */,
 				23AAC3EF1AADE9D000F7D0DC /* MigrationManager_4_5.h */,
@@ -275,6 +283,8 @@
 				23E58E401AAF49E800791501 /* Model_4_5.xcmappingmodel in Sources */,
 				236980101AA87B5A009CC9F3 /* Detail_VC.m in Sources */,
 				23697FE31AA85B67009CC9F3 /* AppDelegate.m in Sources */,
+				2390C09A1AB194FA008B5F85 /* Model_3_5.xcmappingmodel in Sources */,
+				2390C0981AB18730008B5F85 /* Migration_4_5.m in Sources */,
 				23697FE01AA85B67009CC9F3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

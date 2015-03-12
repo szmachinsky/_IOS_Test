@@ -4,7 +4,7 @@
         <attribute name="detail_1" optional="YES" attributeType="String" defaultValueString="def-1" syncable="YES"/>
         <attribute name="detail_2" optional="YES" attributeType="String" defaultValueString="def-2" syncable="YES"/>
         <attribute name="f" optional="YES" attributeType="Float" defaultValueString="5" syncable="YES"/>
-        <attribute name="field" optional="YES" attributeType="String" defaultValueString="init val" syncable="YES"/>
+        <attribute name="field" optional="YES" attributeType="String" defaultValueString="init fild" syncable="YES"/>
         <attribute name="when" optional="YES" attributeType="Date" elementID="timeStamp">
             <userInfo/>
         </attribute>
