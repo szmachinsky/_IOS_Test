@@ -11,6 +11,7 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+    #import <objc/message.h>
 #endif
 
 #define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
@@ -45,3 +46,5 @@
 #endif
 //=====================================
 
+//void (*msg)(id,SEL) = (void(*)(id,SEL))objc_msgSend;
+//fff(self.tableView,selector);

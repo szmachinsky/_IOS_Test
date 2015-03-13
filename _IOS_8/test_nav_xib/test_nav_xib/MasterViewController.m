@@ -52,6 +52,16 @@
 //    printf("test2 %d\n",def_rows);
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    void (*msg)(id,SEL) = (void(*)(id,SEL))objc_msgSend;
+    SEL sel1 =  NSSelectorFromString(@"reloadData");
+//    SEL sel2 = @selector(reloadData);
+    msg(self.tableView,sel1);
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
