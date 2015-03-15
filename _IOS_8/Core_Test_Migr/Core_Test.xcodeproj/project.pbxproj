@@ -24,6 +24,7 @@
 		23AAC3EA1AADC0C400F7D0DC /* NewEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3E91AADC0C400F7D0DC /* NewEvent.m */; };
 		23AAC3F11AADE9D000F7D0DC /* MigrationManager_4_5.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3F01AADE9D000F7D0DC /* MigrationManager_4_5.m */; };
 		23E58E401AAF49E800791501 /* Model_4_5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23E58E3F1AAF49E800791501 /* Model_4_5.xcmappingmodel */; };
+		D573D48E1AB6286400E356D9 /* Model_2_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = D573D48D1AB6286400E356D9 /* Model_2_3.xcmappingmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,7 @@
 		23AAC3F01AADE9D000F7D0DC /* MigrationManager_4_5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MigrationManager_4_5.m; sourceTree = "<group>"; };
 		23AAC3F21AADE9E200F7D0DC /* Core_Test 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core_Test 5.xcdatamodel"; sourceTree = "<group>"; };
 		23E58E3F1AAF49E800791501 /* Model_4_5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_4_5.xcmappingmodel; sourceTree = "<group>"; };
+		D573D48D1AB6286400E356D9 /* Model_2_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_2_3.xcmappingmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				2390C0991AB194FA008B5F85 /* Model_3_5.xcmappingmodel */,
 				23E58E3F1AAF49E800791501 /* Model_4_5.xcmappingmodel */,
 				234107C11AAED8CB00218394 /* Model_3_to_4.xcmappingmodel */,
+				D573D48D1AB6286400E356D9 /* Model_2_3.xcmappingmodel */,
 				2390C0961AB18730008B5F85 /* Migration_4_5.h */,
 				2390C0971AB18730008B5F85 /* Migration_4_5.m */,
 				23AAC3E21AADA85700F7D0DC /* Migration_3_4.h */,
@@ -276,6 +279,7 @@
 			files = (
 				2369800C1AA86873009CC9F3 /* Core_Test.xcdatamodeld in Sources */,
 				234107C21AAED8CB00218394 /* Model_3_to_4.xcmappingmodel in Sources */,
+				D573D48E1AB6286400E356D9 /* Model_2_3.xcmappingmodel in Sources */,
 				23AAC3EA1AADC0C400F7D0DC /* NewEvent.m in Sources */,
 				23AAC3F11AADE9D000F7D0DC /* MigrationManager_4_5.m in Sources */,
 				23AAC3E41AADA85700F7D0DC /* Migration_3_4.m in Sources */,

@@ -94,7 +94,7 @@
     }
     
     // Create the coordinator and store
-//      _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"];
@@ -104,8 +104,8 @@
     
     
     NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:NSSQLiteStoreType URL:storeURL error:&error];
-//  NSManagedObjectModel *destinationModel = [_persistentStoreCoordinator managedObjectModel];
-    NSManagedObjectModel *destinationModel = [self managedObjectModel];
+    NSManagedObjectModel *destinationModel = [_persistentStoreCoordinator managedObjectModel];
+//    NSManagedObjectModel *destinationModel = [self managedObjectModel];
     BOOL pscCompatible = (sourceMetadata == nil) || [destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
     
 #if _CORE_VERSION == 4
@@ -151,6 +151,11 @@
        
         
         NSMappingModel *mappingModel1 = [NSMappingModel inferredMappingModelForSourceModel:sourceModel destinationModel:destinationModel error:&error];
+        
+//        NSMappingModel *mappingModel11 = [NSMappingModel ModelFromBundles:nil SourceModel:sourceModel Model:destinationModel];
+        NSMappingModel *mappingModel11 = [NSMappingModel mappingModelFromBundles:nil forSourceModel:sourceModel destinationModel:destinationModel];
+        
+        
         if(mappingModel1 == nil) {
             NSLog(@"Could not find a mapping model");
             abort();
