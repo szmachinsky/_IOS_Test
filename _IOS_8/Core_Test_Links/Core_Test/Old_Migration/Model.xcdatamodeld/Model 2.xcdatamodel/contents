@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Playlist" representedClassName="Playlist" syncable="YES">
+        <attribute name="isTemporary" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="playlistItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PlaylistItem" inverseName="playlist" inverseEntity="PlaylistItem" syncable="YES"/>
+    </entity>
+    <entity name="PlaylistItem" representedClassName="PlaylistItem" syncable="YES">
+        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="playlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Playlist" inverseName="playlistItems" inverseEntity="Playlist" syncable="YES"/>
+        <relationship name="videoItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="VideoItem" inverseName="playlistItems" inverseEntity="VideoItem" syncable="YES"/>
+    </entity>
+    <entity name="SearchVideoCategory" representedClassName="SearchVideoCategory" parentEntity="VideoCategory" syncable="YES">
+        <attribute name="searchString" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sort" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="VideoCategory" representedClassName="VideoCategory" syncable="YES">
+        <attribute name="lastFixedSortType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="lastSortType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="lastUpdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="VideoCategoryItem" inverseName="category" inverseEntity="VideoCategoryItem" syncable="YES"/>
+    </entity>
+    <entity name="VideoCategoryItem" representedClassName="VideoCategoryItem" syncable="YES">
+        <attribute name="order" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="VideoCategory" inverseName="items" inverseEntity="VideoCategory" syncable="YES"/>
+        <relationship name="videoItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="VideoItem" inverseName="categoryItems" inverseEntity="VideoItem" syncable="YES"/>
+    </entity>
+    <entity name="VideoItem" representedClassName="VideoItem" syncable="YES">
+        <attribute name="db_EST" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="db_iTunesURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_LastUsedResolution" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="db_possibleState" optional="YES" attributeType="Integer 32" defaultValueString="NO" syncable="YES"/>
+        <attribute name="db_possibleURLs" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="db_possibleURLsDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="db_title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="favoriteOrder" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="internal_nativeData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isPossibilationPaused" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="lastViewed" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="lastViewedSectionKey" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="possibleDuration" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="possibleOrder" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="possibleResolution" optional="YES" attributeType="Integer 32" defaultValueString="240" syncable="YES"/>
+        <attribute name="possibleSpeed" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="possibleStatus" optional="YES" attributeType="Integer 32" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="possibleSz" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="videoID" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="categoryItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="VideoCategoryItem" inverseName="videoItem" inverseEntity="VideoCategoryItem" syncable="YES"/>
+        <relationship name="playlistItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PlaylistItem" inverseName="videoItem" inverseEntity="PlaylistItem" syncable="YES"/>
+        <fetchedProperty name="fetchedProperty" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="VideoItem"/>
+        </fetchedProperty>
+    </entity>
+    <elements>
+        <element name="Playlist" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="PlaylistItem" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="SearchVideoCategory" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="VideoCategory" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="VideoCategoryItem" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="VideoItem" positionX="0" positionY="0" width="128" height="401"/>
+    </elements>
+</model>

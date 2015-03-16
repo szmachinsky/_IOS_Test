@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Playlist" representedClassName="Playlist" syncable="YES">
+        <attribute name="db_isTemporary" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="db_isUser" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="db_name" attributeType="String" syncable="YES"/>
+        <attribute name="db_order" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="db_sysname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_type" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="db_playlistItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PlaylistItem" inverseName="db_playlist" inverseEntity="PlaylistItem" syncable="YES"/>
+    </entity>
+    <entity name="PlaylistItem" representedClassName="PlaylistItem" syncable="YES">
+        <attribute name="db_order" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="db_mediaItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="VideoItem" inverseName="db_playlistItems" inverseEntity="VideoItem" syncable="YES"/>
+        <relationship name="db_playlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Playlist" inverseName="db_playlistItems" inverseEntity="Playlist" syncable="YES"/>
+    </entity>
+    <entity name="SearchVideoCategory" representedClassName="SearchVideoCategory" parentEntity="VideoCategory" syncable="YES">
+        <attribute name="db_searchString" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
+        <attribute name="db_sortMode" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="VideoCategory" representedClassName="VideoCategory" syncable="YES">
+        <attribute name="db_lastFixedScopeType" optional="YES" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
+        <attribute name="db_lastFixedSortType" optional="YES" attributeType="Integer 32" defaultValueString="-1" syncable="YES"/>
+        <attribute name="db_lastScopeType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="db_lastSortType" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="db_lastUpdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="db_order" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="db_type" attributeType="String" syncable="YES"/>
+        <attribute name="db_youtubeChannelsToken" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_youtubePlaylistsToken" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_youtubeVideosToken" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="db_mediaItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="VideoCategoryItem" inverseName="db_category" inverseEntity="VideoCategoryItem" syncable="YES"/>
+        <relationship name="db_youtubeChannels" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="VideoCategoryYoutubeChannelItem" inverseName="db_category" inverseEntity="VideoCategoryYoutubeChannelItem" syncable="YES"/>
+        <relationship name="db_youtubePlaylists" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="VideoCategoryYoutubePlaylistItem" inverseName="db_category" inverseEntity="VideoCategoryYoutubePlaylistItem" syncable="YES"/>
+    </entity>
+    <entity name="VideoCategoryItem" representedClassName="VideoCategoryItem" syncable="YES">
+        <attribute name="db_order" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="db_category" maxCount="1" deletionRule="Nullify" destinationEntity="VideoCategory" inverseName="db_mediaItems" inverseEntity="VideoCategory" syncable="YES"/>
+        <relationship name="db_mediaItem" maxCount="1" deletionRule="Nullify" destinationEntity="VideoItem" inverseName="db_categoryItems" inverseEntity="VideoItem" syncable="YES"/>
+    </entity>
+    <entity name="VideoCategoryYoutubeChannelItem" representedClassName="VideoCategoryYoutubeChannelItem" syncable="YES">
+        <attribute name="db_order" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="db_category" maxCount="1" deletionRule="Nullify" destinationEntity="VideoCategory" inverseName="db_youtubeChannels" inverseEntity="VideoCategory" syncable="YES"/>
+        <relationship name="db_youtubeChannel" maxCount="1" deletionRule="Nullify" destinationEntity="YoutubeChannel" inverseName="db_categories" inverseEntity="YoutubeChannel" syncable="YES"/>
+    </entity>
+    <entity name="VideoCategoryYoutubePlaylistItem" representedClassName="VideoCategoryYoutubePlaylistItem" syncable="YES">
+        <attribute name="db_order" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="db_category" maxCount="1" deletionRule="Nullify" destinationEntity="VideoCategory" inverseName="db_youtubePlaylists" inverseEntity="VideoCategory" syncable="YES"/>
+        <relationship name="db_youtubePlaylist" maxCount="1" deletionRule="Nullify" destinationEntity="YoutubePlaylist" inverseName="db_categories" inverseEntity="YoutubePlaylist" syncable="YES"/>
+    </entity>
+    <entity name="VideoItem" representedClassName="VideoItem" syncable="YES">
+        <attribute name="db__CIP" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="db__CO" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
+        <attribute name="db__CPC" optional="YES" attributeType="Integer 32" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="db__CRV" optional="YES" attributeType="Integer 32" defaultValueString="240" syncable="YES"/>
+        <attribute name="db__CS" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="db__CSD" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="db__CST" optional="YES" attributeType="Integer 32" defaultValueString="NO" syncable="YES"/>
+        <attribute name="db__CUD" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="db__CUDD" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="db__EST" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="db_author" attributeType="String" syncable="YES"/>
+        <attribute name="db_channelTitle" attributeType="String" syncable="YES"/>
+        <attribute name="db_defaultThumbmailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_description" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_dislikesCount" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="db_duration" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="db_highResolutionThumbmailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_isPrivate" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="db_iTunesURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_lastUsedResolution" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="db_lastViewed" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="db_lastViewedSectionKey" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_likesCount" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="db_mediumResolutionThumbmailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_nativeInfo" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="db_published" attributeType="Date" syncable="YES"/>
+        <attribute name="db_title" attributeType="String" syncable="YES"/>
+        <attribute name="db_uuid" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="db_viewsCount" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="db_categoryItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="VideoCategoryItem" inverseName="db_mediaItem" inverseEntity="VideoCategoryItem" syncable="YES"/>
+        <relationship name="db_playlistItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PlaylistItem" inverseName="db_mediaItem" inverseEntity="PlaylistItem" syncable="YES"/>
+    </entity>
+    <entity name="YoutubeChannel" representedClassName="YoutubeChannel" parentEntity="Playlist" syncable="YES">
+        <attribute name="db_author" attributeType="String" syncable="YES"/>
+        <attribute name="db_date" attributeType="Date" syncable="YES"/>
+        <attribute name="db_defaultThumbmailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_description" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_highResolutionThumbmailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_mediumResolutionThumbmailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_playlistUuid" attributeType="String" syncable="YES"/>
+        <attribute name="db_preloadedItemsCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="db_uuid" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="db_viewCount" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="db_categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="VideoCategoryYoutubeChannelItem" inverseName="db_youtubeChannel" inverseEntity="VideoCategoryYoutubeChannelItem" syncable="YES"/>
+    </entity>
+    <entity name="YoutubePlaylist" representedClassName="YoutubePlaylist" parentEntity="Playlist" syncable="YES">
+        <attribute name="db_author" attributeType="String" syncable="YES"/>
+        <attribute name="db_channelTitle" attributeType="String" syncable="YES"/>
+        <attribute name="db_date" attributeType="Date" syncable="YES"/>
+        <attribute name="db_defaultThumbmailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_description" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_highResolutionThumbmailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_maxResolutionThumbmailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_mediumResolutionThumbmailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_preloadedItemsCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="db_privacyStatus" attributeType="String" syncable="YES"/>
+        <attribute name="db_standardResolutionThumbmailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_uuid" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="db_categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="VideoCategoryYoutubePlaylistItem" inverseName="db_youtubePlaylist" inverseEntity="VideoCategoryYoutubePlaylistItem" syncable="YES"/>
+    </entity>
+    <entity name="YoutubePlaylistItem" representedClassName="YoutubePlaylistItem" parentEntity="PlaylistItem" syncable="YES">
+        <attribute name="db_uuid" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Playlist" positionX="0" positionY="0" width="128" height="150"/>
+        <element name="PlaylistItem" positionX="0" positionY="0" width="128" height="88"/>
+        <element name="SearchVideoCategory" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="VideoCategory" positionX="0" positionY="0" width="128" height="240"/>
+        <element name="VideoCategoryItem" positionX="0" positionY="0" width="128" height="88"/>
+        <element name="VideoCategoryYoutubeChannelItem" positionX="99" positionY="207" width="128" height="88"/>
+        <element name="VideoCategoryYoutubePlaylistItem" positionX="81" positionY="198" width="128" height="88"/>
+        <element name="VideoItem" positionX="0" positionY="0" width="128" height="508"/>
+        <element name="YoutubeChannel" positionX="27" positionY="171" width="128" height="208"/>
+        <element name="YoutubePlaylist" positionX="45" positionY="180" width="128" height="240"/>
+        <element name="YoutubePlaylistItem" positionX="54" positionY="153" width="128" height="60"/>
+    </elements>
+</model>
