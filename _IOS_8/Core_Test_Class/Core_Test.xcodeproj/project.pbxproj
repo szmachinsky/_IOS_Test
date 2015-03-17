@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23112F4E1AB858BE0021A545 /* RHManagedObjectContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23112F4D1AB858BE0021A545 /* RHManagedObjectContextManager.m */; };
+		23112F511AB85A0D0021A545 /* BPModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23112F4F1AB85A0D0021A545 /* BPModel.xcdatamodeld */; };
 		234107C21AAED8CB00218394 /* Model_3_to_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 234107C11AAED8CB00218394 /* Model_3_to_4.xcmappingmodel */; };
 		23697FE01AA85B67009CC9F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 23697FDF1AA85B67009CC9F3 /* main.m */; };
 		23697FE31AA85B67009CC9F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 23697FE21AA85B67009CC9F3 /* AppDelegate.m */; };
@@ -27,7 +29,15 @@
 		23EDC3D81AB81550009473BB /* Migrate.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3D01AB81550009473BB /* Migrate.xcmappingmodel */; };
 		23EDC3D91AB81550009473BB /* Migrate23.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3D11AB81550009473BB /* Migrate23.xcmappingmodel */; };
 		23EDC3DA1AB81550009473BB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3D21AB81550009473BB /* Model.xcdatamodeld */; };
-		23EDC3DB1AB81550009473BB /* RHManagedObjectContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3D71AB81550009473BB /* RHManagedObjectContextManager.m */; };
+		23EDC3E21AB81B54009473BB /* BPMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3E11AB81B54009473BB /* BPMigrationManager.m */; };
+		23EDC3E51AB81BA1009473BB /* BPMigrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3E41AB81BA1009473BB /* BPMigrator.m */; };
+		23FFE1E01AB822CE00FE46A8 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = 23FFE1D81AB822CE00FE46A8 /* ioapi.c */; };
+		23FFE1E11AB822CE00FE46A8 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 23FFE1DA1AB822CE00FE46A8 /* unzip.c */; };
+		23FFE1E21AB822CE00FE46A8 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 23FFE1DC1AB822CE00FE46A8 /* zip.c */; };
+		23FFE1E31AB822CE00FE46A8 /* ZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FFE1DF1AB822CE00FE46A8 /* ZipArchive.m */; };
+		23FFE1F51AB82E0E00FE46A8 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 23FFE1F01AB82E0E00FE46A8 /* SVProgressHUD.bundle */; };
+		23FFE1F61AB82E0E00FE46A8 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FFE1F21AB82E0E00FE46A8 /* SVProgressHUD.m */; };
+		23FFE1F71AB82E0E00FE46A8 /* UIViewController+Hud.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FFE1F41AB82E0E00FE46A8 /* UIViewController+Hud.m */; };
 		D573D48E1AB6286400E356D9 /* Model_2_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = D573D48D1AB6286400E356D9 /* Model_2_3.xcmappingmodel */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		23112F4C1AB858BE0021A545 /* RHManagedObjectContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RHManagedObjectContextManager.h; path = Migration_Test/RHManagedObjectContextManager.h; sourceTree = "<group>"; };
+		23112F4D1AB858BE0021A545 /* RHManagedObjectContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RHManagedObjectContextManager.m; path = Migration_Test/RHManagedObjectContextManager.m; sourceTree = "<group>"; };
+		23112F501AB85A0D0021A545 /* BPModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BPModel.xcdatamodel; sourceTree = "<group>"; };
 		234107C11AAED8CB00218394 /* Model_3_to_4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_3_to_4.xcmappingmodel; sourceTree = "<group>"; };
 		23697FDA1AA85B67009CC9F3 /* Core_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Core_Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23697FDE1AA85B67009CC9F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,8 +93,24 @@
 		23EDC3D31AB81550009473BB /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
 		23EDC3D41AB81550009473BB /* Model 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 3.xcdatamodel"; sourceTree = "<group>"; };
 		23EDC3D51AB81550009473BB /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		23EDC3D61AB81550009473BB /* RHManagedObjectContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RHManagedObjectContextManager.h; sourceTree = "<group>"; };
-		23EDC3D71AB81550009473BB /* RHManagedObjectContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RHManagedObjectContextManager.m; sourceTree = "<group>"; };
+		23EDC3E01AB81B54009473BB /* BPMigrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPMigrationManager.h; sourceTree = "<group>"; };
+		23EDC3E11AB81B54009473BB /* BPMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPMigrationManager.m; sourceTree = "<group>"; };
+		23EDC3E31AB81BA1009473BB /* BPMigrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPMigrator.h; sourceTree = "<group>"; };
+		23EDC3E41AB81BA1009473BB /* BPMigrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPMigrator.m; sourceTree = "<group>"; };
+		23FFE1D71AB822CE00FE46A8 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		23FFE1D81AB822CE00FE46A8 /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		23FFE1D91AB822CE00FE46A8 /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		23FFE1DA1AB822CE00FE46A8 /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		23FFE1DB1AB822CE00FE46A8 /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		23FFE1DC1AB822CE00FE46A8 /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		23FFE1DD1AB822CE00FE46A8 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		23FFE1DE1AB822CE00FE46A8 /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		23FFE1DF1AB822CE00FE46A8 /* ZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipArchive.m; sourceTree = "<group>"; };
+		23FFE1F01AB82E0E00FE46A8 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		23FFE1F11AB82E0E00FE46A8 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		23FFE1F21AB82E0E00FE46A8 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		23FFE1F31AB82E0E00FE46A8 /* UIViewController+Hud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Hud.h"; sourceTree = "<group>"; };
+		23FFE1F41AB82E0E00FE46A8 /* UIViewController+Hud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Hud.m"; sourceTree = "<group>"; };
 		D573D48D1AB6286400E356D9 /* Model_2_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_2_3.xcmappingmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,6 +155,7 @@
 		23697FDC1AA85B67009CC9F3 /* Core_Test */ = {
 			isa = PBXGroup;
 			children = (
+				23FFE1EE1AB82DF000FE46A8 /* Utils */,
 				2369800D1AA87B5A009CC9F3 /* Detail_VC.h */,
 				2369800E1AA87B5A009CC9F3 /* Detail_VC.m */,
 				2369800F1AA87B5A009CC9F3 /* Detail_VC.xib */,
@@ -133,6 +163,7 @@
 				23697FE81AA85B67009CC9F3 /* MasterViewController.m */,
 				23697FE11AA85B67009CC9F3 /* AppDelegate.h */,
 				23697FE21AA85B67009CC9F3 /* AppDelegate.m */,
+				23EDC3DC1AB81943009473BB /* My_Migration */,
 				23EDC3CF1AB81550009473BB /* Migration_Test */,
 				23AAC3DD1AADA55700F7D0DC /* Migration */,
 				23697FED1AA85B67009CC9F3 /* Main.storyboard */,
@@ -194,10 +225,67 @@
 				23EDC3D01AB81550009473BB /* Migrate.xcmappingmodel */,
 				23EDC3D11AB81550009473BB /* Migrate23.xcmappingmodel */,
 				23EDC3D21AB81550009473BB /* Model.xcdatamodeld */,
-				23EDC3D61AB81550009473BB /* RHManagedObjectContextManager.h */,
-				23EDC3D71AB81550009473BB /* RHManagedObjectContextManager.m */,
 			);
 			path = Migration_Test;
+			sourceTree = "<group>";
+		};
+		23EDC3DC1AB81943009473BB /* My_Migration */ = {
+			isa = PBXGroup;
+			children = (
+				23112F4F1AB85A0D0021A545 /* BPModel.xcdatamodeld */,
+				23EDC3E01AB81B54009473BB /* BPMigrationManager.h */,
+				23EDC3E11AB81B54009473BB /* BPMigrationManager.m */,
+				23EDC3E31AB81BA1009473BB /* BPMigrator.h */,
+				23EDC3E41AB81BA1009473BB /* BPMigrator.m */,
+				23112F4C1AB858BE0021A545 /* RHManagedObjectContextManager.h */,
+				23112F4D1AB858BE0021A545 /* RHManagedObjectContextManager.m */,
+			);
+			name = My_Migration;
+			sourceTree = "<group>";
+		};
+		23FFE1D51AB822CE00FE46A8 /* Zip */ = {
+			isa = PBXGroup;
+			children = (
+				23FFE1D61AB822CE00FE46A8 /* minizip */,
+				23FFE1DE1AB822CE00FE46A8 /* ZipArchive.h */,
+				23FFE1DF1AB822CE00FE46A8 /* ZipArchive.m */,
+			);
+			path = Zip;
+			sourceTree = "<group>";
+		};
+		23FFE1D61AB822CE00FE46A8 /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				23FFE1D71AB822CE00FE46A8 /* crypt.h */,
+				23FFE1D81AB822CE00FE46A8 /* ioapi.c */,
+				23FFE1D91AB822CE00FE46A8 /* ioapi.h */,
+				23FFE1DA1AB822CE00FE46A8 /* unzip.c */,
+				23FFE1DB1AB822CE00FE46A8 /* unzip.h */,
+				23FFE1DC1AB822CE00FE46A8 /* zip.c */,
+				23FFE1DD1AB822CE00FE46A8 /* zip.h */,
+			);
+			path = minizip;
+			sourceTree = "<group>";
+		};
+		23FFE1EE1AB82DF000FE46A8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				23FFE1EF1AB82E0E00FE46A8 /* SVProgressHUD */,
+				23FFE1F31AB82E0E00FE46A8 /* UIViewController+Hud.h */,
+				23FFE1F41AB82E0E00FE46A8 /* UIViewController+Hud.m */,
+				23FFE1D51AB822CE00FE46A8 /* Zip */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		23FFE1EF1AB82E0E00FE46A8 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				23FFE1F01AB82E0E00FE46A8 /* SVProgressHUD.bundle */,
+				23FFE1F11AB82E0E00FE46A8 /* SVProgressHUD.h */,
+				23FFE1F21AB82E0E00FE46A8 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,6 +368,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23FFE1F51AB82E0E00FE46A8 /* SVProgressHUD.bundle in Resources */,
 				23697FEF1AA85B67009CC9F3 /* Main.storyboard in Resources */,
 				236980111AA87B5A009CC9F3 /* Detail_VC.xib in Resources */,
 				23697FF41AA85B67009CC9F3 /* LaunchScreen.xib in Resources */,
@@ -301,19 +390,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23FFE1F71AB82E0E00FE46A8 /* UIViewController+Hud.m in Sources */,
+				23112F511AB85A0D0021A545 /* BPModel.xcdatamodeld in Sources */,
 				2369800C1AA86873009CC9F3 /* Core_Test.xcdatamodeld in Sources */,
 				234107C21AAED8CB00218394 /* Model_3_to_4.xcmappingmodel in Sources */,
+				23EDC3E51AB81BA1009473BB /* BPMigrator.m in Sources */,
 				D573D48E1AB6286400E356D9 /* Model_2_3.xcmappingmodel in Sources */,
 				23EDC3D81AB81550009473BB /* Migrate.xcmappingmodel in Sources */,
 				23AAC3EA1AADC0C400F7D0DC /* NewEvent.m in Sources */,
+				23112F4E1AB858BE0021A545 /* RHManagedObjectContextManager.m in Sources */,
 				23AAC3F11AADE9D000F7D0DC /* MigrationManager_4_5.m in Sources */,
 				23AAC3E41AADA85700F7D0DC /* Migration_3_4.m in Sources */,
-				23EDC3DB1AB81550009473BB /* RHManagedObjectContextManager.m in Sources */,
 				23697FE91AA85B67009CC9F3 /* MasterViewController.m in Sources */,
 				23E58E401AAF49E800791501 /* Model_4_5.xcmappingmodel in Sources */,
+				23FFE1E21AB822CE00FE46A8 /* zip.c in Sources */,
 				236980101AA87B5A009CC9F3 /* Detail_VC.m in Sources */,
 				23697FE31AA85B67009CC9F3 /* AppDelegate.m in Sources */,
 				23EDC3DA1AB81550009473BB /* Model.xcdatamodeld in Sources */,
+				23FFE1E31AB822CE00FE46A8 /* ZipArchive.m in Sources */,
+				23FFE1E01AB822CE00FE46A8 /* ioapi.c in Sources */,
+				23FFE1F61AB82E0E00FE46A8 /* SVProgressHUD.m in Sources */,
+				23FFE1E11AB822CE00FE46A8 /* unzip.c in Sources */,
+				23EDC3E21AB81B54009473BB /* BPMigrationManager.m in Sources */,
 				2390C09A1AB194FA008B5F85 /* Model_3_5.xcmappingmodel in Sources */,
 				2390C0981AB18730008B5F85 /* Migration_4_5.m in Sources */,
 				23EDC3D91AB81550009473BB /* Migrate23.xcmappingmodel in Sources */,
@@ -528,6 +626,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		23112F4F1AB85A0D0021A545 /* BPModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				23112F501AB85A0D0021A545 /* BPModel.xcdatamodel */,
+			);
+			currentVersion = 23112F501AB85A0D0021A545 /* BPModel.xcdatamodel */;
+			path = BPModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		2369800A1AA86873009CC9F3 /* Core_Test.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
