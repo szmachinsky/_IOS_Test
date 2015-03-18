@@ -324,7 +324,7 @@ static const CGFloat SVProgressHUDRingThickness = 2;
             [_cancelButton setTitle:NSLocalizedString(@"Cancel",) forState:UIControlStateNormal];
             [_cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             [_cancelButton addTarget:self action:@selector(cancelTapped) forControlEvents:UIControlEventTouchUpInside];
-            [_cancelButton.titleLabel setFont:[UIFont fontWithName:THEME_FONT_NAME size:14]];
+            [_cancelButton.titleLabel setFont:[UIFont systemFontOfSize:14]];//zs//[UIFont fontWithName:THEME_FONT_NAME size:14]];
             [self.stringLabel.superview addSubview:_cancelButton];
             [self.stringLabel.superview setUserInteractionEnabled:YES];
             [self.stringLabel.superview.superview setUserInteractionEnabled:YES];
@@ -984,7 +984,7 @@ static const CGFloat SVProgressHUDRingThickness = 2;
 
 - (UIFont *)hudFont {
     if(_uiHudFont == nil) {
-        _uiHudFont = [UIFont fontWithName:THEME_FONT_NAME size:14];
+        _uiHudFont = [UIFont systemFontOfSize:14];//zs//[UIFont fontWithName:THEME_FONT_NAME size:14];
     }
     
     if(_uiHudFont != nil) {

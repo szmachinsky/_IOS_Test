@@ -35,10 +35,18 @@
         self.text1.text = @"???";
         self.text2.text = @"???";
         
+#if _CORE_CASE == 1
         self.text1.text = [[self.detailItem valueForKey:@"detail_1"] description];
 #if _CORE_VERSION >= 1
         self.text2.text = [[self.detailItem valueForKey:@"detail_2"] description];
 #endif
+#endif
+        
+#if _CORE_CASE == 2
+        self.text1.text = [[self.detailItem valueForKey:@"fName"] description];
+        self.text2.text = [[self.detailItem valueForKey:@"sName"] description];
+#endif
+        
     }
 }
 
@@ -63,11 +71,19 @@
 {
     [super viewWillDisappear:animated];
     
+#if _CORE_CASE == 1
     [self.detailItem setValue:self.text1.text forKey:@"detail_1"]; //zs
 #if _CORE_VERSION >= 1
     [self.detailItem setValue:self.text2.text forKey:@"detail_2"]; //zs
 #endif
+#endif
 
+#if _CORE_CASE == 2
+    [self.detailItem setValue:self.text1.text forKey:@"fName"]; //zs
+    [self.detailItem setValue:self.text2.text forKey:@"sName"]; //zs
+#endif
+
+    
 //    if ([self.delegate respondsToSelector:@selector(saveContext)]) {
 //        [self.delegate performSelector:@selector(saveContext)];
 //    }

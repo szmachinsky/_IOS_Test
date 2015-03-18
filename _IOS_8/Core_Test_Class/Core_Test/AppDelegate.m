@@ -11,6 +11,8 @@
 
 #import "MigrationManager_4_5.h"
 
+#import "MyMirgaror.h"
+
 @interface AppDelegate ()
 
 @end
@@ -19,10 +21,42 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSLog(@"--delegate begin--");
     // Override point for customization after application launch.
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
-    controller.managedObjectContext = self.managedObjectContext;
+    
+#if _CORE_CASE == 0
+    controller.managedObjectContext = [self managedObjectContext]; //create Core Date stack
+#endif
+    
+#if _CORE_CASE == 1
+    
+    __typeof__(self) __weak weakSelf = self;
+    void (^postAction)(BOOL) = ^(BOOL ok){
+//      NSLog(@">>>>>>> Migration_is_completed : %d <<<<<<<<<<",ok);
+        if (ok)
+        {
+            NSLog(@">>>>>>> Migration_was_COOL : %d <<<<<<<<<<",ok);
+            controller.managedObjectContext = [weakSelf managedObjectContext]; //create Core Date stack
+            [controller update];
+        } else {
+            NSLog(@">>>>>>> Migration_was_WRONG : %d <<<<<<<<<<",ok);
+        }
+     };
+    
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"];
+    NSString *name = CORE_NAME;// @"Core_Test"  @"BPModel"
+     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+//  dispatch_async(dispatch_get_main_queue(), ^{
+        BOOL ok = [MyMirgaror checkMigrationFor:storeURL modelName:name ofType:NSSQLiteStoreType lightMigration:NO completion:[postAction copy]];
+        NSLog(@"MIGRATION WAS = %d",ok);
+    });
+    
+#endif
+    
+    NSLog(@"--delegate end--");
     return YES;
 }
 
@@ -66,9 +100,15 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    
+#if _CORE_CASE == 1
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Core_Test" withExtension:@"momd"];
 //  NSURL *modelURL = [[NSBundle mainBundle] URLForResource:CORE_NAME withExtension:@"momd"]; //@"Core_Test"
+#endif
+    
+#if _CORE_CASE == 2
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"BPModel" withExtension:@"momd"];
+#endif
+    
     NSLog(@"URL=%@",modelURL);
     
     if (!modelURL) {
@@ -161,7 +201,7 @@
         BOOL ok = [myMigrationManager migrateStoreFromURL:storeURL
                                                    type:NSSQLiteStoreType
                                                 options:nil
-                                       withMappingModel:mappingModel2
+                                       withMappingModel:mappingModel1
                                        toDestinationURL:newStoreURL
                                         destinationType:NSSQLiteStoreType
                                      destinationOptions:nil

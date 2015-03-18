@@ -22,11 +22,11 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 
-#import "RHManagedObjectContextManager.h"
-#import "RHManagedObject.h"
+//#import "RHManagedObjectContextManager.h"
+//#import "RHManagedObject.h"
 #import "ZipArchive.h"
 #import "UIViewController+Hud.h"
-#import "NSDictionary+YoutubeInfo.h"
+//#import "NSDictionary+YoutubeInfo.h"
 
 #if !DEBUG || 0
 # define NSLog(...)     ((void)0)
@@ -67,7 +67,7 @@
         if (![dict isKindOfClass:[NSDictionary class]])
             return @"";
         
-        return [dict youtube_AuthorString];
+        return nil;//[dict youtube_AuthorString];
     }
     @catch(...)
     {
@@ -82,7 +82,7 @@
         if (![dict isKindOfClass:[NSDictionary class]])
             return @"";
         
-        return [dict youtube_ChannelTitle];
+        return nil;//[dict youtube_ChannelTitle];
     }
     @catch(...)
     {
@@ -97,7 +97,7 @@
         if (![dict isKindOfClass:[NSDictionary class]])
             return @"";
         
-        return [dict youtube_DescriptionString];
+        return nil;//[dict youtube_DescriptionString];
     }
     @catch(...)
     {
@@ -113,7 +113,7 @@
         if (![dict isKindOfClass:[NSDictionary class]])
             return @(0);
         
-        return @([[dict youtube_DislikesCountString] integerValue]);
+        return nil;//@([[dict youtube_DislikesCountString] integerValue]);
     }
     @catch(...)
     {
@@ -128,7 +128,7 @@
         if (![dict isKindOfClass:[NSDictionary class]])
             return @(0);
         
-        return @([[dict youtube_ViewCountString] integerValue]);
+        return nil;//@([[dict youtube_ViewCountString] integerValue]);
     }
     @catch(...)
     {
@@ -143,7 +143,7 @@
         if (![dict isKindOfClass:[NSDictionary class]])
             return @(0);
         
-        return @([[dict youtube_LikesCountString] integerValue]);
+        return nil;//@([[dict youtube_LikesCountString] integerValue]);
     }
     @catch(...)
     {
@@ -158,7 +158,7 @@
         if (![dict isKindOfClass:[NSDictionary class]])
             return @"";
         
-        return [[dict youtube_HighResolutionThumbmailURL] absoluteString];
+        return nil;//[[dict youtube_HighResolutionThumbmailURL] absoluteString];
     }
     @catch(...)
     {
@@ -173,7 +173,7 @@
         if (![dict isKindOfClass:[NSDictionary class]])
             return @"";
         
-        return [[dict youtube_MediumResolutionThumbmailURL] absoluteString];
+        return nil;//[[dict youtube_MediumResolutionThumbmailURL] absoluteString];
     }
     @catch(...)
     {
@@ -188,7 +188,7 @@
         if (![dict isKindOfClass:[NSDictionary class]])
             return @"";
         
-        return [[dict youtube_DefaultThumbmailURL] absoluteString];
+        return nil;//[[dict youtube_DefaultThumbmailURL] absoluteString];
     }
     @catch(...)
     {

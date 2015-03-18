@@ -32,10 +32,17 @@
     
 }
 
+-(void)update
+{
+    if (_managedObjectContext)
+        [self.tableView reloadData];
+}
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self.tableView reloadData];
+    if (_managedObjectContext)
+        [self.tableView reloadData];
 }
 
 
@@ -46,13 +53,16 @@
 
 - (void)insertNewObject:(id)sender {
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSError *error;
+ 
+#if _CORE_CASE == 1
+    
     NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
     NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-        
+    
     // If appropriate, configure the new managed object.
     // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
     [newManagedObject setValue:[NSDate date] forKey:t_Stamp];
- 
     
 #if _CORE_VERSION == 3
     [newManagedObject setValue:@"3-detail1" forKey:@"detail_1"];
@@ -65,6 +75,7 @@
 #if _CORE_VERSION == 5
     [newManagedObject setValue:@"5-detail1" forKey:@"detail_1"];
 #endif
+#endif //_CORE_CASE
 
     
 //    [newManagedObject setValue:@"new detail2" forKey:@"detail_2"];
@@ -73,14 +84,73 @@
     [newManagedObject setValue:@15.5 forKey:@"f"];
 #endif
     
+    
+#if _CORE_CASE == 2
+    NSManagedObject *newManagedObject1 = [NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:context];
+    
+    [newManagedObject1 setValue:[NSDate date] forKey:t_Stamp];
+    
+    [newManagedObject1 setValue:@"Peter" forKey:@"fName"];
+    [newManagedObject1 setValue:@"Welker" forKey:@"sName"];
+    
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *e = [NSEntityDescription entityForName:@"Sex" inManagedObjectContext:self.managedObjectContext];
+    [request setEntity:e];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"descr" ascending:YES];
+    [request setSortDescriptors:@[sortDescriptor]];
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    static int ind = 0;
+    if (result.count == 0)
+    {
+        NSManagedObject *newManagedObject3 = [NSEntityDescription insertNewObjectForEntityForName:@"Sex" inManagedObjectContext:context];
+        [newManagedObject3 setValue:@"MEN" forKey:@"descr"];
+        
+        [newManagedObject1 setValue:newManagedObject3 forKey:@"sex"];
+        
+        NSSet *set = [newManagedObject3 valueForKey:@"people"];
+        NSMutableSet *sett = [set mutableCopy];
+        [sett addObject:newManagedObject1];
+        [newManagedObject3 setValue:sett forKey:@"people"];
+        
+        
+        
+        newManagedObject3 = [NSEntityDescription insertNewObjectForEntityForName:@"Sex" inManagedObjectContext:context];
+        [newManagedObject3 setValue:@"WIM" forKey:@"descr"];
+        newManagedObject3 = [NSEntityDescription insertNewObjectForEntityForName:@"Sex" inManagedObjectContext:context];
+        [newManagedObject3 setValue:@"UNI" forKey:@"descr"];        
+    }
+    if (result.count == 3) {
+        int new_ind = (ind++ %3);
+        NSManagedObject *newManagedObject4 = result[new_ind]; //0-men 2-wim 1-uni
+        
+        [newManagedObject1 setValue:newManagedObject4 forKey:@"sex"];
+//        NSSet *set = [newManagedObject4 valueForKey:@"people"];
+//        NSMutableSet *sett = [set mutableCopy];
+        NSMutableSet *sett = [newManagedObject4 valueForKey:@"people"];
+        [sett addObject:newManagedObject1];
+        [newManagedObject4 setValue:sett forKey:@"people"];
+        
+        [newManagedObject1 setValue:@(25+new_ind) forKey:@"age"];
+        [newManagedObject1 setValue:@"Jone" forKey:@"fName"];
+        [newManagedObject1 setValue:@"" forKey:@"sName"];
+    }
+    
+    
+    
+#endif //_CORE_CASE
+    
+    
+    
     // Save the context.
-    NSError *error = nil;
     if (![context save:&error]) {
         // Replace this implementation with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+    if (_managedObjectContext)
+        [self.tableView reloadData];
 }
 
 #pragma mark - Segues
@@ -96,11 +166,17 @@
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (!_managedObjectContext)
+        return 0;
+    
     return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    if (!_managedObjectContext)
+        return 0;
+    
+   id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
     return [sectionInfo numberOfObjects];
 }
 //===================================
@@ -144,9 +220,14 @@
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath]; //get object
     
 //  cell.textLabel.text = [[object valueForKey:t_Stamp] description];
+    
+
+#if _CORE_CASE == 1
+
     NSDate *date = [object valueForKey:t_Stamp];
     cell.textLabel.text = [NSDateFormatter localizedStringFromDate:date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
     
@@ -167,6 +248,24 @@
     str = [NSString stringWithFormat:@"%@ (%@)",str,str3];
 #endif
 
+#endif //_CORE_CASE
+    
+    
+#if _CORE_CASE == 2
+    NSString *str1 = [object valueForKey:@"fName"];
+    NSString *str2 = [object valueForKey:@"sName"];
+    NSNumber *num = [object valueForKey:@"age"];
+    NSString *str3 = [num stringValue];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ / %@ / %@",str1,str2,str3];
+    
+    NSManagedObject *obj = [object valueForKey:@"sex"];
+    NSString *str = [obj valueForKeyPath:@"descr"];
+    NSMutableSet *set = [obj valueForKeyPath:@"people"];
+    int i = set.count;
+    str = [NSString stringWithFormat:@"%@ /all is %d",str,i];
+
+#endif //_CORE_CASE
+    
     
     cell.detailTextLabel.text = str;
 }
@@ -177,6 +276,10 @@
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
+    
+    if (!_managedObjectContext)
+        return nil;
+    
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }

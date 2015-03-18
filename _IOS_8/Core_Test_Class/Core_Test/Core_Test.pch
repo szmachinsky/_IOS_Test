@@ -21,6 +21,9 @@
 #import <CoreData/CoreData.h>
 #endif
 
+
+#define _CORE_CASE 1
+ 
 #define _CORE_VERSION 5
 # define CORE_NAME  @"Core_Test"
 
@@ -46,4 +49,20 @@
 # define CORE_ENTITY1   @"MigrEvent"
 #endif
 
+ 
+
+
+/*
+#define _CORE_CASE 2
+
+#define _CORE_VERSION 0
+
+# define CORE_NAME  @"BPModel"
+# define t_Stamp        @"when"
+# define CORE_ENTITY1   @"Person"
+*/
+
+
 #endif
+
+

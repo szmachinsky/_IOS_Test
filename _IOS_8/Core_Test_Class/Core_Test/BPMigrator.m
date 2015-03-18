@@ -19,9 +19,9 @@ static BOOL _isDatabaseReady = NO;
 #define ENABLE_DYNAMIC_MODELS 1
 
 
-#if ENABLE_DYNAMIC_MODELS
-# import "ZipArchive.h"
-#endif
+//#if ENABLE_DYNAMIC_MODELS
+//# import "ZipArchive.h"
+//#endif
 
 
 #if ENABLE_DYNAMIC_MODELS
@@ -574,6 +574,27 @@ static void ShowProgress()
     
     return url;
 }
+
+
 @end
+
+/*
+if ([[NSFileManager defaultManager] fileExistsAtPath:[[self storeURL] path]])
+{
+    if (![Migrator iterativeMigrateURL:[self storeURL]
+                                ofType:NSSQLiteStoreType
+                               toModel:[self managedObjectModel]
+                                 error:&error])
+    {
+        NSLog(@"Error migrating to latest model: %@\n %@", error, [error userInfo]);
+#if DEBUG || ADHOC
+        abort();
+#else // #if DEBUG || ADHOC
+        [[NSFileManager defaultManager] removeItemAtURL:[self storeURL] error:NULL];
+#endif // #if DEBUG || ADHOC
+    }
+}
+*/
+
 
 
