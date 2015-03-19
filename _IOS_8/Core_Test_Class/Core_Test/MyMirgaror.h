@@ -10,13 +10,25 @@
 
 @interface MyMirgaror : NSObject
 
-+(BOOL)checkMigrationFor:(NSURL *)storeURL 
++(instancetype)sharedMigrator;
+
+
+@property (nonatomic, copy) void (^initHud)();
+@property (nonatomic, copy) void (^progressHud)(float, NSString*);
+
+
+-(BOOL)checkMigrationFor:(NSURL *)storeURL
                modelName:(NSString *)modelName
                   ofType:(NSString *)sourceStoreType
           lightMigration:(BOOL)lightMigration
-              completion: (void (^)(BOOL ok))completion;
+              completion: (void (^)(BOOL ok))completion
+                 initHud:(void (^)())initHud
+             progressHud:(void (^)(float, NSString*))progressHud;
 
-+ (BOOL)migrateURL:(NSURL *)storeURL
+
+
+
+- (BOOL)migrateURL:(NSURL *)storeURL
 //migrationManager:(NSMigrationManager*)migrationManager
     migrationClass:(Class)migrationClass
             ofType:(NSString *)sourceStoreType
@@ -25,7 +37,10 @@
       mappingModel:(NSMappingModel *)mappingModel
 //            error:(NSError **)err
             offset:(float)offset
-             range:(float)range;
+             range:(float)range
+           initHud:(void (^)())initHud
+       progressHud:(void (^)(float, NSString*))progressHud;
+
 
 
 @end

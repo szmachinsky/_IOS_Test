@@ -13,6 +13,11 @@
 
 #import "MyMirgaror.h"
 
+#import "UIViewController+Hud.h"
+#import "SVProgressHUD.h"
+
+
+
 @interface AppDelegate ()
 
 @end
@@ -45,12 +50,25 @@
         }
      };
     
+    void (^initHud)() = ^{
+        [UIViewController showInfiniteHudText:NSLocalizedString(@"Updating media database...",)];
+    };
+    
+    void (^progressHud)(float, NSString*) = ^(float off, NSString *str){
+//        [UIViewController showInfiniteHudText:NSLocalizedString(@"Updating media database...",)];
+        [UIViewController showProgressHud:off text:str];
+    };
+    
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"];
     NSString *name = CORE_NAME;// @"Core_Test"  @"BPModel"
      
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 //  dispatch_async(dispatch_get_main_queue(), ^{
-        BOOL ok = [MyMirgaror checkMigrationFor:storeURL modelName:name ofType:NSSQLiteStoreType lightMigration:NO completion:[postAction copy]];
+        MyMirgaror *migrator = [MyMirgaror sharedMigrator];
+        migrator.initHud = [initHud copy];
+        migrator.progressHud = progressHud;
+        BOOL ok = [MyMirgaror checkMigrationFor:storeURL modelName:name ofType:NSSQLiteStoreType lightMigration:NO
+                                     completion:[postAction copy] initHud:[initHud copy] progressHud:[progressHud copy]];
         NSLog(@"MIGRATION WAS = %d",ok);
     });
     

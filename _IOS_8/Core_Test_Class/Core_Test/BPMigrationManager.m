@@ -42,19 +42,38 @@
     return @"";
 }
 
+
+- (NSString*)getNewName:(NSData*)nativeData
+{
+    @try
+    {
+        NSDictionary* dict = [NSKeyedUnarchiver unarchiveObjectWithData:nativeData];
+        if (![dict isKindOfClass:[NSDictionary class]]) {
+            return @"";
+        }
+        NSLog(@"%@",dict);        
+        return @"new detail";//[dict youtube_AuthorString];
+    }
+    @catch(...)
+    {
+        return @"!err";
+    }
+}
+
+
 - (NSString*)getAuthor:(NSData*)nativeData
 {
     @try
     {
         NSDictionary* dict = [NSKeyedUnarchiver unarchiveObjectWithData:nativeData];
         if (![dict isKindOfClass:[NSDictionary class]])
-            return @"";
+            return @"!!!";
         
-        return nil;//[dict youtube_AuthorString];
+        return @"???";//[dict youtube_AuthorString];
     }
     @catch(...)
     {
-        return @"";
+        return @"err";
     }
 }
 
@@ -106,6 +125,30 @@
     {
         return @"";
     }
+}
+
+
+
+-(void)associateSourceInstance:(NSManagedObject*)sourceInstance withDestinationInstance:(NSManagedObject *)destinationInstance forEntityMapping:(NSEntityMapping *)entityMapping
+{
+    [super associateSourceInstance:sourceInstance withDestinationInstance:destinationInstance forEntityMapping:entityMapping];
+    NSString *name = [entityMapping destinationEntityName];
+    static int i = 0;
+    NSLog(@"--%02d--> migrate Manager for = %@",++i,name);
+   
+//    if([name compare:@"MigrEvent"] == NSOrderedSame || [name compare:@"MigrEvent"] == NSOrderedSame)
+//    {
+//        // Generate UUID
+//        //        CFUUIDRef theUUID = CFUUIDCreate(NULL);
+//        //        CFStringRef string = CFUUIDCreateString(NULL, theUUID); CFRelease(theUUID);
+//        //        NSString *uuid = (__bridge NSString *)string;
+//        NSString *sss = [sourceInstance valueForKey:@"detail_1"];
+//        NSLog(@"custom migrate Manager for = %@",sss);
+//        
+//        [destinationInstance setValue:@"+Custom1!!!" forKey:@"detail_1"];
+//        //        [destinationInstance setValue:@"+Custom2!!!" forKey:@"detail_2"];
+//        //        [destinationInstance setValue:@"+Cust-field" forKey:@"field"];
+//    }
 }
 
 

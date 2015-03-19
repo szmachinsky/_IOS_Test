@@ -10,10 +10,69 @@
 
 @implementation MigrationManager_4_5
 
+
+- (NSString*)getNewName:(NSData*)nativeData
+{
+    @try
+    {
+        NSDictionary* dict = [NSKeyedUnarchiver unarchiveObjectWithData:nativeData];
+        if (![dict isKindOfClass:[NSDictionary class]]) {
+            return @"";
+        }
+        NSLog(@"%@",dict);
+        return @"new detail";//[dict youtube_AuthorString];
+    }
+    @catch(...)
+    {
+        return @"!err";
+    }
+}
+
+
+- (NSString*)emptyString
+{
+    return @"ччч";
+}
+
+- (NSString*)addString:(NSString*)nativeData
+{
+//    @try
+//    {
+        NSString *res = [NSString stringWithFormat:@"/%@/+add",nativeData];
+        return res;
+//    }
+//    @catch(...)
+//    {
+//        return @"";
+//    }
+}
+
+
+- (NSString*)getAuthor:(NSData*)nativeData
+{
+    @try
+    {
+        NSDictionary* dict = [NSKeyedUnarchiver unarchiveObjectWithData:nativeData];
+        if (![dict isKindOfClass:[NSDictionary class]])
+            return @"!!!";
+        
+        return @"???";//[dict youtube_AuthorString];
+    }
+    @catch(...)
+    {
+        return @"err";
+    }
+}
+
+
 -(void)associateSourceInstance:(NSManagedObject*)sourceInstance withDestinationInstance:(NSManagedObject *)destinationInstance forEntityMapping:(NSEntityMapping *)entityMapping
 {
     [super associateSourceInstance:sourceInstance withDestinationInstance:destinationInstance forEntityMapping:entityMapping];
     NSString *name = [entityMapping destinationEntityName];
+    
+    static int i = 0;
+    NSLog(@"--%02d--> migrate Manager_4_5 for = %@",++i,name);
+    sleep(1);
     
     if([name compare:@"MigrEvent"] == NSOrderedSame || [name compare:@"MigrEvent"] == NSOrderedSame)
     {
