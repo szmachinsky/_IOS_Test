@@ -12,18 +12,19 @@
 
 +(instancetype)sharedMigrator;
 
+-(instancetype)init;
 
 @property (nonatomic, copy) void (^initHud)();
-@property (nonatomic, copy) void (^progressHud)(float, NSString*);
+@property (nonatomic, copy) void (^progressHud)(float);
 
 
 -(BOOL)checkMigrationFor:(NSURL *)storeURL
                modelName:(NSString *)modelName
                   ofType:(NSString *)sourceStoreType
           lightMigration:(BOOL)lightMigration
-              completion: (void (^)(BOOL ok))completion
-                 initHud:(void (^)())initHud
-             progressHud:(void (^)(float, NSString*))progressHud;
+              completion: (void (^)(BOOL ok))completion;
+//                 initHud:(void (^)())initHud
+//             progressHud:(void (^)(float, NSString*))progressHud;
 
 
 
@@ -37,9 +38,9 @@
       mappingModel:(NSMappingModel *)mappingModel
 //            error:(NSError **)err
             offset:(float)offset
-             range:(float)range
-           initHud:(void (^)())initHud
-       progressHud:(void (^)(float, NSString*))progressHud;
+             range:(float)range;
+//           initHud:(void (^)())initHud
+//       progressHud:(void (^)(float, NSString*))progressHud;
 
 
 

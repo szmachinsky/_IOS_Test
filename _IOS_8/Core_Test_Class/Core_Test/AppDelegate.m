@@ -50,25 +50,30 @@
         }
      };
     
-    void (^initHud)() = ^{
-        [UIViewController showInfiniteHudText:NSLocalizedString(@"Updating media database...",)];
-    };
-    
-    void (^progressHud)(float, NSString*) = ^(float off, NSString *str){
+//    void (^initHud)() = ^{
 //        [UIViewController showInfiniteHudText:NSLocalizedString(@"Updating media database...",)];
-        [UIViewController showProgressHud:off text:str];
-    };
+//    };
+//    
+//    void (^progressHud)(float, NSString*) = ^(float off, NSString *str){
+//        [UIViewController showProgressHud:off text:str];
+//    };
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"];
     NSString *name = CORE_NAME;// @"Core_Test"  @"BPModel"
      
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
 //  dispatch_async(dispatch_get_main_queue(), ^{
-        MyMirgaror *migrator = [MyMirgaror sharedMigrator];
-        migrator.initHud = [initHud copy];
-        migrator.progressHud = progressHud;
-        BOOL ok = [MyMirgaror checkMigrationFor:storeURL modelName:name ofType:NSSQLiteStoreType lightMigration:NO
-                                     completion:[postAction copy] initHud:[initHud copy] progressHud:[progressHud copy]];
+        MyMirgaror *migrator = [MyMirgaror new];
+        migrator.initHud = ^{
+            [UIViewController showInfiniteHudText:NSLocalizedString(@"Updating media database...",)];
+        };
+        migrator.progressHud = ^(float progress){
+            NSLog(@"HUD_OFF=%.02f",progress);
+            [UIViewController showProgressHud:progress text:NSLocalizedString(@"Run migration...",)];
+        };
+
+        BOOL ok = [migrator checkMigrationFor:storeURL modelName:name ofType:NSSQLiteStoreType lightMigration:NO
+                                     completion:[postAction copy]];
         NSLog(@"MIGRATION WAS = %d",ok);
     });
     
