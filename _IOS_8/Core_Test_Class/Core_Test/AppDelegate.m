@@ -35,14 +35,13 @@
     controller.managedObjectContext = [self managedObjectContext]; //create Core Date stack
 #endif
     
-#if _CORE_CASE == 1
+#if _CORE_CASE == 2
     
     __typeof__(self) __weak weakSelf = self;
     void (^postAction)(BOOL) = ^(BOOL ok){
-//      NSLog(@">>>>>>> Migration_is_completed : %d <<<<<<<<<<",ok);
         if (ok)
         {
-            NSLog(@">>>>>>> Migration_was_COOL : %d <<<<<<<<<<",ok);
+            NSLog(@">>>>>>> Migration_was_OK : %d <<<<<<<<<<",ok);
             controller.managedObjectContext = [weakSelf managedObjectContext]; //create Core Date stack
             [controller update];
         } else {
@@ -50,20 +49,15 @@
         }
      };
     
-//    void (^initHud)() = ^{
-//        [UIViewController showInfiniteHudText:NSLocalizedString(@"Updating media database...",)];
-//    };
-//    
-//    void (^progressHud)(float, NSString*) = ^(float off, NSString *str){
-//        [UIViewController showProgressHud:off text:str];
-//    };
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"];
     NSString *name = CORE_NAME;// @"Core_Test"  @"BPModel"
      
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-//  dispatch_async(dispatch_get_main_queue(), ^{
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+//dispatch_async(dispatch_get_main_queue(), ^{
+      
         MyMirgaror *migrator = [MyMirgaror new];
+      
         migrator.initHud = ^{
             [UIViewController showInfiniteHudText:NSLocalizedString(@"Updating media database...",)];
         };
@@ -72,9 +66,11 @@
             [UIViewController showProgressHud:progress text:NSLocalizedString(@"Run migration...",)];
         };
 
-        BOOL ok = [migrator checkMigrationFor:storeURL modelName:name ofType:NSSQLiteStoreType lightMigration:NO
+        BOOL ok = [migrator checkMigrationFor:storeURL modelName:name ofType:NSSQLiteStoreType lightMigration:NO 
                                      completion:[postAction copy]];
+      
         NSLog(@"MIGRATION WAS = %d",ok);
+      
     });
     
 #endif

@@ -16,13 +16,15 @@
 #import "MigrationManager_4_5.h"
 #import "BPMigrationManager.h"
 
+
 static volatile float _progressOffset = 0.f;
 static volatile float _progressRange = 0.f;
 
 
 @implementation MyMirgaror
     
-+(instancetype) sharedMigrator {
++(instancetype) sharedMigrator
+{
     static MyMirgaror *_sharedInstance = nil;
     static dispatch_once_t onceToken;
     
@@ -53,9 +55,7 @@ static volatile float _progressRange = 0.f;
                modelName:(NSString *)modelName
                   ofType:(NSString *)sourceStoreType
           lightMigration:(BOOL)lightMigration
-              completion:(void (^)(BOOL ok))completion
-//                 initHud:(void (^)())initHud
-//             progressHud:(void (^)(float, NSString*))progressHud
+              completion:(void (^)(BOOL))completion
 {
     BOOL result = NO;
     NSManagedObjectModel *_managedObjectModel;
@@ -76,11 +76,8 @@ static volatile float _progressRange = 0.f;
             return result;
         }
         
-        
-        
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
-    //  NSURL *storeURL = sourceStoreURL;//[[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"];
-        NSLog(@"storeURL=%@",storeURL);
+        NSLog(@"Migration from storeURL=%@",storeURL);
         NSError *error = nil;
         NSDictionary *options = nil;
         
@@ -95,7 +92,6 @@ static volatile float _progressRange = 0.f;
                 NSLog(@"Light Migration"); // Try Light Migration
                 options = @{NSMigratePersistentStoresAutomaticallyOption: @YES, NSInferMappingModelAutomaticallyOption: @YES};
             } else {
-    //          NSURL *newStoreURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test-Temp.sqlite"];
                 NSManagedObjectModel *sourceModel = [NSManagedObjectModel mergedModelFromBundles:nil forStoreMetadata:sourceMetadata];
                 
                 NSMappingModel *mappingModel =[NSMappingModel mappingModelFromBundles:nil forSourceModel:sourceModel destinationModel:destinationModel];
@@ -105,30 +101,25 @@ static volatile float _progressRange = 0.f;
                     return result;
                 }
                 
-    //          MigrationManager_4_5 *myMigrationManager = [[MigrationManager_4_5 alloc] initWithSourceModel:sourceModel destinationModel:destinationModel];
-    //          NSMigrationManager *myMigrationManager = [[NSMigrationManager alloc] initWithSourceModel:sourceModel destinationModel:destinationModel];
-                
-    //          NSError *error;
                 float off = 0.;
                 float ran = 1.0;
                 
                 BOOL ok = [self migrateURL:storeURL
-    //                      migrationManager:myMigrationManager
                             migrationClass:[MigrationManager_4_5 class] //[NSMigrationManager class]
                                     ofType:sourceStoreType
                                  fromModel:sourceModel
                                    toModel:destinationModel
                               mappingModel:mappingModel
                                     offset:off
-                                     range:ran];
-//                                   initHud:initHud
-//                                progressHud:progressHud];
+                                     range:ran
+                                completion:nil];
                 if (!ok) {
                     return result;
                 }
                 
             }
         } else {
+            NSLog(@"Migration is NOT needed"); // Migration is not needed
             result = YES;
             return result;
         }
@@ -142,6 +133,7 @@ static volatile float _progressRange = 0.f;
         if (![[NSFileManager defaultManager] fileExistsAtPath:[storeURL path]])
         {
             NSLog(@"STORE FILE IS NOT EXIST!!!");
+            result = NO;
          } else {
             result = YES;
         }
@@ -153,36 +145,34 @@ static volatile float _progressRange = 0.f;
         if (completion)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"run_complition_block woth result=%d",result);
+                NSLog(@"run_completion_block with result=%d",result);
                 completion(result);
             });
         }
         
+        return result;
     } //@finally
-    
     
     return result;
 }
 
 
 - (BOOL)migrateURL:(NSURL *)storeURL
-//migrationManager:(NSMigrationManager*)migrationManager
     migrationClass:(Class)migrationClass
             ofType:(NSString *)sourceStoreType
          fromModel:(NSManagedObjectModel *)sourceModel
            toModel:(NSManagedObjectModel *)destinationModel
       mappingModel:(NSMappingModel *)mappingModel
- //            error:(NSError **)err
             offset:(float)offset
             range:(float)range
-//           initHud:(void (^)())initHud
-//       progressHud:(void (^)(float, NSString*))progressHud;
+        completion: (void (^)(BOOL))completion
 {
     BOOL result = NO;
     
+@try {
+        
     _progressOffset = offset;
     _progressRange = range;
-    
     
     if (!migrationClass) {
         migrationClass = [NSMigrationManager class];
@@ -220,7 +210,6 @@ static volatile float _progressRange = 0.f;
         if ([NSThread isMainThread])
         {
             self.initHud();
-            //while (kCFRunLoopRunHandledSource == CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.001, YES)) ;
         }
         else{
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -228,15 +217,13 @@ static volatile float _progressRange = 0.f;
             });
         }
     }
-//    self.progress_Hud = progressHud;
-//    self->progressHud = progressHud;
-    [migrationManager addObserver:(id)self forKeyPath:@"migrationProgress" options:0 context:NULL];
-    sleep(2);
     
+    [migrationManager addObserver:(id)self forKeyPath:@"migrationProgress" options:0 context:NULL];
+//    sleep(1);
     
     BOOL ok = [migrationManager migrateStoreFromURL:storeURL
                                                  type:sourceStoreType
-                                              options:nil
+                                              options:options
                                      withMappingModel:mappingModel
                                      toDestinationURL:newStoreURL
                                       destinationType:sourceStoreType
@@ -250,7 +237,6 @@ static volatile float _progressRange = 0.f;
         if ([NSThread isMainThread])
         {
             [UIViewController dismissHud];
-            //while (kCFRunLoopRunHandledSource == CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.001, YES));
         }
         else{
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -268,7 +254,6 @@ static volatile float _progressRange = 0.f;
         if ([NSThread isMainThread])
         {
             [UIViewController dismissHud];
-            //while (kCFRunLoopRunHandledSource == CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.001, YES));
         }
         else{
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -316,13 +301,30 @@ static volatile float _progressRange = 0.f;
         return NO;
     }
     
- 
+    //delete *-shm and *-wal files for result base
     [[NSFileManager defaultManager] removeItemAtURL:sourceStoreURL_SHM error:NULL];
     [[NSFileManager defaultManager] removeItemAtURL:sourceStoreURL_WAL error:NULL];
     
-    sleep(2);
+//    sleep(1);
+    
+} //@try
+@catch (NSException *exception) {
+        
+} //@catch
+@finally {
+        if (completion)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"run_migration_complition_block with result=%d",result);
+                completion(result);
+            });
+        }
+        
+        return result;
+} //@finally
     
     return result;
+
 }
 
 
@@ -333,12 +335,13 @@ static volatile float _progressRange = 0.f;
     if (self.progressHud) {
         if ([NSThread isMainThread])
         {
+            NSLog(@"IN MAIN THREAD");
             self.progressHud(_progressOffset + migrator.migrationProgress * _progressRange);
     //        [UIViewController showProgressHud:_progressOffset + migrator.migrationProgress * _progressRange text:NSLocalizedString(@"Updating media database...",)];
             while (kCFRunLoopRunHandledSource == CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.001, YES));
         }
         else{
-            NSLog(@"NOT MAIN THREAD");
+            NSLog(@"NOT IN MAIN THREAD");
             const float off = _progressOffset;
             const float ran = _progressRange;
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -361,8 +364,6 @@ static volatile float _progressRange = 0.f;
     [[NSFileManager defaultManager] removeItemAtPath:[storePath stringByAppendingString:@"-shm"] error:NULL];
     [[NSFileManager defaultManager] removeItemAtPath:[storePath stringByAppendingString:@"-wal"] error:NULL];
 }
-
-
 
 
 - (NSURL *)applicationDocumentsDirectory {

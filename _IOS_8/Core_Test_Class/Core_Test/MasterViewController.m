@@ -51,7 +51,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)insertNewObject:(id)sender {
+- (void)insertNewObject:(id)sender
+{
+    for (int i = 1; i <= 1; i++) {
+        @autoreleasepool {
+            NSLog(@"%04d)",i);
+            for (int j = 1; j <= 120; j++) { //30kb
+                [self insertNewObjects:sender];            
+            }
+            
+            [self saveContext];
+        }
+    }
+    
+}
+
+- (void)insertNewObjects:(id)sender {
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSError *error;
  
@@ -86,12 +101,22 @@
     
     
 #if _CORE_CASE == 2
+    static int ind = 0;
+    ind ++;
+    
     NSManagedObject *newManagedObject1 = [NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:context];
     
     [newManagedObject1 setValue:[NSDate date] forKey:t_Stamp];
     
-    [newManagedObject1 setValue:@"Peter" forKey:@"fName"];
-    [newManagedObject1 setValue:@"Welker" forKey:@"sName"];
+    if (ind<=100) {
+        [newManagedObject1 setValue:@"Peter" forKey:@"fName"];
+        [newManagedObject1 setValue:@"Welker" forKey:@"sName"];
+    } else {
+        [newManagedObject1 setValue:@"Name" forKey:@"fName"];
+        [newManagedObject1 setValue:@"no" forKey:@"sName"];
+        [newManagedObject1 setValue:@(99) forKey:@"age"];
+        return;
+    }
     
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -100,8 +125,7 @@
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"descr" ascending:YES];
     [request setSortDescriptors:@[sortDescriptor]];
     NSArray *result = [context executeFetchRequest:request error:&error];
-    static int ind = 0;
-    if (result.count == 0)
+     if (result.count == 0)
     {
         NSManagedObject *newManagedObject3 = [NSEntityDescription insertNewObjectForEntityForName:@"Sex" inManagedObjectContext:context];
         [newManagedObject3 setValue:@"MEN" forKey:@"descr"];
@@ -121,7 +145,7 @@
         [newManagedObject3 setValue:@"UNI" forKey:@"descr"];        
     }
     if (result.count == 3) {
-        int new_ind = (ind++ %3);
+        int new_ind = (ind %3);
         NSManagedObject *newManagedObject4 = result[new_ind]; //0-men 2-wim 1-uni
         
         [newManagedObject1 setValue:newManagedObject4 forKey:@"sex"];
@@ -132,7 +156,8 @@
         [newManagedObject4 setValue:sett forKey:@"people"];
         
         [newManagedObject1 setValue:@(25+new_ind) forKey:@"age"];
-        [newManagedObject1 setValue:@"Jone" forKey:@"fName"];
+ 
+        [newManagedObject1 setValue:@"Name" forKey:@"fName"];
         [newManagedObject1 setValue:@"" forKey:@"sName"];
     }
     

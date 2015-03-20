@@ -22,26 +22,18 @@
                modelName:(NSString *)modelName
                   ofType:(NSString *)sourceStoreType
           lightMigration:(BOOL)lightMigration
-              completion: (void (^)(BOOL ok))completion;
-//                 initHud:(void (^)())initHud
-//             progressHud:(void (^)(float, NSString*))progressHud;
-
-
+              completion: (void (^)(BOOL))completion;
 
 
 - (BOOL)migrateURL:(NSURL *)storeURL
-//migrationManager:(NSMigrationManager*)migrationManager
     migrationClass:(Class)migrationClass
             ofType:(NSString *)sourceStoreType
          fromModel:(NSManagedObjectModel *)sourceModel
            toModel:(NSManagedObjectModel *)destinationModel
       mappingModel:(NSMappingModel *)mappingModel
-//            error:(NSError **)err
             offset:(float)offset
-             range:(float)range;
-//           initHud:(void (^)())initHud
-//       progressHud:(void (^)(float, NSString*))progressHud;
-
+             range:(float)range
+        completion: (void (^)(BOOL))completion;
 
 
 @end

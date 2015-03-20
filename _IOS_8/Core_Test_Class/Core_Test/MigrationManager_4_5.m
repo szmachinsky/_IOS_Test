@@ -8,37 +8,24 @@
 
 #import "MigrationManager_4_5.h"
 
+
 @implementation MigrationManager_4_5
-
-
-- (NSString*)getNewName:(NSData*)nativeData
-{
-    @try
-    {
-        NSDictionary* dict = [NSKeyedUnarchiver unarchiveObjectWithData:nativeData];
-        if (![dict isKindOfClass:[NSDictionary class]]) {
-            return @"";
-        }
-        NSLog(@"%@",dict);
-        return @"new detail";//[dict youtube_AuthorString];
-    }
-    @catch(...)
-    {
-        return @"!err";
-    }
-}
-
 
 - (NSString*)emptyString
 {
-    return @"ччч";
+    return @"";
 }
 
 - (NSString*)addString:(NSString*)nativeData
 {
 //    @try
 //    {
+        static int i = 0;
+        
         NSString *res = [NSString stringWithFormat:@"/%@/+add",nativeData];
+        
+//        NSLog(@"--%03d)--> addString %@",i,res);
+        
         return res;
 //    }
 //    @catch(...)
@@ -48,22 +35,6 @@
 }
 
 
-- (NSString*)getAuthor:(NSData*)nativeData
-{
-    @try
-    {
-        NSDictionary* dict = [NSKeyedUnarchiver unarchiveObjectWithData:nativeData];
-        if (![dict isKindOfClass:[NSDictionary class]])
-            return @"!!!";
-        
-        return @"???";//[dict youtube_AuthorString];
-    }
-    @catch(...)
-    {
-        return @"err";
-    }
-}
-
 
 -(void)associateSourceInstance:(NSManagedObject*)sourceInstance withDestinationInstance:(NSManagedObject *)destinationInstance forEntityMapping:(NSEntityMapping *)entityMapping
 {
@@ -72,21 +43,41 @@
     
     static int i = 0;
     NSLog(@"--%02d--> migrate Manager_4_5 for = %@",++i,name);
-    sleep(1);
+//    sleep(1);
     
     if([name compare:@"MigrEvent"] == NSOrderedSame || [name compare:@"MigrEvent"] == NSOrderedSame)
     {
-        // Generate UUID
-//        CFUUIDRef theUUID = CFUUIDCreate(NULL);
-//        CFStringRef string = CFUUIDCreateString(NULL, theUUID); CFRelease(theUUID);
-//        NSString *uuid = (__bridge NSString *)string;
         NSString *sss = [sourceInstance valueForKey:@"detail_1"];
-        NSLog(@"custom migrate Manager for = %@",sss);
+        NSLog(@"-->custom for = %@",sss);
         
         [destinationInstance setValue:@"+Custom1!!!" forKey:@"detail_1"];
 //        [destinationInstance setValue:@"+Custom2!!!" forKey:@"detail_2"];
 //        [destinationInstance setValue:@"+Cust-field" forKey:@"field"];
     }
+    
+    if([name compare:@"Person"] == NSOrderedSame)
+    {
+//        NSLog(@"-->custom for Person");
+        
+        NSString *name = [sourceInstance valueForKey:@"sName"];
+        name = [NSString stringWithFormat:@"%@ + XX",name];
+        [destinationInstance setValue:name forKey:@"sName"];
+        
+        [destinationInstance setValue:@"+Custom1!!!" forKey:@"newField"];
+    }
+    
+    if([name compare:@"Sex"] == NSOrderedSame)
+    {
+//        NSLog(@"--custom for Sex");
+        
+        NSString *name = [sourceInstance valueForKey:@"descr"];
+        name = [NSString stringWithFormat:@"%@ + YY",name];
+        [destinationInstance setValue:name forKey:@"descr"];
+        
+        [destinationInstance setValue:@"+Custom2!!!" forKey:@"newField"];
+    }
 }
 
 @end
+
+

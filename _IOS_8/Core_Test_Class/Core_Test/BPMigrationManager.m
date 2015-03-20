@@ -30,12 +30,6 @@
     return def;
 }
 
-- (NSString*)ensureNotEmptyString:(NSString*)s
-{
-    if (s)
-        return s;
-    return [self emptyString];
-}
 
 - (NSString*)emptyString
 {
