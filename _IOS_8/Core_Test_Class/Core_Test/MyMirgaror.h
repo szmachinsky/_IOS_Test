@@ -15,14 +15,25 @@
 -(instancetype)init;
 
 @property (nonatomic, copy) void (^initHud)();
+@property (nonatomic, copy) void (^dismissHud)();
 @property (nonatomic, copy) void (^progressHud)(float);
+
+
+-(BOOL)checkMigrationFor:(NSURL *)storeURL 
+              asyncQueue:(dispatch_queue_t)queue
+               modelName:(NSString *)modelName
+                  ofType:(NSString *)sourceStoreType
+          lightMigration:(BOOL)lightMigration
+          migrationClass:(Class)migrationClass
+              completion:(void (^)(BOOL))completion;
 
 
 -(BOOL)checkMigrationFor:(NSURL *)storeURL
                modelName:(NSString *)modelName
                   ofType:(NSString *)sourceStoreType
           lightMigration:(BOOL)lightMigration
-              completion: (void (^)(BOOL))completion;
+          migrationClass:(Class)migrationClass
+              completion:(void (^)(BOOL))completion;
 
 
 - (BOOL)migrateURL:(NSURL *)storeURL
@@ -33,7 +44,7 @@
       mappingModel:(NSMappingModel *)mappingModel
             offset:(float)offset
              range:(float)range
-        completion: (void (^)(BOOL))completion;
+        completion:(void (^)(BOOL))completion;
 
 
 @end

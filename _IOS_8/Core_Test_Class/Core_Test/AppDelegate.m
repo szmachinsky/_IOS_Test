@@ -9,13 +9,14 @@
 #import "AppDelegate.h"
 #import "MasterViewController.h"
 
-#import "MigrationManager_4_5.h"
-
 #import "MyMirgaror.h"
 
 #import "UIViewController+Hud.h"
 #import "SVProgressHUD.h"
 
+#import "MigrationManager_4_5.h"
+#import "BPMigrationManager.h"
+#import "MyMigrationManager.h"
 
 
 @interface AppDelegate ()
@@ -26,7 +27,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    NSLog(@"--delegate begin--");
+    NSLog(@"--app delegate begin--");
     // Override point for customization after application launch.
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
@@ -49,33 +50,29 @@
         }
      };
     
+    MyMirgaror *migrator = [MyMirgaror new];
+    migrator.initHud = ^{[UIViewController showInfiniteHudText:NSLocalizedString(@"Updating media database...",)];};
+    migrator.dismissHud = ^{[UIViewController dismissHud];};
+    migrator.progressHud = ^(float progress){
+        NSLog(@"CALL HUD_OFF=%.02f",progress);
+        [UIViewController showProgressHud:progress text:NSLocalizedString(@"Run migration...",)];
+    };
+    BOOL ok = [migrator checkMigrationFor:[[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"]
+                               asyncQueue:nil//dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0) //dispatch_get_main_queue()
+                                modelName:CORE_NAME //@"BPModel"
+                                   ofType:NSSQLiteStoreType
+                           lightMigration:NO
+                           migrationClass:[MyMigrationManager class]               
+                               completion:[postAction copy]];
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"];
-    NSString *name = CORE_NAME;// @"Core_Test"  @"BPModel"
-     
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-//dispatch_async(dispatch_get_main_queue(), ^{
-      
-        MyMirgaror *migrator = [MyMirgaror new];
-      
-        migrator.initHud = ^{
-            [UIViewController showInfiniteHudText:NSLocalizedString(@"Updating media database...",)];
-        };
-        migrator.progressHud = ^(float progress){
-            NSLog(@"HUD_OFF=%.02f",progress);
-            [UIViewController showProgressHud:progress text:NSLocalizedString(@"Run migration...",)];
-        };
-
-        BOOL ok = [migrator checkMigrationFor:storeURL modelName:name ofType:NSSQLiteStoreType lightMigration:NO 
-                                     completion:[postAction copy]];
-      
-        NSLog(@"MIGRATION WAS = %d",ok);
-      
-    });
+    
+    NSLog(@"migrator call was = %d",ok);
+    
+    
     
 #endif
     
-    NSLog(@"--delegate end--");
+    NSLog(@"--app delegate end--");
     return YES;
 }
 

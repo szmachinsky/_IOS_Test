@@ -27,6 +27,7 @@
 		23AAC3F11AADE9D000F7D0DC /* MigrationManager_4_5.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3F01AADE9D000F7D0DC /* MigrationManager_4_5.m */; };
 		23B85A321AB95EFB0082D008 /* BPMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B85A311AB95EFB0082D008 /* BPMigrationManager.m */; };
 		23B85A351AB962AD0082D008 /* MyMirgaror.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B85A341AB962AD0082D008 /* MyMirgaror.m */; };
+		23DE87F01AC01DC7008BB2C9 /* MyMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DE87EF1AC01DC7008BB2C9 /* MyMigrationManager.m */; };
 		23E58E401AAF49E800791501 /* Model_4_5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23E58E3F1AAF49E800791501 /* Model_4_5.xcmappingmodel */; };
 		23EDC3D81AB81550009473BB /* Migrate.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3D01AB81550009473BB /* Migrate.xcmappingmodel */; };
 		23EDC3D91AB81550009473BB /* Migrate23.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3D11AB81550009473BB /* Migrate23.xcmappingmodel */; };
@@ -87,6 +88,8 @@
 		23B85A311AB95EFB0082D008 /* BPMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPMigrationManager.m; sourceTree = "<group>"; };
 		23B85A331AB962AD0082D008 /* MyMirgaror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMirgaror.h; sourceTree = "<group>"; };
 		23B85A341AB962AD0082D008 /* MyMirgaror.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMirgaror.m; sourceTree = "<group>"; };
+		23DE87EE1AC01DC7008BB2C9 /* MyMigrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMigrationManager.h; sourceTree = "<group>"; };
+		23DE87EF1AC01DC7008BB2C9 /* MyMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMigrationManager.m; sourceTree = "<group>"; };
 		23E58E3F1AAF49E800791501 /* Model_4_5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_4_5.xcmappingmodel; sourceTree = "<group>"; };
 		23EDC3D01AB81550009473BB /* Migrate.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Migrate.xcmappingmodel; sourceTree = "<group>"; };
 		23EDC3D11AB81550009473BB /* Migrate23.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Migrate23.xcmappingmodel; sourceTree = "<group>"; };
@@ -230,6 +233,8 @@
 				23EDC3E41AB81BA1009473BB /* BPMigrator.m */,
 				23B85A331AB962AD0082D008 /* MyMirgaror.h */,
 				23B85A341AB962AD0082D008 /* MyMirgaror.m */,
+				23DE87EE1AC01DC7008BB2C9 /* MyMigrationManager.h */,
+				23DE87EF1AC01DC7008BB2C9 /* MyMigrationManager.m */,
 			);
 			name = My_Migration__2;
 			sourceTree = "<group>";
@@ -370,6 +375,7 @@
 				234107C21AAED8CB00218394 /* Model_3_to_4.xcmappingmodel in Sources */,
 				23EDC3E51AB81BA1009473BB /* BPMigrator.m in Sources */,
 				D573D48E1AB6286400E356D9 /* Model_2_3.xcmappingmodel in Sources */,
+				23DE87F01AC01DC7008BB2C9 /* MyMigrationManager.m in Sources */,
 				23EDC3D81AB81550009473BB /* Migrate.xcmappingmodel in Sources */,
 				23AAC3EA1AADC0C400F7D0DC /* NewEvent.m in Sources */,
 				23B85A351AB962AD0082D008 /* MyMirgaror.m in Sources */,
@@ -603,7 +609,7 @@
 				239A68781ABC1CC2003AB3B8 /* BPModel 2.xcdatamodel */,
 				23112F501AB85A0D0021A545 /* BPModel.xcdatamodel */,
 			);
-			currentVersion = 23112F501AB85A0D0021A545 /* BPModel.xcdatamodel */;
+			currentVersion = 239A68781ABC1CC2003AB3B8 /* BPModel 2.xcdatamodel */;
 			path = BPModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

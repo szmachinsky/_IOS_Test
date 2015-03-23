@@ -53,16 +53,20 @@
 
 - (void)insertNewObject:(id)sender
 {
-    for (int i = 1; i <= 1; i++) {
-        @autoreleasepool {
-            NSLog(@"%04d)",i);
-            for (int j = 1; j <= 120; j++) { //30kb
-                [self insertNewObjects:sender];            
-            }
-            
-            [self saveContext];
-        }
-    }
+    [self insertNewObjects:sender];
+    return;
+    
+    
+//    for (int i = 1; i <= 1; i++) {
+//        @autoreleasepool {
+//            NSLog(@"%04d)",i);
+//            for (int j = 1; j <= 120; j++) { //30kb
+//                [self insertNewObjects:sender];            
+//            }
+//            
+//            [self saveContext];
+//        }
+//    }
     
 }
 
@@ -109,8 +113,8 @@
     [newManagedObject1 setValue:[NSDate date] forKey:t_Stamp];
     
     if (ind<=100) {
-        [newManagedObject1 setValue:@"Peter" forKey:@"fName"];
-        [newManagedObject1 setValue:@"Welker" forKey:@"sName"];
+        [newManagedObject1 setValue:@"Name" forKey:@"fName"];
+        [newManagedObject1 setValue:@"no" forKey:@"sName"];
     } else {
         [newManagedObject1 setValue:@"Name" forKey:@"fName"];
         [newManagedObject1 setValue:@"no" forKey:@"sName"];
@@ -281,7 +285,13 @@
     NSString *str2 = [object valueForKey:@"sName"];
     NSNumber *num = [object valueForKey:@"age"];
     NSString *str3 = [num stringValue];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ / %@ / %@",str1,str2,str3];
+    NSString *nf;
+    if ([str2 hasSuffix:@" ."]) {
+        nf = [object valueForKey:@"newField"];
+    }
+    if (!nf)
+        nf = @"";
+    cell.textLabel.text = [NSString stringWithFormat:@"%@/%@/%@/%@",str1,str2,str3,nf];
     
     NSManagedObject *obj = [object valueForKey:@"sex"];
     NSString *str = [obj valueForKeyPath:@"descr"];

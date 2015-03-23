@@ -3,7 +3,7 @@
     <entity name="Person" syncable="YES">
         <attribute name="age" optional="YES" attributeType="Integer 32" defaultValueString="10" syncable="YES"/>
         <attribute name="fName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="newField" optional="YES" attributeType="String" defaultValueString="&quot;def string1&quot;" syncable="YES"/>
+        <attribute name="newField" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
         <attribute name="sName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="when" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="sex" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sex" inverseName="people" inverseEntity="Sex" syncable="YES"/>
@@ -14,7 +14,7 @@
         <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="sex" inverseEntity="Person" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Person" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Person" positionX="-63" positionY="-18" width="128" height="135"/>
         <element name="Sex" positionX="-54" positionY="18" width="128" height="88"/>
     </elements>
 </model>

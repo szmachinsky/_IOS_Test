@@ -15,6 +15,7 @@
 
 #import "MigrationManager_4_5.h"
 #import "BPMigrationManager.h"
+#import "MyMigrationManager.h"
 
 
 static volatile float _progressOffset = 0.f;
@@ -51,10 +52,97 @@ static volatile float _progressRange = 0.f;
     NSLog(@"!!!DEALLOC MIGRATOR!!!");
 }
 
+
+-(BOOL)checkMigrationFor:(NSURL *)storeURL
+              asyncQueue:(dispatch_queue_t)queue
+               modelName:(NSString *)modelName
+                  ofType:(NSString *)sourceStoreType
+          lightMigration:(BOOL)lightMigration
+          migrationClass:(Class)migrationClass
+              completion:(void (^)(BOOL))completion
+
+{
+    __block BOOL result = NO;
+    if (queue) {
+        NSLog(@"run migrator in asynq queue");
+        dispatch_async(queue, ^{
+            result = [self checkMigrationFor:storeURL
+                                    modelName:modelName
+                                       ofType:sourceStoreType
+                               lightMigration:lightMigration
+                              migrationClass:migrationClass
+                                   completion:completion];
+        });
+    } else {
+        NSLog(@"run migrator sync");
+        result = [self checkMigrationFor:storeURL
+                               modelName:modelName
+                                  ofType:sourceStoreType
+                          lightMigration:lightMigration
+                          migrationClass:migrationClass
+                              completion:completion];
+        
+    }
+    return result;
+}
+
+
+//BPModel BPModel 2
+//Migration_BPModel_0_2
+
+// Returns the URL for a model file with the given name in the given directory.
+// @param directory The name of the bundle directory to search.  If nil,
+//    searches default paths.
+- (NSURL *)urlForModelName:(NSString *)modelName
+               inDirectory:(NSString *)directory
+{
+    NSBundle * bundle = nil;
+    
+    if (!bundle)
+        bundle = [NSBundle mainBundle];
+    
+    NSURL * url = [bundle URLForResource:modelName
+                           withExtension:@"mom"
+                            subdirectory:directory];
+    if (nil == url)
+    {
+        // Get mom file paths from momd directories.
+        NSArray * momdPaths = [bundle pathsForResourcesOfType:@"momd"
+                                                  inDirectory:directory];
+        for (NSString * momdPath in momdPaths)
+        {
+            url = [bundle URLForResource:modelName
+                           withExtension:@"mom"
+                            subdirectory:[momdPath lastPathComponent]];
+            if (url)
+                break;
+        }
+    }
+    
+    return url;
+}
+
+
+-(BOOL)checkCurrentModel:(NSString*)modelName compatibleWithStoreMetadata:sourceMetadata
+{
+    BOOL res = NO;
+    
+    NSURL *modelURL0 = [self urlForModelName:modelName inDirectory:nil]; //@"BPModel"
+    NSLog(@"MODEL_URL for %@ = %@",modelName,modelURL0);
+    NSManagedObjectModel *model =  [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL0];
+    
+    BOOL pscCompatible = (sourceMetadata == nil) || [model isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
+    NSLog(@"for %@ compatible is %d",modelName,pscCompatible);
+    
+    return res;
+}
+
+
 -(BOOL)checkMigrationFor:(NSURL *)storeURL
                modelName:(NSString *)modelName
                   ofType:(NSString *)sourceStoreType
           lightMigration:(BOOL)lightMigration
+          migrationClass:(Class)migrationClass
               completion:(void (^)(BOOL))completion
 {
     BOOL result = NO;
@@ -64,7 +152,7 @@ static volatile float _progressRange = 0.f;
 @try
     {
         NSURL *modelURL = [[NSBundle mainBundle] URLForResource:modelName withExtension:@"momd"]; //modelName @"BPModel"
-        NSLog(@"URL=%@",modelURL);
+        NSLog(@"MODEL_URL1=%@",modelURL);
         if (!modelURL) {
             NSLog(@"WRONG MODEL URL");
             return result;
@@ -76,6 +164,23 @@ static volatile float _progressRange = 0.f;
             return result;
         }
         
+        
+//        NSSet *vers = _managedObjectModel.versionIdentifiers;
+//        NSDictionary *dic = _managedObjectModel.entityVersionHashesByName;
+    
+        
+//        NSURL *modelURL0 = [self urlForModelName:@"BPModel" inDirectory:nil];
+//        NSLog(@"MODEL_URL_0=%@",modelURL0);
+//        NSManagedObjectModel *mod0 =  [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL0];
+//        
+//        NSURL *modelURL2 = [self urlForModelName:@"BPModel 2" inDirectory:nil];
+//        NSLog(@"MODEL_URL_2=%@",modelURL2);
+//        NSManagedObjectModel *mod2 =  [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL2];
+//        
+//        _managedObjectModel = mod2;
+        
+        
+        
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
         NSLog(@"Migration from storeURL=%@",storeURL);
         NSError *error = nil;
@@ -84,9 +189,27 @@ static volatile float _progressRange = 0.f;
         NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:NSSQLiteStoreType URL:storeURL error:&error];
         NSManagedObjectModel *destinationModel = [_persistentStoreCoordinator managedObjectModel];
         BOOL pscCompatible = (sourceMetadata == nil) || [destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
+        
+        BOOL pscCompatible0 = [self checkCurrentModel:@"BPModel" compatibleWithStoreMetadata:sourceMetadata];
+        BOOL pscCompatible2 = [self checkCurrentModel:@"BPModel 2" compatibleWithStoreMetadata:sourceMetadata];
+        
+        
        
         if(!pscCompatible) //Migration is needed
         {
+            if (self.initHud) {
+                NSLog(@"-init HUD");
+               if ([NSThread isMainThread])
+                {
+                    self.initHud();
+                }
+                else{
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.initHud();
+                    });
+                }
+            }
+            
             NSLog(@"Migration is needed"); // Migration is needed
             if (lightMigration) {
                 NSLog(@"Light Migration"); // Try Light Migration
@@ -105,7 +228,7 @@ static volatile float _progressRange = 0.f;
                 float ran = 1.0;
                 
                 BOOL ok = [self migrateURL:storeURL
-                            migrationClass:[MigrationManager_4_5 class] //[NSMigrationManager class]
+                            migrationClass:migrationClass //[NSMigrationManager class]
                                     ofType:sourceStoreType
                                  fromModel:sourceModel
                                    toModel:destinationModel
@@ -142,6 +265,19 @@ static volatile float _progressRange = 0.f;
     
 @finally
     {
+        if (self.dismissHud) {
+            NSLog(@"-dismiss HUD");
+            if ([NSThread isMainThread])
+            {
+                self.dismissHud();//[UIViewController dismissHud];
+            }
+            else{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.dismissHud();//[UIViewController dismissHud];
+                });
+            }
+        }
+        
         if (completion)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -164,13 +300,11 @@ static volatile float _progressRange = 0.f;
            toModel:(NSManagedObjectModel *)destinationModel
       mappingModel:(NSMappingModel *)mappingModel
             offset:(float)offset
-            range:(float)range
-        completion: (void (^)(BOOL))completion
+             range:(float)range
+        completion:(void (^)(BOOL))completion
 {
     BOOL result = NO;
     
-@try {
-        
     _progressOffset = offset;
     _progressRange = range;
     
@@ -178,6 +312,7 @@ static volatile float _progressRange = 0.f;
         migrationClass = [NSMigrationManager class];
     }
     if (![migrationClass isSubclassOfClass:[NSMigrationManager class]]) {
+        NSLog(@"Error migration manager class");
         return result;
     }
     
@@ -185,133 +320,131 @@ static volatile float _progressRange = 0.f;
 
     if (!migrationManager)
     {
+        NSLog(@"Wrong migration manager");
         return result;
     }
-    
-    NSError *error;
-    NSURL *newStoreURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test-Temp.sqlite"];
-    
-    // Build a temporary path to write the migrated store.
-    NSURL * tempDestinationStoreURL = [NSURL fileURLWithPath:[[storeURL path] stringByAppendingPathExtension:@"tmp"]];
-    
-    NSURL * sourceStoreURL_SHM = [NSURL fileURLWithPath:[[storeURL path] stringByAppendingString:@"-shm"]];
-    NSURL * sourceStoreURL_WAL = [NSURL fileURLWithPath:[[storeURL path] stringByAppendingString:@"-wal"]];
-    
-    [self removeStoreAtURL:tempDestinationStoreURL];
-    
-    newStoreURL = tempDestinationStoreURL;
-    
-    NSDictionary *options =   @{
-                               NSMigratePersistentStoresAutomaticallyOption:@YES
-                               ,NSInferMappingModelAutomaticallyOption:@YES
-                               ,NSSQLitePragmasOption: @{@"journal_mode": @"DELETE"} //"DELETE" "WAL"
-                               };
-    if (self.initHud) {
-        if ([NSThread isMainThread])
-        {
-            self.initHud();
-        }
-        else{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.initHud();
-            });
-        }
-    }
-    
-    [migrationManager addObserver:(id)self forKeyPath:@"migrationProgress" options:0 context:NULL];
-//    sleep(1);
-    
-    BOOL ok = [migrationManager migrateStoreFromURL:storeURL
-                                                 type:sourceStoreType
-                                              options:options
-                                     withMappingModel:mappingModel
-                                     toDestinationURL:newStoreURL
-                                      destinationType:sourceStoreType
-                                   destinationOptions:options
-                                                error:&error];
-    if(!ok)
-    {
-        NSLog(@"Error migrating %@, %@", error, [error userInfo]);
-        [migrationManager removeObserver:(id)self forKeyPath:@"migrationProgress"];
         
-        if ([NSThread isMainThread])
-        {
-            [UIViewController dismissHud];
-        }
-        else{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [UIViewController dismissHud];
-            });
-        }
+    @try
+    {
+        
+        NSError *error;
+//      NSURL *newStoreURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test-Temp.sqlite"];
+        
+        // Build a temporary path to write the migrated store.
+        NSURL * tempDestinationStoreURL = [NSURL fileURLWithPath:[[storeURL path] stringByAppendingPathExtension:@"tmp"]];
+        
+        NSURL * sourceStoreURL_SHM = [NSURL fileURLWithPath:[[storeURL path] stringByAppendingString:@"-shm"]];
+        NSURL * sourceStoreURL_WAL = [NSURL fileURLWithPath:[[storeURL path] stringByAppendingString:@"-wal"]];
         
         [self removeStoreAtURL:tempDestinationStoreURL];
         
-        return result;
-    } else {
-        NSLog(@"OK migrating");
-        [migrationManager removeObserver:(id)self forKeyPath:@"migrationProgress"];
+        NSURL *newStoreURL = tempDestinationStoreURL;
         
-        if ([NSThread isMainThread])
+        NSDictionary *options =   @{
+                                   NSMigratePersistentStoresAutomaticallyOption:@YES
+                                   ,NSInferMappingModelAutomaticallyOption:@YES
+                                   ,NSSQLitePragmasOption: @{@"journal_mode": @"DELETE"} //"DELETE" "WAL"
+                                   };
+//        if (self.initHud) {
+//            if ([NSThread isMainThread])
+//            {
+//                self.initHud();
+//            }
+//            else{
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    self.initHud();
+//                });
+//            }
+//        }
+        
+        [migrationManager addObserver:(id)self forKeyPath:@"migrationProgress" options:0 context:NULL];
+    //    sleep(1);
+        
+        BOOL ok = [migrationManager migrateStoreFromURL:storeURL
+                                                     type:sourceStoreType
+                                                  options:options
+                                         withMappingModel:mappingModel
+                                         toDestinationURL:newStoreURL
+                                          destinationType:sourceStoreType
+                                       destinationOptions:options
+                                                    error:&error];
+        if(!ok)
         {
-            [UIViewController dismissHud];
-        }
-        else{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [UIViewController dismissHud];
-            });
+            NSLog(@"Error migrating %@, %@", error, [error userInfo]);
+            [migrationManager removeObserver:(id)self forKeyPath:@"migrationProgress"];
+            
+            [self removeStoreAtURL:tempDestinationStoreURL];
+            
+            return result;
+        } else {
+            NSLog(@"OK migrating");
         }
         
-    }
-    
-    result = ok;
-    
-    NSURL *sourceStoreURL = storeURL;
-    NSFileManager * fileManager = [NSFileManager defaultManager];
-    
-    // Move the original source store to a backup location.
-    NSString * backupPath = [[sourceStoreURL path] stringByAppendingPathExtension:@"bak"];
-    
-    if (![fileManager moveItemAtPath:[sourceStoreURL path]
-                              toPath:backupPath
-                               error:&error])
-    {
-        [self removeStoreAtURL:tempDestinationStoreURL];
-        // If the move fails, delete the migrated destination store.
-        [fileManager moveItemAtPath:[tempDestinationStoreURL path]
-                             toPath:[sourceStoreURL path]
-                              error:NULL];
-        return NO;
-    }
-    
-    
-    // Move the destination store to the original source location.
-    if ([fileManager moveItemAtPath:[tempDestinationStoreURL path]
-                             toPath:[sourceStoreURL path]
-                              error:&error])
-    {
-        // If the move succeeds, delete the backup of the original store.
-        [fileManager removeItemAtPath:backupPath error:NULL];
-    }
-    else
-    {
-        // If the move fails, restore the original store to its original location.
-        [fileManager moveItemAtPath:backupPath
-                             toPath:[sourceStoreURL path]
-                              error:NULL];
-        return NO;
-    }
-    
-    //delete *-shm and *-wal files for result base
-    [[NSFileManager defaultManager] removeItemAtURL:sourceStoreURL_SHM error:NULL];
-    [[NSFileManager defaultManager] removeItemAtURL:sourceStoreURL_WAL error:NULL];
+        [migrationManager removeObserver:(id)self forKeyPath:@"migrationProgress"];
+        result = ok;
+        
+        NSURL *sourceStoreURL = storeURL;
+        NSFileManager * fileManager = [NSFileManager defaultManager];
+        
+        // Move the original source store to a backup location.
+        NSString * backupPath = [[sourceStoreURL path] stringByAppendingPathExtension:@"bak"];
+        
+        if (![fileManager moveItemAtPath:[sourceStoreURL path]
+                                  toPath:backupPath
+                                   error:&error])
+        {
+            [self removeStoreAtURL:tempDestinationStoreURL];
+            // If the move fails, delete the migrated destination store.
+            [fileManager moveItemAtPath:[tempDestinationStoreURL path]
+                                 toPath:[sourceStoreURL path]
+                                  error:NULL];
+            return NO;
+        }
+        
+        
+        // Move the destination store to the original source location.
+        if ([fileManager moveItemAtPath:[tempDestinationStoreURL path]
+                                 toPath:[sourceStoreURL path]
+                                  error:&error])
+        {
+            // If the move succeeds, delete the backup of the original store.
+            [fileManager removeItemAtPath:backupPath error:NULL];
+        }
+        else
+        {
+            // If the move fails, restore the original store to its original location.
+            [fileManager moveItemAtPath:backupPath
+                                 toPath:[sourceStoreURL path]
+                                  error:NULL];
+            return NO;
+        }
+        
+        //delete *-shm and *-wal files for result base
+        [[NSFileManager defaultManager] removeItemAtURL:sourceStoreURL_SHM error:NULL];
+        [[NSFileManager defaultManager] removeItemAtURL:sourceStoreURL_WAL error:NULL];
     
 //    sleep(1);
     
-} //@try
-@catch (NSException *exception) {
+    } //@try
+    
+@catch (NSException *exception)
+    {
         
-} //@catch
-@finally {
+    } //@catch
+    
+@finally
+    {
+    
+//        if ([NSThread isMainThread])
+//        {
+//            [UIViewController dismissHud];
+//        }
+//        else{
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [UIViewController dismissHud];
+//            });
+//        }
+    
         if (completion)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -321,7 +454,7 @@ static volatile float _progressRange = 0.f;
         }
         
         return result;
-} //@finally
+    } //@finally
     
     return result;
 
