@@ -57,8 +57,10 @@
         NSLog(@"CALL HUD_OFF=%.02f",progress);
         [UIViewController showProgressHud:progress text:NSLocalizedString(@"Run migration...",)];
     };
+    migrator.models = [@[@{@"name":@"BPModel"}, @{@"name":@"BPModel 2"}, @{@"name":@"BPModel 3"}, @{@"name":@"BPModel 4"}] mutableCopy];
+    
     BOOL ok = [migrator checkMigrationFor:[[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"]
-                               asyncQueue:nil//dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0) //dispatch_get_main_queue()
+                               asyncQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0) //dispatch_get_main_queue()
                                 modelName:CORE_NAME //@"BPModel"
                                    ofType:NSSQLiteStoreType
                            lightMigration:NO

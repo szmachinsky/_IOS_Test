@@ -20,7 +20,9 @@
 {
     static int i = 0;
     NSString *res = [NSString stringWithFormat:@"%@ +%@",str,addStr];
-    NSLog(@"%02d) (%@)->(%@)",i++,str,res);
+    if (++i % 1000 == 0) {
+        NSLog(@"%02d) (%@)->(%@)",i,str,res);
+    }
     return res;
 }
 
@@ -32,8 +34,10 @@
     NSString *name = [entityMapping destinationEntityName];
     
     static int i = 0;
-    NSLog(@"--%02d--> migrate Manager_4_5 for = %@",++i,name);
+    if (++i % 1000 == 0) {
+        NSLog(@"--%02d--> migrate Manager_4_5 for = %@",i,name);
     //    sleep(1);
+    }
     
     
     if([name compare:@"Person"] == NSOrderedSame)

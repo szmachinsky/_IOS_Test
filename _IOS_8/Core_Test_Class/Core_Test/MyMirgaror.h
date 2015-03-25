@@ -14,6 +14,8 @@
 
 -(instancetype)init;
 
+@property (nonatomic, strong) NSMutableArray *models;
+
 @property (nonatomic, copy) void (^initHud)();
 @property (nonatomic, copy) void (^dismissHud)();
 @property (nonatomic, copy) void (^progressHud)(float);

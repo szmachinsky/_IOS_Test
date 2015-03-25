@@ -22,6 +22,8 @@
 		2390C0981AB18730008B5F85 /* Migration_4_5.m in Sources */ = {isa = PBXBuildFile; fileRef = 2390C0971AB18730008B5F85 /* Migration_4_5.m */; };
 		2390C09A1AB194FA008B5F85 /* Model_3_5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2390C0991AB194FA008B5F85 /* Model_3_5.xcmappingmodel */; };
 		239A687A1ABC1EB1003AB3B8 /* Migration_BPModel_0_2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 239A68791ABC1EB1003AB3B8 /* Migration_BPModel_0_2.xcmappingmodel */; };
+		23A541581AC1990900E0DA46 /* Migration_BPModel_2_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23A541571AC1990900E0DA46 /* Migration_BPModel_2_3.xcmappingmodel */; };
+		23A5415A1AC1993100E0DA46 /* Migration_BPModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23A541591AC1993100E0DA46 /* Migration_BPModel_3_4.xcmappingmodel */; };
 		23AAC3E41AADA85700F7D0DC /* Migration_3_4.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3E31AADA85700F7D0DC /* Migration_3_4.m */; };
 		23AAC3EA1AADC0C400F7D0DC /* NewEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3E91AADC0C400F7D0DC /* NewEvent.m */; };
 		23AAC3F11AADE9D000F7D0DC /* MigrationManager_4_5.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3F01AADE9D000F7D0DC /* MigrationManager_4_5.m */; };
@@ -77,6 +79,10 @@
 		2390C0991AB194FA008B5F85 /* Model_3_5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_3_5.xcmappingmodel; sourceTree = "<group>"; };
 		239A68781ABC1CC2003AB3B8 /* BPModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BPModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		239A68791ABC1EB1003AB3B8 /* Migration_BPModel_0_2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Migration_BPModel_0_2.xcmappingmodel; sourceTree = "<group>"; };
+		23A541551AC196DF00E0DA46 /* BPModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BPModel 3.xcdatamodel"; sourceTree = "<group>"; };
+		23A541561AC1987400E0DA46 /* BPModel 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BPModel 4.xcdatamodel"; sourceTree = "<group>"; };
+		23A541571AC1990900E0DA46 /* Migration_BPModel_2_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Migration_BPModel_2_3.xcmappingmodel; sourceTree = "<group>"; };
+		23A541591AC1993100E0DA46 /* Migration_BPModel_3_4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Migration_BPModel_3_4.xcmappingmodel; sourceTree = "<group>"; };
 		23AAC3D41AAD944900F7D0DC /* Core_Test 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core_Test 4.xcdatamodel"; sourceTree = "<group>"; };
 		23AAC3E21AADA85700F7D0DC /* Migration_3_4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Migration_3_4.h; sourceTree = "<group>"; };
 		23AAC3E31AADA85700F7D0DC /* Migration_3_4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Migration_3_4.m; sourceTree = "<group>"; };
@@ -226,6 +232,8 @@
 			isa = PBXGroup;
 			children = (
 				23112F4F1AB85A0D0021A545 /* BPModel.xcdatamodeld */,
+				23A541591AC1993100E0DA46 /* Migration_BPModel_3_4.xcmappingmodel */,
+				23A541571AC1990900E0DA46 /* Migration_BPModel_2_3.xcmappingmodel */,
 				239A68791ABC1EB1003AB3B8 /* Migration_BPModel_0_2.xcmappingmodel */,
 				23EDC3E01AB81B54009473BB /* BPMigrationManager.h */,
 				23B85A311AB95EFB0082D008 /* BPMigrationManager.m */,
@@ -374,6 +382,7 @@
 				2369800C1AA86873009CC9F3 /* Core_Test.xcdatamodeld in Sources */,
 				234107C21AAED8CB00218394 /* Model_3_to_4.xcmappingmodel in Sources */,
 				23EDC3E51AB81BA1009473BB /* BPMigrator.m in Sources */,
+				23A541581AC1990900E0DA46 /* Migration_BPModel_2_3.xcmappingmodel in Sources */,
 				D573D48E1AB6286400E356D9 /* Model_2_3.xcmappingmodel in Sources */,
 				23DE87F01AC01DC7008BB2C9 /* MyMigrationManager.m in Sources */,
 				23EDC3D81AB81550009473BB /* Migrate.xcmappingmodel in Sources */,
@@ -389,6 +398,7 @@
 				23EDC3DA1AB81550009473BB /* Model.xcdatamodeld in Sources */,
 				23FFE1F61AB82E0E00FE46A8 /* SVProgressHUD.m in Sources */,
 				2390C09A1AB194FA008B5F85 /* Model_3_5.xcmappingmodel in Sources */,
+				23A5415A1AC1993100E0DA46 /* Migration_BPModel_3_4.xcmappingmodel in Sources */,
 				2390C0981AB18730008B5F85 /* Migration_4_5.m in Sources */,
 				23EDC3D91AB81550009473BB /* Migrate23.xcmappingmodel in Sources */,
 				23697FE01AA85B67009CC9F3 /* main.m in Sources */,
@@ -606,10 +616,12 @@
 		23112F4F1AB85A0D0021A545 /* BPModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				23A541551AC196DF00E0DA46 /* BPModel 3.xcdatamodel */,
+				23A541561AC1987400E0DA46 /* BPModel 4.xcdatamodel */,
 				239A68781ABC1CC2003AB3B8 /* BPModel 2.xcdatamodel */,
 				23112F501AB85A0D0021A545 /* BPModel.xcdatamodel */,
 			);
-			currentVersion = 239A68781ABC1CC2003AB3B8 /* BPModel 2.xcdatamodel */;
+			currentVersion = 23112F501AB85A0D0021A545 /* BPModel.xcdatamodel */;
 			path = BPModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

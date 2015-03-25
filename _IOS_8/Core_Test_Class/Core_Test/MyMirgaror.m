@@ -123,19 +123,60 @@ static volatile float _progressRange = 0.f;
 }
 
 
--(BOOL)checkCurrentModel:(NSString*)modelName compatibleWithStoreMetadata:sourceMetadata
+-(BOOL)checkModel:(NSString*)modelName compatibleWithStoreMetadata:sourceMetadata
 {
-    BOOL res = NO;
-    
     NSURL *modelURL0 = [self urlForModelName:modelName inDirectory:nil]; //@"BPModel"
     NSLog(@"MODEL_URL for %@ = %@",modelName,modelURL0);
     NSManagedObjectModel *model =  [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL0];
     
-    BOOL pscCompatible = (sourceMetadata == nil) || [model isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
+    BOOL pscCompatible = [model isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
     NSLog(@"for %@ compatible is %d",modelName,pscCompatible);
     
-    return res;
+    return pscCompatible;
 }
+
+
+-(NSArray*)findCompatibleModelIn:(NSMutableArray*)models forMetaData:(NSDictionary*)sourceMetadata
+{
+    NSMutableArray *arr = [NSMutableArray array];
+    NSManagedObjectModel *destModel;
+    NSString *destName;
+    NSMutableDictionary *dict;
+    for (int i = models.count-1; i >= 0;  i--) {
+        NSDictionary *dic = [models objectAtIndex:i];
+        NSString *modelName = dic[@"name"];
+                
+        NSURL *modelURL = [self urlForModelName:modelName inDirectory:nil]; //@"BPModel"
+        if(!modelURL) {
+            NSLog(@"for (%@) modelURL not found!!!",modelName);
+            return NO;
+        }
+        NSLog(@"MODEL_URL for %@ = %@",modelName,modelURL);
+        NSManagedObjectModel *model =  [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+        if(!model) {
+            NSLog(@"for (%@) model not found!!!",modelName);
+            return NO;
+        }
+        BOOL compatible = [model isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
+        NSLog(@"for model (%@) compatible=%d",modelName,compatible);
+        if (destModel && destName) {
+            dict = [NSMutableDictionary dictionary];
+            dict[@"sourceName"] = modelName;
+            dict[@"sourceModel"] = model;
+            dict[@"destName"] = destName;
+            dict[@"destModel"] = destModel;
+            [arr insertObject:dict atIndex:0];
+        }
+        if (compatible ) {
+            return arr;
+        }
+        destName = modelName;
+        destModel = model;
+    }
+    
+    return nil;
+}
+
 
 
 -(BOOL)checkMigrationFor:(NSURL *)storeURL
@@ -164,21 +205,15 @@ static volatile float _progressRange = 0.f;
             return result;
         }
         
-        
-//        NSSet *vers = _managedObjectModel.versionIdentifiers;
-//        NSDictionary *dic = _managedObjectModel.entityVersionHashesByName;
-    
-        
-//        NSURL *modelURL0 = [self urlForModelName:@"BPModel" inDirectory:nil];
-//        NSLog(@"MODEL_URL_0=%@",modelURL0);
-//        NSManagedObjectModel *mod0 =  [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL0];
-//        
-//        NSURL *modelURL2 = [self urlForModelName:@"BPModel 2" inDirectory:nil];
-//        NSLog(@"MODEL_URL_2=%@",modelURL2);
-//        NSManagedObjectModel *mod2 =  [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL2];
-//        
-//        _managedObjectModel = mod2;
-        
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"VersionInfo"
+                       withExtension:@"plist"
+                        subdirectory:[modelName stringByAppendingPathExtension:@"momd"]];  
+        NSLog(@"%@",url);
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfURL:url];
+        NSLog(@"%@",dic);
+        NSString *nameOfDestinationModel = dic[@"NSManagedObjectModel_CurrentVersionName"];
+        NSLog(@"dest_model_name=(%@)",nameOfDestinationModel);
+       
         
         
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
@@ -190,10 +225,8 @@ static volatile float _progressRange = 0.f;
         NSManagedObjectModel *destinationModel = [_persistentStoreCoordinator managedObjectModel];
         BOOL pscCompatible = (sourceMetadata == nil) || [destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
         
-        BOOL pscCompatible0 = [self checkCurrentModel:@"BPModel" compatibleWithStoreMetadata:sourceMetadata];
-        BOOL pscCompatible2 = [self checkCurrentModel:@"BPModel 2" compatibleWithStoreMetadata:sourceMetadata];
-        
-        
+//        BOOL pscCompatible0 = [self checkCurrentModel:@"BPModel" compatibleWithStoreMetadata:sourceMetadata];
+//        BOOL pscCompatible2 = [self checkCurrentModel:@"BPModel 2" compatibleWithStoreMetadata:sourceMetadata];
        
         if(!pscCompatible) //Migration is needed
         {
@@ -211,36 +244,90 @@ static volatile float _progressRange = 0.f;
             }
             
             NSLog(@"Migration is needed"); // Migration is needed
+            
             if (lightMigration) {
                 NSLog(@"Light Migration"); // Try Light Migration
                 options = @{NSMigratePersistentStoresAutomaticallyOption: @YES, NSInferMappingModelAutomaticallyOption: @YES};
             } else {
-                NSManagedObjectModel *sourceModel = [NSManagedObjectModel mergedModelFromBundles:nil forStoreMetadata:sourceMetadata];
                 
-                NSMappingModel *mappingModel =[NSMappingModel mappingModelFromBundles:nil forSourceModel:sourceModel destinationModel:destinationModel];
-                
-                if(mappingModel == nil) {
-                    NSLog(@"Could not find a mapping model");
-                    return result;
-                }
-                
+                NSManagedObjectModel *sourceModel;
+                NSMappingModel *mappingModel;
+                NSArray *arraySteps;
                 float off = 0.;
                 float ran = 1.0;
+                BOOL ok = YES;
                 
-                BOOL ok = [self migrateURL:storeURL
-                            migrationClass:migrationClass //[NSMigrationManager class]
-                                    ofType:sourceStoreType
-                                 fromModel:sourceModel
-                                   toModel:destinationModel
-                              mappingModel:mappingModel
-                                    offset:off
-                                     range:ran
-                                completion:nil];
-                if (!ok) {
-                    return result;
+                sourceModel = [NSManagedObjectModel mergedModelFromBundles:nil forStoreMetadata:sourceMetadata];
+                mappingModel =[NSMappingModel mappingModelFromBundles:nil forSourceModel:sourceModel destinationModel:destinationModel];
+                if (mappingModel) {
+                    NSLog(@"run direct migration");
+                    ok = [self migrateURL:storeURL
+                           migrationClass:migrationClass
+                                   ofType:sourceStoreType
+                                fromModel:sourceModel
+                                  toModel:destinationModel
+                             mappingModel:mappingModel
+                                   offset:off
+                                    range:ran
+                               completion:nil];
+                    if (!ok) {
+                        return result;
+                    }
                 }
                 
-            }
+                
+                if (!mappingModel)
+                {
+                    arraySteps = [self findCompatibleModelIn:self.models forMetaData:sourceMetadata];
+                    if (arraySteps.count)
+                        NSLog(@"run chain migration:%d",arraySteps.count);
+                    NSLog(@"found %d migration steps",arraySteps.count);
+                    float delta = (arraySteps.count > 0 ? 1./arraySteps.count : 1.) - 0.00001;
+                    off = 0.;
+                    ran = delta;
+                    for (int i = 0; i < arraySteps.count; i++)
+                    @autoreleasepool
+                    {
+                        NSLog(@"======================= iteraion %d ========================",i);
+                        NSDictionary *dic = (NSDictionary*)arraySteps[i];
+                        NSManagedObjectModel *sModel = dic[@"sourceModel"];
+                        NSManagedObjectModel *dModel = dic[@"destModel"];
+                        NSMappingModel *mapModel = [NSMappingModel mappingModelFromBundles:nil forSourceModel:sModel destinationModel:dModel];
+                        NSLog(@"%@ -> %@",dic[@"sourceName"],dic[@"destName"]);
+                        if (mapModel) {
+                            NSLog(@"  there is mapping model!");
+                            sourceModel = sModel;
+                            destinationModel = dModel;
+                            mappingModel = mapModel;
+                        } else {
+                            NSLog(@"Could not find a mapping model");
+                            return result;
+                        }
+                        
+                        ok = [self migrateURL:storeURL
+                               migrationClass:migrationClass
+                                       ofType:sourceStoreType
+                                    fromModel:sourceModel
+                                      toModel:destinationModel
+                                 mappingModel:mappingModel
+                                       offset:off
+                                        range:ran
+                                   completion:nil];
+                    
+                        if (!ok) {
+                            return result;
+                        }
+                
+                        if ([nameOfDestinationModel isEqual:dic[@"destName"]]) {
+                            NSLog(@"-----exit by nameOfDestinationModel=%@-----",nameOfDestinationModel);
+                            break;
+                        }
+                        off +=delta;
+                        
+                    }//for - autorelease
+                }//if
+                
+            } //custom migration
         } else {
             NSLog(@"Migration is NOT needed"); // Migration is not needed
             result = YES;
