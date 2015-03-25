@@ -42,20 +42,18 @@
     void (^postAction)(BOOL) = ^(BOOL ok){
         if (ok)
         {
-            NSLog(@">>>>>>> Migration_was_OK : %d <<<<<<<<<<",ok);
+            NSLog(@">>>>>>> Migration_was_OK <<<<<<<<<<");
             controller.managedObjectContext = [weakSelf managedObjectContext]; //create Core Date stack
             [controller update];
         } else {
-            NSLog(@">>>>>>> Migration_was_WRONG : %d <<<<<<<<<<",ok);
+            NSLog(@">>>>>>> Migration_was_WRONG <<<<<<<<<<");
         }
      };
     
     MyMirgaror *migrator = [MyMirgaror new];
     migrator.initHud = ^{[UIViewController showInfiniteHudText:NSLocalizedString(@"Updating media database...",)];};
     migrator.dismissHud = ^{[UIViewController dismissHud];};
-    migrator.progressHud = ^(float progress){
-        NSLog(@"CALL HUD_OFF=%.02f",progress);
-        [UIViewController showProgressHud:progress text:NSLocalizedString(@"Run migration...",)];
+    migrator.progressHud = ^(float progress){NSLog(@"HUD=%.02f",progress);[UIViewController showProgressHud:progress text:NSLocalizedString(@"Run migration...",)];
     };
     migrator.models = [@[@{@"name":@"BPModel"}, @{@"name":@"BPModel 2"}, @{@"name":@"BPModel 3"}, @{@"name":@"BPModel 4"}] mutableCopy];
     

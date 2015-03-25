@@ -524,12 +524,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Core_Test/Core_Test.pch;
 				INFOPLIST_FILE = Core_Test/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7e8a62be-5cab-4f37-a58b-4253597a89aa";
 			};
 			name = Debug;
 		};
@@ -540,9 +542,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Core_Test/Core_Test.pch;
 				INFOPLIST_FILE = Core_Test/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7e8a62be-5cab-4f37-a58b-4253597a89aa";
 			};
 			name = Release;
 		};
@@ -621,7 +624,7 @@
 				239A68781ABC1CC2003AB3B8 /* BPModel 2.xcdatamodel */,
 				23112F501AB85A0D0021A545 /* BPModel.xcdatamodel */,
 			);
-			currentVersion = 23112F501AB85A0D0021A545 /* BPModel.xcdatamodel */;
+			currentVersion = 23A541561AC1987400E0DA46 /* BPModel 4.xcdatamodel */;
 			path = BPModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

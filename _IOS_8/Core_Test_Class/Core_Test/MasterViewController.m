@@ -53,20 +53,20 @@
 
 - (void)insertNewObject:(id)sender
 {
-    [self insertNewObjects:sender];
-    return;
+//    [self insertNewObjects:sender];
+//    return;
     
     
-//    for (int i = 1; i <= 1; i++) {
-//        @autoreleasepool {
-//            NSLog(@"%04d)",i);
-//            for (int j = 1; j <= 120; j++) { //30kb
-//                [self insertNewObjects:sender];            
-//            }
-//            
-//            [self saveContext];
-//        }
-//    }
+    for (int i = 1; i <= 100; i++) {
+        @autoreleasepool {
+            NSLog(@"%04d)",i);
+            for (int j = 1; j <= 1000; j++) { //30kb
+                [self insertNewObjects:sender];            
+            }
+            
+            [self saveContext];
+        }
+    }
     
 }
 

@@ -18,6 +18,10 @@
 #import "MyMigrationManager.h"
 
 
+#if !DEBUG
+# define NSLog(...)     ((void)0)
+#endif
+
 static volatile float _progressOffset = 0.f;
 static volatile float _progressRange = 0.f;
 
@@ -87,12 +91,6 @@ static volatile float _progressRange = 0.f;
 }
 
 
-//BPModel BPModel 2
-//Migration_BPModel_0_2
-
-// Returns the URL for a model file with the given name in the given directory.
-// @param directory The name of the bundle directory to search.  If nil,
-//    searches default paths.
 - (NSURL *)urlForModelName:(NSString *)modelName
                inDirectory:(NSString *)directory
 {
@@ -123,20 +121,7 @@ static volatile float _progressRange = 0.f;
 }
 
 
--(BOOL)checkModel:(NSString*)modelName compatibleWithStoreMetadata:sourceMetadata
-{
-    NSURL *modelURL0 = [self urlForModelName:modelName inDirectory:nil]; //@"BPModel"
-    NSLog(@"MODEL_URL for %@ = %@",modelName,modelURL0);
-    NSManagedObjectModel *model =  [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL0];
-    
-    BOOL pscCompatible = [model isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
-    NSLog(@"for %@ compatible is %d",modelName,pscCompatible);
-    
-    return pscCompatible;
-}
-
-
--(NSArray*)findCompatibleModelIn:(NSMutableArray*)models forMetaData:(NSDictionary*)sourceMetadata
+-(NSArray*)migrationChainFor:(NSMutableArray*)models metadata:(NSDictionary*)sourceMetadata
 {
     NSMutableArray *arr = [NSMutableArray array];
     NSManagedObjectModel *destModel;
@@ -208,14 +193,12 @@ static volatile float _progressRange = 0.f;
         NSURL *url = [[NSBundle mainBundle] URLForResource:@"VersionInfo"
                        withExtension:@"plist"
                         subdirectory:[modelName stringByAppendingPathExtension:@"momd"]];  
-        NSLog(@"%@",url);
+//        NSLog(@"%@",url);
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfURL:url];
-        NSLog(@"%@",dic);
+//        NSLog(@"%@",dic);
         NSString *nameOfDestinationModel = dic[@"NSManagedObjectModel_CurrentVersionName"];
         NSLog(@"dest_model_name=(%@)",nameOfDestinationModel);
        
-        
-        
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
         NSLog(@"Migration from storeURL=%@",storeURL);
         NSError *error = nil;
@@ -225,11 +208,10 @@ static volatile float _progressRange = 0.f;
         NSManagedObjectModel *destinationModel = [_persistentStoreCoordinator managedObjectModel];
         BOOL pscCompatible = (sourceMetadata == nil) || [destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
         
-//        BOOL pscCompatible0 = [self checkCurrentModel:@"BPModel" compatibleWithStoreMetadata:sourceMetadata];
-//        BOOL pscCompatible2 = [self checkCurrentModel:@"BPModel 2" compatibleWithStoreMetadata:sourceMetadata];
-       
         if(!pscCompatible) //Migration is needed
         {
+            NSLog(@"Migration is needed"); // Migration is needed
+            
             if (self.initHud) {
                 NSLog(@"-init HUD");
                if ([NSThread isMainThread])
@@ -243,12 +225,11 @@ static volatile float _progressRange = 0.f;
                 }
             }
             
-            NSLog(@"Migration is needed"); // Migration is needed
-            
             if (lightMigration) {
                 NSLog(@"Light Migration"); // Try Light Migration
                 options = @{NSMigratePersistentStoresAutomaticallyOption: @YES, NSInferMappingModelAutomaticallyOption: @YES};
-            } else {
+            } else
+            {
                 
                 NSManagedObjectModel *sourceModel;
                 NSMappingModel *mappingModel;
@@ -278,10 +259,9 @@ static volatile float _progressRange = 0.f;
                 
                 if (!mappingModel)
                 {
-                    arraySteps = [self findCompatibleModelIn:self.models forMetaData:sourceMetadata];
-                    if (arraySteps.count)
-                        NSLog(@"run chain migration:%d",arraySteps.count);
-                    NSLog(@"found %d migration steps",arraySteps.count);
+                    //build  array with migration chain steps descriptios
+                    arraySteps = [self migrationChainFor:self.models metadata:sourceMetadata];
+                    NSLog(@"found %d migration chain steps",arraySteps.count);
                     float delta = (arraySteps.count > 0 ? 1./arraySteps.count : 1.) - 0.00001;
                     off = 0.;
                     ran = delta;
@@ -328,6 +308,7 @@ static volatile float _progressRange = 0.f;
                 }//if
                 
             } //custom migration
+            
         } else {
             NSLog(@"Migration is NOT needed"); // Migration is not needed
             result = YES;
@@ -356,11 +337,11 @@ static volatile float _progressRange = 0.f;
             NSLog(@"-dismiss HUD");
             if ([NSThread isMainThread])
             {
-                self.dismissHud();//[UIViewController dismissHud];
+                self.dismissHud();
             }
             else{
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    self.dismissHud();//[UIViewController dismissHud];
+                    self.dismissHud();
                 });
             }
         }
@@ -432,21 +413,10 @@ static volatile float _progressRange = 0.f;
                                    ,NSInferMappingModelAutomaticallyOption:@YES
                                    ,NSSQLitePragmasOption: @{@"journal_mode": @"DELETE"} //"DELETE" "WAL"
                                    };
-//        if (self.initHud) {
-//            if ([NSThread isMainThread])
-//            {
-//                self.initHud();
-//            }
-//            else{
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    self.initHud();
-//                });
-//            }
-//        }
         
         [migrationManager addObserver:(id)self forKeyPath:@"migrationProgress" options:0 context:NULL];
-    //    sleep(1);
         
+        // run migration
         BOOL ok = [migrationManager migrateStoreFromURL:storeURL
                                                      type:sourceStoreType
                                                   options:options
@@ -516,21 +486,12 @@ static volatile float _progressRange = 0.f;
     
 @catch (NSException *exception)
     {
+        NSLog(@"!!! MIGRATION EXCEPTION !!!");
         
     } //@catch
     
 @finally
     {
-    
-//        if ([NSThread isMainThread])
-//        {
-//            [UIViewController dismissHud];
-//        }
-//        else{
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [UIViewController dismissHud];
-//            });
-//        }
     
         if (completion)
         {
@@ -551,12 +512,14 @@ static volatile float _progressRange = 0.f;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     NSMigrationManager * migrator = object;
+    float progress = migrator.migrationProgress;
+    NSLog(@"migrationProgress = %f",progress);
     
     if (self.progressHud) {
         if ([NSThread isMainThread])
         {
             NSLog(@"IN MAIN THREAD");
-            self.progressHud(_progressOffset + migrator.migrationProgress * _progressRange);
+            self.progressHud(_progressOffset + progress * _progressRange);
     //        [UIViewController showProgressHud:_progressOffset + migrator.migrationProgress * _progressRange text:NSLocalizedString(@"Updating media database...",)];
             while (kCFRunLoopRunHandledSource == CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.001, YES));
         }
@@ -565,13 +528,12 @@ static volatile float _progressRange = 0.f;
             const float off = _progressOffset;
             const float ran = _progressRange;
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.progressHud(off + migrator.migrationProgress * ran);
+                self.progressHud(off + progress * ran);
     //          [UIViewController showProgressHud:off + migrator.migrationProgress * ran text:NSLocalizedString(@"Updating media database...",)];
             });
         }
     }
     
-    NSLog(@"migrationProgress = %f",migrator.migrationProgress);
 }
 
 
