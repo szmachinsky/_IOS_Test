@@ -54,7 +54,7 @@
     if([name compare:@"Sex"] == NSOrderedSame)
     {
         //        NSLog(@"--custom for Sex");
-        
+   
         NSString *name = [sourceInstance valueForKey:@"descr"];
         name = [NSString stringWithFormat:@"%@ .",name];
         [destinationInstance setValue:name forKey:@"descr"];

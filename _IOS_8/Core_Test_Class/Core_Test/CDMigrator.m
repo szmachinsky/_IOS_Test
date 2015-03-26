@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Zmachinsky Sergei. All rights reserved.
 //
 
-#import "MyMirgaror.h"
+#import "CDMigrator.h"
 #import <CoreData/CoreData.h>
 
 
@@ -26,11 +26,11 @@ static volatile float _progressOffset = 0.f;
 static volatile float _progressRange = 0.f;
 
 
-@implementation MyMirgaror
+@implementation CDMigrator
     
 +(instancetype) sharedMigrator
 {
-    static MyMirgaror *_sharedInstance = nil;
+    static CDMigrator *_sharedInstance = nil;
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
@@ -217,6 +217,7 @@ static volatile float _progressRange = 0.f;
                if ([NSThread isMainThread])
                 {
                     self.initHud();
+                    while (kCFRunLoopRunHandledSource == CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.001, YES));
                 }
                 else{
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -239,7 +240,7 @@ static volatile float _progressRange = 0.f;
                 BOOL ok = YES;
                 
                 sourceModel = [NSManagedObjectModel mergedModelFromBundles:nil forStoreMetadata:sourceMetadata];
-                mappingModel =[NSMappingModel mappingModelFromBundles:nil forSourceModel:sourceModel destinationModel:destinationModel];
+                mappingModel = nil;//[NSMappingModel mappingModelFromBundles:nil forSourceModel:sourceModel destinationModel:destinationModel];
                 if (mappingModel) {
                     NSLog(@"run direct migration");
                     ok = [self migrateURL:storeURL
@@ -338,6 +339,7 @@ static volatile float _progressRange = 0.f;
             if ([NSThread isMainThread])
             {
                 self.dismissHud();
+                while (kCFRunLoopRunHandledSource == CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.001, YES));
             }
             else{
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -520,7 +522,6 @@ static volatile float _progressRange = 0.f;
         {
             NSLog(@"IN MAIN THREAD");
             self.progressHud(_progressOffset + progress * _progressRange);
-    //        [UIViewController showProgressHud:_progressOffset + migrator.migrationProgress * _progressRange text:NSLocalizedString(@"Updating media database...",)];
             while (kCFRunLoopRunHandledSource == CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.001, YES));
         }
         else{
@@ -529,7 +530,6 @@ static volatile float _progressRange = 0.f;
             const float ran = _progressRange;
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.progressHud(off + progress * ran);
-    //          [UIViewController showProgressHud:off + migrator.migrationProgress * ran text:NSLocalizedString(@"Updating media database...",)];
             });
         }
     }

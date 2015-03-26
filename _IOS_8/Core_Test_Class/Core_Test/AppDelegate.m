@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "MasterViewController.h"
 
-#import "MyMirgaror.h"
+#import "CDMigrator.h"
 
 #import "UIViewController+Hud.h"
 #import "SVProgressHUD.h"
@@ -28,6 +28,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     NSLog(@"--app delegate begin--");
+    
     // Override point for customization after application launch.
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
@@ -43,6 +44,8 @@
         if (ok)
         {
             NSLog(@">>>>>>> Migration_was_OK <<<<<<<<<<");
+//            UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+//            MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
             controller.managedObjectContext = [weakSelf managedObjectContext]; //create Core Date stack
             [controller update];
         } else {
@@ -50,15 +53,22 @@
         }
      };
     
-    MyMirgaror *migrator = [MyMirgaror new];
-    migrator.initHud = ^{[UIViewController showInfiniteHudText:NSLocalizedString(@"Updating media database...",)];};
-    migrator.dismissHud = ^{[UIViewController dismissHud];};
-    migrator.progressHud = ^(float progress){NSLog(@"HUD=%.02f",progress);[UIViewController showProgressHud:progress text:NSLocalizedString(@"Run migration...",)];
-    };
+    CDMigrator *migrator = [CDMigrator new];
+    
+//    migrator.initHud = ^{[UIViewController showInfiniteHudText:@"Updating media database..."];};
+//    migrator.dismissHud = ^{[UIViewController dismissHud];};
+//    migrator.progressHud = ^(float progress){NSLog(@"HUD=%.02f",progress);[UIViewController showProgressHud:progress text:@"Run migration..."];};
+    
+    
+    migrator.initHud = ^{[SVProgressHUD showWithStatus:@"Updating media database..." maskType:SVProgressHUDMaskTypeClear];};
+    migrator.dismissHud = ^{[SVProgressHUD dismiss];};
+    migrator.progressHud = ^(float progress){[SVProgressHUD showProgress:progress status:@"Run migration..." maskType:SVProgressHUDMaskTypeClear];};
+    
+    
     migrator.models = [@[@{@"name":@"BPModel"}, @{@"name":@"BPModel 2"}, @{@"name":@"BPModel 3"}, @{@"name":@"BPModel 4"}] mutableCopy];
     
     BOOL ok = [migrator checkMigrationFor:[[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"]
-                               asyncQueue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0) //dispatch_get_main_queue()
+                               asyncQueue:nil//dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0) //dispatch_get_main_queue()
                                 modelName:CORE_NAME //@"BPModel"
                                    ofType:NSSQLiteStoreType
                            lightMigration:NO
@@ -67,8 +77,6 @@
     
     
     NSLog(@"migrator call was = %d",ok);
-    
-    
     
 #endif
     

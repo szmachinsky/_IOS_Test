@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MyMirgaror : NSObject
+@interface CDMigrator : NSObject
 
 +(instancetype)sharedMigrator;
 

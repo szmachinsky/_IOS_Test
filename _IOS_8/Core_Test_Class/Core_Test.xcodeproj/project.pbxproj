@@ -28,7 +28,7 @@
 		23AAC3EA1AADC0C400F7D0DC /* NewEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3E91AADC0C400F7D0DC /* NewEvent.m */; };
 		23AAC3F11AADE9D000F7D0DC /* MigrationManager_4_5.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3F01AADE9D000F7D0DC /* MigrationManager_4_5.m */; };
 		23B85A321AB95EFB0082D008 /* BPMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B85A311AB95EFB0082D008 /* BPMigrationManager.m */; };
-		23B85A351AB962AD0082D008 /* MyMirgaror.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B85A341AB962AD0082D008 /* MyMirgaror.m */; };
+		23B85A351AB962AD0082D008 /* CDMigrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B85A341AB962AD0082D008 /* CDMigrator.m */; };
 		23DE87F01AC01DC7008BB2C9 /* MyMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DE87EF1AC01DC7008BB2C9 /* MyMigrationManager.m */; };
 		23E58E401AAF49E800791501 /* Model_4_5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23E58E3F1AAF49E800791501 /* Model_4_5.xcmappingmodel */; };
 		23EDC3D81AB81550009473BB /* Migrate.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3D01AB81550009473BB /* Migrate.xcmappingmodel */; };
@@ -92,8 +92,8 @@
 		23AAC3F01AADE9D000F7D0DC /* MigrationManager_4_5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MigrationManager_4_5.m; sourceTree = "<group>"; };
 		23AAC3F21AADE9E200F7D0DC /* Core_Test 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core_Test 5.xcdatamodel"; sourceTree = "<group>"; };
 		23B85A311AB95EFB0082D008 /* BPMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPMigrationManager.m; sourceTree = "<group>"; };
-		23B85A331AB962AD0082D008 /* MyMirgaror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMirgaror.h; sourceTree = "<group>"; };
-		23B85A341AB962AD0082D008 /* MyMirgaror.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMirgaror.m; sourceTree = "<group>"; };
+		23B85A331AB962AD0082D008 /* CDMigrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDMigrator.h; sourceTree = "<group>"; };
+		23B85A341AB962AD0082D008 /* CDMigrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDMigrator.m; sourceTree = "<group>"; };
 		23DE87EE1AC01DC7008BB2C9 /* MyMigrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMigrationManager.h; sourceTree = "<group>"; };
 		23DE87EF1AC01DC7008BB2C9 /* MyMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMigrationManager.m; sourceTree = "<group>"; };
 		23E58E3F1AAF49E800791501 /* Model_4_5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_4_5.xcmappingmodel; sourceTree = "<group>"; };
@@ -239,8 +239,8 @@
 				23B85A311AB95EFB0082D008 /* BPMigrationManager.m */,
 				23EDC3E31AB81BA1009473BB /* BPMigrator.h */,
 				23EDC3E41AB81BA1009473BB /* BPMigrator.m */,
-				23B85A331AB962AD0082D008 /* MyMirgaror.h */,
-				23B85A341AB962AD0082D008 /* MyMirgaror.m */,
+				23B85A331AB962AD0082D008 /* CDMigrator.h */,
+				23B85A341AB962AD0082D008 /* CDMigrator.m */,
 				23DE87EE1AC01DC7008BB2C9 /* MyMigrationManager.h */,
 				23DE87EF1AC01DC7008BB2C9 /* MyMigrationManager.m */,
 			);
@@ -387,7 +387,7 @@
 				23DE87F01AC01DC7008BB2C9 /* MyMigrationManager.m in Sources */,
 				23EDC3D81AB81550009473BB /* Migrate.xcmappingmodel in Sources */,
 				23AAC3EA1AADC0C400F7D0DC /* NewEvent.m in Sources */,
-				23B85A351AB962AD0082D008 /* MyMirgaror.m in Sources */,
+				23B85A351AB962AD0082D008 /* CDMigrator.m in Sources */,
 				23AAC3F11AADE9D000F7D0DC /* MigrationManager_4_5.m in Sources */,
 				23AAC3E41AADA85700F7D0DC /* Migration_3_4.m in Sources */,
 				23697FE91AA85B67009CC9F3 /* MasterViewController.m in Sources */,
@@ -528,7 +528,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Core_Test/Core_Test.pch;
 				INFOPLIST_FILE = Core_Test/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7e8a62be-5cab-4f37-a58b-4253597a89aa";
@@ -542,7 +542,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Core_Test/Core_Test.pch;
 				INFOPLIST_FILE = Core_Test/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7e8a62be-5cab-4f37-a58b-4253597a89aa";
