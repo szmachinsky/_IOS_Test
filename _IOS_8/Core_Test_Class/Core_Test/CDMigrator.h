@@ -14,33 +14,30 @@
 
 -(instancetype)init;
 
-@property (nonatomic, strong) NSMutableArray *models;
+@property (nonatomic, strong) NSArray *models;
 
 @property (nonatomic, copy) void (^initHud)();
 @property (nonatomic, copy) void (^dismissHud)();
 @property (nonatomic, copy) void (^progressHud)(float);
 
+@property (nonatomic, unsafe_unretained) BOOL useOnlyLightMigration;
+@property (nonatomic, strong) dispatch_queue_t asyncQueue;
+@property (nonatomic, strong) Class migrationClass;
 
--(BOOL)checkMigrationFor:(NSURL *)storeURL 
-              asyncQueue:(dispatch_queue_t)queue
+@property (nonatomic, strong) NSURL *modelsUrl;
+
+
+-(void)migrationFor:(NSURL *)storeURL
                modelName:(NSString *)modelName
-                  ofType:(NSString *)sourceStoreType
-          lightMigration:(BOOL)lightMigration
-          migrationClass:(Class)migrationClass
               completion:(void (^)(BOOL))completion;
 
 
 -(BOOL)checkMigrationFor:(NSURL *)storeURL
                modelName:(NSString *)modelName
-                  ofType:(NSString *)sourceStoreType
-          lightMigration:(BOOL)lightMigration
-          migrationClass:(Class)migrationClass
               completion:(void (^)(BOOL))completion;
 
 
-- (BOOL)migrateURL:(NSURL *)storeURL
-    migrationClass:(Class)migrationClass
-            ofType:(NSString *)sourceStoreType
+-(BOOL)migrateURL:(NSURL *)storeURL
          fromModel:(NSManagedObjectModel *)sourceModel
            toModel:(NSManagedObjectModel *)destinationModel
       mappingModel:(NSMappingModel *)mappingModel

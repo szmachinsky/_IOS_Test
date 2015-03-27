@@ -59,24 +59,18 @@
 //    migrator.dismissHud = ^{[UIViewController dismissHud];};
 //    migrator.progressHud = ^(float progress){NSLog(@"HUD=%.02f",progress);[UIViewController showProgressHud:progress text:@"Run migration..."];};
     
-    
     migrator.initHud = ^{[SVProgressHUD showWithStatus:@"Updating media database..." maskType:SVProgressHUDMaskTypeClear];};
     migrator.dismissHud = ^{[SVProgressHUD dismiss];};
     migrator.progressHud = ^(float progress){[SVProgressHUD showProgress:progress status:@"Run migration..." maskType:SVProgressHUDMaskTypeClear];};
+        
+    migrator.models = @[ @{@"name":@"BPModel"}, @{@"name":@"BPModel 2"}, @{@"name":@"BPModel 3"}, @{@"name":@"BPModel 4"}, @{@"name":@"BPModel 5"} ];
+    migrator.migrationClass = [MyMigrationManager class];    
+    migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"CoreDataDir/"];
     
+    [migrator migrationFor:[[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"]
+                 modelName:@"BPModel"
+                completion:[postAction copy]];
     
-    migrator.models = [@[@{@"name":@"BPModel"}, @{@"name":@"BPModel 2"}, @{@"name":@"BPModel 3"}, @{@"name":@"BPModel 4"}] mutableCopy];
-    
-    BOOL ok = [migrator checkMigrationFor:[[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"]
-                               asyncQueue:nil//dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0) //dispatch_get_main_queue()
-                                modelName:CORE_NAME //@"BPModel"
-                                   ofType:NSSQLiteStoreType
-                           lightMigration:NO
-                           migrationClass:[MyMigrationManager class]               
-                               completion:[postAction copy]];
-    
-    
-    NSLog(@"migrator call was = %d",ok);
     
 #endif
     
@@ -116,6 +110,8 @@
 
 - (NSURL *)applicationDocumentsDirectory {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "minsk.Core_Test" in the application's documents directory.
+//    NSArray *arr = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+//    NSLog(@"%@",arr);
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 

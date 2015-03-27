@@ -10,20 +10,29 @@
 #import <CoreData/CoreData.h>
 
 
-#import "UIViewController+Hud.h"
-#import "SVProgressHUD.h"
+//#import "UIViewController+Hud.h"
+//#import "SVProgressHUD.h"
 
-#import "MigrationManager_4_5.h"
-#import "BPMigrationManager.h"
-#import "MyMigrationManager.h"
+//#import "MigrationManager_4_5.h"
+//#import "BPMigrationManager.h"
+//#import "MyMigrationManager.h"
 
 
 #if !DEBUG
 # define NSLog(...)     ((void)0)
 #endif
 
+#define kCoreDataStoreType  NSSQLiteStoreType
+
+
 static volatile float _progressOffset = 0.f;
 static volatile float _progressRange = 0.f;
+
+
+
+@interface CDMigrator ()
+@property (nonatomic, strong) NSBundle *dataBundle;
+@end
 
 
 @implementation CDMigrator
@@ -47,6 +56,7 @@ static volatile float _progressRange = 0.f;
 {
     self = [super init];
     if (self)  {
+        _useOnlyLightMigration = NO;
     }
     return self;
 }
@@ -57,71 +67,9 @@ static volatile float _progressRange = 0.f;
 }
 
 
--(BOOL)checkMigrationFor:(NSURL *)storeURL
-              asyncQueue:(dispatch_queue_t)queue
-               modelName:(NSString *)modelName
-                  ofType:(NSString *)sourceStoreType
-          lightMigration:(BOOL)lightMigration
-          migrationClass:(Class)migrationClass
-              completion:(void (^)(BOOL))completion
+#pragma migration Chain
 
-{
-    __block BOOL result = NO;
-    if (queue) {
-        NSLog(@"run migrator in asynq queue");
-        dispatch_async(queue, ^{
-            result = [self checkMigrationFor:storeURL
-                                    modelName:modelName
-                                       ofType:sourceStoreType
-                               lightMigration:lightMigration
-                              migrationClass:migrationClass
-                                   completion:completion];
-        });
-    } else {
-        NSLog(@"run migrator sync");
-        result = [self checkMigrationFor:storeURL
-                               modelName:modelName
-                                  ofType:sourceStoreType
-                          lightMigration:lightMigration
-                          migrationClass:migrationClass
-                              completion:completion];
-        
-    }
-    return result;
-}
-
-
-- (NSURL *)urlForModelName:(NSString *)modelName
-               inDirectory:(NSString *)directory
-{
-    NSBundle * bundle = nil;
-    
-    if (!bundle)
-        bundle = [NSBundle mainBundle];
-    
-    NSURL * url = [bundle URLForResource:modelName
-                           withExtension:@"mom"
-                            subdirectory:directory];
-    if (nil == url)
-    {
-        // Get mom file paths from momd directories.
-        NSArray * momdPaths = [bundle pathsForResourcesOfType:@"momd"
-                                                  inDirectory:directory];
-        for (NSString * momdPath in momdPaths)
-        {
-            url = [bundle URLForResource:modelName
-                           withExtension:@"mom"
-                            subdirectory:[momdPath lastPathComponent]];
-            if (url)
-                break;
-        }
-    }
-    
-    return url;
-}
-
-
--(NSArray*)migrationChainFor:(NSMutableArray*)models metadata:(NSDictionary*)sourceMetadata
+-(NSArray*)migrationChainFor:(NSArray*)models metadata:(NSDictionary*)sourceMetadata
 {
     NSMutableArray *arr = [NSMutableArray array];
     NSManagedObjectModel *destModel;
@@ -163,21 +111,49 @@ static volatile float _progressRange = 0.f;
 }
 
 
+#pragma mark - Migrations
+
+-(void)migrationFor:(NSURL *)storeURL
+               modelName:(NSString *)modelName
+              completion:(void (^)(BOOL))completion
+
+{
+    __block BOOL result = NO;
+    
+    if (!self.asyncQueue)
+        self.asyncQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0); //dispatch_get_main_queue()
+    
+    NSLog(@"run migrator in asynq queue");
+    dispatch_async(self.asyncQueue, ^{
+        result = [self checkMigrationFor:storeURL
+                               modelName:modelName
+                              completion:completion];
+    });
+    
+    return;
+}
+
 
 -(BOOL)checkMigrationFor:(NSURL *)storeURL
                modelName:(NSString *)modelName
-                  ofType:(NSString *)sourceStoreType
-          lightMigration:(BOOL)lightMigration
-          migrationClass:(Class)migrationClass
               completion:(void (^)(BOOL))completion
 {
     BOOL result = NO;
     NSManagedObjectModel *_managedObjectModel;
     NSPersistentStoreCoordinator *_persistentStoreCoordinator;
     
+    if (self.modelsUrl) {
+        self.dataBundle = [NSBundle bundleWithURL:self.modelsUrl];
+        NSLog(@"MODEL_BUNDLE=%@",self.dataBundle);
+    }
+    
+    if (!self.dataBundle) {
+        self.dataBundle = [NSBundle mainBundle];
+    }
+    
 @try
     {
-        NSURL *modelURL = [[NSBundle mainBundle] URLForResource:modelName withExtension:@"momd"]; //modelName @"BPModel"
+        NSURL *modelURL = [self.dataBundle URLForResource:modelName withExtension:@"momd"]; //modelName @"BPModel"
         NSLog(@"MODEL_URL1=%@",modelURL);
         if (!modelURL) {
             NSLog(@"WRONG MODEL URL");
@@ -190,21 +166,41 @@ static volatile float _progressRange = 0.f;
             return result;
         }
         
-        NSURL *url = [[NSBundle mainBundle] URLForResource:@"VersionInfo"
+        NSURL *url = [self.dataBundle URLForResource:@"VersionInfo"
                        withExtension:@"plist"
                         subdirectory:[modelName stringByAppendingPathExtension:@"momd"]];  
-//        NSLog(@"%@",url);
+        NSLog(@"%@",url);
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfURL:url];
-//        NSLog(@"%@",dic);
+        NSLog(@"DIC=%@",dic);
         NSString *nameOfDestinationModel = dic[@"NSManagedObjectModel_CurrentVersionName"];
         NSLog(@"dest_model_name=(%@)",nameOfDestinationModel);
+        NSDictionary *d = dic[@"NSManagedObjectModel_VersionHashes"];
+        NSMutableArray *arrModels = [NSMutableArray array];
+        NSArray *a = [d allKeys];
+        if (a)
+            [arrModels addObjectsFromArray:a];
+        
+        NSLog(@"arrModels1=%@",arrModels);
+        [arrModels sortUsingComparator:^(id a, id b) {
+            NSString *str1 = (NSString*)a;
+            NSString *str2 = (NSString*)b;
+            return [str1 compare:str2];
+            //      if ( x1 < x2 )
+            //          return (NSComparisonResult)NSOrderedAscending;
+            //      if ( x1 > x2 )
+            //          return (NSComparisonResult)NSOrderedDescending;
+            //      return (NSComparisonResult)NSOrderedSame;
+        }];
+        NSLog(@"arrModels2=%@",arrModels);
+
+        
        
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
         NSLog(@"Migration from storeURL=%@",storeURL);
         NSError *error = nil;
         NSDictionary *options = nil;
         
-        NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:NSSQLiteStoreType URL:storeURL error:&error];
+        NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:kCoreDataStoreType URL:storeURL error:&error];
         NSManagedObjectModel *destinationModel = [_persistentStoreCoordinator managedObjectModel];
         BOOL pscCompatible = (sourceMetadata == nil) || [destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
         
@@ -226,8 +222,9 @@ static volatile float _progressRange = 0.f;
                 }
             }
             
-            if (lightMigration) {
-                NSLog(@"Light Migration"); // Try Light Migration
+            if (self.useOnlyLightMigration)
+            {
+                NSLog(@"Light Migration"); // Try to perform Light Migration
                 options = @{NSMigratePersistentStoresAutomaticallyOption: @YES, NSInferMappingModelAutomaticallyOption: @YES};
             } else
             {
@@ -244,8 +241,6 @@ static volatile float _progressRange = 0.f;
                 if (mappingModel) {
                     NSLog(@"run direct migration");
                     ok = [self migrateURL:storeURL
-                           migrationClass:migrationClass
-                                   ofType:sourceStoreType
                                 fromModel:sourceModel
                                   toModel:destinationModel
                              mappingModel:mappingModel
@@ -269,7 +264,7 @@ static volatile float _progressRange = 0.f;
                     for (int i = 0; i < arraySteps.count; i++)
                     @autoreleasepool
                     {
-                        NSLog(@"======================= iteraion %d ========================",i);
+                        NSLog(@"======================= iteraion %d ========================",(i+1));
                         NSDictionary *dic = (NSDictionary*)arraySteps[i];
                         NSManagedObjectModel *sModel = dic[@"sourceModel"];
                         NSManagedObjectModel *dModel = dic[@"destModel"];
@@ -282,12 +277,13 @@ static volatile float _progressRange = 0.f;
                             mappingModel = mapModel;
                         } else {
                             NSLog(@"Could not find a mapping model");
-                            return result;
+//                          return result;
+                            NSLog(@"Try light migration");
+                            options = @{NSMigratePersistentStoresAutomaticallyOption: @YES, NSInferMappingModelAutomaticallyOption: @YES};
+                            break;
                         }
                         
                         ok = [self migrateURL:storeURL
-                               migrationClass:migrationClass
-                                       ofType:sourceStoreType
                                     fromModel:sourceModel
                                       toModel:destinationModel
                                  mappingModel:mappingModel
@@ -316,7 +312,7 @@ static volatile float _progressRange = 0.f;
             return result;
         }
         
-        id ok = [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error];
+        id ok = [_persistentStoreCoordinator addPersistentStoreWithType:kCoreDataStoreType configuration:nil URL:storeURL options:options error:&error];
         if (!ok) {
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             return result;
@@ -364,8 +360,8 @@ static volatile float _progressRange = 0.f;
 
 
 - (BOOL)migrateURL:(NSURL *)storeURL
-    migrationClass:(Class)migrationClass
-            ofType:(NSString *)sourceStoreType
+//    migrationClass:(Class)migrationClass
+//            ofType:(NSString *)sourceStoreType
          fromModel:(NSManagedObjectModel *)sourceModel
            toModel:(NSManagedObjectModel *)destinationModel
       mappingModel:(NSMappingModel *)mappingModel
@@ -378,15 +374,15 @@ static volatile float _progressRange = 0.f;
     _progressOffset = offset;
     _progressRange = range;
     
-    if (!migrationClass) {
-        migrationClass = [NSMigrationManager class];
+    if (!self.migrationClass) {
+        self.migrationClass = [NSMigrationManager class];
     }
-    if (![migrationClass isSubclassOfClass:[NSMigrationManager class]]) {
+    if (![self.migrationClass isSubclassOfClass:[NSMigrationManager class]]) {
         NSLog(@"Error migration manager class");
         return result;
     }
     
-    NSMigrationManager *migrationManager = [[migrationClass alloc] initWithSourceModel:sourceModel destinationModel:destinationModel];
+    NSMigrationManager *migrationManager = [[self.migrationClass alloc] initWithSourceModel:sourceModel destinationModel:destinationModel];
 
     if (!migrationManager)
     {
@@ -420,11 +416,11 @@ static volatile float _progressRange = 0.f;
         
         // run migration
         BOOL ok = [migrationManager migrateStoreFromURL:storeURL
-                                                     type:sourceStoreType
+                                                     type:kCoreDataStoreType
                                                   options:options
                                          withMappingModel:mappingModel
                                          toDestinationURL:newStoreURL
-                                          destinationType:sourceStoreType
+                                          destinationType:kCoreDataStoreType
                                        destinationOptions:options
                                                     error:&error];
         if(!ok)
@@ -511,6 +507,9 @@ static volatile float _progressRange = 0.f;
 }
 
 
+
+#pragma mark - progress Observer
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     NSMigrationManager * migrator = object;
@@ -537,6 +536,43 @@ static volatile float _progressRange = 0.f;
 }
 
 
+
+#pragma mark - File System's Service
+
+- (NSURL *)urlForModelName:(NSString *)modelName
+               inDirectory:(NSString *)directory
+{
+    NSBundle * bundle = self.dataBundle;
+    
+//    if (!bundle)
+//        bundle = [NSBundle mainBundle];
+//    NSLog(@"bundle=%@",bundle);
+    
+    NSURL * url = [bundle URLForResource:modelName
+                           withExtension:@"mom"
+                            subdirectory:directory];
+    if (nil == url)
+    {
+        // Get mom file paths from momd directories.
+        NSArray * momdPaths = [bundle pathsForResourcesOfType:@"momd"
+                                                  inDirectory:directory];
+        for (NSString * momdPath in momdPaths)
+        {
+            url = [bundle URLForResource:modelName
+                           withExtension:@"mom"
+                            subdirectory:[momdPath lastPathComponent]];
+            if (url) {
+//                NSLog(@"url_found=%@",url);
+                break;
+            }
+        }
+    }
+    
+    return url;
+}
+
+
+
 - (void)removeStoreAtURL:(NSURL *)storeURL
 {
     NSString * storePath = [storeURL path];
@@ -551,6 +587,9 @@ static volatile float _progressRange = 0.f;
 - (NSURL *)applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
+
+
+//NSTemporaryDirectory()
 
 @end
 

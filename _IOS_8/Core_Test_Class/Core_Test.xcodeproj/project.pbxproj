@@ -79,6 +79,7 @@
 		2390C0991AB194FA008B5F85 /* Model_3_5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_3_5.xcmappingmodel; sourceTree = "<group>"; };
 		239A68781ABC1CC2003AB3B8 /* BPModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BPModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		239A68791ABC1EB1003AB3B8 /* Migration_BPModel_0_2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Migration_BPModel_0_2.xcmappingmodel; sourceTree = "<group>"; };
+		239F4A701AC537D40018E2D2 /* BPModel 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BPModel 5.xcdatamodel"; sourceTree = "<group>"; };
 		23A541551AC196DF00E0DA46 /* BPModel 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BPModel 3.xcdatamodel"; sourceTree = "<group>"; };
 		23A541561AC1987400E0DA46 /* BPModel 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BPModel 4.xcdatamodel"; sourceTree = "<group>"; };
 		23A541571AC1990900E0DA46 /* Migration_BPModel_2_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Migration_BPModel_2_3.xcmappingmodel; sourceTree = "<group>"; };
@@ -619,6 +620,7 @@
 		23112F4F1AB85A0D0021A545 /* BPModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				239F4A701AC537D40018E2D2 /* BPModel 5.xcdatamodel */,
 				23A541551AC196DF00E0DA46 /* BPModel 3.xcdatamodel */,
 				23A541561AC1987400E0DA46 /* BPModel 4.xcdatamodel */,
 				239A68781ABC1CC2003AB3B8 /* BPModel 2.xcdatamodel */,
