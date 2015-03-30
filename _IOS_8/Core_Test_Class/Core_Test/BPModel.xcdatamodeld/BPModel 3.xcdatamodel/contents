@@ -4,7 +4,7 @@
         <attribute name="age" optional="YES" attributeType="Integer 32" defaultValueString="10" syncable="YES"/>
         <attribute name="fName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="newField" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
-        <attribute name="newField3" optional="YES" attributeType="String" defaultValueString="&quot;def new3&quot;" syncable="YES"/>
+        <attribute name="newField3" optional="YES" attributeType="String" defaultValueString="&quot;v.3&quot;" syncable="YES"/>
         <attribute name="sName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="when" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="sex" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sex" inverseName="people" inverseEntity="Sex" syncable="YES"/>

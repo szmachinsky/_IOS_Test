@@ -48,6 +48,14 @@
         name = [NSString stringWithFormat:@"%@ .",name];
         [destinationInstance setValue:name forKey:@"sName"];
         
+//        if ([name hasSuffix:@". . ."]) {
+//            name = [sourceInstance valueForKey:@"newField3"];
+//            if (name.length) {
+//                [destinationInstance setValue:nil forKey:@"newField3"];
+//            }
+//        }
+        
+        
 //        [destinationInstance setValue:@"+Custom1!!!" forKey:@"newField"];
     }
     

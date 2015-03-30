@@ -4,8 +4,9 @@
         <attribute name="age" optional="YES" attributeType="Integer 32" defaultValueString="10" syncable="YES"/>
         <attribute name="fName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="newField" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
-        <attribute name="newField3" optional="YES" attributeType="String" defaultValueString="&quot;def new3&quot;" syncable="YES"/>
+        <attribute name="newField3" optional="YES" attributeType="String" defaultValueString="&quot;v.5&quot;" syncable="YES"/>
         <attribute name="newField4" optional="YES" attributeType="String" defaultValueString="&quot;def new4&quot;" syncable="YES"/>
+        <attribute name="newField5" optional="YES" attributeType="String" defaultValueString="&quot;def new5&quot;" syncable="YES"/>
         <attribute name="sName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="when" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="sex" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sex" inverseName="people" inverseEntity="Sex" syncable="YES"/>
@@ -16,7 +17,7 @@
         <relationship name="people" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="sex" inverseEntity="Person" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Person" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="Person" positionX="-63" positionY="-18" width="128" height="180"/>
         <element name="Sex" positionX="-54" positionY="18" width="128" height="88"/>
     </elements>
 </model>

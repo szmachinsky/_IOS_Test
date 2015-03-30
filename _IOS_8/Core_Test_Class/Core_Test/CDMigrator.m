@@ -98,6 +98,7 @@ static volatile float _progressRange = 0.f;
             dict[@"sourceModel"] = model;
             dict[@"destName"] = destName;
             dict[@"destModel"] = destModel;
+            dict[@"mapModel"] = [NSNull null];
             [arr insertObject:dict atIndex:0];
         }
         if (compatible ) {
@@ -169,30 +170,45 @@ static volatile float _progressRange = 0.f;
         NSURL *url = [self.dataBundle URLForResource:@"VersionInfo"
                        withExtension:@"plist"
                         subdirectory:[modelName stringByAppendingPathExtension:@"momd"]];  
-        NSLog(@"%@",url);
+//        NSLog(@"%@",url);
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfURL:url];
-        NSLog(@"DIC=%@",dic);
+//        NSLog(@"DIC=%@",dic);
         NSString *nameOfDestinationModel = dic[@"NSManagedObjectModel_CurrentVersionName"];
         NSLog(@"dest_model_name=(%@)",nameOfDestinationModel);
         NSDictionary *d = dic[@"NSManagedObjectModel_VersionHashes"];
         NSMutableArray *arrModels = [NSMutableArray array];
         NSArray *a = [d allKeys];
-        if (a)
+        if (a) {
             [arrModels addObjectsFromArray:a];
+        }
         
         NSLog(@"arrModels1=%@",arrModels);
         [arrModels sortUsingComparator:^(id a, id b) {
             NSString *str1 = (NSString*)a;
             NSString *str2 = (NSString*)b;
-            return [str1 compare:str2];
-            //      if ( x1 < x2 )
-            //          return (NSComparisonResult)NSOrderedAscending;
-            //      if ( x1 > x2 )
-            //          return (NSComparisonResult)NSOrderedDescending;
-            //      return (NSComparisonResult)NSOrderedSame;
+//          return [str1 compare:str2];
+            NSInteger x1 = [[[str1 componentsSeparatedByString:@" "] lastObject] integerValue];
+            NSInteger x2 = [[[str2 componentsSeparatedByString:@" "] lastObject] integerValue];
+//          NSLog(@"(%@)(%@) %d %d",str1,str2,x1,x2);
+            if ( x1 < x2 )
+                return (NSComparisonResult)NSOrderedAscending;
+            if ( x1 > x2 )
+                return (NSComparisonResult)NSOrderedDescending;
+            return (NSComparisonResult)NSOrderedSame;
         }];
+        
         NSLog(@"arrModels2=%@",arrModels);
-
+        if (!self.models && arrModels.count) {
+            NSMutableArray *res = [NSMutableArray array];
+            for (NSString *str in arrModels) {
+                [res addObject:@{@"name":str}];
+                if ([nameOfDestinationModel isEqual:str]) {
+                    break;
+                }
+           }
+            self.models = res;
+            NSLog(@"%@",self.models);
+        }
         
        
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
@@ -208,19 +224,7 @@ static volatile float _progressRange = 0.f;
         {
             NSLog(@"Migration is needed"); // Migration is needed
             
-            if (self.initHud) {
-                NSLog(@"-init HUD");
-               if ([NSThread isMainThread])
-                {
-                    self.initHud();
-                    while (kCFRunLoopRunHandledSource == CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.001, YES));
-                }
-                else{
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        self.initHud();
-                    });
-                }
-            }
+            [self showHud];
             
             if (self.useOnlyLightMigration)
             {
@@ -237,51 +241,41 @@ static volatile float _progressRange = 0.f;
                 BOOL ok = YES;
                 
                 sourceModel = [NSManagedObjectModel mergedModelFromBundles:nil forStoreMetadata:sourceMetadata];
-                mappingModel = nil;//[NSMappingModel mappingModelFromBundles:nil forSourceModel:sourceModel destinationModel:destinationModel];
+                mappingModel = [NSMappingModel mappingModelFromBundles:nil forSourceModel:sourceModel destinationModel:destinationModel];
                 if (mappingModel) {
-                    NSLog(@"run direct migration");
-                    ok = [self migrateURL:storeURL
-                                fromModel:sourceModel
-                                  toModel:destinationModel
-                             mappingModel:mappingModel
-                                   offset:off
-                                    range:ran
-                               completion:nil];
-                    if (!ok) {
-                        return result;
-                    }
+                    NSLog(@"====== run direct migration ======");
+                    arraySteps = @[ @{@"sourceModel":sourceModel, @"destModel":destinationModel, @"mapModel":mappingModel, @"sourceName":@"?", @"destName":@"?" } ];
                 }
                 
-                
-                if (!mappingModel)
-                {
-                    //build  array with migration chain steps descriptios
+                //build  array with migration chain steps descriptios
+                if (arraySteps.count == 0) {
                     arraySteps = [self migrationChainFor:self.models metadata:sourceMetadata];
-                    NSLog(@"found %d migration chain steps",arraySteps.count);
-                    float delta = (arraySteps.count > 0 ? 1./arraySteps.count : 1.) - 0.00001;
-                    off = 0.;
-                    ran = delta;
-                    for (int i = 0; i < arraySteps.count; i++)
-                    @autoreleasepool
+                }
+                NSLog(@"found %d migration chain steps",arraySteps.count);
+                float delta = (arraySteps.count > 0 ? 1./arraySteps.count : 1.) - 0.00001;
+                off = 0.;
+                ran = delta;
+                for (int i = 0; i < arraySteps.count; i++)
+                @autoreleasepool
+                {
+                    NSLog(@"======================= iteration %d ========================",(i+1));
+                    NSDictionary *dic = (NSDictionary*)arraySteps[i];
+                    NSManagedObjectModel *sModel = dic[@"sourceModel"];
+                    NSManagedObjectModel *dModel = dic[@"destModel"];
+                    NSMappingModel *mapModel;
+                    if (dic[@"mapModel"] == [NSNull null])
                     {
-                        NSLog(@"======================= iteraion %d ========================",(i+1));
-                        NSDictionary *dic = (NSDictionary*)arraySteps[i];
-                        NSManagedObjectModel *sModel = dic[@"sourceModel"];
-                        NSManagedObjectModel *dModel = dic[@"destModel"];
-                        NSMappingModel *mapModel = [NSMappingModel mappingModelFromBundles:nil forSourceModel:sModel destinationModel:dModel];
-                        NSLog(@"%@ -> %@",dic[@"sourceName"],dic[@"destName"]);
-                        if (mapModel) {
-                            NSLog(@"  there is mapping model!");
-                            sourceModel = sModel;
-                            destinationModel = dModel;
-                            mappingModel = mapModel;
-                        } else {
-                            NSLog(@"Could not find a mapping model");
-//                          return result;
-                            NSLog(@"Try light migration");
-                            options = @{NSMigratePersistentStoresAutomaticallyOption: @YES, NSInferMappingModelAutomaticallyOption: @YES};
-                            break;
-                        }
+                        mapModel = [NSMappingModel mappingModelFromBundles:nil forSourceModel:sModel destinationModel:dModel];
+                    } else {
+                        mapModel = dic[@"mapModel"];
+                    }
+                    NSLog(@"%@ -> %@",dic[@"sourceName"],dic[@"destName"]);
+                    
+                    if (mapModel) {
+                        NSLog(@"  there is mapping model");
+                        sourceModel = sModel;
+                        destinationModel = dModel;
+                        mappingModel = mapModel;
                         
                         ok = [self migrateURL:storeURL
                                     fromModel:sourceModel
@@ -290,19 +284,33 @@ static volatile float _progressRange = 0.f;
                                        offset:off
                                         range:ran
                                    completion:nil];
-                    
+                        
                         if (!ok) {
                             return result;
                         }
-                
-                        if ([nameOfDestinationModel isEqual:dic[@"destName"]]) {
-                            NSLog(@"-----exit by nameOfDestinationModel=%@-----",nameOfDestinationModel);
-                            break;
-                        }
-                        off +=delta;
                         
-                    }//for - autorelease
-                }//if
+                    } else {
+                        NSLog(@"there is NOT mapping model!");
+                        NSLog(@"========= Try light migration =========");
+                        ok = [self runLightMigration:storeURL
+                                             toModel:dModel
+                                              offset:off
+                                               range:1.0
+                                               delta:delta];
+                        if (!ok) {
+                            return result;
+                        } else {
+                            NSLog(@"========= light migration OK! =========");
+                        }
+                    }
+                    
+                    if ([nameOfDestinationModel isEqual:dic[@"destName"]]) {
+                        NSLog(@"-----exit by nameOfDestinationModel=%@-----",nameOfDestinationModel);
+                        break;
+                    }
+                    off +=delta;
+                    
+                }//for - autorelease
                 
             } //custom migration
             
@@ -330,19 +338,7 @@ static volatile float _progressRange = 0.f;
     
 @finally
     {
-        if (self.dismissHud) {
-            NSLog(@"-dismiss HUD");
-            if ([NSThread isMainThread])
-            {
-                self.dismissHud();
-                while (kCFRunLoopRunHandledSource == CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.001, YES));
-            }
-            else{
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.dismissHud();
-                });
-            }
-        }
+        [self hideHud];
         
         if (completion)
         {
@@ -356,6 +352,46 @@ static volatile float _progressRange = 0.f;
     } //@finally
     
     return result;
+}
+
+
+-(BOOL)runLightMigration:(NSURL *)storeURL
+                 toModel:(NSManagedObjectModel *)destinationModel
+                  offset:(float)offset
+                   range:(float)range
+                   delta:(float)delta
+{
+    _progressOffset = offset;
+    _progressRange = range;
+
+    [self showProgress:delta*0.1];
+    NSError *error = nil;
+    NSDictionary *options = @{NSMigratePersistentStoresAutomaticallyOption: @YES, NSInferMappingModelAutomaticallyOption: @YES};
+    NSPersistentStoreCoordinator *persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:destinationModel];
+    
+    NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:kCoreDataStoreType URL:storeURL error:&error];
+    BOOL pscCompatible = (sourceMetadata == nil) || [destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
+    
+    if(!pscCompatible) //Migration is needed
+    {
+        NSLog(@"Migration is needed  %.3f %.3f %.3f",offset,range,delta); // Migration is needed
+    }
+    [self showProgress:delta*0.3];
+
+    id ok = [persistentStoreCoordinator addPersistentStoreWithType:kCoreDataStoreType configuration:nil URL:storeURL options:options error:&error];
+    if (!ok) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        return NO;
+    }
+    [self showProgress:delta];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[storeURL path]])
+    {
+        NSLog(@"LITE MIGRATION - STORE FILE IS NOT EXIST!!!");
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 
@@ -485,7 +521,6 @@ static volatile float _progressRange = 0.f;
 @catch (NSException *exception)
     {
         NSLog(@"!!! MIGRATION EXCEPTION !!!");
-        
     } //@catch
     
 @finally
@@ -516,25 +551,68 @@ static volatile float _progressRange = 0.f;
     float progress = migrator.migrationProgress;
     NSLog(@"migrationProgress = %f",progress);
     
+    [self showProgress:progress];
+}
+
+#pragma mark - progress showing
+
+-(void)showProgress:(float)progress
+{
     if (self.progressHud) {
         if ([NSThread isMainThread])
         {
-            NSLog(@"IN MAIN THREAD");
-            self.progressHud(_progressOffset + progress * _progressRange);
+            float progr = _progressOffset + progress * _progressRange;
+            NSLog(@"IN MAIN THREAD:%.3f",progr);
+            self.progressHud(progr);
             while (kCFRunLoopRunHandledSource == CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.001, YES));
         }
         else{
-            NSLog(@"NOT IN MAIN THREAD");
             const float off = _progressOffset;
             const float ran = _progressRange;
+            float progr = off + progress * ran;
+            NSLog(@"NOT IN MAIN THREAD:%.3f",progr);
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.progressHud(off + progress * ran);
+                self.progressHud(progr);
             });
         }
     }
-    
 }
 
+
+-(void)showHud
+{
+    if (self.initHud) {
+        NSLog(@"-init HUD");
+        if ([NSThread isMainThread])
+        {
+            self.initHud();
+            while (kCFRunLoopRunHandledSource == CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.001, YES));
+        }
+        else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.initHud();
+            });
+        }
+    }
+}
+
+
+-(void)hideHud
+{
+    if (self.dismissHud) {
+        NSLog(@"-dismiss HUD");
+        if ([NSThread isMainThread])
+        {
+            self.dismissHud();
+            while (kCFRunLoopRunHandledSource == CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.001, YES));
+        }
+        else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.dismissHud();
+            });
+        }
+    }
+}
 
 
 #pragma mark - File System's Service

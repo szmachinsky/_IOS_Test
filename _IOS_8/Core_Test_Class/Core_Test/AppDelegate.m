@@ -63,9 +63,9 @@
     migrator.dismissHud = ^{[SVProgressHUD dismiss];};
     migrator.progressHud = ^(float progress){[SVProgressHUD showProgress:progress status:@"Run migration..." maskType:SVProgressHUDMaskTypeClear];};
         
-    migrator.models = @[ @{@"name":@"BPModel"}, @{@"name":@"BPModel 2"}, @{@"name":@"BPModel 3"}, @{@"name":@"BPModel 4"}, @{@"name":@"BPModel 5"} ];
+//    migrator.models = @[ @{@"name":@"BPModel"}, @{@"name":@"BPModel 2"}, @{@"name":@"BPModel 3"}, @{@"name":@"BPModel 4"}, @{@"name":@"BPModel 5"} ];
     migrator.migrationClass = [MyMigrationManager class];    
-    migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"CoreDataDir/"];
+//    migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"BPModelDataDir/"];
     
     [migrator migrationFor:[[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"]
                  modelName:@"BPModel"

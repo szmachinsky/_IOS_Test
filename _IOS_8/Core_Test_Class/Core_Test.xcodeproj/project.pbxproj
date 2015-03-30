@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		23112F511AB85A0D0021A545 /* BPModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23112F4F1AB85A0D0021A545 /* BPModel.xcdatamodeld */; };
+		2333868D1AC9A273004DC375 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2333868A1AC9A273004DC375 /* Model.xcdatamodeld */; };
 		234107C21AAED8CB00218394 /* Model_3_to_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 234107C11AAED8CB00218394 /* Model_3_to_4.xcmappingmodel */; };
 		23697FE01AA85B67009CC9F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 23697FDF1AA85B67009CC9F3 /* main.m */; };
 		23697FE31AA85B67009CC9F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 23697FE21AA85B67009CC9F3 /* AppDelegate.m */; };
@@ -35,6 +36,7 @@
 		23EDC3D91AB81550009473BB /* Migrate23.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3D11AB81550009473BB /* Migrate23.xcmappingmodel */; };
 		23EDC3DA1AB81550009473BB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3D21AB81550009473BB /* Model.xcdatamodeld */; };
 		23EDC3E51AB81BA1009473BB /* BPMigrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3E41AB81BA1009473BB /* BPMigrator.m */; };
+		23F2DEF91AC93B6B00831BCF /* Migration_BPModel_5_6.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23F2DEF81AC93B6B00831BCF /* Migration_BPModel_5_6.xcmappingmodel */; };
 		23FFE1F51AB82E0E00FE46A8 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 23FFE1F01AB82E0E00FE46A8 /* SVProgressHUD.bundle */; };
 		23FFE1F61AB82E0E00FE46A8 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FFE1F21AB82E0E00FE46A8 /* SVProgressHUD.m */; };
 		23FFE1F71AB82E0E00FE46A8 /* UIViewController+Hud.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FFE1F41AB82E0E00FE46A8 /* UIViewController+Hud.m */; };
@@ -53,6 +55,8 @@
 
 /* Begin PBXFileReference section */
 		23112F501AB85A0D0021A545 /* BPModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BPModel.xcdatamodel; sourceTree = "<group>"; };
+		2333868B1AC9A273004DC375 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		2333868C1AC9A273004DC375 /* Model_2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_2.xcdatamodel; sourceTree = "<group>"; };
 		234107C11AAED8CB00218394 /* Model_3_to_4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_3_to_4.xcmappingmodel; sourceTree = "<group>"; };
 		23697FDA1AA85B67009CC9F3 /* Core_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Core_Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23697FDE1AA85B67009CC9F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -106,6 +110,8 @@
 		23EDC3E01AB81B54009473BB /* BPMigrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPMigrationManager.h; sourceTree = "<group>"; };
 		23EDC3E31AB81BA1009473BB /* BPMigrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPMigrator.h; sourceTree = "<group>"; };
 		23EDC3E41AB81BA1009473BB /* BPMigrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPMigrator.m; sourceTree = "<group>"; };
+		23F2DEF51AC939F300831BCF /* BPModel 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BPModel 6.xcdatamodel"; sourceTree = "<group>"; };
+		23F2DEF81AC93B6B00831BCF /* Migration_BPModel_5_6.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Migration_BPModel_5_6.xcmappingmodel; sourceTree = "<group>"; };
 		23FFE1F01AB82E0E00FE46A8 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		23FFE1F11AB82E0E00FE46A8 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		23FFE1F21AB82E0E00FE46A8 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
@@ -132,6 +138,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		233386881AC9A234004DC375 /* SOUND */ = {
+			isa = PBXGroup;
+			children = (
+				233386891AC9A273004DC375 /* BlackApp */,
+			);
+			name = SOUND;
+			sourceTree = "<group>";
+		};
+		233386891AC9A273004DC375 /* BlackApp */ = {
+			isa = PBXGroup;
+			children = (
+				2333868A1AC9A273004DC375 /* Model.xcdatamodeld */,
+			);
+			path = BlackApp;
+			sourceTree = "<group>";
+		};
 		23697FD11AA85B67009CC9F3 = {
 			isa = PBXGroup;
 			children = (
@@ -155,8 +177,8 @@
 		23697FDC1AA85B67009CC9F3 /* Core_Test */ = {
 			isa = PBXGroup;
 			children = (
+				23EDC3CF1AB81550009473BB /* OLD_SOUND_DATA */,
 				23FFE1EE1AB82DF000FE46A8 /* Utils */,
-				23EDC3CF1AB81550009473BB /* Migration_Test */,
 				2369800D1AA87B5A009CC9F3 /* Detail_VC.h */,
 				2369800E1AA87B5A009CC9F3 /* Detail_VC.m */,
 				2369800F1AA87B5A009CC9F3 /* Detail_VC.xib */,
@@ -164,6 +186,7 @@
 				23697FE81AA85B67009CC9F3 /* MasterViewController.m */,
 				23697FE11AA85B67009CC9F3 /* AppDelegate.h */,
 				23697FE21AA85B67009CC9F3 /* AppDelegate.m */,
+				233386881AC9A234004DC375 /* SOUND */,
 				23EDC3DC1AB81943009473BB /* My_Migration__2 */,
 				23AAC3DD1AADA55700F7D0DC /* Migration__1 */,
 				23697FED1AA85B67009CC9F3 /* Main.storyboard */,
@@ -219,13 +242,14 @@
 			name = Migration__1;
 			sourceTree = "<group>";
 		};
-		23EDC3CF1AB81550009473BB /* Migration_Test */ = {
+		23EDC3CF1AB81550009473BB /* OLD_SOUND_DATA */ = {
 			isa = PBXGroup;
 			children = (
 				23EDC3D01AB81550009473BB /* Migrate.xcmappingmodel */,
 				23EDC3D11AB81550009473BB /* Migrate23.xcmappingmodel */,
 				23EDC3D21AB81550009473BB /* Model.xcdatamodeld */,
 			);
+			name = OLD_SOUND_DATA;
 			path = Migration_Test;
 			sourceTree = "<group>";
 		};
@@ -233,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				23112F4F1AB85A0D0021A545 /* BPModel.xcdatamodeld */,
+				23F2DEF81AC93B6B00831BCF /* Migration_BPModel_5_6.xcmappingmodel */,
 				23A541591AC1993100E0DA46 /* Migration_BPModel_3_4.xcmappingmodel */,
 				23A541571AC1990900E0DA46 /* Migration_BPModel_2_3.xcmappingmodel */,
 				239A68791ABC1EB1003AB3B8 /* Migration_BPModel_0_2.xcmappingmodel */,
@@ -378,8 +403,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23F2DEF91AC93B6B00831BCF /* Migration_BPModel_5_6.xcmappingmodel in Sources */,
 				23FFE1F71AB82E0E00FE46A8 /* UIViewController+Hud.m in Sources */,
 				23112F511AB85A0D0021A545 /* BPModel.xcdatamodeld in Sources */,
+				2333868D1AC9A273004DC375 /* Model.xcdatamodeld in Sources */,
 				2369800C1AA86873009CC9F3 /* Core_Test.xcdatamodeld in Sources */,
 				234107C21AAED8CB00218394 /* Model_3_to_4.xcmappingmodel in Sources */,
 				23EDC3E51AB81BA1009473BB /* BPMigrator.m in Sources */,
@@ -621,13 +648,25 @@
 			isa = XCVersionGroup;
 			children = (
 				239F4A701AC537D40018E2D2 /* BPModel 5.xcdatamodel */,
+				23F2DEF51AC939F300831BCF /* BPModel 6.xcdatamodel */,
 				23A541551AC196DF00E0DA46 /* BPModel 3.xcdatamodel */,
 				23A541561AC1987400E0DA46 /* BPModel 4.xcdatamodel */,
 				239A68781ABC1CC2003AB3B8 /* BPModel 2.xcdatamodel */,
 				23112F501AB85A0D0021A545 /* BPModel.xcdatamodel */,
 			);
-			currentVersion = 23A541561AC1987400E0DA46 /* BPModel 4.xcdatamodel */;
+			currentVersion = 23F2DEF51AC939F300831BCF /* BPModel 6.xcdatamodel */;
 			path = BPModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		2333868A1AC9A273004DC375 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2333868B1AC9A273004DC375 /* Model.xcdatamodel */,
+				2333868C1AC9A273004DC375 /* Model_2.xcdatamodel */,
+			);
+			currentVersion = 2333868C1AC9A273004DC375 /* Model_2.xcdatamodel */;
+			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

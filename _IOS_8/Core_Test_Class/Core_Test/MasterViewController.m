@@ -286,18 +286,24 @@
     NSNumber *num = [object valueForKey:@"age"];
     NSString *str3 = [num stringValue];
     NSString *nf;
+    NSString *nf3 = @"?";
     if ([str2 hasSuffix:@" ."]) {
         nf = [object valueForKey:@"newField"];
     }
+    if ([str2 hasSuffix:@". ."]) {
+        nf3 = [object valueForKey:@"newField3"];
+    }
     if (!nf)
         nf = @"";
-    cell.textLabel.text = [NSString stringWithFormat:@"%@/%@/%@/%@",str1,str2,str3,nf];
+//    cell.textLabel.text = [NSString stringWithFormat:@"%@/%@/%@/%@",str1,str2,str3,nf];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@/%@/%@",str1,str2,nf];
+    cell.textLabel.font = [UIFont systemFontOfSize:14.];
     
     NSManagedObject *obj = [object valueForKey:@"sex"];
     NSString *str = [obj valueForKeyPath:@"descr"];
     NSMutableSet *set = [obj valueForKeyPath:@"people"];
     int i = set.count;
-    str = [NSString stringWithFormat:@"%@ /all is %d",str,i];
+    str = [NSString stringWithFormat:@"%@ /all is %d/%@",str,i,nf3];
 
 #endif //_CORE_CASE
     
