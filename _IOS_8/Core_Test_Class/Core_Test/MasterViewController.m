@@ -57,16 +57,16 @@
 //    return;
     
     
-    for (int i = 1; i <= 100; i++) {
-        @autoreleasepool {
-            NSLog(@"%04d)",i);
-            for (int j = 1; j <= 1000; j++) { //30kb
-                [self insertNewObjects:sender];            
-            }
-            
-            [self saveContext];
-        }
-    }
+//    for (int i = 1; i <= 100; i++) {
+//        @autoreleasepool {
+//            NSLog(@"%04d)",i);
+//            for (int j = 1; j <= 1000; j++) { //30kb
+//                [self insertNewObjects:sender];            
+//            }
+//            
+//            [self saveContext];
+//        }
+//    }
     
 }
 
@@ -307,6 +307,28 @@
 
 #endif //_CORE_CASE
     
+#if _CORE_CASE == 3
+    NSString *str1 = [object valueForKey:@"db_title"];
+    NSString *str2 = [object valueForKey:@"db_channelTitle"];
+//    NSNumber *num = [object valueForKey:@"age"];
+//    NSString *str3 = [num stringValue];
+    NSString *nf = @"";
+    NSString *nf3 = @"";
+    if ([str2 hasSuffix:@" ."]) {
+        nf = [object valueForKey:@"newField"];
+    }
+//    if ([str2 hasSuffix:@". ."]) {
+//        nf3 = [object valueForKey:@"newField4"];
+//    }
+    if (!nf)
+        nf = @"";
+    //    cell.textLabel.text = [NSString stringWithFormat:@"%@/%@/%@/%@",str1,str2,str3,nf];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",str1];
+    cell.textLabel.font = [UIFont systemFontOfSize:14.];
+    
+    NSString *str = [NSString stringWithFormat:@"%@/%@",str2,nf];
+    
+#endif //_CORE_CASE
     
     cell.detailTextLabel.text = str;
 }
@@ -334,7 +356,12 @@
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:t_Stamp ascending:NO];
+    BOOL ascending = NO;
+#if _CORE_CASE == 3
+    ascending = YES;
+#endif //_CORE_CASE
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:t_Stamp ascending:ascending];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];

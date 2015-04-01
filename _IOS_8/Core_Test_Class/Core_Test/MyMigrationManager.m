@@ -18,13 +18,34 @@
 
 - (NSString*)addString:(NSString*)addStr to:(NSString*)str
 {
-    static int i = 0;
+    static int i1 = 0;
     NSString *res = [NSString stringWithFormat:@"%@ +%@",str,addStr];
-    if (++i % 1000 == 0) {
-        NSLog(@"%02d) (%@)->(%@)",i,str,res);
+    if (++i1 % 500 == 2) {
+        NSLog(@"_%02d) (%@)->(%@)",i1,str,res);
     }
     return res;
 }
+
+- (NSString*)fillWithString:(NSString*)addStr
+{
+    static int i2 = 0;
+    NSString *res = [NSString stringWithFormat:@"+%@",addStr];
+    if (++i2 % 500 == 1) {
+        NSLog(@"_%02d) (%@)",i2,res);
+    }
+    return res;
+}
+
+- (NSString*)fillWithStr:(NSString*)addStr
+{
+    static int i3 = 0;
+    NSString *res = [NSString stringWithFormat:@"+%@",addStr];
+    if (++i3 % 500 == 1) {
+        NSLog(@"_%02d) (%@)",i3,res);
+    }
+    return res;
+}
+
 
 
 
@@ -34,8 +55,8 @@
     NSString *name = [entityMapping destinationEntityName];
     
     static int i = 0;
-    if (++i % 1000 == 0) {
-        NSLog(@"--%02d--> migrate Manager_4_5 for = %@",i,name);
+    if (++i % 500 == 0) {
+        NSLog(@"--%02d--> migration Manager for = %@",i,name);
     //    sleep(1);
     }
     
@@ -69,6 +90,20 @@
         
         [destinationInstance setValue:@"+Custom2!!!" forKey:@"newField"];
     }
+    
+    
+    if([name compare:@"VideoItem"] == NSOrderedSame)
+    {
+        //        NSLog(@"--custom for Sex");
+        
+        NSString *name = [sourceInstance valueForKey:@"db_channelTitle"];
+        name = [NSString stringWithFormat:@"%@ .",name];
+        [destinationInstance setValue:name forKey:@"db_channelTitle"];
+        
+ //       [destinationInstance setValue:@"+Custom2!!!" forKey:@"newField"];
+    }
+    
+    
 }
 
 @end

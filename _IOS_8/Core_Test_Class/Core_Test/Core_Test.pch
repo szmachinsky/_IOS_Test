@@ -54,7 +54,7 @@
 */
  
 
-
+/*
 
 #define _CORE_CASE 2
 
@@ -64,6 +64,16 @@
 # define t_Stamp        @"when"
 # define CORE_ENTITY1   @"Person"
 
+*/
+
+
+#define _CORE_CASE 3
+
+#define _CORE_VERSION 2
+
+# define CORE_NAME  @"Model"
+# define t_Stamp        @"db_title"  //@"db_channelTitle"
+# define CORE_ENTITY1   @"VideoItem"
 
 
 #endif

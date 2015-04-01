@@ -32,19 +32,5 @@
               completion:(void (^)(BOOL))completion;
 
 
--(BOOL)checkMigrationFor:(NSURL *)storeURL
-               modelName:(NSString *)modelName
-              completion:(void (^)(BOOL))completion;
-
-
--(BOOL)migrateURL:(NSURL *)storeURL
-         fromModel:(NSManagedObjectModel *)sourceModel
-           toModel:(NSManagedObjectModel *)destinationModel
-      mappingModel:(NSMappingModel *)mappingModel
-            offset:(float)offset
-             range:(float)range
-        completion:(void (^)(BOOL))completion;
-
-
 @end
 

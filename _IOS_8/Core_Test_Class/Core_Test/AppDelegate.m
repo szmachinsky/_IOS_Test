@@ -33,25 +33,27 @@
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
     
-#if _CORE_CASE == 0
-    controller.managedObjectContext = [self managedObjectContext]; //create Core Date stack
-#endif
-    
-#if _CORE_CASE == 2
     
     __typeof__(self) __weak weakSelf = self;
     void (^postAction)(BOOL) = ^(BOOL ok){
         if (ok)
         {
             NSLog(@">>>>>>> Migration_was_OK <<<<<<<<<<");
-//            UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-//            MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
+            //            UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+            //            MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
             controller.managedObjectContext = [weakSelf managedObjectContext]; //create Core Date stack
             [controller update];
         } else {
             NSLog(@">>>>>>> Migration_was_WRONG <<<<<<<<<<");
         }
-     };
+    };
+    
+    
+#if _CORE_CASE == 0
+    controller.managedObjectContext = [self managedObjectContext]; //create Core Date stack
+#endif
+    
+#if _CORE_CASE == 2
     
     CDMigrator *migrator = [CDMigrator new];
     
@@ -71,8 +73,29 @@
                  modelName:@"BPModel"
                 completion:[postAction copy]];
     
-    
 #endif
+    
+    
+#if _CORE_CASE == 3
+    
+//    controller.managedObjectContext = [self managedObjectContext]; //create Core Date stack
+
+    CDMigrator *migrator = [CDMigrator new];
+    
+    migrator.initHud = ^{[SVProgressHUD showWithStatus:@"Updating media database..." maskType:SVProgressHUDMaskTypeClear];};
+    migrator.dismissHud = ^{[SVProgressHUD dismiss];};
+    migrator.progressHud = ^(float progress){[SVProgressHUD showProgress:progress status:@"Run migration..." maskType:SVProgressHUDMaskTypeClear];};
+    
+//    migrator.models = @[ @{@"name":@"Model"}, @{@"name":@"Model_2"}, @{@"name":@"Model_3"}, @{@"name":@"Model 4"}, @{@"name":@"Model 5"} ];
+    migrator.migrationClass = [MyMigrationManager class];
+//    migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"SoundTubeDataDir/"];
+    
+    [migrator migrationFor:[[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Model.sqlite"]
+                 modelName:@"Model"
+                completion:[postAction copy]];
+
+#endif
+
     
     NSLog(@"--app delegate end--");
     return YES;
@@ -128,7 +151,11 @@
 #if _CORE_CASE == 2
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"BPModel" withExtension:@"momd"];
 #endif
-    
+ 
+#if _CORE_CASE == 3
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Model" withExtension:@"momd"];
+#endif
+
     NSLog(@"URL=%@",modelURL);
     
     if (!modelURL) {
@@ -158,6 +185,11 @@
     
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"];
+    
+#if _CORE_CASE == 3
+    storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"model.sqlite"];
+#endif
+    
     NSLog(@"storeURL=%@",storeURL);
     NSError *error = nil;
     NSDictionary *options = nil;
@@ -171,6 +203,10 @@
 #if _CORE_VERSION <= 4
     if(!pscCompatible) // Migration is needed
     {
+        NSLog(@"Migration is needed"); // Migration is needed
+        
+        options = @{NSMigratePersistentStoresAutomaticallyOption: @YES, NSInferMappingModelAutomaticallyOption: @YES}; //light migration
+        
 #if _CORE_VERSION <= 3
         options = @{NSMigratePersistentStoresAutomaticallyOption: @YES, NSInferMappingModelAutomaticallyOption: @YES}; //light migration
 //      options = @{NSMigratePersistentStoresAutomaticallyOption: @YES}; //there is a mapping model

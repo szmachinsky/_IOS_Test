@@ -67,50 +67,6 @@ static volatile float _progressRange = 0.f;
 }
 
 
-#pragma migration Chain
-
--(NSArray*)migrationChainFor:(NSArray*)models metadata:(NSDictionary*)sourceMetadata
-{
-    NSMutableArray *arr = [NSMutableArray array];
-    NSManagedObjectModel *destModel;
-    NSString *destName;
-    NSMutableDictionary *dict;
-    for (int i = models.count-1; i >= 0;  i--) {
-        NSDictionary *dic = [models objectAtIndex:i];
-        NSString *modelName = dic[@"name"];
-                
-        NSURL *modelURL = [self urlForModelName:modelName inDirectory:nil]; //@"BPModel"
-        if(!modelURL) {
-            NSLog(@"for (%@) modelURL not found!!!",modelName);
-            return NO;
-        }
-        NSLog(@"MODEL_URL for %@ = %@",modelName,modelURL);
-        NSManagedObjectModel *model =  [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-        if(!model) {
-            NSLog(@"for (%@) model not found!!!",modelName);
-            return NO;
-        }
-        BOOL compatible = [model isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
-        NSLog(@"for model (%@) compatible=%d",modelName,compatible);
-        if (destModel && destName) {
-            dict = [NSMutableDictionary dictionary];
-            dict[@"sourceName"] = modelName;
-            dict[@"sourceModel"] = model;
-            dict[@"destName"] = destName;
-            dict[@"destModel"] = destModel;
-            dict[@"mapModel"] = [NSNull null];
-            [arr insertObject:dict atIndex:0];
-        }
-        if (compatible ) {
-            return arr;
-        }
-        destName = modelName;
-        destModel = model;
-    }
-    
-    return nil;
-}
-
 
 #pragma mark - Migrations
 
@@ -154,7 +110,7 @@ static volatile float _progressRange = 0.f;
     
 @try
     {
-        NSURL *modelURL = [self.dataBundle URLForResource:modelName withExtension:@"momd"]; //modelName @"BPModel"
+        NSURL *modelURL = [self.dataBundle URLForResource:modelName withExtension:@"momd"];
         NSLog(@"MODEL_URL1=%@",modelURL);
         if (!modelURL) {
             NSLog(@"WRONG MODEL URL");
@@ -170,7 +126,7 @@ static volatile float _progressRange = 0.f;
         NSURL *url = [self.dataBundle URLForResource:@"VersionInfo"
                        withExtension:@"plist"
                         subdirectory:[modelName stringByAppendingPathExtension:@"momd"]];  
-//        NSLog(@"%@",url);
+        NSLog(@"%@",url);
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfURL:url];
 //        NSLog(@"DIC=%@",dic);
         NSString *nameOfDestinationModel = dic[@"NSManagedObjectModel_CurrentVersionName"];
@@ -184,12 +140,9 @@ static volatile float _progressRange = 0.f;
         
         NSLog(@"arrModels1=%@",arrModels);
         [arrModels sortUsingComparator:^(id a, id b) {
-            NSString *str1 = (NSString*)a;
-            NSString *str2 = (NSString*)b;
-//          return [str1 compare:str2];
-            NSInteger x1 = [[[str1 componentsSeparatedByString:@" "] lastObject] integerValue];
-            NSInteger x2 = [[[str2 componentsSeparatedByString:@" "] lastObject] integerValue];
-//          NSLog(@"(%@)(%@) %d %d",str1,str2,x1,x2);
+            NSInteger x1 = [self lastNumberFromString:(NSString*)a];
+            NSInteger x2 = [self lastNumberFromString:(NSString*)b];
+//          NSLog(@"(%@)(%@) %d %d",a,b,x1,x2);
             if ( x1 < x2 )
                 return (NSComparisonResult)NSOrderedAscending;
             if ( x1 > x2 )
@@ -212,7 +165,7 @@ static volatile float _progressRange = 0.f;
         
        
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
-        NSLog(@"Migration from storeURL=%@",storeURL);
+        NSLog(@"storeURL=%@",storeURL);
         NSError *error = nil;
         NSDictionary *options = nil;
         
@@ -243,7 +196,7 @@ static volatile float _progressRange = 0.f;
                 sourceModel = [NSManagedObjectModel mergedModelFromBundles:nil forStoreMetadata:sourceMetadata];
                 mappingModel = [NSMappingModel mappingModelFromBundles:nil forSourceModel:sourceModel destinationModel:destinationModel];
                 if (mappingModel) {
-                    NSLog(@"====== run direct migration ======");
+                    NSLog(@"====== direct migration ======");
                     arraySteps = @[ @{@"sourceModel":sourceModel, @"destModel":destinationModel, @"mapModel":mappingModel, @"sourceName":@"?", @"destName":@"?" } ];
                 }
                 
@@ -615,6 +568,51 @@ static volatile float _progressRange = 0.f;
 }
 
 
+#pragma mark - Migration Chain
+
+-(NSArray*)migrationChainFor:(NSArray*)models metadata:(NSDictionary*)sourceMetadata
+{
+    NSMutableArray *arr = [NSMutableArray array];
+    NSManagedObjectModel *destModel;
+    NSString *destName;
+    NSMutableDictionary *dict;
+    for (int i = models.count-1; i >= 0;  i--) {
+        NSDictionary *dic = [models objectAtIndex:i];
+        NSString *modelName = dic[@"name"];
+        
+        NSURL *modelURL = [self urlForModelName:modelName inDirectory:nil]; //@"BPModel"
+        if(!modelURL) {
+            NSLog(@"for (%@) modelURL not found!!!",modelName);
+            return NO;
+        }
+        NSLog(@"MODEL_URL for %@ = %@",modelName,modelURL);
+        NSManagedObjectModel *model =  [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+        if(!model) {
+            NSLog(@"for (%@) model not found!!!",modelName);
+            return NO;
+        }
+        BOOL compatible = [model isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
+        NSLog(@"for model (%@) compatible=%d",modelName,compatible);
+        if (destModel && destName) {
+            dict = [NSMutableDictionary dictionary];
+            dict[@"sourceName"] = modelName;
+            dict[@"sourceModel"] = model;
+            dict[@"destName"] = destName;
+            dict[@"destModel"] = destModel;
+            dict[@"mapModel"] = [NSNull null];
+            [arr insertObject:dict atIndex:0];
+        }
+        if (compatible ) {
+            return arr;
+        }
+        destName = modelName;
+        destModel = model;
+    }
+    
+    return nil;
+}
+
+
 #pragma mark - File System's Service
 
 - (NSURL *)urlForModelName:(NSString *)modelName
@@ -659,6 +657,18 @@ static volatile float _progressRange = 0.f;
     [[NSFileManager defaultManager] removeItemAtURL:storeURL error:NULL];
     [[NSFileManager defaultManager] removeItemAtPath:[storePath stringByAppendingString:@"-shm"] error:NULL];
     [[NSFileManager defaultManager] removeItemAtPath:[storePath stringByAppendingString:@"-wal"] error:NULL];
+}
+
+
+-(NSInteger)lastNumberFromString:(NSString*)str
+{
+    NSArray *arr = [str componentsSeparatedByString:@" "];
+    NSInteger i = [[arr lastObject] integerValue];
+    if ((arr.count <= 1) && (i==0)) {
+        arr = [str componentsSeparatedByString:@"_"];
+        i = [[arr lastObject] integerValue];
+    }
+    return i;
 }
 
 

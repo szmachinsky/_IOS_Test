@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		23112F511AB85A0D0021A545 /* BPModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23112F4F1AB85A0D0021A545 /* BPModel.xcdatamodeld */; };
-		2333868D1AC9A273004DC375 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2333868A1AC9A273004DC375 /* Model.xcdatamodeld */; };
 		234107C21AAED8CB00218394 /* Model_3_to_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 234107C11AAED8CB00218394 /* Model_3_to_4.xcmappingmodel */; };
 		23697FE01AA85B67009CC9F3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 23697FDF1AA85B67009CC9F3 /* main.m */; };
 		23697FE31AA85B67009CC9F3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 23697FE21AA85B67009CC9F3 /* AppDelegate.m */; };
@@ -22,6 +21,9 @@
 		236980111AA87B5A009CC9F3 /* Detail_VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2369800F1AA87B5A009CC9F3 /* Detail_VC.xib */; };
 		2390C0981AB18730008B5F85 /* Migration_4_5.m in Sources */ = {isa = PBXBuildFile; fileRef = 2390C0971AB18730008B5F85 /* Migration_4_5.m */; };
 		2390C09A1AB194FA008B5F85 /* Model_3_5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2390C0991AB194FA008B5F85 /* Model_3_5.xcmappingmodel */; };
+		23996E9A1ACAAE1E00E3D365 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23996E971ACAAE1E00E3D365 /* Model.xcdatamodeld */; };
+		23996EA31ACACB3200E3D365 /* Model_Migr_2_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23996EA21ACACB3200E3D365 /* Model_Migr_2_3.xcmappingmodel */; };
+		23996EA51ACACB4C00E3D365 /* Model_Migr_4_5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23996EA41ACACB4C00E3D365 /* Model_Migr_4_5.xcmappingmodel */; };
 		239A687A1ABC1EB1003AB3B8 /* Migration_BPModel_0_2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 239A68791ABC1EB1003AB3B8 /* Migration_BPModel_0_2.xcmappingmodel */; };
 		23A541581AC1990900E0DA46 /* Migration_BPModel_2_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23A541571AC1990900E0DA46 /* Migration_BPModel_2_3.xcmappingmodel */; };
 		23A5415A1AC1993100E0DA46 /* Migration_BPModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23A541591AC1993100E0DA46 /* Migration_BPModel_3_4.xcmappingmodel */; };
@@ -32,9 +34,6 @@
 		23B85A351AB962AD0082D008 /* CDMigrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B85A341AB962AD0082D008 /* CDMigrator.m */; };
 		23DE87F01AC01DC7008BB2C9 /* MyMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DE87EF1AC01DC7008BB2C9 /* MyMigrationManager.m */; };
 		23E58E401AAF49E800791501 /* Model_4_5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23E58E3F1AAF49E800791501 /* Model_4_5.xcmappingmodel */; };
-		23EDC3D81AB81550009473BB /* Migrate.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3D01AB81550009473BB /* Migrate.xcmappingmodel */; };
-		23EDC3D91AB81550009473BB /* Migrate23.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3D11AB81550009473BB /* Migrate23.xcmappingmodel */; };
-		23EDC3DA1AB81550009473BB /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3D21AB81550009473BB /* Model.xcdatamodeld */; };
 		23EDC3E51AB81BA1009473BB /* BPMigrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3E41AB81BA1009473BB /* BPMigrator.m */; };
 		23F2DEF91AC93B6B00831BCF /* Migration_BPModel_5_6.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23F2DEF81AC93B6B00831BCF /* Migration_BPModel_5_6.xcmappingmodel */; };
 		23FFE1F51AB82E0E00FE46A8 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 23FFE1F01AB82E0E00FE46A8 /* SVProgressHUD.bundle */; };
@@ -55,8 +54,6 @@
 
 /* Begin PBXFileReference section */
 		23112F501AB85A0D0021A545 /* BPModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BPModel.xcdatamodel; sourceTree = "<group>"; };
-		2333868B1AC9A273004DC375 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		2333868C1AC9A273004DC375 /* Model_2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_2.xcdatamodel; sourceTree = "<group>"; };
 		234107C11AAED8CB00218394 /* Model_3_to_4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_3_to_4.xcmappingmodel; sourceTree = "<group>"; };
 		23697FDA1AA85B67009CC9F3 /* Core_Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Core_Test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23697FDE1AA85B67009CC9F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -81,6 +78,14 @@
 		2390C0961AB18730008B5F85 /* Migration_4_5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Migration_4_5.h; sourceTree = "<group>"; };
 		2390C0971AB18730008B5F85 /* Migration_4_5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Migration_4_5.m; sourceTree = "<group>"; };
 		2390C0991AB194FA008B5F85 /* Model_3_5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_3_5.xcmappingmodel; sourceTree = "<group>"; };
+		23996E981ACAAE1E00E3D365 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		23996E991ACAAE1E00E3D365 /* Model_2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_2.xcdatamodel; sourceTree = "<group>"; };
+		23996E9B1ACAAF9500E3D365 /* Model_3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_3.xcdatamodel; sourceTree = "<group>"; };
+		23996E9C1ACAB03800E3D365 /* Model 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 4.xcdatamodel"; sourceTree = "<group>"; };
+		23996E9D1ACAB09300E3D365 /* Model 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 5.xcdatamodel"; sourceTree = "<group>"; };
+		23996EA21ACACB3200E3D365 /* Model_Migr_2_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_Migr_2_3.xcmappingmodel; sourceTree = "<group>"; };
+		23996EA41ACACB4C00E3D365 /* Model_Migr_4_5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_Migr_4_5.xcmappingmodel; sourceTree = "<group>"; };
+		23996EA61ACACE4300E3D365 /* Model 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 6.xcdatamodel"; sourceTree = "<group>"; };
 		239A68781ABC1CC2003AB3B8 /* BPModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BPModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		239A68791ABC1EB1003AB3B8 /* Migration_BPModel_0_2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Migration_BPModel_0_2.xcmappingmodel; sourceTree = "<group>"; };
 		239F4A701AC537D40018E2D2 /* BPModel 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BPModel 5.xcdatamodel"; sourceTree = "<group>"; };
@@ -97,16 +102,11 @@
 		23AAC3F01AADE9D000F7D0DC /* MigrationManager_4_5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MigrationManager_4_5.m; sourceTree = "<group>"; };
 		23AAC3F21AADE9E200F7D0DC /* Core_Test 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core_Test 5.xcdatamodel"; sourceTree = "<group>"; };
 		23B85A311AB95EFB0082D008 /* BPMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPMigrationManager.m; sourceTree = "<group>"; };
-		23B85A331AB962AD0082D008 /* CDMigrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDMigrator.h; sourceTree = "<group>"; };
-		23B85A341AB962AD0082D008 /* CDMigrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDMigrator.m; sourceTree = "<group>"; };
-		23DE87EE1AC01DC7008BB2C9 /* MyMigrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMigrationManager.h; sourceTree = "<group>"; };
-		23DE87EF1AC01DC7008BB2C9 /* MyMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMigrationManager.m; sourceTree = "<group>"; };
+		23B85A331AB962AD0082D008 /* CDMigrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDMigrator.h; path = ../CDMigrator.h; sourceTree = "<group>"; };
+		23B85A341AB962AD0082D008 /* CDMigrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDMigrator.m; path = ../CDMigrator.m; sourceTree = "<group>"; };
+		23DE87EE1AC01DC7008BB2C9 /* MyMigrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMigrationManager.h; path = ../MyMigrationManager.h; sourceTree = "<group>"; };
+		23DE87EF1AC01DC7008BB2C9 /* MyMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyMigrationManager.m; path = ../MyMigrationManager.m; sourceTree = "<group>"; };
 		23E58E3F1AAF49E800791501 /* Model_4_5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_4_5.xcmappingmodel; sourceTree = "<group>"; };
-		23EDC3D01AB81550009473BB /* Migrate.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Migrate.xcmappingmodel; sourceTree = "<group>"; };
-		23EDC3D11AB81550009473BB /* Migrate23.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Migrate23.xcmappingmodel; sourceTree = "<group>"; };
-		23EDC3D31AB81550009473BB /* Model 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 2.xcdatamodel"; sourceTree = "<group>"; };
-		23EDC3D41AB81550009473BB /* Model 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 3.xcdatamodel"; sourceTree = "<group>"; };
-		23EDC3D51AB81550009473BB /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		23EDC3E01AB81B54009473BB /* BPMigrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPMigrationManager.h; sourceTree = "<group>"; };
 		23EDC3E31AB81BA1009473BB /* BPMigrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPMigrator.h; sourceTree = "<group>"; };
 		23EDC3E41AB81BA1009473BB /* BPMigrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPMigrator.m; sourceTree = "<group>"; };
@@ -141,17 +141,9 @@
 		233386881AC9A234004DC375 /* SOUND */ = {
 			isa = PBXGroup;
 			children = (
-				233386891AC9A273004DC375 /* BlackApp */,
+				23996E961ACAAE1E00E3D365 /* BlackApp */,
 			);
 			name = SOUND;
-			sourceTree = "<group>";
-		};
-		233386891AC9A273004DC375 /* BlackApp */ = {
-			isa = PBXGroup;
-			children = (
-				2333868A1AC9A273004DC375 /* Model.xcdatamodeld */,
-			);
-			path = BlackApp;
 			sourceTree = "<group>";
 		};
 		23697FD11AA85B67009CC9F3 = {
@@ -177,7 +169,6 @@
 		23697FDC1AA85B67009CC9F3 /* Core_Test */ = {
 			isa = PBXGroup;
 			children = (
-				23EDC3CF1AB81550009473BB /* OLD_SOUND_DATA */,
 				23FFE1EE1AB82DF000FE46A8 /* Utils */,
 				2369800D1AA87B5A009CC9F3 /* Detail_VC.h */,
 				2369800E1AA87B5A009CC9F3 /* Detail_VC.m */,
@@ -224,6 +215,20 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		23996E961ACAAE1E00E3D365 /* BlackApp */ = {
+			isa = PBXGroup;
+			children = (
+				23996E971ACAAE1E00E3D365 /* Model.xcdatamodeld */,
+				23996EA21ACACB3200E3D365 /* Model_Migr_2_3.xcmappingmodel */,
+				23996EA41ACACB4C00E3D365 /* Model_Migr_4_5.xcmappingmodel */,
+				23B85A331AB962AD0082D008 /* CDMigrator.h */,
+				23B85A341AB962AD0082D008 /* CDMigrator.m */,
+				23DE87EE1AC01DC7008BB2C9 /* MyMigrationManager.h */,
+				23DE87EF1AC01DC7008BB2C9 /* MyMigrationManager.m */,
+			);
+			path = BlackApp;
+			sourceTree = "<group>";
+		};
 		23AAC3DD1AADA55700F7D0DC /* Migration__1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,17 +247,6 @@
 			name = Migration__1;
 			sourceTree = "<group>";
 		};
-		23EDC3CF1AB81550009473BB /* OLD_SOUND_DATA */ = {
-			isa = PBXGroup;
-			children = (
-				23EDC3D01AB81550009473BB /* Migrate.xcmappingmodel */,
-				23EDC3D11AB81550009473BB /* Migrate23.xcmappingmodel */,
-				23EDC3D21AB81550009473BB /* Model.xcdatamodeld */,
-			);
-			name = OLD_SOUND_DATA;
-			path = Migration_Test;
-			sourceTree = "<group>";
-		};
 		23EDC3DC1AB81943009473BB /* My_Migration__2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,10 +259,6 @@
 				23B85A311AB95EFB0082D008 /* BPMigrationManager.m */,
 				23EDC3E31AB81BA1009473BB /* BPMigrator.h */,
 				23EDC3E41AB81BA1009473BB /* BPMigrator.m */,
-				23B85A331AB962AD0082D008 /* CDMigrator.h */,
-				23B85A341AB962AD0082D008 /* CDMigrator.m */,
-				23DE87EE1AC01DC7008BB2C9 /* MyMigrationManager.h */,
-				23DE87EF1AC01DC7008BB2C9 /* MyMigrationManager.m */,
 			);
 			name = My_Migration__2;
 			sourceTree = "<group>";
@@ -406,15 +396,15 @@
 				23F2DEF91AC93B6B00831BCF /* Migration_BPModel_5_6.xcmappingmodel in Sources */,
 				23FFE1F71AB82E0E00FE46A8 /* UIViewController+Hud.m in Sources */,
 				23112F511AB85A0D0021A545 /* BPModel.xcdatamodeld in Sources */,
-				2333868D1AC9A273004DC375 /* Model.xcdatamodeld in Sources */,
 				2369800C1AA86873009CC9F3 /* Core_Test.xcdatamodeld in Sources */,
 				234107C21AAED8CB00218394 /* Model_3_to_4.xcmappingmodel in Sources */,
 				23EDC3E51AB81BA1009473BB /* BPMigrator.m in Sources */,
 				23A541581AC1990900E0DA46 /* Migration_BPModel_2_3.xcmappingmodel in Sources */,
 				D573D48E1AB6286400E356D9 /* Model_2_3.xcmappingmodel in Sources */,
 				23DE87F01AC01DC7008BB2C9 /* MyMigrationManager.m in Sources */,
-				23EDC3D81AB81550009473BB /* Migrate.xcmappingmodel in Sources */,
+				23996EA31ACACB3200E3D365 /* Model_Migr_2_3.xcmappingmodel in Sources */,
 				23AAC3EA1AADC0C400F7D0DC /* NewEvent.m in Sources */,
+				23996EA51ACACB4C00E3D365 /* Model_Migr_4_5.xcmappingmodel in Sources */,
 				23B85A351AB962AD0082D008 /* CDMigrator.m in Sources */,
 				23AAC3F11AADE9D000F7D0DC /* MigrationManager_4_5.m in Sources */,
 				23AAC3E41AADA85700F7D0DC /* Migration_3_4.m in Sources */,
@@ -423,12 +413,11 @@
 				236980101AA87B5A009CC9F3 /* Detail_VC.m in Sources */,
 				239A687A1ABC1EB1003AB3B8 /* Migration_BPModel_0_2.xcmappingmodel in Sources */,
 				23697FE31AA85B67009CC9F3 /* AppDelegate.m in Sources */,
-				23EDC3DA1AB81550009473BB /* Model.xcdatamodeld in Sources */,
 				23FFE1F61AB82E0E00FE46A8 /* SVProgressHUD.m in Sources */,
 				2390C09A1AB194FA008B5F85 /* Model_3_5.xcmappingmodel in Sources */,
 				23A5415A1AC1993100E0DA46 /* Migration_BPModel_3_4.xcmappingmodel in Sources */,
 				2390C0981AB18730008B5F85 /* Migration_4_5.m in Sources */,
-				23EDC3D91AB81550009473BB /* Migrate23.xcmappingmodel in Sources */,
+				23996E9A1ACAAE1E00E3D365 /* Model.xcdatamodeld in Sources */,
 				23697FE01AA85B67009CC9F3 /* main.m in Sources */,
 				23B85A321AB95EFB0082D008 /* BPMigrationManager.m in Sources */,
 			);
@@ -654,19 +643,8 @@
 				239A68781ABC1CC2003AB3B8 /* BPModel 2.xcdatamodel */,
 				23112F501AB85A0D0021A545 /* BPModel.xcdatamodel */,
 			);
-			currentVersion = 23F2DEF51AC939F300831BCF /* BPModel 6.xcdatamodel */;
+			currentVersion = 239A68781ABC1CC2003AB3B8 /* BPModel 2.xcdatamodel */;
 			path = BPModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		2333868A1AC9A273004DC375 /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				2333868B1AC9A273004DC375 /* Model.xcdatamodel */,
-				2333868C1AC9A273004DC375 /* Model_2.xcdatamodel */,
-			);
-			currentVersion = 2333868C1AC9A273004DC375 /* Model_2.xcdatamodel */;
-			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
@@ -684,14 +662,17 @@
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
-		23EDC3D21AB81550009473BB /* Model.xcdatamodeld */ = {
+		23996E971ACAAE1E00E3D365 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				23EDC3D31AB81550009473BB /* Model 2.xcdatamodel */,
-				23EDC3D41AB81550009473BB /* Model 3.xcdatamodel */,
-				23EDC3D51AB81550009473BB /* Model.xcdatamodel */,
+				23996EA61ACACE4300E3D365 /* Model 6.xcdatamodel */,
+				23996E9D1ACAB09300E3D365 /* Model 5.xcdatamodel */,
+				23996E9C1ACAB03800E3D365 /* Model 4.xcdatamodel */,
+				23996E9B1ACAAF9500E3D365 /* Model_3.xcdatamodel */,
+				23996E981ACAAE1E00E3D365 /* Model.xcdatamodel */,
+				23996E991ACAAE1E00E3D365 /* Model_2.xcdatamodel */,
 			);
-			currentVersion = 23EDC3D41AB81550009473BB /* Model 3.xcdatamodel */;
+			currentVersion = 23996E9B1ACAAF9500E3D365 /* Model_3.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

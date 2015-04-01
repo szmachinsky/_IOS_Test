@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14C1514" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Playlist" representedClassName="Playlist" syncable="YES">
         <attribute name="db_isTemporary" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="db_isUser" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -65,7 +65,9 @@
         <attribute name="db_description" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="db_dislikesCount" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="db_duration" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="db_favoriteOrder" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="db_highResolutionThumbmailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="db_isFavorite" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="db_isPrivate" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="db_iTunesURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="db_lastUsedResolution" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -78,6 +80,9 @@
         <attribute name="db_title" attributeType="String" syncable="YES"/>
         <attribute name="db_uuid" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="db_viewsCount" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="newField" optional="YES" attributeType="String" defaultValueString="&quot;v.5&quot;" syncable="YES"/>
+        <attribute name="newField4" optional="YES" attributeType="String" defaultValueString="&quot;v.n45&quot;" syncable="YES"/>
+        <attribute name="newField5" optional="YES" attributeType="String" defaultValueString="&quot;v.n5&quot;" syncable="YES"/>
         <relationship name="db_categoryItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="VideoCategoryItem" inverseName="db_mediaItem" inverseEntity="VideoCategoryItem" syncable="YES"/>
         <relationship name="db_playlistItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PlaylistItem" inverseName="db_mediaItem" inverseEntity="PlaylistItem" syncable="YES"/>
     </entity>
@@ -120,7 +125,7 @@
         <element name="VideoCategoryItem" positionX="0" positionY="0" width="128" height="88"/>
         <element name="VideoCategoryYoutubeChannelItem" positionX="99" positionY="207" width="128" height="88"/>
         <element name="VideoCategoryYoutubePlaylistItem" positionX="81" positionY="198" width="128" height="88"/>
-        <element name="VideoItem" positionX="0" positionY="0" width="128" height="508"/>
+        <element name="VideoItem" positionX="0" positionY="0" width="128" height="585"/>
         <element name="YoutubeChannel" positionX="27" positionY="171" width="128" height="208"/>
         <element name="YoutubePlaylist" positionX="45" positionY="180" width="128" height="240"/>
         <element name="YoutubePlaylistItem" positionX="54" positionY="153" width="128" height="60"/>
