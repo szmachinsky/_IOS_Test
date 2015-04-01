@@ -10,6 +10,11 @@
 #import "DetailViewController.h"
 #import "MasterViewController.h"
 
+#import "SVProgressHUD.h"
+#import "CDMigrator.h"
+#import "CDMigrationManager.h"
+
+
 @interface AppDelegate ()
 
 @end
@@ -21,7 +26,36 @@
     // Override point for customization after application launch.
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
-    controller.managedObjectContext = self.managedObjectContext;
+    
+//  controller.managedObjectContext = self.managedObjectContext;
+    
+    __typeof__(self) __weak weakSelf = self;
+    void (^postAction)(BOOL) = ^(BOOL ok){
+        if (ok)
+        {
+            NSLog(@">>>>>>> Migration_was_OK <<<<<<<<<<");
+            controller.managedObjectContext = [weakSelf managedObjectContext]; //create Core Date stack
+            [controller update];
+        } else {
+            NSLog(@">>>>>>> Migration_was_WRONG <<<<<<<<<<");
+        }
+    };
+    
+    CDMigrator *migrator = [CDMigrator new];
+        
+    migrator.initHud = ^{[SVProgressHUD showWithStatus:@"Updating media database..." maskType:SVProgressHUDMaskTypeGradient];};
+    migrator.dismissHud = ^{[SVProgressHUD dismiss];};
+    migrator.progressHud = ^(float progress){[SVProgressHUD showProgress:progress status:@"Run migration..." maskType:SVProgressHUDMaskTypeClear];};
+    
+    migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"},];
+    migrator.migrationClass = [CDMigrationManager class];
+//  migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ModelDataDir/"];
+    
+    [migrator migrationFor:[[self applicationDocumentsDirectory] URLByAppendingPathComponent:CORE_FILE] 
+                 modelName:CORE_NAME 
+                completion:[postAction copy]];
+    
+    
     return YES;
 }
 
@@ -65,7 +99,7 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"TestMigrator" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:CORE_NAME withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -79,7 +113,7 @@
     // Create the coordinator and store
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"TestMigrator.sqlite"];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:CORE_FILE];
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {

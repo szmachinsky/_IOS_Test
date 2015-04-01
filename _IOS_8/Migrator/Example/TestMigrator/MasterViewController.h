@@ -15,5 +15,7 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 
+-(void)update;
+
 @end
 

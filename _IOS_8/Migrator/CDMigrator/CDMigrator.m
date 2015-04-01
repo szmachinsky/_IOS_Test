@@ -1,6 +1,5 @@
 //
 //  CDMirgaror.m
-//  Core_Test
 //
 //  Created by Zmachinsky Sergei on 18.03.15.
 //  Copyright (c) 2015 Zmachinsky Sergei. All rights reserved.
@@ -8,14 +7,6 @@
 
 #import "CDMigrator.h"
 #import <CoreData/CoreData.h>
-
-
-//#import "UIViewController+Hud.h"
-//#import "SVProgressHUD.h"
-
-//#import "MigrationManager_4_5.h"
-//#import "BPMigrationManager.h"
-//#import "MyMigrationManager.h"
 
 
 #if !DEBUG
@@ -27,7 +18,6 @@
 
 static volatile float _progressOffset = 0.f;
 static volatile float _progressRange = 0.f;
-
 
 
 @interface CDMigrator ()
@@ -110,6 +100,13 @@ static volatile float _progressRange = 0.f;
     
 @try
     {
+        if (![[NSFileManager defaultManager] fileExistsAtPath:[storeURL path]])
+        {
+            NSLog(@"base file is not exist - migration is not needed");
+            result = YES;
+            return result;
+        }
+        
         NSURL *modelURL = [self.dataBundle URLForResource:modelName withExtension:@"momd"];
         NSLog(@"MODEL_URL1=%@",modelURL);
         if (!modelURL) {
@@ -349,8 +346,6 @@ static volatile float _progressRange = 0.f;
 
 
 - (BOOL)migrateURL:(NSURL *)storeURL
-//    migrationClass:(Class)migrationClass
-//            ofType:(NSString *)sourceStoreType
          fromModel:(NSManagedObjectModel *)sourceModel
            toModel:(NSManagedObjectModel *)destinationModel
       mappingModel:(NSMappingModel *)mappingModel

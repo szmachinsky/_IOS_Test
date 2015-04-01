@@ -28,6 +28,22 @@
     self.navigationItem.rightBarButtonItem = addButton;
 }
 
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (_managedObjectContext)
+        [self update];
+}
+
+
+-(void)update
+{
+    if (_managedObjectContext)
+        [self.tableView reloadData];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -101,13 +117,23 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    cell.textLabel.font = [UIFont systemFontOfSize:14.];
+    
     cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
-}
+    
+    NSString *str1 = [object valueForKey:@"sInfo"];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",str1];
+    
+ }
 
 #pragma mark - Fetched results controller
 
 - (NSFetchedResultsController *)fetchedResultsController
-{
+{    
+    if (!_managedObjectContext)
+        return nil;
+    
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }

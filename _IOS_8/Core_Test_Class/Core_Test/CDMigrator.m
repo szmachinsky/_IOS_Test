@@ -99,6 +99,7 @@ static volatile float _progressRange = 0.f;
     NSManagedObjectModel *_managedObjectModel;
     NSPersistentStoreCoordinator *_persistentStoreCoordinator;
     
+    
     if (self.modelsUrl) {
         self.dataBundle = [NSBundle bundleWithURL:self.modelsUrl];
         NSLog(@"MODEL_BUNDLE=%@",self.dataBundle);
@@ -110,6 +111,13 @@ static volatile float _progressRange = 0.f;
     
 @try
     {
+        if (![[NSFileManager defaultManager] fileExistsAtPath:[storeURL path]])
+        {
+            NSLog(@"base file is not exist - migration is not needed");
+            result = YES;
+            return result;
+        }
+        
         NSURL *modelURL = [self.dataBundle URLForResource:modelName withExtension:@"momd"];
         NSLog(@"MODEL_URL1=%@",modelURL);
         if (!modelURL) {
