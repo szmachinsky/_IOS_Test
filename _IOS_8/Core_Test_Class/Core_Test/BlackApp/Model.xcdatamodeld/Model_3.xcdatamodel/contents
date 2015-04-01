@@ -80,7 +80,7 @@
         <attribute name="db_title" attributeType="String" syncable="YES"/>
         <attribute name="db_uuid" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="db_viewsCount" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
-        <attribute name="newField" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="newField" optional="YES" attributeType="String" defaultValueString="&quot;def&quot;" syncable="YES"/>
         <relationship name="db_categoryItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="VideoCategoryItem" inverseName="db_mediaItem" inverseEntity="VideoCategoryItem" syncable="YES"/>
         <relationship name="db_playlistItems" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PlaylistItem" inverseName="db_mediaItem" inverseEntity="PlaylistItem" syncable="YES"/>
     </entity>

@@ -1,5 +1,5 @@
 //
-//  MyMirgaror.h
+//  CDMirgaror.h
 //  Core_Test
 //
 //  Created by Zmachinsky Sergei on 18.03.15.

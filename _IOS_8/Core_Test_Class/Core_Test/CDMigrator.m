@@ -1,5 +1,5 @@
 //
-//  MyMirgaror.m
+//  CDMirgaror.m
 //  Core_Test
 //
 //  Created by Zmachinsky Sergei on 18.03.15.
@@ -363,6 +363,10 @@ static volatile float _progressRange = 0.f;
     _progressOffset = offset;
     _progressRange = range;
     
+    if (!mappingModel) {
+        return result;
+    }
+    
     if (!self.migrationClass) {
         self.migrationClass = [NSMigrationManager class];
     }
@@ -397,7 +401,7 @@ static volatile float _progressRange = 0.f;
         
         NSDictionary *options =   @{
                                    NSMigratePersistentStoresAutomaticallyOption:@YES
-                                   ,NSInferMappingModelAutomaticallyOption:@YES
+ //                                  ,NSInferMappingModelAutomaticallyOption:@YES
                                    ,NSSQLitePragmasOption: @{@"journal_mode": @"DELETE"} //"DELETE" "WAL"
                                    };
         
@@ -502,7 +506,7 @@ static volatile float _progressRange = 0.f;
 {
     NSMigrationManager * migrator = object;
     float progress = migrator.migrationProgress;
-    NSLog(@"migrationProgress = %f",progress);
+//    NSLog(@"migrationProgress = %f",progress);
     
     [self showProgress:progress];
 }
@@ -515,7 +519,7 @@ static volatile float _progressRange = 0.f;
         if ([NSThread isMainThread])
         {
             float progr = _progressOffset + progress * _progressRange;
-            NSLog(@"IN MAIN THREAD:%.3f",progr);
+//            NSLog(@"IN MAIN THREAD:%.3f",progr);
             self.progressHud(progr);
             while (kCFRunLoopRunHandledSource == CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.001, YES));
         }
@@ -523,7 +527,7 @@ static volatile float _progressRange = 0.f;
             const float off = _progressOffset;
             const float ran = _progressRange;
             float progr = off + progress * ran;
-            NSLog(@"NOT IN MAIN THREAD:%.3f",progr);
+//            NSLog(@"NOT IN MAIN THREAD:%.3f",progr);
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.progressHud(progr);
             });

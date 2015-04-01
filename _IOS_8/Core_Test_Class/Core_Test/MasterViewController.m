@@ -310,16 +310,10 @@
 #if _CORE_CASE == 3
     NSString *str1 = [object valueForKey:@"db_title"];
     NSString *str2 = [object valueForKey:@"db_channelTitle"];
-//    NSNumber *num = [object valueForKey:@"age"];
-//    NSString *str3 = [num stringValue];
     NSString *nf = @"";
-    NSString *nf3 = @"";
     if ([str2 hasSuffix:@" ."]) {
         nf = [object valueForKey:@"newField"];
     }
-//    if ([str2 hasSuffix:@". ."]) {
-//        nf3 = [object valueForKey:@"newField4"];
-//    }
     if (!nf)
         nf = @"";
     //    cell.textLabel.text = [NSString stringWithFormat:@"%@/%@/%@/%@",str1,str2,str3,nf];

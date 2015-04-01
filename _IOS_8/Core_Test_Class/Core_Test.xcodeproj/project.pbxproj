@@ -22,8 +22,8 @@
 		2390C0981AB18730008B5F85 /* Migration_4_5.m in Sources */ = {isa = PBXBuildFile; fileRef = 2390C0971AB18730008B5F85 /* Migration_4_5.m */; };
 		2390C09A1AB194FA008B5F85 /* Model_3_5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2390C0991AB194FA008B5F85 /* Model_3_5.xcmappingmodel */; };
 		23996E9A1ACAAE1E00E3D365 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23996E971ACAAE1E00E3D365 /* Model.xcdatamodeld */; };
-		23996EA31ACACB3200E3D365 /* Model_Migr_2_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23996EA21ACACB3200E3D365 /* Model_Migr_2_3.xcmappingmodel */; };
-		23996EA51ACACB4C00E3D365 /* Model_Migr_4_5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23996EA41ACACB4C00E3D365 /* Model_Migr_4_5.xcmappingmodel */; };
+		239A20B51ACBDDC600A4AEF4 /* Mig_Model_2_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 239A20B41ACBDDC600A4AEF4 /* Mig_Model_2_3.xcmappingmodel */; };
+		239A20B71ACBDF2400A4AEF4 /* Mig_Model_4_5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 239A20B61ACBDF2400A4AEF4 /* Mig_Model_4_5.xcmappingmodel */; };
 		239A687A1ABC1EB1003AB3B8 /* Migration_BPModel_0_2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 239A68791ABC1EB1003AB3B8 /* Migration_BPModel_0_2.xcmappingmodel */; };
 		23A541581AC1990900E0DA46 /* Migration_BPModel_2_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23A541571AC1990900E0DA46 /* Migration_BPModel_2_3.xcmappingmodel */; };
 		23A5415A1AC1993100E0DA46 /* Migration_BPModel_3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23A541591AC1993100E0DA46 /* Migration_BPModel_3_4.xcmappingmodel */; };
@@ -83,9 +83,9 @@
 		23996E9B1ACAAF9500E3D365 /* Model_3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model_3.xcdatamodel; sourceTree = "<group>"; };
 		23996E9C1ACAB03800E3D365 /* Model 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 4.xcdatamodel"; sourceTree = "<group>"; };
 		23996E9D1ACAB09300E3D365 /* Model 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 5.xcdatamodel"; sourceTree = "<group>"; };
-		23996EA21ACACB3200E3D365 /* Model_Migr_2_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_Migr_2_3.xcmappingmodel; sourceTree = "<group>"; };
-		23996EA41ACACB4C00E3D365 /* Model_Migr_4_5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_Migr_4_5.xcmappingmodel; sourceTree = "<group>"; };
 		23996EA61ACACE4300E3D365 /* Model 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Model 6.xcdatamodel"; sourceTree = "<group>"; };
+		239A20B41ACBDDC600A4AEF4 /* Mig_Model_2_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Mig_Model_2_3.xcmappingmodel; sourceTree = "<group>"; };
+		239A20B61ACBDF2400A4AEF4 /* Mig_Model_4_5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Mig_Model_4_5.xcmappingmodel; sourceTree = "<group>"; };
 		239A68781ABC1CC2003AB3B8 /* BPModel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BPModel 2.xcdatamodel"; sourceTree = "<group>"; };
 		239A68791ABC1EB1003AB3B8 /* Migration_BPModel_0_2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Migration_BPModel_0_2.xcmappingmodel; sourceTree = "<group>"; };
 		239F4A701AC537D40018E2D2 /* BPModel 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BPModel 5.xcdatamodel"; sourceTree = "<group>"; };
@@ -219,12 +219,12 @@
 			isa = PBXGroup;
 			children = (
 				23996E971ACAAE1E00E3D365 /* Model.xcdatamodeld */,
-				23996EA21ACACB3200E3D365 /* Model_Migr_2_3.xcmappingmodel */,
-				23996EA41ACACB4C00E3D365 /* Model_Migr_4_5.xcmappingmodel */,
 				23B85A331AB962AD0082D008 /* CDMigrator.h */,
 				23B85A341AB962AD0082D008 /* CDMigrator.m */,
 				23DE87EE1AC01DC7008BB2C9 /* MyMigrationManager.h */,
 				23DE87EF1AC01DC7008BB2C9 /* MyMigrationManager.m */,
+				239A20B41ACBDDC600A4AEF4 /* Mig_Model_2_3.xcmappingmodel */,
+				239A20B61ACBDF2400A4AEF4 /* Mig_Model_4_5.xcmappingmodel */,
 			);
 			path = BlackApp;
 			sourceTree = "<group>";
@@ -401,10 +401,9 @@
 				23EDC3E51AB81BA1009473BB /* BPMigrator.m in Sources */,
 				23A541581AC1990900E0DA46 /* Migration_BPModel_2_3.xcmappingmodel in Sources */,
 				D573D48E1AB6286400E356D9 /* Model_2_3.xcmappingmodel in Sources */,
+				239A20B51ACBDDC600A4AEF4 /* Mig_Model_2_3.xcmappingmodel in Sources */,
 				23DE87F01AC01DC7008BB2C9 /* MyMigrationManager.m in Sources */,
-				23996EA31ACACB3200E3D365 /* Model_Migr_2_3.xcmappingmodel in Sources */,
 				23AAC3EA1AADC0C400F7D0DC /* NewEvent.m in Sources */,
-				23996EA51ACACB4C00E3D365 /* Model_Migr_4_5.xcmappingmodel in Sources */,
 				23B85A351AB962AD0082D008 /* CDMigrator.m in Sources */,
 				23AAC3F11AADE9D000F7D0DC /* MigrationManager_4_5.m in Sources */,
 				23AAC3E41AADA85700F7D0DC /* Migration_3_4.m in Sources */,
@@ -418,6 +417,7 @@
 				23A5415A1AC1993100E0DA46 /* Migration_BPModel_3_4.xcmappingmodel in Sources */,
 				2390C0981AB18730008B5F85 /* Migration_4_5.m in Sources */,
 				23996E9A1ACAAE1E00E3D365 /* Model.xcdatamodeld in Sources */,
+				239A20B71ACBDF2400A4AEF4 /* Mig_Model_4_5.xcmappingmodel in Sources */,
 				23697FE01AA85B67009CC9F3 /* main.m in Sources */,
 				23B85A321AB95EFB0082D008 /* BPMigrationManager.m in Sources */,
 			);
@@ -672,7 +672,7 @@
 				23996E981ACAAE1E00E3D365 /* Model.xcdatamodel */,
 				23996E991ACAAE1E00E3D365 /* Model_2.xcdatamodel */,
 			);
-			currentVersion = 23996E9B1ACAAF9500E3D365 /* Model_3.xcdatamodel */;
+			currentVersion = 23996EA61ACACE4300E3D365 /* Model 6.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
