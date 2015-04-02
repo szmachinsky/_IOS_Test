@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 @interface CDMigrator : NSObject
 
@@ -32,6 +33,7 @@
 -(void)migrationFor:(NSURL *)storeURL
                modelName:(NSString *)modelName
               completion:(void (^)(BOOL))completion;
+
 
 
 @end

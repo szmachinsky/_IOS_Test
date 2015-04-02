@@ -47,9 +47,26 @@
     migrator.dismissHud = ^{[SVProgressHUD dismiss];};
     migrator.progressHud = ^(float progress){[SVProgressHUD showProgress:progress status:@"Run migration..." maskType:SVProgressHUDMaskTypeClear];};
     
-    migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"},];
+    migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"}, @{@"name":@"TestMigrator 4"},];
     migrator.migrationClass = [CDMigrationManager class];
 //  migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ModelDataDir/"];
+    
+    
+    migrator.checkResult = ^BOOL(NSManagedObjectContext *context) {
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        [fetchRequest setEntity:[NSEntityDescription entityForName:@"Event" inManagedObjectContext:context]];
+        NSError *error;
+        NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+        if (error || fetchedObjects.count==0)
+            return NO;
+        for (NSManagedObject *info in fetchedObjects) {
+            NSString *str = [info valueForKey:@"sInfo"];
+            NSLog(@"sInfo: %@", str);
+            if (str.length)
+                return YES;
+        }
+        return NO;
+    };
     
     [migrator migrationFor:[[self applicationDocumentsDirectory] URLByAppendingPathComponent:CORE_FILE] 
                  modelName:CORE_NAME 

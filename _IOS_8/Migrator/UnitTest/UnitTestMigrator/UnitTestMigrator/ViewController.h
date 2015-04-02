@@ -10,6 +10,11 @@
 
 @interface ViewController : UIViewController
 
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+
+@property (weak, nonatomic) IBOutlet UILabel *textLabel;
+
+-(void)infoText:(NSString*)info;
 
 @end
 

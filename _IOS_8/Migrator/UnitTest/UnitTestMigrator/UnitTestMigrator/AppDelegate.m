@@ -7,18 +7,151 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
+
+#import "SVProgressHUD.h"
+#import "CDMigrator.h"
+#import "CDMigrationManager.h"
+
+
+#define CORE_NAME  @"TestMigrator"
+#define CORE_FILE  @"TestMigrator.sqlite"
+#define CORE_FILE_DIR  @"Documents/Data/"
+
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+{
+    ViewController *controller;
+    NSURL *storeUrl;
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    controller = (ViewController *)self.window.rootViewController;
+    
+    [self performSelector:@selector(runTest) withObject:nil afterDelay:1.0];
+    
     return YES;
 }
+
+
+
+
+-(void)runTest
+{
+    [controller infoText:@""];
+    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:CORE_FILE_DIR];
+    NSLog(@"%@",path);
+    NSURL *url = [NSURL fileURLWithPath:path];
+    NSLog(@"%@",url);
+    [self copyResurce:CORE_FILE toDir:CORE_FILE_DIR];
+    
+    __typeof__(self) __weak weakSelf = self;
+    void (^postAction)(BOOL) = ^(BOOL ok){
+        if (ok)
+        {
+            NSLog(@">>>>>>> Migration_was_OK <<<<<<<<<<");
+            controller.managedObjectContext = [weakSelf managedObjectContext]; //create Core Date stack
+            [controller infoText:@"TEST WAS OK"];
+        } else {
+            NSLog(@">>>>>>> Migration_was_WRONG <<<<<<<<<<");
+            [controller infoText:@"TEST FAILED!!!"];
+        }
+        [self removeStoreAtURL:storeUrl];
+    };
+    
+    CDMigrator *migrator = [CDMigrator new];
+    
+    migrator.initHud = ^{[SVProgressHUD showWithStatus:@"Updating media database..." maskType:SVProgressHUDMaskTypeGradient];};
+    migrator.dismissHud = ^{[SVProgressHUD dismiss];};
+    migrator.progressHud = ^(float progress){[SVProgressHUD showProgress:progress status:@"Run migration..." maskType:SVProgressHUDMaskTypeClear];};
+    
+    migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"}, @{@"name":@"TestMigrator 4"},];
+    migrator.migrationClass = [CDMigrationManager class];
+    //  migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ModelDataDir/"];
+    
+    
+    migrator.checkResult = ^BOOL(NSManagedObjectContext *context) {
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        [fetchRequest setEntity:[NSEntityDescription entityForName:@"Event" inManagedObjectContext:context]];
+        NSError *error;
+        NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+        if (error || fetchedObjects.count==0)
+            return NO;
+        for (NSManagedObject *info in fetchedObjects) {
+            NSString *str = [info valueForKey:@"sInfo"];
+            NSLog(@"sInfo: %@", str);
+            if (str.length)
+                return YES;
+        }
+        return NO;
+    };
+    
+    storeUrl = [url URLByAppendingPathComponent:CORE_FILE];
+    NSLog(@"%@",storeUrl);
+    [migrator migrationFor:storeUrl
+                 modelName:CORE_NAME
+                completion:[postAction copy]];
+    
+    
+}
+
+
+
+//    [self copyResurce:@"index.json" toDir:@"Documents"];
+//    [self copyResurce:@"tvdata.archive" toDir:@"Documents"];
+//    [self copyResurce:@"TVProgram.sqlite" toDir:@"Documents"];
+
+#define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
+-(void)copyResurce:(NSString*)resFile toDir:(NSString*)Dir
+{
+    NSString *filePathFfom = [[NSBundle mainBundle] pathForResource:[resFile stringByDeletingPathExtension] ofType:[resFile pathExtension]];
+    NSString *dirPathTo;
+    NSString *filePathTo;
+    dirPathTo = [NSHomeDirectory() stringByAppendingPathComponent:Dir];
+    filePathTo = [dirPathTo stringByAppendingPathComponent:resFile];
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    // If the expected store doesn't exist, copy the default store.
+    if (![fileManager fileExistsAtPath:filePathTo])
+    {
+        NSError *error;
+        
+        [[NSFileManager defaultManager] createDirectoryAtPath:dirPathTo
+                                  withIntermediateDirectories:YES
+                                                   attributes:nil
+                                                        error:nil];
+        
+        BOOL success = [fileManager copyItemAtPath:filePathFfom toPath:filePathTo error:&error];
+        NSLog(@"copy = /%@/ to /%@/",filePathFfom,filePathTo);
+        if (success)
+        {
+            NSLog(@"COPY OK");
+        } else {
+            NSLog(@"Failed to copy!!!");
+        }
+        
+    } else {
+        NSLog(@"OK-/%@/",filePathTo);
+    }
+}
+
+- (void)removeStoreAtURL:(NSURL *)storeURL
+{
+    NSString * storePath = [storeURL path];
+    NSLog(@"remove files at %@",storePath);
+    
+    [[NSFileManager defaultManager] removeItemAtURL:storeURL error:NULL];
+    [[NSFileManager defaultManager] removeItemAtPath:[storePath stringByAppendingString:@"-shm"] error:NULL];
+    [[NSFileManager defaultManager] removeItemAtPath:[storePath stringByAppendingString:@"-wal"] error:NULL];
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -60,7 +193,7 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"UnitTestMigrator" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:CORE_NAME withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -74,7 +207,7 @@
     // Create the coordinator and store
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"UnitTestMigrator.sqlite"];
+    NSURL *storeURL = storeUrl; //[[self applicationDocumentsDirectory] URLByAppendingPathComponent:CORE_FILE];
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {

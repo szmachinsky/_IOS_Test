@@ -100,6 +100,8 @@ static volatile float _progressRange = 0.f;
     
 @try
     {
+//        NSLog(@"storeURL=%@",storeURL);
+        
         if (![[NSFileManager defaultManager] fileExistsAtPath:[storeURL path]])
         {
             NSLog(@"base file is not exist - migration is not needed");
