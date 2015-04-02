@@ -19,6 +19,9 @@
 @property (nonatomic, copy) void (^dismissHud)();
 @property (nonatomic, copy) void (^progressHud)(float);
 
+@property (nonatomic, copy) BOOL (^checkResult)(NSManagedObjectContext *context);
+
+
 @property (nonatomic, unsafe_unretained) BOOL useOnlyLightMigration;
 @property (nonatomic, strong) dispatch_queue_t asyncQueue;
 @property (nonatomic, strong) Class migrationClass;

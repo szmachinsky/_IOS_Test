@@ -283,6 +283,19 @@ static volatile float _progressRange = 0.f;
          } else {
             result = YES;
         }
+        
+        if (self.checkResult) {
+            NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+            [context setPersistentStoreCoordinator:_persistentStoreCoordinator];
+            if (!context) {
+                NSLog(@"Can't create context!");
+                return result;
+            } else {
+                result = self.checkResult(context);
+                NSLog(@"checkResult=%d",result);
+            }
+        } 
+        
 
     } //@try
     

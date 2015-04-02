@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Zmachinsky Sergei. All rights reserved.
 //
 
-#import "CDMigrator.h"
+#import "MyMigrator.h"
 #import <CoreData/CoreData.h>
 
 
@@ -30,16 +30,16 @@ static volatile float _progressRange = 0.f;
 
 
 
-@interface CDMigrator ()
+@interface MyMigrator ()
 @property (nonatomic, strong) NSBundle *dataBundle;
 @end
 
 
-@implementation CDMigrator
+@implementation MyMigrator
     
 +(instancetype) sharedMigrator
 {
-    static CDMigrator *_sharedInstance = nil;
+    static MyMigrator *_sharedInstance = nil;
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{

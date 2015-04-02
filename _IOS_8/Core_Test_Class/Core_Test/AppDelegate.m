@@ -9,14 +9,17 @@
 #import "AppDelegate.h"
 #import "MasterViewController.h"
 
-#import "CDMigrator.h"
 
 #import "UIViewController+Hud.h"
 #import "SVProgressHUD.h"
 
 #import "MigrationManager_4_5.h"
-#import "BPMigrationManager.h"
+//#import "BPMigrationManager.h"
 #import "MyMigrationManager.h"
+
+#import "MyMigrator.h"
+
+#import "CDMigrator.h"
 
 
 @interface AppDelegate ()
@@ -28,6 +31,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     NSLog(@"--app delegate begin--");
+    
+//    assert(false);
     
     // Override point for customization after application launch.
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
@@ -69,6 +74,7 @@
     migrator.migrationClass = [MyMigrationManager class];    
 //    migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"BPModelDataDir/"];
     
+    
     [migrator migrationFor:[[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Core_Test.sqlite"]
                  modelName:@"BPModel"
                 completion:[postAction copy]];
@@ -89,6 +95,23 @@
 //    migrator.models = @[ @{@"name":@"Model"}, @{@"name":@"Model_2"}, @{@"name":@"Model_3"}, @{@"name":@"Model 4"}, @{@"name":@"Model 5"} ];
     migrator.migrationClass = [MyMigrationManager class];
 //    migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"SoundTubeDataDir/"];
+    
+    migrator.checkResult = ^BOOL(NSManagedObjectContext *context) {
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        [fetchRequest setEntity:[NSEntityDescription entityForName:@"VideoItem" inManagedObjectContext:context]];
+        NSError *error;
+        NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+        if (error || fetchedObjects.count==0)
+            return NO;
+        for (NSManagedObject *info in fetchedObjects) {
+            NSString *str = [info valueForKey:@"db_title"];
+            NSLog(@"db_title: %@", str);
+            if (str.length)
+                return YES;
+        }
+        return NO;
+    };
+    
     
     [migrator migrationFor:[[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Model.sqlite"]
                  modelName:@"Model"

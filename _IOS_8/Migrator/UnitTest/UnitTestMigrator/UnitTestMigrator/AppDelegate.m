@@ -1,19 +1,12 @@
 //
 //  AppDelegate.m
-//  TestMigrator
+//  UnitTestMigrator
 //
-//  Created by Zmachinsky Sergei on 01.04.15.
+//  Created by Zmachinsky Sergei on 02.04.15.
 //  Copyright (c) 2015 Zmachinsky Sergei. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "DetailViewController.h"
-#import "MasterViewController.h"
-
-#import "SVProgressHUD.h"
-#import "CDMigrator.h"
-#import "CDMigrationManager.h"
-
 
 @interface AppDelegate ()
 
@@ -24,38 +17,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
-    
-//  controller.managedObjectContext = self.managedObjectContext; //create Core Date stack
-    
-    __typeof__(self) __weak weakSelf = self;
-    void (^postAction)(BOOL) = ^(BOOL ok){
-        if (ok)
-        {
-            NSLog(@">>>>>>> Migration_was_OK <<<<<<<<<<");
-            controller.managedObjectContext = [weakSelf managedObjectContext]; //create Core Date stack
-            [controller update];
-        } else {
-            NSLog(@">>>>>>> Migration_was_WRONG <<<<<<<<<<");
-        }
-    };
-    
-    CDMigrator *migrator = [CDMigrator new];
-        
-    migrator.initHud = ^{[SVProgressHUD showWithStatus:@"Updating media database..." maskType:SVProgressHUDMaskTypeGradient];};
-    migrator.dismissHud = ^{[SVProgressHUD dismiss];};
-    migrator.progressHud = ^(float progress){[SVProgressHUD showProgress:progress status:@"Run migration..." maskType:SVProgressHUDMaskTypeClear];};
-    
-    migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"},];
-    migrator.migrationClass = [CDMigrationManager class];
-//  migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ModelDataDir/"];
-    
-    [migrator migrationFor:[[self applicationDocumentsDirectory] URLByAppendingPathComponent:CORE_FILE] 
-                 modelName:CORE_NAME 
-                completion:[postAction copy]];
-    
-    
     return YES;
 }
 
@@ -90,7 +51,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (NSURL *)applicationDocumentsDirectory {
-    // The directory the application uses to store the Core Data store file. This code uses a directory named "minsk.TestMigrator" in the application's documents directory.
+    // The directory the application uses to store the Core Data store file. This code uses a directory named "minsk.UnitTestMigrator" in the application's documents directory.
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
@@ -99,7 +60,7 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:CORE_NAME withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"UnitTestMigrator" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -113,7 +74,7 @@
     // Create the coordinator and store
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:CORE_FILE];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"UnitTestMigrator.sqlite"];
     NSError *error = nil;
     NSString *failureReason = @"There was an error creating or loading the application's saved data.";
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {

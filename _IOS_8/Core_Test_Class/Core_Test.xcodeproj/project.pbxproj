@@ -31,11 +31,13 @@
 		23AAC3EA1AADC0C400F7D0DC /* NewEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3E91AADC0C400F7D0DC /* NewEvent.m */; };
 		23AAC3F11AADE9D000F7D0DC /* MigrationManager_4_5.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AAC3F01AADE9D000F7D0DC /* MigrationManager_4_5.m */; };
 		23B85A321AB95EFB0082D008 /* BPMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B85A311AB95EFB0082D008 /* BPMigrationManager.m */; };
-		23B85A351AB962AD0082D008 /* CDMigrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B85A341AB962AD0082D008 /* CDMigrator.m */; };
+		23B85A351AB962AD0082D008 /* MyMigrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B85A341AB962AD0082D008 /* MyMigrator.m */; };
 		23DE87F01AC01DC7008BB2C9 /* MyMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DE87EF1AC01DC7008BB2C9 /* MyMigrationManager.m */; };
 		23E58E401AAF49E800791501 /* Model_4_5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23E58E3F1AAF49E800791501 /* Model_4_5.xcmappingmodel */; };
 		23EDC3E51AB81BA1009473BB /* BPMigrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EDC3E41AB81BA1009473BB /* BPMigrator.m */; };
 		23F2DEF91AC93B6B00831BCF /* Migration_BPModel_5_6.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23F2DEF81AC93B6B00831BCF /* Migration_BPModel_5_6.xcmappingmodel */; };
+		23FC294B1ACD311700CD60DB /* CDMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FC29481ACD311700CD60DB /* CDMigrationManager.m */; };
+		23FC294C1ACD311700CD60DB /* CDMigrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FC294A1ACD311700CD60DB /* CDMigrator.m */; };
 		23FFE1F51AB82E0E00FE46A8 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 23FFE1F01AB82E0E00FE46A8 /* SVProgressHUD.bundle */; };
 		23FFE1F61AB82E0E00FE46A8 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FFE1F21AB82E0E00FE46A8 /* SVProgressHUD.m */; };
 		23FFE1F71AB82E0E00FE46A8 /* UIViewController+Hud.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FFE1F41AB82E0E00FE46A8 /* UIViewController+Hud.m */; };
@@ -102,8 +104,8 @@
 		23AAC3F01AADE9D000F7D0DC /* MigrationManager_4_5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MigrationManager_4_5.m; sourceTree = "<group>"; };
 		23AAC3F21AADE9E200F7D0DC /* Core_Test 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Core_Test 5.xcdatamodel"; sourceTree = "<group>"; };
 		23B85A311AB95EFB0082D008 /* BPMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPMigrationManager.m; sourceTree = "<group>"; };
-		23B85A331AB962AD0082D008 /* CDMigrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDMigrator.h; path = ../CDMigrator.h; sourceTree = "<group>"; };
-		23B85A341AB962AD0082D008 /* CDMigrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDMigrator.m; path = ../CDMigrator.m; sourceTree = "<group>"; };
+		23B85A331AB962AD0082D008 /* MyMigrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMigrator.h; path = ../MyMigrator.h; sourceTree = "<group>"; };
+		23B85A341AB962AD0082D008 /* MyMigrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyMigrator.m; path = ../MyMigrator.m; sourceTree = "<group>"; };
 		23DE87EE1AC01DC7008BB2C9 /* MyMigrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyMigrationManager.h; path = ../MyMigrationManager.h; sourceTree = "<group>"; };
 		23DE87EF1AC01DC7008BB2C9 /* MyMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyMigrationManager.m; path = ../MyMigrationManager.m; sourceTree = "<group>"; };
 		23E58E3F1AAF49E800791501 /* Model_4_5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_4_5.xcmappingmodel; sourceTree = "<group>"; };
@@ -112,6 +114,10 @@
 		23EDC3E41AB81BA1009473BB /* BPMigrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPMigrator.m; sourceTree = "<group>"; };
 		23F2DEF51AC939F300831BCF /* BPModel 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BPModel 6.xcdatamodel"; sourceTree = "<group>"; };
 		23F2DEF81AC93B6B00831BCF /* Migration_BPModel_5_6.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Migration_BPModel_5_6.xcmappingmodel; sourceTree = "<group>"; };
+		23FC29471ACD311700CD60DB /* CDMigrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDMigrationManager.h; sourceTree = "<group>"; };
+		23FC29481ACD311700CD60DB /* CDMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDMigrationManager.m; sourceTree = "<group>"; };
+		23FC29491ACD311700CD60DB /* CDMigrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDMigrator.h; sourceTree = "<group>"; };
+		23FC294A1ACD311700CD60DB /* CDMigrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDMigrator.m; sourceTree = "<group>"; };
 		23FFE1F01AB82E0E00FE46A8 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		23FFE1F11AB82E0E00FE46A8 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		23FFE1F21AB82E0E00FE46A8 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
@@ -177,6 +183,7 @@
 				23697FE81AA85B67009CC9F3 /* MasterViewController.m */,
 				23697FE11AA85B67009CC9F3 /* AppDelegate.h */,
 				23697FE21AA85B67009CC9F3 /* AppDelegate.m */,
+				23FC29461ACD311700CD60DB /* CDMigrator */,
 				233386881AC9A234004DC375 /* SOUND */,
 				23EDC3DC1AB81943009473BB /* My_Migration__2 */,
 				23AAC3DD1AADA55700F7D0DC /* Migration__1 */,
@@ -219,8 +226,8 @@
 			isa = PBXGroup;
 			children = (
 				23996E971ACAAE1E00E3D365 /* Model.xcdatamodeld */,
-				23B85A331AB962AD0082D008 /* CDMigrator.h */,
-				23B85A341AB962AD0082D008 /* CDMigrator.m */,
+				23B85A331AB962AD0082D008 /* MyMigrator.h */,
+				23B85A341AB962AD0082D008 /* MyMigrator.m */,
 				23DE87EE1AC01DC7008BB2C9 /* MyMigrationManager.h */,
 				23DE87EF1AC01DC7008BB2C9 /* MyMigrationManager.m */,
 				239A20B41ACBDDC600A4AEF4 /* Mig_Model_2_3.xcmappingmodel */,
@@ -261,6 +268,18 @@
 				23EDC3E41AB81BA1009473BB /* BPMigrator.m */,
 			);
 			name = My_Migration__2;
+			sourceTree = "<group>";
+		};
+		23FC29461ACD311700CD60DB /* CDMigrator */ = {
+			isa = PBXGroup;
+			children = (
+				23FC29471ACD311700CD60DB /* CDMigrationManager.h */,
+				23FC29481ACD311700CD60DB /* CDMigrationManager.m */,
+				23FC29491ACD311700CD60DB /* CDMigrator.h */,
+				23FC294A1ACD311700CD60DB /* CDMigrator.m */,
+			);
+			name = CDMigrator;
+			path = ../../Migrator/CDMigrator;
 			sourceTree = "<group>";
 		};
 		23FFE1D51AB822CE00FE46A8 /* Zip */ = {
@@ -394,6 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				23F2DEF91AC93B6B00831BCF /* Migration_BPModel_5_6.xcmappingmodel in Sources */,
+				23FC294C1ACD311700CD60DB /* CDMigrator.m in Sources */,
 				23FFE1F71AB82E0E00FE46A8 /* UIViewController+Hud.m in Sources */,
 				23112F511AB85A0D0021A545 /* BPModel.xcdatamodeld in Sources */,
 				2369800C1AA86873009CC9F3 /* Core_Test.xcdatamodeld in Sources */,
@@ -404,10 +424,11 @@
 				239A20B51ACBDDC600A4AEF4 /* Mig_Model_2_3.xcmappingmodel in Sources */,
 				23DE87F01AC01DC7008BB2C9 /* MyMigrationManager.m in Sources */,
 				23AAC3EA1AADC0C400F7D0DC /* NewEvent.m in Sources */,
-				23B85A351AB962AD0082D008 /* CDMigrator.m in Sources */,
+				23B85A351AB962AD0082D008 /* MyMigrator.m in Sources */,
 				23AAC3F11AADE9D000F7D0DC /* MigrationManager_4_5.m in Sources */,
 				23AAC3E41AADA85700F7D0DC /* Migration_3_4.m in Sources */,
 				23697FE91AA85B67009CC9F3 /* MasterViewController.m in Sources */,
+				23FC294B1ACD311700CD60DB /* CDMigrationManager.m in Sources */,
 				23E58E401AAF49E800791501 /* Model_4_5.xcmappingmodel in Sources */,
 				236980101AA87B5A009CC9F3 /* Detail_VC.m in Sources */,
 				239A687A1ABC1EB1003AB3B8 /* Migration_BPModel_0_2.xcmappingmodel in Sources */,
