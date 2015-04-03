@@ -29,10 +29,10 @@
 
 #define CORE_NAME  @"TestMigrator"
 #define CORE_FILE  @"TestMigrator.sqlite"
-//#define CORE_FILE_DIR  @"Documents/Data_Files/"
-//#define CORE_MIGR_DIR  @"Documents/Migration_Models/"
-#define CORE_FILE_DIR  @"Tmp/Data_Files/"
-#define CORE_MIGR_DIR  @"Tmp/Migration_Models/"
+#define CORE_FILE_DIR  @"Documents/Data_Files/"
+#define CORE_MIGR_DIR  @"Documents/Migration_Models/"
+//#define CORE_FILE_DIR  @"Tmp/Data_Files/"
+//#define CORE_MIGR_DIR  @"Tmp/Migration_Models/"
 
 
 #define USE_TEST_MIGRATION_DELAY
