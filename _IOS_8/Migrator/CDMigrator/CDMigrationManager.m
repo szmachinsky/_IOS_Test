@@ -42,7 +42,9 @@
     NSString *name2 = [entityMapping destinationEntityName];
     
     NSLog(@"--> migration Manager for (%@) (%@) Tables",name1,name2);
+#ifdef USE_TEST_MIGRATION_DELAY
     sleep(1);
+#endif
             
     if([name2 compare:@"Event"] == NSOrderedSame)
     {        

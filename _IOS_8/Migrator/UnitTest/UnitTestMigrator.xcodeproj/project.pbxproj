@@ -7,60 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23D78F7D1ACE70AE00D81298 /* TestMigrator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23D78F781ACE70AE00D81298 /* TestMigrator.xcdatamodeld */; };
+		23D78F831ACE70FE00D81298 /* CDMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D78F801ACE70FE00D81298 /* CDMigrationManager.m */; };
+		23D78F841ACE70FE00D81298 /* CDMigrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D78F821ACE70FE00D81298 /* CDMigrator.m */; };
+		23D78F8D1ACE795300D81298 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23D78F8B1ACE795300D81298 /* Main.storyboard */; };
 		23FC29641ACD6F9C00CD60DB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FC29631ACD6F9C00CD60DB /* main.m */; };
 		23FC29671ACD6F9C00CD60DB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FC29661ACD6F9C00CD60DB /* AppDelegate.m */; };
 		23FC296D1ACD6F9C00CD60DB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FC296C1ACD6F9C00CD60DB /* ViewController.m */; };
-		23FC29701ACD6F9C00CD60DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23FC296E1ACD6F9C00CD60DB /* Main.storyboard */; };
 		23FC29721ACD6F9C00CD60DB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23FC29711ACD6F9C00CD60DB /* Images.xcassets */; };
-		23FC29751ACD6F9C00CD60DB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23FC29731ACD6F9C00CD60DB /* LaunchScreen.xib */; };
-		23FC29811ACD6F9D00CD60DB /* UnitTestMigratorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FC29801ACD6F9D00CD60DB /* UnitTestMigratorTests.m */; };
 		23FC29901ACD7D4900CD60DB /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FC298C1ACD7D4900CD60DB /* SVIndefiniteAnimatedView.m */; };
 		23FC29911ACD7D4900CD60DB /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 23FC298D1ACD7D4900CD60DB /* SVProgressHUD.bundle */; };
 		23FC29921ACD7D4900CD60DB /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FC298F1ACD7D4900CD60DB /* SVProgressHUD.m */; };
-		23FC29981ACD7DA700CD60DB /* CDMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FC29951ACD7DA700CD60DB /* CDMigrationManager.m */; };
-		23FC29991ACD7DA700CD60DB /* CDMigrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FC29971ACD7DA700CD60DB /* CDMigrator.m */; };
-		23FC29A61ACD89DD00CD60DB /* TestMigrator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23FC29A11ACD89DD00CD60DB /* TestMigrator.xcdatamodeld */; };
 		23FC29A81ACD91B000CD60DB /* TestMigrator.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 23FC29A71ACD91B000CD60DB /* TestMigrator.sqlite */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		23FC297B1ACD6F9D00CD60DB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 23FC29561ACD6F9C00CD60DB /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 23FC295D1ACD6F9C00CD60DB;
-			remoteInfo = UnitTestMigrator;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		238166711ACE801A002DEAD4 /* UnitTest.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTest.pch; sourceTree = SOURCE_ROOT; };
+		23D78F791ACE70AE00D81298 /* TestMigrator 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TestMigrator 2.xcdatamodel"; sourceTree = "<group>"; };
+		23D78F7A1ACE70AE00D81298 /* TestMigrator 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TestMigrator 3.xcdatamodel"; sourceTree = "<group>"; };
+		23D78F7B1ACE70AE00D81298 /* TestMigrator 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = "TestMigrator 4.xcdatamodel"; path = "../Example/TestMigrator/TestMigrator.xcdatamodeld/TestMigrator 4.xcdatamodel"; sourceTree = SOURCE_ROOT; };
+		23D78F7C1ACE70AE00D81298 /* TestMigrator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestMigrator.xcdatamodel; sourceTree = "<group>"; };
+		23D78F7F1ACE70FE00D81298 /* CDMigrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDMigrationManager.h; sourceTree = "<group>"; };
+		23D78F801ACE70FE00D81298 /* CDMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDMigrationManager.m; sourceTree = "<group>"; };
+		23D78F811ACE70FE00D81298 /* CDMigrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDMigrator.h; sourceTree = "<group>"; };
+		23D78F821ACE70FE00D81298 /* CDMigrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDMigrator.m; sourceTree = "<group>"; };
+		23D78F8C1ACE795300D81298 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
 		23FC295E1ACD6F9C00CD60DB /* UnitTestMigrator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnitTestMigrator.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		23FC29621ACD6F9C00CD60DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		23FC29631ACD6F9C00CD60DB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		23FC29651ACD6F9C00CD60DB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		23FC29661ACD6F9C00CD60DB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		23FC296B1ACD6F9C00CD60DB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		23FC296C1ACD6F9C00CD60DB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		23FC296F1ACD6F9C00CD60DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		23FC29711ACD6F9C00CD60DB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		23FC29621ACD6F9C00CD60DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
+		23FC29631ACD6F9C00CD60DB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
+		23FC29651ACD6F9C00CD60DB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		23FC29661ACD6F9C00CD60DB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
+		23FC296B1ACD6F9C00CD60DB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = SOURCE_ROOT; };
+		23FC296C1ACD6F9C00CD60DB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = SOURCE_ROOT; };
+		23FC29711ACD6F9C00CD60DB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = SOURCE_ROOT; };
 		23FC29741ACD6F9C00CD60DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		23FC297A1ACD6F9D00CD60DB /* UnitTestMigratorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTestMigratorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		23FC297F1ACD6F9D00CD60DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		23FC29801ACD6F9D00CD60DB /* UnitTestMigratorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UnitTestMigratorTests.m; sourceTree = "<group>"; };
 		23FC298B1ACD7D4900CD60DB /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
 		23FC298C1ACD7D4900CD60DB /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
 		23FC298D1ACD7D4900CD60DB /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		23FC298E1ACD7D4900CD60DB /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		23FC298F1ACD7D4900CD60DB /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
-		23FC29941ACD7DA700CD60DB /* CDMigrationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDMigrationManager.h; sourceTree = "<group>"; };
-		23FC29951ACD7DA700CD60DB /* CDMigrationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDMigrationManager.m; sourceTree = "<group>"; };
-		23FC29961ACD7DA700CD60DB /* CDMigrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDMigrator.h; sourceTree = "<group>"; };
-		23FC29971ACD7DA700CD60DB /* CDMigrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDMigrator.m; sourceTree = "<group>"; };
-		23FC29A21ACD89DD00CD60DB /* TestMigrator 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TestMigrator 2.xcdatamodel"; sourceTree = "<group>"; };
-		23FC29A31ACD89DD00CD60DB /* TestMigrator 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TestMigrator 3.xcdatamodel"; sourceTree = "<group>"; };
-		23FC29A41ACD89DD00CD60DB /* TestMigrator 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TestMigrator 4.xcdatamodel"; sourceTree = "<group>"; };
-		23FC29A51ACD89DD00CD60DB /* TestMigrator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestMigrator.xcdatamodel; sourceTree = "<group>"; };
-		23FC29A71ACD91B000CD60DB /* TestMigrator.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestMigrator.sqlite; sourceTree = "<group>"; };
+		23FC29A71ACD91B000CD60DB /* TestMigrator.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestMigrator.sqlite; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,21 +57,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		23FC29771ACD6F9D00CD60DB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23D78F7E1ACE70FE00D81298 /* CDMigrator */ = {
+			isa = PBXGroup;
+			children = (
+				23D78F7F1ACE70FE00D81298 /* CDMigrationManager.h */,
+				23D78F801ACE70FE00D81298 /* CDMigrationManager.m */,
+				23D78F811ACE70FE00D81298 /* CDMigrator.h */,
+				23D78F821ACE70FE00D81298 /* CDMigrator.m */,
+			);
+			name = CDMigrator;
+			path = ../CDMigrator;
+			sourceTree = SOURCE_ROOT;
+		};
 		23FC29551ACD6F9C00CD60DB = {
 			isa = PBXGroup;
 			children = (
 				23FC29601ACD6F9C00CD60DB /* UnitTestMigrator */,
-				23FC297D1ACD6F9D00CD60DB /* UnitTestMigratorTests */,
 				23FC295F1ACD6F9C00CD60DB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -94,7 +84,6 @@
 			isa = PBXGroup;
 			children = (
 				23FC295E1ACD6F9C00CD60DB /* UnitTestMigrator.app */,
-				23FC297A1ACD6F9D00CD60DB /* UnitTestMigratorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,16 +91,13 @@
 		23FC29601ACD6F9C00CD60DB /* UnitTestMigrator */ = {
 			isa = PBXGroup;
 			children = (
-				23FC299A1ACD87D200CD60DB /* Core Data Base */,
 				23FC298A1ACD7D4900CD60DB /* SVProgressHUD */,
-				23FC29931ACD7DA700CD60DB /* CDMigrator */,
+				23D78F7E1ACE70FE00D81298 /* CDMigrator */,
+				23FC299A1ACD87D200CD60DB /* Core Data Base */,
 				23FC296B1ACD6F9C00CD60DB /* ViewController.h */,
 				23FC296C1ACD6F9C00CD60DB /* ViewController.m */,
 				23FC29651ACD6F9C00CD60DB /* AppDelegate.h */,
 				23FC29661ACD6F9C00CD60DB /* AppDelegate.m */,
-				23FC296E1ACD6F9C00CD60DB /* Main.storyboard */,
-				23FC29711ACD6F9C00CD60DB /* Images.xcassets */,
-				23FC29731ACD6F9C00CD60DB /* LaunchScreen.xib */,
 				23FC29611ACD6F9C00CD60DB /* Supporting Files */,
 			);
 			path = UnitTestMigrator;
@@ -120,26 +106,13 @@
 		23FC29611ACD6F9C00CD60DB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				238166711ACE801A002DEAD4 /* UnitTest.pch */,
 				23FC29A71ACD91B000CD60DB /* TestMigrator.sqlite */,
+				23D78F8B1ACE795300D81298 /* Main.storyboard */,
+				23FC29731ACD6F9C00CD60DB /* LaunchScreen.xib */,
+				23FC29711ACD6F9C00CD60DB /* Images.xcassets */,
 				23FC29621ACD6F9C00CD60DB /* Info.plist */,
 				23FC29631ACD6F9C00CD60DB /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		23FC297D1ACD6F9D00CD60DB /* UnitTestMigratorTests */ = {
-			isa = PBXGroup;
-			children = (
-				23FC29801ACD6F9D00CD60DB /* UnitTestMigratorTests.m */,
-				23FC297E1ACD6F9D00CD60DB /* Supporting Files */,
-			);
-			path = UnitTestMigratorTests;
-			sourceTree = "<group>";
-		};
-		23FC297E1ACD6F9D00CD60DB /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				23FC297F1ACD6F9D00CD60DB /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -154,28 +127,16 @@
 				23FC298F1ACD7D4900CD60DB /* SVProgressHUD.m */,
 			);
 			name = SVProgressHUD;
-			path = ../../Example/TestMigrator/SVProgressHUD;
-			sourceTree = SOURCE_ROOT;
-		};
-		23FC29931ACD7DA700CD60DB /* CDMigrator */ = {
-			isa = PBXGroup;
-			children = (
-				23FC29941ACD7DA700CD60DB /* CDMigrationManager.h */,
-				23FC29951ACD7DA700CD60DB /* CDMigrationManager.m */,
-				23FC29961ACD7DA700CD60DB /* CDMigrator.h */,
-				23FC29971ACD7DA700CD60DB /* CDMigrator.m */,
-			);
-			name = CDMigrator;
-			path = ../../CDMigrator;
+			path = ../Example/TestMigrator/SVProgressHUD;
 			sourceTree = SOURCE_ROOT;
 		};
 		23FC299A1ACD87D200CD60DB /* Core Data Base */ = {
 			isa = PBXGroup;
 			children = (
-				23FC29A11ACD89DD00CD60DB /* TestMigrator.xcdatamodeld */,
+				23D78F781ACE70AE00D81298 /* TestMigrator.xcdatamodeld */,
 			);
 			name = "Core Data Base";
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -197,24 +158,6 @@
 			productReference = 23FC295E1ACD6F9C00CD60DB /* UnitTestMigrator.app */;
 			productType = "com.apple.product-type.application";
 		};
-		23FC29791ACD6F9D00CD60DB /* UnitTestMigratorTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 23FC29871ACD6F9D00CD60DB /* Build configuration list for PBXNativeTarget "UnitTestMigratorTests" */;
-			buildPhases = (
-				23FC29761ACD6F9D00CD60DB /* Sources */,
-				23FC29771ACD6F9D00CD60DB /* Frameworks */,
-				23FC29781ACD6F9D00CD60DB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				23FC297C1ACD6F9D00CD60DB /* PBXTargetDependency */,
-			);
-			name = UnitTestMigratorTests;
-			productName = UnitTestMigratorTests;
-			productReference = 23FC297A1ACD6F9D00CD60DB /* UnitTestMigratorTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -226,10 +169,6 @@
 				TargetAttributes = {
 					23FC295D1ACD6F9C00CD60DB = {
 						CreatedOnToolsVersion = 6.2;
-					};
-					23FC29791ACD6F9D00CD60DB = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = 23FC295D1ACD6F9C00CD60DB;
 					};
 				};
 			};
@@ -247,7 +186,6 @@
 			projectRoot = "";
 			targets = (
 				23FC295D1ACD6F9C00CD60DB /* UnitTestMigrator */,
-				23FC29791ACD6F9D00CD60DB /* UnitTestMigratorTests */,
 			);
 		};
 /* End PBXProject section */
@@ -258,17 +196,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				23FC29A81ACD91B000CD60DB /* TestMigrator.sqlite in Resources */,
-				23FC29701ACD6F9C00CD60DB /* Main.storyboard in Resources */,
-				23FC29751ACD6F9C00CD60DB /* LaunchScreen.xib in Resources */,
 				23FC29721ACD6F9C00CD60DB /* Images.xcassets in Resources */,
 				23FC29911ACD7D4900CD60DB /* SVProgressHUD.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		23FC29781ACD6F9D00CD60DB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				23D78F8D1ACE795300D81298 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,39 +210,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				23FC29901ACD7D4900CD60DB /* SVIndefiniteAnimatedView.m in Sources */,
-				23FC29981ACD7DA700CD60DB /* CDMigrationManager.m in Sources */,
-				23FC29991ACD7DA700CD60DB /* CDMigrator.m in Sources */,
+				23D78F831ACE70FE00D81298 /* CDMigrationManager.m in Sources */,
 				23FC29671ACD6F9C00CD60DB /* AppDelegate.m in Sources */,
+				23D78F841ACE70FE00D81298 /* CDMigrator.m in Sources */,
 				23FC296D1ACD6F9C00CD60DB /* ViewController.m in Sources */,
 				23FC29641ACD6F9C00CD60DB /* main.m in Sources */,
-				23FC29A61ACD89DD00CD60DB /* TestMigrator.xcdatamodeld in Sources */,
+				23D78F7D1ACE70AE00D81298 /* TestMigrator.xcdatamodeld in Sources */,
 				23FC29921ACD7D4900CD60DB /* SVProgressHUD.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		23FC29761ACD6F9D00CD60DB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				23FC29811ACD6F9D00CD60DB /* UnitTestMigratorTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		23FC297C1ACD6F9D00CD60DB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 23FC295D1ACD6F9C00CD60DB /* UnitTestMigrator */;
-			targetProxy = 23FC297B1ACD6F9D00CD60DB /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		23FC296E1ACD6F9C00CD60DB /* Main.storyboard */ = {
+		23D78F8B1ACE795300D81298 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				23FC296F1ACD6F9C00CD60DB /* Base */,
+				23D78F8C1ACE795300D81298 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -408,7 +322,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = UnitTestMigrator/Info.plist;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = UnitTest.pch;
+				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -419,44 +335,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = UnitTestMigrator/Info.plist;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = UnitTest.pch;
+				INFOPLIST_FILE = Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		23FC29881ACD6F9D00CD60DB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = UnitTestMigratorTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UnitTestMigrator.app/UnitTestMigrator";
-			};
-			name = Debug;
-		};
-		23FC29891ACD6F9D00CD60DB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = UnitTestMigratorTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UnitTestMigrator.app/UnitTestMigrator";
 			};
 			name = Release;
 		};
@@ -479,29 +363,22 @@
 				23FC29861ACD6F9D00CD60DB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		23FC29871ACD6F9D00CD60DB /* Build configuration list for PBXNativeTarget "UnitTestMigratorTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				23FC29881ACD6F9D00CD60DB /* Debug */,
-				23FC29891ACD6F9D00CD60DB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		23FC29A11ACD89DD00CD60DB /* TestMigrator.xcdatamodeld */ = {
+		23D78F781ACE70AE00D81298 /* TestMigrator.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				23FC29A21ACD89DD00CD60DB /* TestMigrator 2.xcdatamodel */,
-				23FC29A31ACD89DD00CD60DB /* TestMigrator 3.xcdatamodel */,
-				23FC29A41ACD89DD00CD60DB /* TestMigrator 4.xcdatamodel */,
-				23FC29A51ACD89DD00CD60DB /* TestMigrator.xcdatamodel */,
+				23D78F791ACE70AE00D81298 /* TestMigrator 2.xcdatamodel */,
+				23D78F7A1ACE70AE00D81298 /* TestMigrator 3.xcdatamodel */,
+				23D78F7B1ACE70AE00D81298 /* TestMigrator 4.xcdatamodel */,
+				23D78F7C1ACE70AE00D81298 /* TestMigrator.xcdatamodel */,
 			);
-			currentVersion = 23FC29A41ACD89DD00CD60DB /* TestMigrator 4.xcdatamodel */;
+			currentVersion = 23D78F7A1ACE70AE00D81298 /* TestMigrator 3.xcdatamodel */;
 			name = TestMigrator.xcdatamodeld;
-			path = ../../../Example/TestMigrator/TestMigrator.xcdatamodeld;
+			path = ../Example/TestMigrator/TestMigrator.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -14,9 +14,9 @@
 #import "CDMigrationManager.h"
 
 
-#define CORE_NAME  @"TestMigrator"
-#define CORE_FILE  @"TestMigrator.sqlite"
-#define CORE_FILE_DIR  @"Documents/Data/"
+//#define CORE_NAME  @"TestMigrator"
+//#define CORE_FILE  @"TestMigrator.sqlite"
+//#define CORE_FILE_DIR  @"Documents/Data/"
 
 
 @interface AppDelegate ()
@@ -27,7 +27,9 @@
 {
     ViewController *controller;
     NSURL *storeUrl;
+    NSURL *modelUrl;
 }
+
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -46,11 +48,21 @@
 -(void)runTest
 {
     [controller infoText:@""];
-    NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:CORE_FILE_DIR];
-    NSLog(@"%@",path);
-    NSURL *url = [NSURL fileURLWithPath:path];
-    NSLog(@"%@",url);
-    [self copyResurce:CORE_FILE toDir:CORE_FILE_DIR];
+    NSString *pathToFile = [NSHomeDirectory() stringByAppendingPathComponent:CORE_FILE_DIR];
+    NSString *pathToModels = [NSHomeDirectory() stringByAppendingPathComponent:CORE_MIGR_DIR];
+//    NSLog(@"%@",path);
+    NSURL *url = [NSURL fileURLWithPath:pathToFile];
+    storeUrl = [url URLByAppendingPathComponent:CORE_FILE];
+    NSLog(@"%@",storeUrl);
+    modelUrl = [NSURL fileURLWithPath:pathToModels];
+    
+    NSLog(@"%@",modelUrl);
+    
+    [self removeStoreAtURL:storeUrl];
+    
+    [self copyResurce:CORE_FILE toDir:CORE_FILE_DIR withUpdate:YES];
+    [self copyResurce:@"TestMigrator.momd" toDir:CORE_MIGR_DIR withUpdate:YES];
+    
     
     __typeof__(self) __weak weakSelf = self;
     void (^postAction)(BOOL) = ^(BOOL ok){
@@ -58,12 +70,12 @@
         {
             NSLog(@">>>>>>> Migration_was_OK <<<<<<<<<<");
             controller.managedObjectContext = [weakSelf managedObjectContext]; //create Core Date stack
-            [controller infoText:@"TEST WAS OK"];
+            [controller infoText:@"MIGRATION WAS OK"];
         } else {
             NSLog(@">>>>>>> Migration_was_WRONG <<<<<<<<<<");
             [controller infoText:@"TEST FAILED!!!"];
         }
-        [self removeStoreAtURL:storeUrl];
+//        [self removeStoreAtURL:storeUrl];
     };
     
     CDMigrator *migrator = [CDMigrator new];
@@ -74,7 +86,7 @@
     
     migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"}, @{@"name":@"TestMigrator 4"},];
     migrator.migrationClass = [CDMigrationManager class];
-    //  migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ModelDataDir/"];
+    migrator.modelsUrl = modelUrl;//[[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ModelDataDir/"];
     
     
     migrator.checkResult = ^BOOL(NSManagedObjectContext *context) {
@@ -93,52 +105,41 @@
         return NO;
     };
     
-    storeUrl = [url URLByAppendingPathComponent:CORE_FILE];
     NSLog(@"%@",storeUrl);
     [migrator migrationFor:storeUrl
                  modelName:CORE_NAME
                 completion:[postAction copy]];
-    
-    
+        
 }
 
 
 
-//    [self copyResurce:@"index.json" toDir:@"Documents"];
-//    [self copyResurce:@"tvdata.archive" toDir:@"Documents"];
-//    [self copyResurce:@"TVProgram.sqlite" toDir:@"Documents"];
-
-#define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
--(void)copyResurce:(NSString*)resFile toDir:(NSString*)Dir
+//#define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
+-(void)copyResurce:(NSString*)resFile toDir:(NSString*)Dir withUpdate:(BOOL)update
 {
     NSString *filePathFfom = [[NSBundle mainBundle] pathForResource:[resFile stringByDeletingPathExtension] ofType:[resFile pathExtension]];
-    NSString *dirPathTo;
-    NSString *filePathTo;
-    dirPathTo = [NSHomeDirectory() stringByAppendingPathComponent:Dir];
-    filePathTo = [dirPathTo stringByAppendingPathComponent:resFile];
-    
+    NSString *dirPathTo = [NSHomeDirectory() stringByAppendingPathComponent:Dir];
+    NSString *filePathTo = [dirPathTo stringByAppendingPathComponent:resFile];
+    BOOL success;
+    NSError *error;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     // If the expected store doesn't exist, copy the default store.
     if (![fileManager fileExistsAtPath:filePathTo])
     {
-        NSError *error;
-        
-        [[NSFileManager defaultManager] createDirectoryAtPath:dirPathTo
-                                  withIntermediateDirectories:YES
-                                                   attributes:nil
-                                                        error:nil];
-        
-        BOOL success = [fileManager copyItemAtPath:filePathFfom toPath:filePathTo error:&error];
-        NSLog(@"copy = /%@/ to /%@/",filePathFfom,filePathTo);
-        if (success)
-        {
-            NSLog(@"COPY OK");
-        } else {
-            NSLog(@"Failed to copy!!!");
-        }
-        
+        [fileManager createDirectoryAtPath:dirPathTo
+               withIntermediateDirectories:YES
+                                attributes:nil
+                                     error:nil];
+        success = [fileManager copyItemAtPath:filePathFfom toPath:filePathTo error:&error];
+        NSLog(@"copy is %d = /%@/ to /%@/",success,filePathFfom,filePathTo);
     } else {
-        NSLog(@"OK-/%@/",filePathTo);
+        NSLog(@"EXIST /%@/",filePathTo);
+        if (update) {
+            success = [fileManager removeItemAtPath:filePathTo error:&error];
+            NSLog(@"remove is %d",success);
+            success = [fileManager copyItemAtPath:filePathFfom toPath:filePathTo error:&error];
+            NSLog(@"copy is %d = /%@/ to /%@/",success,filePathFfom,filePathTo);
+        }
     }
 }
 

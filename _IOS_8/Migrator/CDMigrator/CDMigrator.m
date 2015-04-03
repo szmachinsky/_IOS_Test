@@ -100,7 +100,7 @@ static volatile float _progressRange = 0.f;
     
 @try
     {
-//        NSLog(@"storeURL=%@",storeURL);
+        NSLog(@"storeURL=%@",storeURL);
         
         if (![[NSFileManager defaultManager] fileExistsAtPath:[storeURL path]])
         {
@@ -164,7 +164,6 @@ static volatile float _progressRange = 0.f;
         
        
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
-        NSLog(@"storeURL=%@",storeURL);
         NSError *error = nil;
         NSDictionary *options = nil;
         
