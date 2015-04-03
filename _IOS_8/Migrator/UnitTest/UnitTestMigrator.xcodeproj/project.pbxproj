@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		238166731ACE9914002DEAD4 /* Model__0_2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 238166721ACE9914002DEAD4 /* Model__0_2.xcmappingmodel */; };
+		238166751ACE9936002DEAD4 /* Model__3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 238166741ACE9936002DEAD4 /* Model__3_4.xcmappingmodel */; };
 		23D78F7D1ACE70AE00D81298 /* TestMigrator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23D78F781ACE70AE00D81298 /* TestMigrator.xcdatamodeld */; };
 		23D78F831ACE70FE00D81298 /* CDMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D78F801ACE70FE00D81298 /* CDMigrationManager.m */; };
 		23D78F841ACE70FE00D81298 /* CDMigrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D78F821ACE70FE00D81298 /* CDMigrator.m */; };
@@ -23,6 +25,8 @@
 
 /* Begin PBXFileReference section */
 		238166711ACE801A002DEAD4 /* UnitTest.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTest.pch; sourceTree = SOURCE_ROOT; };
+		238166721ACE9914002DEAD4 /* Model__0_2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model__0_2.xcmappingmodel; sourceTree = "<group>"; };
+		238166741ACE9936002DEAD4 /* Model__3_4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model__3_4.xcmappingmodel; sourceTree = "<group>"; };
 		23D78F791ACE70AE00D81298 /* TestMigrator 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TestMigrator 2.xcdatamodel"; sourceTree = "<group>"; };
 		23D78F7A1ACE70AE00D81298 /* TestMigrator 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TestMigrator 3.xcdatamodel"; sourceTree = "<group>"; };
 		23D78F7B1ACE70AE00D81298 /* TestMigrator 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = "TestMigrator 4.xcdatamodel"; path = "../Example/TestMigrator/TestMigrator.xcdatamodeld/TestMigrator 4.xcdatamodel"; sourceTree = SOURCE_ROOT; };
@@ -134,6 +138,8 @@
 			isa = PBXGroup;
 			children = (
 				23D78F781ACE70AE00D81298 /* TestMigrator.xcdatamodeld */,
+				238166721ACE9914002DEAD4 /* Model__0_2.xcmappingmodel */,
+				238166741ACE9936002DEAD4 /* Model__3_4.xcmappingmodel */,
 			);
 			name = "Core Data Base";
 			sourceTree = SOURCE_ROOT;
@@ -209,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				238166751ACE9936002DEAD4 /* Model__3_4.xcmappingmodel in Sources */,
 				23FC29901ACD7D4900CD60DB /* SVIndefiniteAnimatedView.m in Sources */,
 				23D78F831ACE70FE00D81298 /* CDMigrationManager.m in Sources */,
 				23FC29671ACD6F9C00CD60DB /* AppDelegate.m in Sources */,
@@ -216,6 +223,7 @@
 				23FC296D1ACD6F9C00CD60DB /* ViewController.m in Sources */,
 				23FC29641ACD6F9C00CD60DB /* main.m in Sources */,
 				23D78F7D1ACE70AE00D81298 /* TestMigrator.xcdatamodeld in Sources */,
+				238166731ACE9914002DEAD4 /* Model__0_2.xcmappingmodel in Sources */,
 				23FC29921ACD7D4900CD60DB /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,7 +384,7 @@
 				23D78F7B1ACE70AE00D81298 /* TestMigrator 4.xcdatamodel */,
 				23D78F7C1ACE70AE00D81298 /* TestMigrator.xcdatamodel */,
 			);
-			currentVersion = 23D78F7A1ACE70AE00D81298 /* TestMigrator 3.xcdatamodel */;
+			currentVersion = 23D78F7B1ACE70AE00D81298 /* TestMigrator 4.xcdatamodel */;
 			name = TestMigrator.xcdatamodeld;
 			path = ../Example/TestMigrator/TestMigrator.xcdatamodeld;
 			sourceTree = "<group>";

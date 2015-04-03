@@ -50,19 +50,17 @@
     [controller infoText:@""];
     NSString *pathToFile = [NSHomeDirectory() stringByAppendingPathComponent:CORE_FILE_DIR];
     NSString *pathToModels = [NSHomeDirectory() stringByAppendingPathComponent:CORE_MIGR_DIR];
-//    NSLog(@"%@",path);
-    NSURL *url = [NSURL fileURLWithPath:pathToFile];
-    storeUrl = [url URLByAppendingPathComponent:CORE_FILE];
+    storeUrl = [[NSURL fileURLWithPath:pathToFile] URLByAppendingPathComponent:CORE_FILE];
     NSLog(@"%@",storeUrl);
     modelUrl = [NSURL fileURLWithPath:pathToModels];
-    
     NSLog(@"%@",modelUrl);
     
-    [self removeStoreAtURL:storeUrl];
-    
-    [self copyResurce:CORE_FILE toDir:CORE_FILE_DIR withUpdate:YES];
-    [self copyResurce:@"TestMigrator.momd" toDir:CORE_MIGR_DIR withUpdate:YES];
-    
+//  [self removeStoreAtURL:storeUrl];
+    BOOL ok1 = [[NSFileManager defaultManager] removeItemAtPath:pathToFile error:NULL];
+    BOOL ok2 = [[NSFileManager defaultManager] removeItemAtPath:pathToModels error:NULL];
+   
+    [self copyResurce:CORE_FILE toDir:CORE_FILE_DIR withDelete:YES];
+    [self copyResurce:@"TestMigrator.momd" toDir:CORE_MIGR_DIR withDelete:YES];
     
     __typeof__(self) __weak weakSelf = self;
     void (^postAction)(BOOL) = ^(BOOL ok){
@@ -98,8 +96,8 @@
             return NO;
         for (NSManagedObject *info in fetchedObjects) {
             NSString *str = [info valueForKey:@"sInfo"];
-            NSLog(@"sInfo: %@", str);
-            if (str.length)
+            NSLog(@"sInfo: (%@)", str); //"migr 0->2 + / migr 3->4"
+            if (str.length && [str isEqualToString:@"migr 0->2 + / migr 3->4"])
                 return YES;
         }
         return NO;
@@ -115,7 +113,7 @@
 
 
 //#define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
--(void)copyResurce:(NSString*)resFile toDir:(NSString*)Dir withUpdate:(BOOL)update
+-(void)copyResurce:(NSString*)resFile toDir:(NSString*)Dir withDelete:(BOOL)delete
 {
     NSString *filePathFfom = [[NSBundle mainBundle] pathForResource:[resFile stringByDeletingPathExtension] ofType:[resFile pathExtension]];
     NSString *dirPathTo = [NSHomeDirectory() stringByAppendingPathComponent:Dir];
@@ -134,7 +132,7 @@
         NSLog(@"copy is %d = /%@/ to /%@/",success,filePathFfom,filePathTo);
     } else {
         NSLog(@"EXIST /%@/",filePathTo);
-        if (update) {
+        if (delete) {
             success = [fileManager removeItemAtPath:filePathTo error:&error];
             NSLog(@"remove is %d",success);
             success = [fileManager copyItemAtPath:filePathFfom toPath:filePathTo error:&error];
