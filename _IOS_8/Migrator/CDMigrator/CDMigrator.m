@@ -69,6 +69,7 @@ static volatile float _progressRange = 0.f;
     
     if (!self.asyncQueue)
         self.asyncQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0); //dispatch_get_main_queue()
+    self.asyncQueue = dispatch_get_main_queue();
     
     NSLog(@"run migrator in asynq queue");
     dispatch_async(self.asyncQueue, ^{
@@ -88,14 +89,18 @@ static volatile float _progressRange = 0.f;
     BOOL result = NO;
     NSManagedObjectModel *_managedObjectModel;
     NSPersistentStoreCoordinator *_persistentStoreCoordinator;
-    
+
+    NSArray *bundles = nil;
+
     if (self.modelsUrl) {
         self.dataBundle = [NSBundle bundleWithURL:self.modelsUrl];
         NSLog(@"MODEL_BUNDLE=%@",self.dataBundle);
+        bundles = @[self.dataBundle];
     }
     
     if (!self.dataBundle) {
         self.dataBundle = [NSBundle mainBundle];
+        bundles = @[self.dataBundle];
     }
     
 @try
@@ -191,8 +196,10 @@ static volatile float _progressRange = 0.f;
                 float ran = 1.0;
                 BOOL ok = YES;
                 
-                sourceModel = [NSManagedObjectModel mergedModelFromBundles:nil forStoreMetadata:sourceMetadata];
-                mappingModel = [NSMappingModel mappingModelFromBundles:nil forSourceModel:sourceModel destinationModel:destinationModel];
+//                if (self.dataBundle
+                
+                sourceModel = [NSManagedObjectModel mergedModelFromBundles:bundles forStoreMetadata:sourceMetadata];
+                mappingModel = [NSMappingModel mappingModelFromBundles:bundles forSourceModel:sourceModel destinationModel:destinationModel];
                 if (mappingModel) {
                     NSLog(@"====== direct migration ======");
                     arraySteps = @[ @{@"sourceModel":sourceModel, @"destModel":destinationModel, @"mapModel":mappingModel, @"sourceName":@"?", @"destName":@"?" } ];
@@ -216,7 +223,7 @@ static volatile float _progressRange = 0.f;
                     NSMappingModel *mapModel;
                     if (dic[@"mapModel"] == [NSNull null])
                     {
-                        mapModel = [NSMappingModel mappingModelFromBundles:nil forSourceModel:sModel destinationModel:dModel];
+                        mapModel = [NSMappingModel mappingModelFromBundles:bundles forSourceModel:sModel destinationModel:dModel];
                     } else {
                         mapModel = dic[@"mapModel"];
                     }
@@ -254,6 +261,10 @@ static volatile float _progressRange = 0.f;
                             NSLog(@"========= light migration OK! =========");
                         }
                     }
+                    
+#ifdef USE_TEST_MIGRATION_DELAY
+                    sleep(1);
+#endif
                     
                     if ([nameOfDestinationModel isEqual:dic[@"destName"]]) {
                         NSLog(@"-----exit by nameOfDestinationModel=%@-----",nameOfDestinationModel);
@@ -479,9 +490,7 @@ static volatile float _progressRange = 0.f;
         //delete *-shm and *-wal files for result base
         [[NSFileManager defaultManager] removeItemAtURL:sourceStoreURL_SHM error:NULL];
         [[NSFileManager defaultManager] removeItemAtURL:sourceStoreURL_WAL error:NULL];
-    
-//    sleep(1);
-    
+        
     } //@try
     
 @catch (NSException *exception)

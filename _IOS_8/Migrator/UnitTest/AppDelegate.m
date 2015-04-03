@@ -37,7 +37,10 @@
     
     controller = (ViewController *)self.window.rootViewController;
     
-    [self performSelector:@selector(runTest) withObject:nil afterDelay:1.0];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self runTest:0];
+    });
+    
     
     return YES;
 }
@@ -45,9 +48,14 @@
 
 
 
--(void)runTest
+-(void)runTest:(int)mode
 {
-    [controller infoText:@""];
+    if (mode>=2)
+        return;
+#ifdef USE_TEST_MIGRATION_DELAY
+    sleep(1);
+#endif
+    [controller infoText:[NSString stringWithFormat:@"%d",mode]];
     NSString *pathToFile = [NSHomeDirectory() stringByAppendingPathComponent:CORE_FILE_DIR];
     NSString *pathToModels = [NSHomeDirectory() stringByAppendingPathComponent:CORE_MIGR_DIR];
     storeUrl = [[NSURL fileURLWithPath:pathToFile] URLByAppendingPathComponent:CORE_FILE];
@@ -55,12 +63,18 @@
     modelUrl = [NSURL fileURLWithPath:pathToModels];
     NSLog(@"%@",modelUrl);
     
-//  [self removeStoreAtURL:storeUrl];
-    BOOL ok1 = [[NSFileManager defaultManager] removeItemAtPath:pathToFile error:NULL];
-    BOOL ok2 = [[NSFileManager defaultManager] removeItemAtPath:pathToModels error:NULL];
+    [[NSFileManager defaultManager] removeItemAtPath:pathToFile error:NULL];
+    [[NSFileManager defaultManager] removeItemAtPath:pathToModels error:NULL];
    
-    [self copyResurce:CORE_FILE toDir:CORE_FILE_DIR withDelete:YES];
-    [self copyResurce:@"TestMigrator.momd" toDir:CORE_MIGR_DIR withDelete:YES];
+//  [self copyResurce:CORE_FILE toDir:CORE_FILE_DIR withDelete:YES];
+    [self copyResurce:@"TestMigrator.sqlite" toDir:CORE_FILE_DIR withDelete:YES];
+    [self copyResurce:@"TestMigrator.sqlite-shm" toDir:CORE_FILE_DIR withDelete:YES];
+    [self copyResurce:@"TestMigrator.sqlite-wal" toDir:CORE_FILE_DIR withDelete:YES];
+    if (mode==1) {
+        [self copyResurce:@"TestMigrator.momd" toDir:CORE_MIGR_DIR withDelete:YES];
+        [self copyResurce:@"Model__0_2.cdm" toDir:CORE_MIGR_DIR withDelete:YES];
+        [self copyResurce:@"Model__3_4.cdm" toDir:CORE_MIGR_DIR withDelete:YES];
+    }
     
     __typeof__(self) __weak weakSelf = self;
     void (^postAction)(BOOL) = ^(BOOL ok){
@@ -68,10 +82,14 @@
         {
             NSLog(@">>>>>>> Migration_was_OK <<<<<<<<<<");
             controller.managedObjectContext = [weakSelf managedObjectContext]; //create Core Date stack
-            [controller infoText:@"MIGRATION WAS OK"];
+            [controller infoText:[NSString stringWithFormat:@"MIGRATION %d WAS OK",mode]];
+            [[NSOperationQueue mainQueue] addOperationWithBlock: ^{
+                [self runTest:mode+1];
+            }];
+            
         } else {
             NSLog(@">>>>>>> Migration_was_WRONG <<<<<<<<<<");
-            [controller infoText:@"TEST FAILED!!!"];
+            [controller infoText:[NSString stringWithFormat:@"MIGRATION %d FAILED!!!!",mode]];
         }
 //        [self removeStoreAtURL:storeUrl];
     };
@@ -80,12 +98,7 @@
     
     migrator.initHud = ^{[SVProgressHUD showWithStatus:@"Updating media database..." maskType:SVProgressHUDMaskTypeGradient];};
     migrator.dismissHud = ^{[SVProgressHUD dismiss];};
-    migrator.progressHud = ^(float progress){[SVProgressHUD showProgress:progress status:@"Run migration..." maskType:SVProgressHUDMaskTypeClear];};
-    
-    migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"}, @{@"name":@"TestMigrator 4"},];
-    migrator.migrationClass = [CDMigrationManager class];
-    migrator.modelsUrl = modelUrl;//[[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ModelDataDir/"];
-    
+    migrator.progressHud = ^(float progress){[SVProgressHUD showProgress:progress status:@"Run migration..." maskType:SVProgressHUDMaskTypeGradient];};
     
     migrator.checkResult = ^BOOL(NSManagedObjectContext *context) {
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -103,7 +116,26 @@
         return NO;
     };
     
-    NSLog(@"%@",storeUrl);
+    
+    switch (mode) {
+        case 0:
+            migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"}, @{@"name":@"TestMigrator 4"},];
+            migrator.migrationClass = [CDMigrationManager class];
+//          migrator.modelsUrl = modelUrl;//[[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ModelDataDir/"];
+    
+            break;
+            
+        case 1:
+//          migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"}, @{@"name":@"TestMigrator 4"},];
+            migrator.migrationClass = [CDMigrationManager class];
+            migrator.modelsUrl = modelUrl;
+            
+            break;
+            
+        default:
+            return;
+    }
+    
     [migrator migrationFor:storeUrl
                  modelName:CORE_NAME
                 completion:[postAction copy]];

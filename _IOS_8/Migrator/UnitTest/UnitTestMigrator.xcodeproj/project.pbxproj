@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		238166731ACE9914002DEAD4 /* Model__0_2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 238166721ACE9914002DEAD4 /* Model__0_2.xcmappingmodel */; };
-		238166751ACE9936002DEAD4 /* Model__3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 238166741ACE9936002DEAD4 /* Model__3_4.xcmappingmodel */; };
+		238166781ACEC878002DEAD4 /* Model__0_2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 238166761ACEC878002DEAD4 /* Model__0_2.xcmappingmodel */; };
+		238166791ACEC878002DEAD4 /* Model__3_4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 238166771ACEC878002DEAD4 /* Model__3_4.xcmappingmodel */; };
+		2381667D1ACED0C3002DEAD4 /* TestMigrator.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2381667A1ACED0C3002DEAD4 /* TestMigrator.sqlite */; };
+		2381667E1ACED0C3002DEAD4 /* TestMigrator.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = 2381667B1ACED0C3002DEAD4 /* TestMigrator.sqlite-shm */; };
+		2381667F1ACED0C3002DEAD4 /* TestMigrator.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = 2381667C1ACED0C3002DEAD4 /* TestMigrator.sqlite-wal */; };
 		23D78F7D1ACE70AE00D81298 /* TestMigrator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 23D78F781ACE70AE00D81298 /* TestMigrator.xcdatamodeld */; };
 		23D78F831ACE70FE00D81298 /* CDMigrationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D78F801ACE70FE00D81298 /* CDMigrationManager.m */; };
 		23D78F841ACE70FE00D81298 /* CDMigrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D78F821ACE70FE00D81298 /* CDMigrator.m */; };
@@ -20,13 +23,15 @@
 		23FC29901ACD7D4900CD60DB /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FC298C1ACD7D4900CD60DB /* SVIndefiniteAnimatedView.m */; };
 		23FC29911ACD7D4900CD60DB /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 23FC298D1ACD7D4900CD60DB /* SVProgressHUD.bundle */; };
 		23FC29921ACD7D4900CD60DB /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 23FC298F1ACD7D4900CD60DB /* SVProgressHUD.m */; };
-		23FC29A81ACD91B000CD60DB /* TestMigrator.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 23FC29A71ACD91B000CD60DB /* TestMigrator.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		238166711ACE801A002DEAD4 /* UnitTest.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTest.pch; sourceTree = SOURCE_ROOT; };
-		238166721ACE9914002DEAD4 /* Model__0_2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model__0_2.xcmappingmodel; sourceTree = "<group>"; };
-		238166741ACE9936002DEAD4 /* Model__3_4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model__3_4.xcmappingmodel; sourceTree = "<group>"; };
+		238166761ACEC878002DEAD4 /* Model__0_2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model__0_2.xcmappingmodel; sourceTree = "<group>"; };
+		238166771ACEC878002DEAD4 /* Model__3_4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model__3_4.xcmappingmodel; sourceTree = "<group>"; };
+		2381667A1ACED0C3002DEAD4 /* TestMigrator.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestMigrator.sqlite; sourceTree = SOURCE_ROOT; };
+		2381667B1ACED0C3002DEAD4 /* TestMigrator.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TestMigrator.sqlite-shm"; sourceTree = SOURCE_ROOT; };
+		2381667C1ACED0C3002DEAD4 /* TestMigrator.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "TestMigrator.sqlite-wal"; sourceTree = SOURCE_ROOT; };
 		23D78F791ACE70AE00D81298 /* TestMigrator 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TestMigrator 2.xcdatamodel"; sourceTree = "<group>"; };
 		23D78F7A1ACE70AE00D81298 /* TestMigrator 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TestMigrator 3.xcdatamodel"; sourceTree = "<group>"; };
 		23D78F7B1ACE70AE00D81298 /* TestMigrator 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; name = "TestMigrator 4.xcdatamodel"; path = "../Example/TestMigrator/TestMigrator.xcdatamodeld/TestMigrator 4.xcdatamodel"; sourceTree = SOURCE_ROOT; };
@@ -50,7 +55,6 @@
 		23FC298D1ACD7D4900CD60DB /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		23FC298E1ACD7D4900CD60DB /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		23FC298F1ACD7D4900CD60DB /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
-		23FC29A71ACD91B000CD60DB /* TestMigrator.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestMigrator.sqlite; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,8 +114,10 @@
 		23FC29611ACD6F9C00CD60DB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2381667A1ACED0C3002DEAD4 /* TestMigrator.sqlite */,
+				2381667B1ACED0C3002DEAD4 /* TestMigrator.sqlite-shm */,
+				2381667C1ACED0C3002DEAD4 /* TestMigrator.sqlite-wal */,
 				238166711ACE801A002DEAD4 /* UnitTest.pch */,
-				23FC29A71ACD91B000CD60DB /* TestMigrator.sqlite */,
 				23D78F8B1ACE795300D81298 /* Main.storyboard */,
 				23FC29731ACD6F9C00CD60DB /* LaunchScreen.xib */,
 				23FC29711ACD6F9C00CD60DB /* Images.xcassets */,
@@ -138,8 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				23D78F781ACE70AE00D81298 /* TestMigrator.xcdatamodeld */,
-				238166721ACE9914002DEAD4 /* Model__0_2.xcmappingmodel */,
-				238166741ACE9936002DEAD4 /* Model__3_4.xcmappingmodel */,
+				238166761ACEC878002DEAD4 /* Model__0_2.xcmappingmodel */,
+				238166771ACEC878002DEAD4 /* Model__3_4.xcmappingmodel */,
 			);
 			name = "Core Data Base";
 			sourceTree = SOURCE_ROOT;
@@ -201,9 +207,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23FC29A81ACD91B000CD60DB /* TestMigrator.sqlite in Resources */,
+				2381667D1ACED0C3002DEAD4 /* TestMigrator.sqlite in Resources */,
 				23FC29721ACD6F9C00CD60DB /* Images.xcassets in Resources */,
 				23FC29911ACD7D4900CD60DB /* SVProgressHUD.bundle in Resources */,
+				2381667F1ACED0C3002DEAD4 /* TestMigrator.sqlite-wal in Resources */,
+				2381667E1ACED0C3002DEAD4 /* TestMigrator.sqlite-shm in Resources */,
 				23D78F8D1ACE795300D81298 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,7 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				238166751ACE9936002DEAD4 /* Model__3_4.xcmappingmodel in Sources */,
+				238166791ACEC878002DEAD4 /* Model__3_4.xcmappingmodel in Sources */,
 				23FC29901ACD7D4900CD60DB /* SVIndefiniteAnimatedView.m in Sources */,
 				23D78F831ACE70FE00D81298 /* CDMigrationManager.m in Sources */,
 				23FC29671ACD6F9C00CD60DB /* AppDelegate.m in Sources */,
@@ -223,7 +231,7 @@
 				23FC296D1ACD6F9C00CD60DB /* ViewController.m in Sources */,
 				23FC29641ACD6F9C00CD60DB /* main.m in Sources */,
 				23D78F7D1ACE70AE00D81298 /* TestMigrator.xcdatamodeld in Sources */,
-				238166731ACE9914002DEAD4 /* Model__0_2.xcmappingmodel in Sources */,
+				238166781ACEC878002DEAD4 /* Model__0_2.xcmappingmodel in Sources */,
 				23FC29921ACD7D4900CD60DB /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
