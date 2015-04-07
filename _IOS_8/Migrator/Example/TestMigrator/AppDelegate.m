@@ -42,28 +42,39 @@
     };
     
     CDMigrator *migrator = [CDMigrator new];
+    
+//    migrator.useOnlyDirectLightMigration = YES;
         
     migrator.initHud = ^{[SVProgressHUD showWithStatus:@"Updating media database..." maskType:SVProgressHUDMaskTypeGradient];};
     migrator.dismissHud = ^{[SVProgressHUD dismiss];};
     migrator.progressHud = ^(float progress){[SVProgressHUD showProgress:progress status:@"Run migration..." maskType:SVProgressHUDMaskTypeClear];};
     
-    migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"}, @{@"name":@"TestMigrator 4"},];
+//    migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"}, @{@"name":@"TestMigrator 4"},];
     migrator.migrationClass = [CDMigrationManager class];
 //  migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ModelDataDir/"];
     
     
-    migrator.checkResult = ^BOOL(NSManagedObjectContext *context) {
+    migrator.checkAfterMigration = ^BOOL(NSManagedObjectContext *context) {
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        [fetchRequest setEntity:[NSEntityDescription entityForName:@"Event" inManagedObjectContext:context]];
+        [fetchRequest setEntity:[NSEntityDescription entityForName:ENTITY_NAME inManagedObjectContext:context]];
         NSError *error;
-        NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-        if (error || fetchedObjects.count==0)
+        NSArray *fetchedObjects;
+        @try {
+            fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"EXCEPTION CHECK");
             return NO;
+        }
+        if (error || fetchedObjects.count==0) {
+            NSLog(@"ERROR CHECK");
+            return NO;
+        }
         for (NSManagedObject *info in fetchedObjects) {
             NSString *str = [info valueForKey:@"sInfo"];
-            NSLog(@"sInfo: %@", str);
+            NSLog(@"sInfo: (%@)", str);
             if (str.length)
-                return YES;
+                return YES; //there is not empty string - ok
         }
         return NO;
     };

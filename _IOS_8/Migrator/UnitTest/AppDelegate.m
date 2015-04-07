@@ -50,7 +50,7 @@
 
 -(void)runTest:(int)mode
 {
-    if (mode>=2)
+    if (mode>=3)
         return;
 #ifdef USE_TEST_MIGRATION_DELAY
     sleep(1);
@@ -100,18 +100,31 @@
     migrator.dismissHud = ^{[SVProgressHUD dismiss];};
     migrator.progressHud = ^(float progress){[SVProgressHUD showProgress:progress status:@"Run migration..." maskType:SVProgressHUDMaskTypeGradient];};
     
-    migrator.checkResult = ^BOOL(NSManagedObjectContext *context) {
+    migrator.checkAfterMigration = ^BOOL(NSManagedObjectContext *context) {
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        [fetchRequest setEntity:[NSEntityDescription entityForName:@"Event" inManagedObjectContext:context]];
+        [fetchRequest setEntity:[NSEntityDescription entityForName:@"NewEvent" inManagedObjectContext:context]];
         NSError *error;
-        NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-        if (error || fetchedObjects.count==0)
+        NSArray *fetchedObjects;
+        @try {
+            fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"EXCEPTION CHECK");
             return NO;
+        }
+        if (error || fetchedObjects.count==0) {
+            NSLog(@"ERROR CHECK");
+           return NO;
+        }
         for (NSManagedObject *info in fetchedObjects) {
             NSString *str = [info valueForKey:@"sInfo"];
-            NSLog(@"sInfo: (%@)", str); //"migr 0->2 + / migr 3->4"
+            NSLog(@"sInfo: (%@)", str); //"migr 0->2 + / migr 3->4" (0,1) "" (2)
             if (str.length && [str isEqualToString:@"migr 0->2 + / migr 3->4"])
                 return YES;
+            if (str.length && (mode == 2)) {
+                if ([str hasSuffix:@"?\""])
+                    return YES;
+            }
         }
         return NO;
     };
@@ -129,6 +142,12 @@
 //          migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"}, @{@"name":@"TestMigrator 4"},];
             migrator.migrationClass = [CDMigrationManager class];
             migrator.modelsUrl = modelUrl;
+            
+            break;
+
+        case 2:
+            migrator.useOnlyDirectLightMigration = YES; // version 0 -> version 4
+            
             
             break;
             

@@ -30,6 +30,11 @@
 #define CORE_NAME  @"TestMigrator"
 #define CORE_FILE  @"TestMigrator.sqlite"
 
+//#define ENTITY_NAME @"Event"
+#define ENTITY_NAME @"NewEvent"
+
+
+#define USE_TEST_MIGRATION_DELAY
 
 
 #endif

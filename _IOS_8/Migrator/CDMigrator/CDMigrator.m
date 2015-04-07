@@ -46,7 +46,7 @@ static volatile float _progressRange = 0.f;
 {
     self = [super init];
     if (self)  {
-        _useOnlyLightMigration = NO;
+        _useOnlyDirectLightMigration = NO;
     }
     return self;
 }
@@ -69,7 +69,7 @@ static volatile float _progressRange = 0.f;
     
     if (!self.asyncQueue)
         self.asyncQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0); //dispatch_get_main_queue()
-    self.asyncQueue = dispatch_get_main_queue();
+//     self.asyncQueue = dispatch_get_main_queue();
     
     NSLog(@"run migrator in asynq queue");
     dispatch_async(self.asyncQueue, ^{
@@ -86,7 +86,7 @@ static volatile float _progressRange = 0.f;
                modelName:(NSString *)modelName
               completion:(void (^)(BOOL))completion
 {
-    BOOL result = NO;
+    __block BOOL result = NO;
     NSManagedObjectModel *_managedObjectModel;
     NSPersistentStoreCoordinator *_persistentStoreCoordinator;
 
@@ -182,9 +182,9 @@ static volatile float _progressRange = 0.f;
             
             [self showHud];
             
-            if (self.useOnlyLightMigration)
+            if (self.useOnlyDirectLightMigration)
             {
-                NSLog(@"Light Migration"); // Try to perform Light Migration
+                NSLog(@"Try Only Light Migration"); // Try to perform Light Migration
                 options = @{NSMigratePersistentStoresAutomaticallyOption: @YES, NSInferMappingModelAutomaticallyOption: @YES};
             } else
             {
@@ -210,6 +210,10 @@ static volatile float _progressRange = 0.f;
                     arraySteps = [self migrationChainFor:self.models metadata:sourceMetadata];
                 }
                 NSLog(@"found %d migration chain steps",arraySteps.count);
+                if (arraySteps.count == 0) {
+                    NSLog(@"Current model in not found!!!");
+                    return result;
+                }
                 float delta = (arraySteps.count > 0 ? 1./arraySteps.count : 1.) - 0.00001;
                 off = 0.;
                 ran = delta;
@@ -296,14 +300,15 @@ static volatile float _progressRange = 0.f;
             result = YES;
         }
         
-        if (self.checkResult) {
-            NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+        if (self.checkAfterMigration) {
+            NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];//NSPrivateQueueConcurrencyType];
             [context setPersistentStoreCoordinator:_persistentStoreCoordinator];
             if (!context) {
                 NSLog(@"Can't create context!");
                 return result;
             } else {
-                result = self.checkResult(context);
+                result = NO;
+                result = self.checkAfterMigration(context);
                 NSLog(@"checkResult=%d",result);
             }
         } 
@@ -420,9 +425,9 @@ static volatile float _progressRange = 0.f;
         NSURL *newStoreURL = tempDestinationStoreURL;
         
         NSDictionary *options =   @{
-                                   NSMigratePersistentStoresAutomaticallyOption:@YES
- //                                  ,NSInferMappingModelAutomaticallyOption:@YES
-                                   ,NSSQLitePragmasOption: @{@"journal_mode": @"DELETE"} //"DELETE" "WAL"
+//                                   NSMigratePersistentStoresAutomaticallyOption:@YES
+//                                   ,NSInferMappingModelAutomaticallyOption:@YES
+                                   NSSQLitePragmasOption: @{@"journal_mode": @"DELETE"} //"DELETE" "WAL"
                                    };
         
         [migrationManager addObserver:(id)self forKeyPath:@"migrationProgress" options:0 context:NULL];
@@ -495,7 +500,7 @@ static volatile float _progressRange = 0.f;
     
 @catch (NSException *exception)
     {
-        NSLog(@"!!! MIGRATION EXCEPTION !!!");
+        NSLog(@"!!! GOT MIGRATION EXCEPTION !!!");
     } //@catch
     
 @finally
@@ -700,6 +705,60 @@ static volatile float _progressRange = 0.f;
 
 
 //NSTemporaryDirectory()
+
+
+
+/*
+- (NSManagedObjectContext *)managedObjectContext {
+    if (__managedObjectContext != nil) {
+        return __managedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
+        __managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        [__managedObjectContext setPersistentStoreCoordinator:coordinator];
+    }
+    return __managedObjectContext;
+}
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+    if (__persistentStoreCoordinator != nil) {
+        return __persistentStoreCoordinator;
+    }
+    
+    NSURL *storeURL = [[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject] URLByAppendingPathComponent:@"YOURDB.sqlite"];
+    
+    NSError *error = nil;
+    __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+        if (error.code == 134100) {
+            if ( [[NSFileManager defaultManager] fileExistsAtPath: [storeURL path]] ) {
+                NSDictionary *existingPersistentStoreMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType: NSSQLiteStoreType URL: storeURL error: &error];
+                if ( !existingPersistentStoreMetadata ) {
+                    // Something *really* bad has happened to the persistent store
+                    [NSException raise: NSInternalInconsistencyException format: @"Failed to read metadata for persistent store %@: %@", storeURL, error];
+                }
+                
+                if ( ![[self managedObjectModel] isConfiguration: nil compatibleWithStoreMetadata: existingPersistentStoreMetadata] ) {
+                    if (![[NSFileManager defaultManager] removeItemAtURL: storeURL error: &error] ) {
+                        NSLog(@"*** Could not delete persistent store, %@", error);
+                        abort();
+                    } else {
+                        [__persistentStoreCoordinator addPersistentStoreWithType: NSSQLiteStoreType configuration: nil URL: storeURL options: nil error: &error];
+                    }
+                }
+            }
+        } else {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
+    
+    return __persistentStoreCoordinator;
+}
+*/
+
 
 @end
 

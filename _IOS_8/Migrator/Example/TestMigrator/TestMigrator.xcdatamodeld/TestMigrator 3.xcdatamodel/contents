@@ -3,7 +3,7 @@
     <entity name="Event">
         <attribute name="newField2" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
         <attribute name="newField3" optional="YES" attributeType="String" defaultValueString="&quot;&quot;" syncable="YES"/>
-        <attribute name="sInfo" optional="YES" attributeType="String" defaultValueString="&quot;?&quot;" syncable="YES"/>
+        <attribute name="sInfo" optional="YES" attributeType="String" defaultValueString="&quot;3?&quot;" syncable="YES"/>
         <attribute name="timeStamp" optional="YES" attributeType="Date">
             <userInfo/>
         </attribute>

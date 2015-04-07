@@ -20,8 +20,8 @@
 		239A21071ACC20DB00A4AEF4 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 239A21031ACC20DB00A4AEF4 /* SVProgressHUD.bundle */; };
 		239A21081ACC20DB00A4AEF4 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 239A21051ACC20DB00A4AEF4 /* SVProgressHUD.m */; };
 		239A211A1ACC3C7F00A4AEF4 /* TestMigrator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 239A21171ACC3C7F00A4AEF4 /* TestMigrator.xcdatamodeld */; };
-		239A211D1ACC41D600A4AEF4 /* Model_0_2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 239A211C1ACC41D600A4AEF4 /* Model_0_2.xcmappingmodel */; };
-		239A211F1ACC41EC00A4AEF4 /* Model_2_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 239A211E1ACC41EC00A4AEF4 /* Model_2_3.xcmappingmodel */; };
+		23F1F0111AD3D46A00955423 /* Model_0_2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23F1F00F1AD3D46A00955423 /* Model_0_2.xcmappingmodel */; };
+		23F1F0121AD3D46A00955423 /* Model_2_3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 23F1F0101AD3D46A00955423 /* Model_2_3.xcmappingmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,8 +50,8 @@
 		239A21181ACC3C7F00A4AEF4 /* TestMigrator 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TestMigrator 2.xcdatamodel"; sourceTree = "<group>"; };
 		239A21191ACC3C7F00A4AEF4 /* TestMigrator.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TestMigrator.xcdatamodel; sourceTree = "<group>"; };
 		239A211B1ACC3C9F00A4AEF4 /* TestMigrator 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TestMigrator 3.xcdatamodel"; sourceTree = "<group>"; };
-		239A211C1ACC41D600A4AEF4 /* Model_0_2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_0_2.xcmappingmodel; sourceTree = "<group>"; };
-		239A211E1ACC41EC00A4AEF4 /* Model_2_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_2_3.xcmappingmodel; sourceTree = "<group>"; };
+		23F1F00F1AD3D46A00955423 /* Model_0_2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_0_2.xcmappingmodel; sourceTree = "<group>"; };
+		23F1F0101AD3D46A00955423 /* Model_2_3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model_2_3.xcmappingmodel; sourceTree = "<group>"; };
 		23FC29A01ACD895D00CD60DB /* TestMigrator 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TestMigrator 4.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,9 +91,6 @@
 				239A20F21ACC19DB00A4AEF4 /* CDMigrator */,
 				239A20C81ACC10E700A4AEF4 /* AppDelegate.h */,
 				239A20C91ACC10E700A4AEF4 /* AppDelegate.m */,
-				239A20D41ACC10E700A4AEF4 /* Main.storyboard */,
-				239A20D71ACC10E700A4AEF4 /* Images.xcassets */,
-				239A20D91ACC10E700A4AEF4 /* LaunchScreen.xib */,
 				239A20C41ACC10E700A4AEF4 /* Supporting Files */,
 			);
 			path = TestMigrator;
@@ -102,6 +99,9 @@
 		239A20C41ACC10E700A4AEF4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				239A20D41ACC10E700A4AEF4 /* Main.storyboard */,
+				239A20D71ACC10E700A4AEF4 /* Images.xcassets */,
+				239A20D91ACC10E700A4AEF4 /* LaunchScreen.xib */,
 				239A20C51ACC10E700A4AEF4 /* Info.plist */,
 				239A20C61ACC10E700A4AEF4 /* main.m */,
 				239A21091ACC21C400A4AEF4 /* TestMigrator.pch */,
@@ -124,8 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				239A21171ACC3C7F00A4AEF4 /* TestMigrator.xcdatamodeld */,
-				239A211C1ACC41D600A4AEF4 /* Model_0_2.xcmappingmodel */,
-				239A211E1ACC41EC00A4AEF4 /* Model_2_3.xcmappingmodel */,
+				23F1F00F1AD3D46A00955423 /* Model_0_2.xcmappingmodel */,
+				23F1F0101AD3D46A00955423 /* Model_2_3.xcmappingmodel */,
 			);
 			name = "Core Data Base";
 			sourceTree = "<group>";
@@ -232,8 +232,8 @@
 				239A21081ACC20DB00A4AEF4 /* SVProgressHUD.m in Sources */,
 				239A20C71ACC10E700A4AEF4 /* main.m in Sources */,
 				239A20F81ACC19DB00A4AEF4 /* CDMigrationManager.m in Sources */,
-				239A211D1ACC41D600A4AEF4 /* Model_0_2.xcmappingmodel in Sources */,
-				239A211F1ACC41EC00A4AEF4 /* Model_2_3.xcmappingmodel in Sources */,
+				23F1F0111AD3D46A00955423 /* Model_0_2.xcmappingmodel in Sources */,
+				23F1F0121AD3D46A00955423 /* Model_2_3.xcmappingmodel in Sources */,
 				239A211A1ACC3C7F00A4AEF4 /* TestMigrator.xcdatamodeld in Sources */,
 				239A20F71ACC19DB00A4AEF4 /* CDMigrator.m in Sources */,
 			);
