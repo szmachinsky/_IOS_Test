@@ -49,7 +49,7 @@
     migrator.dismissHud = ^{[SVProgressHUD dismiss];};
     migrator.progressHud = ^(float progress){[SVProgressHUD showProgress:progress status:@"Run migration..." maskType:SVProgressHUDMaskTypeClear];};
     
-//    migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"}, @{@"name":@"TestMigrator 4"},];
+//   migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"}, @{@"name":@"TestMigrator 4"},];
     migrator.migrationClass = [CDMigrationManager class];
 //  migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ModelDataDir/"];
     

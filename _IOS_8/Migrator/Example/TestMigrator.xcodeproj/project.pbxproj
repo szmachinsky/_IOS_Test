@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2373DBDB1AD419990088F7C6 /* Model__2__4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 2373DBDA1AD419990088F7C6 /* Model__2__4.xcmappingmodel */; };
 		239A20C71ACC10E700A4AEF4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 239A20C61ACC10E700A4AEF4 /* main.m */; };
 		239A20CA1ACC10E700A4AEF4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 239A20C91ACC10E700A4AEF4 /* AppDelegate.m */; };
 		239A20D01ACC10E700A4AEF4 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 239A20CF1ACC10E700A4AEF4 /* MasterViewController.m */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2373DBDA1AD419990088F7C6 /* Model__2__4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = Model__2__4.xcmappingmodel; sourceTree = "<group>"; };
 		239A20C11ACC10E700A4AEF4 /* TestMigrator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestMigrator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		239A20C51ACC10E700A4AEF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		239A20C61ACC10E700A4AEF4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				239A21171ACC3C7F00A4AEF4 /* TestMigrator.xcdatamodeld */,
 				23F1F00F1AD3D46A00955423 /* Model_0_2.xcmappingmodel */,
 				23F1F0101AD3D46A00955423 /* Model_2_3.xcmappingmodel */,
+				2373DBDA1AD419990088F7C6 /* Model__2__4.xcmappingmodel */,
 			);
 			name = "Core Data Base";
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				239A20D31ACC10E700A4AEF4 /* DetailViewController.m in Sources */,
 				239A20D01ACC10E700A4AEF4 /* MasterViewController.m in Sources */,
 				239A20CA1ACC10E700A4AEF4 /* AppDelegate.m in Sources */,
+				2373DBDB1AD419990088F7C6 /* Model__2__4.xcmappingmodel in Sources */,
 				239A21061ACC20DB00A4AEF4 /* SVIndefiniteAnimatedView.m in Sources */,
 				239A21081ACC20DB00A4AEF4 /* SVProgressHUD.m in Sources */,
 				239A20C71ACC10E700A4AEF4 /* main.m in Sources */,

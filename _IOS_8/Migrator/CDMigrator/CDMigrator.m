@@ -176,6 +176,15 @@ static volatile float _progressRange = 0.f;
         NSManagedObjectModel *destinationModel = [_persistentStoreCoordinator managedObjectModel];
         BOOL pscCompatible = (sourceMetadata == nil) || [destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
         
+//===
+        NSManagedObjectModel *sourceModel = [NSManagedObjectModel
+                                             mergedModelFromBundles:nil
+                                             forStoreMetadata:sourceMetadata];
+        NSAssert(sourceModel != nil, ([NSString stringWithFormat:
+                                       @"Failed to find source model\n%@",
+                                       sourceMetadata]));
+//===
+        
         if(!pscCompatible) //Migration is needed
         {
             NSLog(@"Migration is needed"); // Migration is needed
@@ -196,14 +205,17 @@ static volatile float _progressRange = 0.f;
                 float ran = 1.0;
                 BOOL ok = YES;
                 
-//                if (self.dataBundle
-                
                 sourceModel = [NSManagedObjectModel mergedModelFromBundles:bundles forStoreMetadata:sourceMetadata];
+                NSAssert(sourceModel != nil, ([NSString stringWithFormat:
+                                               @"Failed to find source model\n%@",
+                                               sourceMetadata]));
+                
                 mappingModel = [NSMappingModel mappingModelFromBundles:bundles forSourceModel:sourceModel destinationModel:destinationModel];
                 if (mappingModel) {
                     NSLog(@"====== direct migration ======");
                     arraySteps = @[ @{@"sourceModel":sourceModel, @"destModel":destinationModel, @"mapModel":mappingModel, @"sourceName":@"?", @"destName":@"?" } ];
                 }
+                NSManagedObjectModel *finalModel = destinationModel;
                 
                 //build  array with migration chain steps descriptios
                 if (arraySteps.count == 0) {
@@ -220,10 +232,14 @@ static volatile float _progressRange = 0.f;
                 for (int i = 0; i < arraySteps.count; i++)
                 @autoreleasepool
                 {
-                    NSLog(@"======================= iteration %d ========================",(i+1));
+                    int iterationNumber = (i+1);
+                    NSLog(@"======================= iteration %d ========================",iterationNumber);
                     NSDictionary *dic = (NSDictionary*)arraySteps[i];
                     NSManagedObjectModel *sModel = dic[@"sourceModel"];
                     NSManagedObjectModel *dModel = dic[@"destModel"];
+                    BOOL toBreak = NO;
+                    
+                    
                     NSMappingModel *mapModel;
                     if (dic[@"mapModel"] == [NSNull null])
                     {
@@ -232,6 +248,16 @@ static volatile float _progressRange = 0.f;
                         mapModel = dic[@"mapModel"];
                     }
                     NSLog(@"%@ -> %@",dic[@"sourceName"],dic[@"destName"]);
+                                        
+                    if (arraySteps.count > iterationNumber) {
+                        mappingModel = [NSMappingModel mappingModelFromBundles:bundles forSourceModel:sModel destinationModel:finalModel];
+                        if (mappingModel) {
+                            NSLog(@"= direct migration possible!!! =");
+                            dModel = finalModel;
+                            mapModel = mappingModel;
+                            toBreak = YES;
+                        }
+                     }
                     
                     if (mapModel) {
                         NSLog(@"  there is mapping model");
@@ -272,8 +298,13 @@ static volatile float _progressRange = 0.f;
                     
                     if ([nameOfDestinationModel isEqual:dic[@"destName"]]) {
                         NSLog(@"-----exit by nameOfDestinationModel=%@-----",nameOfDestinationModel);
+                        toBreak = YES;
+                    }
+                    
+                    if (toBreak) {
                         break;
                     }
+                    
                     off +=delta;
                     
                 }//for - autorelease
@@ -360,7 +391,7 @@ static volatile float _progressRange = 0.f;
 
     id ok = [persistentStoreCoordinator addPersistentStoreWithType:kCoreDataStoreType configuration:nil URL:storeURL options:options error:&error];
     if (!ok) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        NSLog(@"Unresolved LM error %@, %@", error, [error userInfo]);
         return NO;
     }
     [self showProgress:delta];
@@ -425,9 +456,9 @@ static volatile float _progressRange = 0.f;
         NSURL *newStoreURL = tempDestinationStoreURL;
         
         NSDictionary *options =   @{
-//                                   NSMigratePersistentStoresAutomaticallyOption:@YES
-//                                   ,NSInferMappingModelAutomaticallyOption:@YES
-                                   NSSQLitePragmasOption: @{@"journal_mode": @"DELETE"} //"DELETE" "WAL"
+//                                  NSMigratePersistentStoresAutomaticallyOption:@YES,
+//                                  NSInferMappingModelAutomaticallyOption:@YES,
+                                    NSSQLitePragmasOption: @{@"journal_mode": @"DELETE"} //"DELETE" "WAL"
                                    };
         
         [migrationManager addObserver:(id)self forKeyPath:@"migrationProgress" options:0 context:NULL];
