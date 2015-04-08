@@ -96,13 +96,22 @@
     migrator.migrationClass = [MyMigrationManager class];
 //    migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"SoundTubeDataDir/"];
     
-    migrator.checkResult = ^BOOL(NSManagedObjectContext *context) {
+    migrator.checkAfterMigration = ^BOOL(NSManagedObjectContext *context) {
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         [fetchRequest setEntity:[NSEntityDescription entityForName:@"VideoItem" inManagedObjectContext:context]];
         NSError *error;
-        NSArray *fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
-        if (error || fetchedObjects.count==0)
+        NSArray *fetchedObjects;
+        @try {
+            fetchedObjects = [context executeFetchRequest:fetchRequest error:&error];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"EXCEPTION CHECK");
             return NO;
+        }
+        if (error || fetchedObjects.count==0) {
+            NSLog(@"ERROR CHECK");
+            return NO;
+        }
         for (NSManagedObject *info in fetchedObjects) {
             NSString *str = [info valueForKey:@"db_title"];
             NSLog(@"db_title: %@", str);
@@ -179,7 +188,7 @@
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"Model" withExtension:@"momd"];
 #endif
 
-    NSLog(@"URL=%@",modelURL);
+    NSLog(@"Model URL=%@",modelURL);
     
     if (!modelURL) {
         NSLog(@"WRONG URL");
@@ -213,7 +222,7 @@
     storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"model.sqlite"];
 #endif
     
-    NSLog(@"storeURL=%@",storeURL);
+    NSLog(@"Store URL=%@",storeURL);
     NSError *error = nil;
     NSDictionary *options = nil;
     
@@ -344,6 +353,10 @@
         return _managedObjectContext;
     }
     
+    
+    NSLog(@"\n\n**** Core Data Stack created ***\n\n");
+    
+    
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (!coordinator) {
         return nil;
@@ -367,5 +380,8 @@
         }
     }
 }
+
+
+
 
 @end

@@ -398,7 +398,7 @@ static volatile float _progressRange = 0.f;
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:[storeURL path]])
     {
-        NSLog(@"LITE MIGRATION - STORE FILE IS NOT EXIST!!!");
+        NSLog(@"LITE MIGRATION FAILS - STORE FILE IS NOT EXIST!!!");
         return NO;
     } else {
         return YES;
