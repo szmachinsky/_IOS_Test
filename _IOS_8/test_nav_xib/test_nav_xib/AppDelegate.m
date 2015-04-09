@@ -154,10 +154,10 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     NSLog(@"---2----");
     
-    NSNotification *anote1 = [NSNotification notificationWithName:@"kRefreshAfterBackgroundState" object:nil userInfo:nil];
-    [[NSNotificationCenter defaultCenter] postNotification:anote1];
+//    NSNotification *anote1 = [NSNotification notificationWithName:@"kRefreshAfterBackgroundState" object:nil userInfo:nil];
+//    [[NSNotificationCenter defaultCenter] postNotification:anote1];
     
-    
+/*
     for (UIWindow *window in [UIApplication sharedApplication].windows) { //zs
         NSLog(@"-setNeedsLayout1-");
         [window setNeedsLayout];
@@ -166,6 +166,7 @@
     
     NSLog(@"-setNeedsLayout2-");
     [self.window.rootViewController.view setNeedsLayout];
+*/
     
 //    [self performSelector:@selector(action) withObject:nil afterDelay:1.0];
 }

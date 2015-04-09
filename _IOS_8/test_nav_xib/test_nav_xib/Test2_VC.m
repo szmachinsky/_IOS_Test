@@ -224,6 +224,7 @@
 {
     NSLog(@"kRefreshAfterBackgroundState");
     [self performSelector:@selector(after) withObject:nil afterDelay:3.0];
+    
 //    act_Sheet.hidden = YES;
     
 //  [act_Sheet setNeedsDisplay];
