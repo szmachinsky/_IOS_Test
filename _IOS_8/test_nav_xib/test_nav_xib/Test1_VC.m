@@ -81,6 +81,22 @@
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"_TEST_01_";
     [self setupTapRecognizers];
+    
+//#ifdef DEBUG
+//    NSLog(@"-debug-");
+//#else
+//    NSLog(@"-release-");
+//#endif
+//    
+//    DLog(@"DLog TEst");
+//    #ifdef NS_BLOCK_ASSERTIONS
+//    NSLog(@"-0--");
+//    #endif
+//    ALog(@"Alog Test");
+//    
+//    NSLog(@"--1-");
+//    NSAssert(false,@"!!!!!");
+//    NSLog(@"--2-");
 }
 
 - (void)didReceiveMemoryWarning {

@@ -13,6 +13,7 @@
 # define NSLog(...)     ((void)0)
 #endif
 
+
 #define kCoreDataStoreType  NSSQLiteStoreType
 
 
@@ -69,9 +70,8 @@ static volatile float _progressRange = 0.f;
     
     if (!self.asyncQueue)
         self.asyncQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0); //dispatch_get_main_queue()
-//     self.asyncQueue = dispatch_get_main_queue();
     
-    NSLog(@"run migrator in asynq queue");
+    NSLog(@"\n\n   Run migrator in asynq queue");
     dispatch_async(self.asyncQueue, ^{
         result = [self checkMigrationFor:storeURL
                                modelName:modelName
@@ -87,12 +87,14 @@ static volatile float _progressRange = 0.f;
               completion:(void (^)(BOOL))completion
 {
     __block BOOL result = NO;
+    
     NSManagedObjectModel *_managedObjectModel;
     NSPersistentStoreCoordinator *_persistentStoreCoordinator;
 
     NSArray *bundles = nil;
-
-    if (self.modelsUrl) {
+    
+    if (self.modelsUrl && [[NSFileManager defaultManager] fileExistsAtPath:[self.modelsUrl path]])
+    {
         self.dataBundle = [NSBundle bundleWithURL:self.modelsUrl];
         NSLog(@"MODEL_BUNDLE=%@",self.dataBundle);
         bundles = @[self.dataBundle];
@@ -115,7 +117,7 @@ static volatile float _progressRange = 0.f;
         }
         
         NSURL *modelURL = [self.dataBundle URLForResource:modelName withExtension:@"momd"];
-        NSLog(@"MODEL_URL1=%@",modelURL);
+        NSLog(@"MODEL_URL=%@",modelURL);
         if (!modelURL) {
             NSLog(@"WRONG MODEL URL");
             return result;
@@ -132,7 +134,7 @@ static volatile float _progressRange = 0.f;
                         subdirectory:[modelName stringByAppendingPathExtension:@"momd"]];  
         NSLog(@"%@",url);
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfURL:url];
-//        NSLog(@"DIC=%@",dic);
+//      NSLog(@"DIC=%@",dic);
         NSString *nameOfDestinationModel = dic[@"NSManagedObjectModel_CurrentVersionName"];
         NSLog(@"dest_model_name=(%@)",nameOfDestinationModel);
         NSDictionary *d = dic[@"NSManagedObjectModel_VersionHashes"];
@@ -142,7 +144,7 @@ static volatile float _progressRange = 0.f;
             [arrModels addObjectsFromArray:a];
         }
         
-        NSLog(@"arrModels1=%@",arrModels);
+//      NSLog(@"arrModels=%@",arrModels);
         [arrModels sortUsingComparator:^(id a, id b) {
             NSInteger x1 = [self lastNumberFromString:(NSString*)a];
             NSInteger x2 = [self lastNumberFromString:(NSString*)b];
@@ -154,7 +156,7 @@ static volatile float _progressRange = 0.f;
             return (NSComparisonResult)NSOrderedSame;
         }];
         
-        NSLog(@"arrModels2=%@",arrModels);
+        NSLog(@"arrModels=%@",arrModels);
         if (!self.models && arrModels.count) {
             NSMutableArray *res = [NSMutableArray array];
             for (NSString *str in arrModels) {
@@ -164,7 +166,7 @@ static volatile float _progressRange = 0.f;
                 }
            }
             self.models = res;
-            NSLog(@"%@",self.models);
+//          NSLog(@"%@",self.models);
         }
         
        
@@ -177,17 +179,17 @@ static volatile float _progressRange = 0.f;
         BOOL pscCompatible = (sourceMetadata == nil) || [destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
         
 //===
-        NSManagedObjectModel *sourceModel = [NSManagedObjectModel
-                                             mergedModelFromBundles:nil
-                                             forStoreMetadata:sourceMetadata];
-        NSAssert(sourceModel != nil, ([NSString stringWithFormat:
-                                       @"Failed to find source model\n%@",
-                                       sourceMetadata]));
+//        NSManagedObjectModel *sourceModel = [NSManagedObjectModel
+//                                             mergedModelFromBundles:nil
+//                                             forStoreMetadata:sourceMetadata];
+//        NSAssert(sourceModel != nil, ([NSString stringWithFormat:
+//                                       @"Failed to find source model\n%@",
+//                                       sourceMetadata]));
 //===
         
-        if(!pscCompatible) //Migration is needed
+        if(!pscCompatible)
         {
-            NSLog(@"Migration is needed"); // Migration is needed
+            NSLog(@"Migration is needed");
             
             [self showHud];
             

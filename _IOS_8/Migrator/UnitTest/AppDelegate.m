@@ -67,13 +67,13 @@
     [[NSFileManager defaultManager] removeItemAtPath:pathToModels error:NULL];
    
 //  [self copyResurce:CORE_FILE toDir:CORE_FILE_DIR withDelete:YES];
-    [self copyResurce:@"TestMigrator.sqlite" toDir:CORE_FILE_DIR withDelete:YES];
-    [self copyResurce:@"TestMigrator.sqlite-shm" toDir:CORE_FILE_DIR withDelete:YES];
-    [self copyResurce:@"TestMigrator.sqlite-wal" toDir:CORE_FILE_DIR withDelete:YES];
+    [self copyResurce:@"TestMigrator.sqlite" toDir:CORE_FILE_DIR update:YES];
+    [self copyResurce:@"TestMigrator.sqlite-shm" toDir:CORE_FILE_DIR update:YES];
+    [self copyResurce:@"TestMigrator.sqlite-wal" toDir:CORE_FILE_DIR update:YES];
     if (mode==1) {
-        [self copyResurce:@"TestMigrator.momd" toDir:CORE_MIGR_DIR withDelete:YES];
-        [self copyResurce:@"Model__0_2.cdm" toDir:CORE_MIGR_DIR withDelete:YES];
-        [self copyResurce:@"Model__3_4.cdm" toDir:CORE_MIGR_DIR withDelete:YES];
+        [self copyResurce:@"TestMigrator.momd" toDir:CORE_MIGR_DIR update:YES];
+        [self copyResurce:@"Model__0_2.cdm" toDir:CORE_MIGR_DIR update:YES];
+        [self copyResurce:@"Model__3_4.cdm" toDir:CORE_MIGR_DIR update:YES];
     }
     
     __typeof__(self) __weak weakSelf = self;
@@ -146,9 +146,8 @@
             break;
 
         case 2:
-            migrator.useOnlyDirectLightMigration = YES; // version 0 -> version 4
-            
-            
+            migrator.useOnlyDirectLightMigration = YES; // try directly: version 0 -> version 4
+                        
             break;
             
         default:
@@ -164,33 +163,37 @@
 
 
 //#define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
--(void)copyResurce:(NSString*)resFile toDir:(NSString*)Dir withDelete:(BOOL)delete
+-(NSString*)copyResurce:(NSString*)resFile toDir:(NSString*)toDir update:(BOOL)update
 {
-    NSString *filePathFfom = [[NSBundle mainBundle] pathForResource:[resFile stringByDeletingPathExtension] ofType:[resFile pathExtension]];
-    NSString *dirPathTo = [NSHomeDirectory() stringByAppendingPathComponent:Dir];
+    BOOL ok = NO;
+//  NSString *filePathFrom = [[NSBundle mainBundle] pathForResource:[resFile stringByDeletingPathExtension] ofType:[resFile pathExtension]];
+    NSString *filePathFrom = [[NSBundle mainBundle] pathForResource:resFile ofType:nil];
+    NSString *dirPathTo = [NSHomeDirectory() stringByAppendingPathComponent:toDir];
     NSString *filePathTo = [dirPathTo stringByAppendingPathComponent:resFile];
-    BOOL success;
     NSError *error;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    // If the expected store doesn't exist, copy the default store.
     if (![fileManager fileExistsAtPath:filePathTo])
     {
-        [fileManager createDirectoryAtPath:dirPathTo
-               withIntermediateDirectories:YES
-                                attributes:nil
-                                     error:nil];
-        success = [fileManager copyItemAtPath:filePathFfom toPath:filePathTo error:&error];
-        NSLog(@"copy is %d = /%@/ to /%@/",success,filePathFfom,filePathTo);
+        [fileManager createDirectoryAtPath:dirPathTo withIntermediateDirectories:YES attributes:nil error:nil];
+        ok = [fileManager copyItemAtPath:filePathFrom toPath:filePathTo error:&error];
+        NSLog(@"copy is %d = /%@/ to /%@/",ok,filePathFrom,filePathTo);
     } else {
-        NSLog(@"EXIST /%@/",filePathTo);
-        if (delete) {
-            success = [fileManager removeItemAtPath:filePathTo error:&error];
-            NSLog(@"remove is %d",success);
-            success = [fileManager copyItemAtPath:filePathFfom toPath:filePathTo error:&error];
-            NSLog(@"copy is %d = /%@/ to /%@/",success,filePathFfom,filePathTo);
+        NSLog(@"file already exists /%@/",filePathTo);
+        if (update) {
+            ok = [fileManager removeItemAtPath:filePathTo error:&error];
+            ok = [fileManager copyItemAtPath:filePathFrom toPath:filePathTo error:&error];
+            NSLog(@"copy is %d = /%@/ to /%@/",ok,filePathFrom,filePathTo);
+        } else {
+            ok = YES;
         }
     }
+    if (ok) {
+        return filePathTo;
+    } else {
+        return nil;
+    }
 }
+
 
 - (void)removeStoreAtURL:(NSURL *)storeURL
 {
