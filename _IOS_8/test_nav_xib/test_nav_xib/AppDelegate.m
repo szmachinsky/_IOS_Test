@@ -13,6 +13,9 @@
 #import "NSObject+Dealloc.h"
 #import "Test1_VC.h"
 
+#import "FICImageCache.h"
+//#import "FICDPhoto.h"
+
 
 //#define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
 
@@ -41,6 +44,12 @@
 }
 @end
 */
+
+
+@interface AppDelegate () <FICImageCacheDelegate>
+
+@end
+
 
 
 @implementation UINavigationController (OrientationSettings_IOS6)
@@ -87,8 +96,43 @@
     
     [Test1_VC RP_toggleSwizzDealloc]; //set custom dealloc!!!
     
+    [self initCache];
     
-   return YES;
+    return YES;
+}
+
+
+-(void)initCache
+{
+    static NSString *XXImageFormatNameUserThumbnailSmall =  @"com.mycompany.myapp.XXImageFormatNameUserThumbnail_Small";
+    static NSString *XXImageFormatNameUserThumbnailMedium = @"com.mycompany.myapp.XXImageFormatNameUserThumbnail_Medium";
+    static NSString *XXImageFormatFamilyUserThumbnails =    @"com.mycompany.myapp.XXImageFormatFamilyUserThumbnails";
+    
+    FICImageFormat *smallUserThumbnailImageFormat = [[FICImageFormat alloc] init];
+    smallUserThumbnailImageFormat.name = XXImageFormatNameUserThumbnailSmall;
+    smallUserThumbnailImageFormat.family = XXImageFormatFamilyUserThumbnails;
+    smallUserThumbnailImageFormat.style = FICImageFormatStyle16BitBGR;
+    smallUserThumbnailImageFormat.imageSize = CGSizeMake(50, 50);
+    smallUserThumbnailImageFormat.maximumCount = 250;
+    smallUserThumbnailImageFormat.devices = FICImageFormatDevicePhone;
+    smallUserThumbnailImageFormat.protectionMode = FICImageFormatProtectionModeNone;
+    
+    FICImageFormat *mediumUserThumbnailImageFormat = [[FICImageFormat alloc] init];
+    mediumUserThumbnailImageFormat.name = XXImageFormatNameUserThumbnailMedium;
+    mediumUserThumbnailImageFormat.family = XXImageFormatFamilyUserThumbnails;
+    mediumUserThumbnailImageFormat.style = FICImageFormatStyle32BitBGRA;
+    mediumUserThumbnailImageFormat.imageSize = CGSizeMake(100, 100);
+    mediumUserThumbnailImageFormat.maximumCount = 250;
+    mediumUserThumbnailImageFormat.devices = FICImageFormatDevicePhone;
+    mediumUserThumbnailImageFormat.protectionMode = FICImageFormatProtectionModeNone;
+    
+    NSArray *imageFormats = @[smallUserThumbnailImageFormat, mediumUserThumbnailImageFormat];
+    
+    // Configure the image cache
+    FICImageCache *sharedImageCache = [FICImageCache sharedImageCache];
+    [sharedImageCache setDelegate:self];
+    [sharedImageCache setFormats:imageFormats];
+    
 }
 
 
@@ -185,5 +229,30 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+
+#pragma mark - FICImageCacheDelegate
+
+//- (void)imageCache:(FICImageCache *)imageCache wantsSourceImageForEntity:(id<FICEntity>)entity withFormatName:(NSString *)formatName completionBlock:(FICImageRequestCompletionBlock)completionBlock {
+//    // Images typically come from the Internet rather than from the app bundle directly, so this would be the place to fire off a network request to download the image.
+//    // For the purposes of this demo app, we'll just access images stored locally on disk.
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        UIImage *sourceImage = [(FICDPhoto *)entity sourceImage];
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            completionBlock(sourceImage);
+//        });
+//    });
+//}
+
+- (BOOL)imageCache:(FICImageCache *)imageCache shouldProcessAllFormatsInFamily:(NSString *)formatFamily forEntity:(id<FICEntity>)entity {
+    return NO;
+}
+
+- (void)imageCache:(FICImageCache *)imageCache errorDidOccurWithMessage:(NSString *)errorMessage {
+    NSLog(@"%@", errorMessage);
+}
+
+
 
 @end

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23667B131ADE75C5007F78D8 /* FICImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B071ADE75C5007F78D8 /* FICImageCache.m */; };
+		23667B141ADE75C5007F78D8 /* FICImageFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B091ADE75C5007F78D8 /* FICImageFormat.m */; };
+		23667B151ADE75C5007F78D8 /* FICImageTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B0B1ADE75C5007F78D8 /* FICImageTable.m */; };
+		23667B161ADE75C5007F78D8 /* FICImageTableChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B0D1ADE75C5007F78D8 /* FICImageTableChunk.m */; };
+		23667B171ADE75C5007F78D8 /* FICImageTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B0F1ADE75C5007F78D8 /* FICImageTableEntry.m */; };
+		23667B181ADE75C5007F78D8 /* FICUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B121ADE75C5007F78D8 /* FICUtilities.m */; };
 		23EA78471A9F013900EACAE4 /* NSObject+Dealloc.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EA78451A9F013900EACAE4 /* NSObject+Dealloc.m */; };
 		23EA78481A9F013900EACAE4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 23EA78461A9F013900EACAE4 /* README.md */; };
 		D5083C2A19F3F7C900C8F00C /* Test1_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5083C2819F3F7C900C8F00C /* Test1_VC.m */; };
@@ -42,6 +48,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23667B041ADE75C5007F78D8 /* FICEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICEntity.h; sourceTree = "<group>"; };
+		23667B051ADE75C5007F78D8 /* FICImageCache+FICErrorLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FICImageCache+FICErrorLogging.h"; sourceTree = "<group>"; };
+		23667B061ADE75C5007F78D8 /* FICImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICImageCache.h; sourceTree = "<group>"; };
+		23667B071ADE75C5007F78D8 /* FICImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICImageCache.m; sourceTree = "<group>"; };
+		23667B081ADE75C5007F78D8 /* FICImageFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICImageFormat.h; sourceTree = "<group>"; };
+		23667B091ADE75C5007F78D8 /* FICImageFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICImageFormat.m; sourceTree = "<group>"; };
+		23667B0A1ADE75C5007F78D8 /* FICImageTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICImageTable.h; sourceTree = "<group>"; };
+		23667B0B1ADE75C5007F78D8 /* FICImageTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICImageTable.m; sourceTree = "<group>"; };
+		23667B0C1ADE75C5007F78D8 /* FICImageTableChunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICImageTableChunk.h; sourceTree = "<group>"; };
+		23667B0D1ADE75C5007F78D8 /* FICImageTableChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICImageTableChunk.m; sourceTree = "<group>"; };
+		23667B0E1ADE75C5007F78D8 /* FICImageTableEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICImageTableEntry.h; sourceTree = "<group>"; };
+		23667B0F1ADE75C5007F78D8 /* FICImageTableEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICImageTableEntry.m; sourceTree = "<group>"; };
+		23667B101ADE75C5007F78D8 /* FICImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICImports.h; sourceTree = "<group>"; };
+		23667B111ADE75C5007F78D8 /* FICUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICUtilities.h; sourceTree = "<group>"; };
+		23667B121ADE75C5007F78D8 /* FICUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICUtilities.m; sourceTree = "<group>"; };
 		23EA78441A9F013900EACAE4 /* NSObject+Dealloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Dealloc.h"; sourceTree = "<group>"; };
 		23EA78451A9F013900EACAE4 /* NSObject+Dealloc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Dealloc.m"; sourceTree = "<group>"; };
 		23EA78461A9F013900EACAE4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -105,9 +126,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23667B031ADE75C5007F78D8 /* FastImageCache */ = {
+			isa = PBXGroup;
+			children = (
+				23667B041ADE75C5007F78D8 /* FICEntity.h */,
+				23667B051ADE75C5007F78D8 /* FICImageCache+FICErrorLogging.h */,
+				23667B061ADE75C5007F78D8 /* FICImageCache.h */,
+				23667B071ADE75C5007F78D8 /* FICImageCache.m */,
+				23667B081ADE75C5007F78D8 /* FICImageFormat.h */,
+				23667B091ADE75C5007F78D8 /* FICImageFormat.m */,
+				23667B0A1ADE75C5007F78D8 /* FICImageTable.h */,
+				23667B0B1ADE75C5007F78D8 /* FICImageTable.m */,
+				23667B0C1ADE75C5007F78D8 /* FICImageTableChunk.h */,
+				23667B0D1ADE75C5007F78D8 /* FICImageTableChunk.m */,
+				23667B0E1ADE75C5007F78D8 /* FICImageTableEntry.h */,
+				23667B0F1ADE75C5007F78D8 /* FICImageTableEntry.m */,
+				23667B101ADE75C5007F78D8 /* FICImports.h */,
+				23667B111ADE75C5007F78D8 /* FICUtilities.h */,
+				23667B121ADE75C5007F78D8 /* FICUtilities.m */,
+			);
+			path = FastImageCache;
+			sourceTree = "<group>";
+		};
 		23EA78421A9F00ED00EACAE4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				23667B031ADE75C5007F78D8 /* FastImageCache */,
 				23EA78431A9F00FA00EACAE4 /* Dealloc */,
 			);
 			name = Utils;
@@ -349,15 +393,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				D58ADFD61A8A9BD7004D9E91 /* TstNew1_VC.m in Sources */,
+				23667B161ADE75C5007F78D8 /* FICImageTableChunk.m in Sources */,
 				D508501219F3139400857C18 /* main.m in Sources */,
 				D58ADFDA1A8A9C16004D9E91 /* TstNew2_VC.m in Sources */,
+				23667B151ADE75C5007F78D8 /* FICImageTable.m in Sources */,
 				D508501619F3139400857C18 /* AppDelegate.m in Sources */,
 				D5083C2A19F3F7C900C8F00C /* Test1_VC.m in Sources */,
 				D5DDB26E19F41497003AEDE9 /* Test2_VC.m in Sources */,
 				D58CB5601A0D3BCB00041966 /* LoadFiles_VC.m in Sources */,
 				D50B5FCF1A2244D200AC0713 /* CustomView.m in Sources */,
 				D508501F19F3139400857C18 /* MasterViewController.m in Sources */,
+				23667B181ADE75C5007F78D8 /* FICUtilities.m in Sources */,
+				23667B141ADE75C5007F78D8 /* FICImageFormat.m in Sources */,
+				23667B131ADE75C5007F78D8 /* FICImageCache.m in Sources */,
 				D5DDB27519F416BC003AEDE9 /* Test3_VC.m in Sources */,
+				23667B171ADE75C5007F78D8 /* FICImageTableEntry.m in Sources */,
 				23EA78481A9F013900EACAE4 /* README.md in Sources */,
 				23EA78471A9F013900EACAE4 /* NSObject+Dealloc.m in Sources */,
 				D508502219F3139400857C18 /* DetailViewController.m in Sources */,

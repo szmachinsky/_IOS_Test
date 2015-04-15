@@ -55,6 +55,9 @@
 #ifdef USE_TEST_MIGRATION_DELAY
     sleep(1);
 #endif
+    [self applicationDocumentsDirectory];
+    [self applicationCacheDirectory];
+    
     [controller infoText:[NSString stringWithFormat:@"%d",mode]];
     NSString *pathToFile = [NSHomeDirectory() stringByAppendingPathComponent:CORE_FILE_DIR];
     NSString *pathToModels = [NSHomeDirectory() stringByAppendingPathComponent:CORE_MIGR_DIR];
@@ -240,6 +243,15 @@
     // The directory the application uses to store the Core Data store file. This code uses a directory named "minsk.UnitTestMigrator" in the application's documents directory.
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
+
+
+- (NSURL *)applicationCacheDirectory {
+    NSURL *cachesUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+//    NSLog(@"cachesDir=%@",[cachesUrl path]);    
+//    [[NSFileManager defaultManager] removeItemAtPath:[[cachesUrl path] stringByAppendingPathComponent:@"com.hackemist.SDWebImageCache.default"] error:NULL];
+    return cachesUrl;
+}
+
 
 - (NSManagedObjectModel *)managedObjectModel {
     // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
