@@ -11,6 +11,7 @@
 #import "MasterViewController.h"
 
 #import <SDWebImage/SDImageCache.h>
+//#import "SDImageCache.h"
 
 @implementation AppDelegate
 
@@ -20,7 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //Add a custom read-only cache path
-    NSString *bundledPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Custom_Path_Images"];
+    NSString *bundledPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"CustomPathImages"];
     [[SDImageCache sharedImageCache] addReadOnlyCachePath:bundledPath];
     
     NSLog(@"app_path=/%@/",NSHomeDirectory()); //zs
