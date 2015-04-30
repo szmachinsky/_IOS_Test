@@ -122,7 +122,7 @@
             NSLog(@"-----%@-----",cell.textLabel.text);
             break;
         case 2:
-            cell.textLabel.text = @"Test3_VC";
+            cell.textLabel.text = @"Test3_VC - Test Cache";
             NSLog(@"-----%@-----",cell.textLabel.text);
             break;
             

@@ -12,6 +12,9 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <objc/message.h>
+
+    #import "SDImageCache.h"
+    #import "UIImageView+WebCache.h"
 #endif
 
 
@@ -84,6 +87,9 @@
 
 
 
+#define use_FIC_Cache
+
+#define use_SDW_Cache
 
 
 

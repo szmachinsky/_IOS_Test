@@ -8,7 +8,17 @@
 
 #import "Test3_VC.h"
 
+#import "UIImageView+WebCache.h"
+
+
 @interface Test3_VC ()
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIView *blureView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView2;
+
+@property (weak, nonatomic) IBOutlet UIButton *but1;
+@property (weak, nonatomic) IBOutlet UIButton *but2;
+@property (weak, nonatomic) IBOutlet UIButton *but3;
 
 @end
 
@@ -34,5 +44,56 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)pressBut1:(id)sender {
+//  NSString *requestUrl = @"http://std3.ru/41/75/1415030144-4175dfd00f9014b5a961e0f0d02abd07.jpg"; //kot
+//  NSString *requestUrl = @"http://www.reactionimage.org/img/gallery/9642880587.jpg"; //цирк
+//    requestUrl = [requestUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    NSURL *url = [NSURL URLWithString:requestUrl];
+//    NSData *dat = [NSData dataWithContentsOfURL:url];
+//    if (dat) {
+//        UIImage *im = [UIImage imageWithData:dat];
+//        self.imageView.image = im;
+//        self.imageView2.image = im;
+//    }
+    
+    [self loadWithCache:@"http://std3.ru/41/75/1415030144-4175dfd00f9014b5a961e0f0d02abd07.jpg"]; //кот
+}
+
+- (IBAction)pressBut2:(id)sender {
+    [self loadWithCache:@"http://www.reactionimage.org/img/gallery/9642880587.jpg"]; //цирк
+}
+
+- (IBAction)pressBut3:(id)sender {
+    [self loadWithCache:@"https://v1.std3.ru/c4/6f/1430398852-c46ff5fde79cc7ff952235910138ecea.jpg"]; //еда
+}
+
+
+
+-(void)loadWithCache:(NSString *)requestUrl
+{
+    self.imageView.image = nil;
+    self.imageView2.image = nil;
+    
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    [manager downloadImageWithURL:[NSURL URLWithString:requestUrl]
+                          options:0
+                         progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                         }
+                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                            if (image && finished) {
+                                NSLog(@"loaded image /%d/ (%.1f %.1f)",cacheType,image.size.width,image.size.height);
+                                self.imageView.image = image;
+                                self.imageView2.image = image;
+                            }
+                        }];
+    
+}
+
+
+- (IBAction)clearCache:(id)sender {
+    [SDWebImageManager.sharedManager.imageCache clearMemory];
+    [SDWebImageManager.sharedManager.imageCache clearDisk];
+}
 
 @end

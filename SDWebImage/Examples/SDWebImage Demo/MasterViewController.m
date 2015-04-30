@@ -380,9 +380,53 @@
     }
 
     cell.textLabel.text = [NSString stringWithFormat:@"Image #%ld", (long)indexPath.row];
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[_objects objectAtIndex:indexPath.row]]
-                      placeholderImage:[UIImage imageNamed:@"placeholder"] options:indexPath.row == 0 ? SDWebImageRefreshCached : 0];
+    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;//UIViewContentModeScaleToFill;//UIViewContentModeScaleAspectFit;//UIViewContentModeScaleAspectFill;
+    cell.imageView.image = [UIImage imageNamed:@"placeholder"];
+    
+//    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[_objects objectAtIndex:indexPath.row]]
+//                      placeholderImage:[UIImage imageNamed:@"placeholder"] options:indexPath.row == 0 ? SDWebImageRefreshCached : 0];
+    
+    
+//    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:[_objects objectAtIndex:indexPath.row]]
+//                      placeholderImage:[UIImage imageNamed:@"placeholder"] options:0 //indexPath.row == 0 ? SDWebImageRefreshCached : 0
+//                              progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//                              }
+//                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                                 if (image) {
+//                                     NSLog(@"loaded image for:%d /%d/ (%.1f %.1f)",indexPath.row,cacheType,image.size.width,image.size.height);
+//                                 }
+//                        }];
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//         cell.imageView.image = [UIImage imageNamed:@"placeholder"];
+//        [cell setNeedsLayout];
+//    });
+    
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    [manager downloadImageWithURL:[NSURL URLWithString:[_objects objectAtIndex:indexPath.row]]
+                          options:0
+                         progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                         }
+                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                            if (image && finished) {
+                                NSLog(@"loaded image for:%d /%d/ (%.1f %.1f)",indexPath.row,cacheType,image.size.width,image.size.height);
+                                cell.imageView.image = image;
+//                                [cell setNeedsLayout];
+                            }
+                        }];
+    
+//    [SDWebImageDownloader.sharedDownloader downloadImageWithURL:[NSURL URLWithString:[_objects objectAtIndex:indexPath.row]]
+//                                                        options:0
+//                                                       progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//                                                       }
+//                                                      completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+//                                                          if (image && finished) {
+//                                                              cell.imageView.image = image;
+//                                                              NSLog(@"loaded image for:%d (%.1f %.1f)",indexPath.row,image.size.width,image.size.height);
+//                                                          }
+//                                                      }];
+   
+    
     return cell;
 }
 
@@ -392,7 +436,11 @@
     {
         self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     }
-    NSString *largeImageURL = [[_objects objectAtIndex:indexPath.row] stringByReplacingOccurrencesOfString:@"small" withString:@"source"];
+    NSString *oldUrl = [_objects objectAtIndex:indexPath.row];
+    NSString *largeImageURL = [oldUrl stringByReplacingOccurrencesOfString:@"small" withString:@"source"];
+    NSLog(@"\n\n(%@)->(%@)\n\n",oldUrl,largeImageURL);
+//    largeImageURL = oldUrl;
+    
     self.detailViewController.imageURL = [NSURL URLWithString:largeImageURL];
     [self.navigationController pushViewController:self.detailViewController animated:YES];
 }

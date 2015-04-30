@@ -25,6 +25,7 @@
     if (_imageURL != imageURL)
     {
         _imageURL = imageURL;
+        NSLog(@"PATH=(%@)",imageURL);
         [self configureView];
     }
 }
@@ -42,12 +43,21 @@
                                           [weakImageView addSubview:activityIndicator = [UIActivityIndicatorView.alloc initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray]];
                                           activityIndicator.center = weakImageView.center;
                                           [activityIndicator startAnimating];
+                                          NSLog(@"progress start");
                                       }
-                                  }
+                                      NSLog(@"progress run %d %d",receivedSize,expectedSize);
+                                 }
                                  completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                      [activityIndicator removeFromSuperview];
                                      activityIndicator = nil;
-                                 }];
+                                     NSLog(@"completed:%d (%@)",cacheType,imageURL);
+                                     if (!image) {
+                                         NSLog(@"no image!!!");
+                                     } else {
+                                         NSLog(@"no image!!!");                                        
+                                     }
+                
+                                }];
     }
 }
 

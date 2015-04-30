@@ -13,8 +13,15 @@
 #import "NSObject+Dealloc.h"
 #import "Test1_VC.h"
 
-#import "FICImageCache.h"
-//#import "FICDPhoto.h"
+#ifdef use_FIC_Cache
+    #import "FICImageCache.h"
+    //#import "FICDPhoto.h"
+#endif
+
+#ifdef use_SDW_Cache
+//    #import "SDImageCache.h"
+//    #import "UIImageView+WebCache.h"
+#endif
 
 
 //#define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
@@ -90,19 +97,34 @@
     NSLog(@"X=%f Y=%f",fr.size.width,fr.size.height);
     
     NSString *s1 = DOCUMENTS; //[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];//NSDocumentDirectory; //DOCUMENTS; //
-    NSLog(@"/%@/",s1);
+    NSLog(@"documents=%@",s1);
 //    NSString *s2 = NSHomeDirectory();
-    NSLog(@"app_path=/%@/",NSHomeDirectory());
+    NSLog(@"Home_path=%@",NSHomeDirectory());
     
     [Test1_VC RP_toggleSwizzDealloc]; //set custom dealloc!!!
     
-    [self initCache];
+#ifdef use_FIC_Cache
+ //   [self initFCCache];
+#endif
+    
+#ifdef use_SDW_Cache
+//    [self initSDWCache];
+#endif
     
     return YES;
 }
 
 
--(void)initCache
+-(void)initSDWCache
+{
+    //Add a custom read-only cache path
+    NSString *bundledPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Custom_Path_Images"];
+    [[SDImageCache sharedImageCache] addReadOnlyCachePath:bundledPath];
+    
+    NSLog(@"SDWCache_path=/%@/",bundledPath); //zs
+}
+
+-(void)initFCCache
 {
     static NSString *XXImageFormatNameUserThumbnailSmall =  @"com.mycompany.myapp.XXImageFormatNameUserThumbnail_Small";
     static NSString *XXImageFormatNameUserThumbnailMedium = @"com.mycompany.myapp.XXImageFormatNameUserThumbnail_Medium";
