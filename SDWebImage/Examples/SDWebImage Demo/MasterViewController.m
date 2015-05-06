@@ -59,7 +59,7 @@
                     @"http://static2.dmcdn.net/static/video/833/347/44743338:jpeg_preview_small.jpg?20120509183004",
                     @"http://static2.dmcdn.net/static/video/683/666/44666386:jpeg_preview_small.jpg?20120505111208",
                     @"http://static2.dmcdn.net/static/video/595/946/44649595:jpeg_preview_small.jpg?20120507194104",
-                    @"http://static2.dmcdn.net/static/video/984/935/44539489:jpeg_preview_small.jpg?20120501184650",
+/*                    @"http://static2.dmcdn.net/static/video/984/935/44539489:jpeg_preview_small.jpg?20120501184650",
                     @"http://static2.dmcdn.net/static/video/440/416/44614044:jpeg_preview_small.jpg?20120505174152",
                     @"http://static2.dmcdn.net/static/video/561/977/20779165:jpeg_preview_small.jpg?20120423161805",
                     @"http://static2.dmcdn.net/static/video/104/546/44645401:jpeg_preview_small.jpg?20120507185246",
@@ -338,11 +338,16 @@
                     @"http://static2.dmcdn.net/static/video/893/348/51843398:jpeg_preview_small.jpg?20121105214157",
                     @"http://static2.dmcdn.net/static/video/351/748/51847153:jpeg_preview_small.jpg?20121105214106",
                     @"http://static2.dmcdn.net/static/video/364/648/51846463:jpeg_preview_small.jpg?20121105215005",
-                    @"http://static2.dmcdn.net/static/video/269/938/51839962:jpeg_preview_small.jpg?20121105214014",
+                    @"http://static2.dmcdn.net/static/video/269/938/51839962:jpeg_preview_small.jpg?20121105214014", */
                     nil];
     }
     [SDWebImageManager.sharedManager.imageDownloader setValue:@"SDWebImage Demo" forHTTPHeaderField:@"AppName"];
     SDWebImageManager.sharedManager.imageDownloader.executionOrder = SDWebImageDownloaderLIFOExecutionOrder;
+    
+    NSUInteger m1 = [SDImageCache sharedImageCache].maxCacheSize;
+    NSUInteger m2 = [SDImageCache sharedImageCache].maxCacheAge;
+    NSLog(@"cache=%u %u",m1,(m2 / (60*60*24)));
+    
     return self;
 }
 

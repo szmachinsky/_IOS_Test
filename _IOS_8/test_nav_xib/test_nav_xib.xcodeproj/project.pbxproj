@@ -31,6 +31,14 @@
 		23667B161ADE75C5007F78D8 /* FICImageTableChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B0D1ADE75C5007F78D8 /* FICImageTableChunk.m */; };
 		23667B171ADE75C5007F78D8 /* FICImageTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B0F1ADE75C5007F78D8 /* FICImageTableEntry.m */; };
 		23667B181ADE75C5007F78D8 /* FICUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B121ADE75C5007F78D8 /* FICUtilities.m */; };
+		23BF1EEB1AF8C7FD00B1FDD5 /* HNKCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BF1EDC1AF8C7FD00B1FDD5 /* HNKCache.m */; };
+		23BF1EEC1AF8C7FD00B1FDD5 /* HNKDiskCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BF1EDE1AF8C7FD00B1FDD5 /* HNKDiskCache.m */; };
+		23BF1EED1AF8C7FD00B1FDD5 /* HNKDiskFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BF1EE01AF8C7FD00B1FDD5 /* HNKDiskFetcher.m */; };
+		23BF1EEE1AF8C7FD00B1FDD5 /* HNKNetworkFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BF1EE21AF8C7FD00B1FDD5 /* HNKNetworkFetcher.m */; };
+		23BF1EEF1AF8C7FD00B1FDD5 /* HNKSimpleFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BF1EE41AF8C7FD00B1FDD5 /* HNKSimpleFetcher.m */; };
+		23BF1EF01AF8C7FD00B1FDD5 /* UIButton+Haneke.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BF1EE61AF8C7FD00B1FDD5 /* UIButton+Haneke.m */; };
+		23BF1EF11AF8C7FD00B1FDD5 /* UIImageView+Haneke.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BF1EE81AF8C7FD00B1FDD5 /* UIImageView+Haneke.m */; };
+		23BF1EF21AF8C7FD00B1FDD5 /* UIView+Haneke.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BF1EEA1AF8C7FD00B1FDD5 /* UIView+Haneke.m */; };
 		23EA78471A9F013900EACAE4 /* NSObject+Dealloc.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EA78451A9F013900EACAE4 /* NSObject+Dealloc.m */; };
 		23EA78481A9F013900EACAE4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 23EA78461A9F013900EACAE4 /* README.md */; };
 		D5083C2A19F3F7C900C8F00C /* Test1_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5083C2819F3F7C900C8F00C /* Test1_VC.m */; };
@@ -116,6 +124,23 @@
 		23667B101ADE75C5007F78D8 /* FICImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICImports.h; sourceTree = "<group>"; };
 		23667B111ADE75C5007F78D8 /* FICUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICUtilities.h; sourceTree = "<group>"; };
 		23667B121ADE75C5007F78D8 /* FICUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICUtilities.m; sourceTree = "<group>"; };
+		23BF1EDA1AF8C7FD00B1FDD5 /* Haneke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Haneke.h; sourceTree = "<group>"; };
+		23BF1EDB1AF8C7FD00B1FDD5 /* HNKCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNKCache.h; sourceTree = "<group>"; };
+		23BF1EDC1AF8C7FD00B1FDD5 /* HNKCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNKCache.m; sourceTree = "<group>"; };
+		23BF1EDD1AF8C7FD00B1FDD5 /* HNKDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNKDiskCache.h; sourceTree = "<group>"; };
+		23BF1EDE1AF8C7FD00B1FDD5 /* HNKDiskCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNKDiskCache.m; sourceTree = "<group>"; };
+		23BF1EDF1AF8C7FD00B1FDD5 /* HNKDiskFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNKDiskFetcher.h; sourceTree = "<group>"; };
+		23BF1EE01AF8C7FD00B1FDD5 /* HNKDiskFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNKDiskFetcher.m; sourceTree = "<group>"; };
+		23BF1EE11AF8C7FD00B1FDD5 /* HNKNetworkFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNKNetworkFetcher.h; sourceTree = "<group>"; };
+		23BF1EE21AF8C7FD00B1FDD5 /* HNKNetworkFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNKNetworkFetcher.m; sourceTree = "<group>"; };
+		23BF1EE31AF8C7FD00B1FDD5 /* HNKSimpleFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HNKSimpleFetcher.h; sourceTree = "<group>"; };
+		23BF1EE41AF8C7FD00B1FDD5 /* HNKSimpleFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HNKSimpleFetcher.m; sourceTree = "<group>"; };
+		23BF1EE51AF8C7FD00B1FDD5 /* UIButton+Haneke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Haneke.h"; sourceTree = "<group>"; };
+		23BF1EE61AF8C7FD00B1FDD5 /* UIButton+Haneke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Haneke.m"; sourceTree = "<group>"; };
+		23BF1EE71AF8C7FD00B1FDD5 /* UIImageView+Haneke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Haneke.h"; sourceTree = "<group>"; };
+		23BF1EE81AF8C7FD00B1FDD5 /* UIImageView+Haneke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Haneke.m"; sourceTree = "<group>"; };
+		23BF1EE91AF8C7FD00B1FDD5 /* UIView+Haneke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Haneke.h"; sourceTree = "<group>"; };
+		23BF1EEA1AF8C7FD00B1FDD5 /* UIView+Haneke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Haneke.m"; sourceTree = "<group>"; };
 		23EA78441A9F013900EACAE4 /* NSObject+Dealloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Dealloc.h"; sourceTree = "<group>"; };
 		23EA78451A9F013900EACAE4 /* NSObject+Dealloc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Dealloc.m"; sourceTree = "<group>"; };
 		23EA78461A9F013900EACAE4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -243,9 +268,34 @@
 			path = FastImageCache;
 			sourceTree = "<group>";
 		};
+		23BF1ED91AF8C7FD00B1FDD5 /* Haneke */ = {
+			isa = PBXGroup;
+			children = (
+				23BF1EDA1AF8C7FD00B1FDD5 /* Haneke.h */,
+				23BF1EDB1AF8C7FD00B1FDD5 /* HNKCache.h */,
+				23BF1EDC1AF8C7FD00B1FDD5 /* HNKCache.m */,
+				23BF1EDD1AF8C7FD00B1FDD5 /* HNKDiskCache.h */,
+				23BF1EDE1AF8C7FD00B1FDD5 /* HNKDiskCache.m */,
+				23BF1EDF1AF8C7FD00B1FDD5 /* HNKDiskFetcher.h */,
+				23BF1EE01AF8C7FD00B1FDD5 /* HNKDiskFetcher.m */,
+				23BF1EE11AF8C7FD00B1FDD5 /* HNKNetworkFetcher.h */,
+				23BF1EE21AF8C7FD00B1FDD5 /* HNKNetworkFetcher.m */,
+				23BF1EE31AF8C7FD00B1FDD5 /* HNKSimpleFetcher.h */,
+				23BF1EE41AF8C7FD00B1FDD5 /* HNKSimpleFetcher.m */,
+				23BF1EE51AF8C7FD00B1FDD5 /* UIButton+Haneke.h */,
+				23BF1EE61AF8C7FD00B1FDD5 /* UIButton+Haneke.m */,
+				23BF1EE71AF8C7FD00B1FDD5 /* UIImageView+Haneke.h */,
+				23BF1EE81AF8C7FD00B1FDD5 /* UIImageView+Haneke.m */,
+				23BF1EE91AF8C7FD00B1FDD5 /* UIView+Haneke.h */,
+				23BF1EEA1AF8C7FD00B1FDD5 /* UIView+Haneke.m */,
+			);
+			path = Haneke;
+			sourceTree = "<group>";
+		};
 		23EA78421A9F00ED00EACAE4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				23BF1ED91AF8C7FD00B1FDD5 /* Haneke */,
 				23579B661AF25BA500C49E42 /* SDWebImage */,
 				23667B031ADE75C5007F78D8 /* FastImageCache */,
 				23EA78431A9F00FA00EACAE4 /* Dealloc */,
@@ -491,13 +541,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				23579B951AF25BA500C49E42 /* UIImageView+HighlightedWebCache.m in Sources */,
+				23BF1EF11AF8C7FD00B1FDD5 /* UIImageView+Haneke.m in Sources */,
 				D58ADFD61A8A9BD7004D9E91 /* TstNew1_VC.m in Sources */,
 				23579B8F1AF25BA500C49E42 /* SDWebImageManager.m in Sources */,
 				23579B8B1AF25BA500C49E42 /* SDWebImageCompat.m in Sources */,
 				23579B901AF25BA500C49E42 /* SDWebImagePrefetcher.m in Sources */,
 				23667B161ADE75C5007F78D8 /* FICImageTableChunk.m in Sources */,
 				23579B8A1AF25BA500C49E42 /* SDImageCache.m in Sources */,
+				23BF1EED1AF8C7FD00B1FDD5 /* HNKDiskFetcher.m in Sources */,
 				D508501219F3139400857C18 /* main.m in Sources */,
+				23BF1EEF1AF8C7FD00B1FDD5 /* HNKSimpleFetcher.m in Sources */,
 				23579B911AF25BA500C49E42 /* UIButton+WebCache.m in Sources */,
 				D58ADFDA1A8A9C16004D9E91 /* TstNew2_VC.m in Sources */,
 				23667B151ADE75C5007F78D8 /* FICImageTable.m in Sources */,
@@ -507,15 +560,20 @@
 				D5DDB26E19F41497003AEDE9 /* Test2_VC.m in Sources */,
 				23579B921AF25BA500C49E42 /* UIImage+GIF.m in Sources */,
 				23579B971AF25BA500C49E42 /* UIView+WebCacheOperation.m in Sources */,
+				23BF1EF01AF8C7FD00B1FDD5 /* UIButton+Haneke.m in Sources */,
 				D58CB5601A0D3BCB00041966 /* LoadFiles_VC.m in Sources */,
 				D50B5FCF1A2244D200AC0713 /* CustomView.m in Sources */,
 				23579B931AF25BA500C49E42 /* UIImage+MultiFormat.m in Sources */,
+				23BF1EEB1AF8C7FD00B1FDD5 /* HNKCache.m in Sources */,
 				23579B8C1AF25BA500C49E42 /* SDWebImageDecoder.m in Sources */,
+				23BF1EF21AF8C7FD00B1FDD5 /* UIView+Haneke.m in Sources */,
 				23579B891AF25BA500C49E42 /* NSData+ImageContentType.m in Sources */,
 				D508501F19F3139400857C18 /* MasterViewController.m in Sources */,
 				23579B8E1AF25BA500C49E42 /* SDWebImageDownloaderOperation.m in Sources */,
+				23BF1EEE1AF8C7FD00B1FDD5 /* HNKNetworkFetcher.m in Sources */,
 				23579B881AF25BA500C49E42 /* MKAnnotationView+WebCache.m in Sources */,
 				23667B181ADE75C5007F78D8 /* FICUtilities.m in Sources */,
+				23BF1EEC1AF8C7FD00B1FDD5 /* HNKDiskCache.m in Sources */,
 				23667B141ADE75C5007F78D8 /* FICImageFormat.m in Sources */,
 				23667B131ADE75C5007F78D8 /* FICImageCache.m in Sources */,
 				D5DDB27519F416BC003AEDE9 /* Test3_VC.m in Sources */,
@@ -625,7 +683,8 @@
 				GCC_PREFIX_HEADER = "test_nav_xib/test_nav_xib-Prefix.pch";
 				INFOPLIST_FILE = "test_nav_xib/test_nav_xib-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LIBTOOLFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6f50142c-a876-4a67-b995-d3184afd4e11";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -642,7 +701,8 @@
 				GCC_PREFIX_HEADER = "test_nav_xib/test_nav_xib-Prefix.pch";
 				INFOPLIST_FILE = "test_nav_xib/test_nav_xib-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LIBTOOLFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6f50142c-a876-4a67-b995-d3184afd4e11";
 				TARGETED_DEVICE_FAMILY = "1,2";

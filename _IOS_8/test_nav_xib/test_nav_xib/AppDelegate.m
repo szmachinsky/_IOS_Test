@@ -23,6 +23,11 @@
 //    #import "UIImageView+WebCache.h"
 #endif
 
+#ifdef use_Haneke_Cache
+    #import "Haneke.h"
+#endif
+
+
 
 //#define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
 
@@ -104,24 +109,113 @@
     [Test1_VC RP_toggleSwizzDealloc]; //set custom dealloc!!!
     
 #ifdef use_FIC_Cache
- //   [self initFCCache];
+    [self initFCCache];
 #endif
     
 #ifdef use_SDW_Cache
-//    [self initSDWCache];
+ //   [self initSDWCache];
 #endif
-    
+  
+#ifdef use_Haneke_Cache
+//    [self initHanekeCache];
+#endif
+ 
     return YES;
+}
+
+-(void)initHanekeCache
+{
+    return;
+    
+    NSDictionary *dic = [HNKCache sharedCache].formats;
+    
+    HNKCacheFormat *format = [[HNKCacheFormat alloc] initWithName:@"thumbnail_110"];
+
+    long long size1 = [format diskCapacity];
+    long long size2 = [format diskSize];
+    
+    format.compressionQuality = 0.5;
+    // UIImageView category default: 0.75, -[HNKCacheFormat initWithName:] default: 1.
+    
+    format.allowUpscaling = YES;
+    // UIImageView category default: YES, -[HNKCacheFormat initWithName:] default: NO.
+    
+    format.diskCapacity = 0.5 * 1024 * 1024;
+    // UIImageView category default: 10 * 1024 * 1024 (10MB), -[HNKCacheFormat initWithName:] default: 0 (no disk cache).
+    
+    format.preloadPolicy = HNKPreloadPolicyAll;
+    // Default: HNKPreloadPolicyNone.
+    
+    format.scaleMode = HNKScaleModeAspectFill;
+    // UIImageView category default: -[UIImageView contentMode], -[HNKCacheFormat initWithName:] default: HNKScaleModeFill.
+    
+    format.size = CGSizeMake(110, 110);
+    // UIImageView category default: -[UIImageView bounds].size, -[HNKCacheFormat initWithName:] default: CGSizeZero.
+    
+
+    [[HNKCache sharedCache] registerFormat:format];
+    
+    
+    format = [[HNKCacheFormat alloc] initWithName:@"thumbnail_150"];
+    
+//    long long size1 = [format diskCapacity];
+//    long long size2 = [format diskSize];
+    
+    format.compressionQuality = 0.5;
+    // UIImageView category default: 0.75, -[HNKCacheFormat initWithName:] default: 1.
+    
+    format.allowUpscaling = YES;
+    // UIImageView category default: YES, -[HNKCacheFormat initWithName:] default: NO.
+    
+    format.diskCapacity = 0.5 * 1024 * 1024;
+    // UIImageView category default: 10 * 1024 * 1024 (10MB), -[HNKCacheFormat initWithName:] default: 0 (no disk cache).
+    
+    format.preloadPolicy = HNKPreloadPolicyLastSession;
+    // Default: HNKPreloadPolicyNone.
+    
+    format.scaleMode = HNKScaleModeAspectFill;
+    // UIImageView category default: -[UIImageView contentMode], -[HNKCacheFormat initWithName:] default: HNKScaleModeFill.
+    
+    format.size = CGSizeMake(150, 150);
+    // UIImageView category default: -[UIImageView bounds].size, -[HNKCacheFormat initWithName:] default: CGSizeZero.
+    
+    
+    [[HNKCache sharedCache] registerFormat:format];
+    
+    dic = [HNKCache sharedCache].formats;
 }
 
 
 -(void)initSDWCache
 {
     //Add a custom read-only cache path
-    NSString *bundledPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Custom_Path_Images"];
-    [[SDImageCache sharedImageCache] addReadOnlyCachePath:bundledPath];
+//    NSString *bundledPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Custom_Path_Images"];
+//    [[SDImageCache sharedImageCache] addReadOnlyCachePath:bundledPath];
+//    NSLog(@"SDWCache_path=/%@/",bundledPath); //zs
     
-    NSLog(@"SDWCache_path=/%@/",bundledPath); //zs
+    
+    static dispatch_once_t wb_cache;
+    dispatch_once(&wb_cache, ^{
+        NSUInteger m1 = [SDImageCache sharedImageCache].maxCacheSize;
+        NSUInteger m2 = [SDImageCache sharedImageCache].maxCacheAge;
+        NSLog(@"cache1=%u max size / %u max age",m1,m2);
+        [SDImageCache sharedImageCache].maxCacheSize = (1024*1024) * 50; //50 mb
+        [SDImageCache sharedImageCache].maxCacheAge = (60*60*24*14); //14 days
+        m1 = [SDImageCache sharedImageCache].maxCacheSize;
+        m2 = [SDImageCache sharedImageCache].maxCacheAge;
+        NSLog(@"cache2=%u max size / %u max days",m1,m2 / (60*60*24));
+        
+        m1 = [[SDImageCache sharedImageCache] getDiskCount];
+        m2 = [[SDImageCache sharedImageCache] getSize];
+        NSLog(@"cache=%u files /  %u bytes",m1,m2);
+        
+        [[SDImageCache sharedImageCache] cleanDiskWithCompletionBlock:^{}];
+        m1 = [[SDImageCache sharedImageCache] getDiskCount];
+        m2 = [[SDImageCache sharedImageCache] getSize];
+        NSLog(@"clean=%u files /  %u bytes",m1,m2);
+        m1=0;
+    });
+    
 }
 
 -(void)initFCCache

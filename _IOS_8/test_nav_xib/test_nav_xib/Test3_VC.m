@@ -8,7 +8,21 @@
 
 #import "Test3_VC.h"
 
-#import "UIImageView+WebCache.h"
+#ifdef use_FIC_Cache
+#import "FICImageCache.h"
+//#import "FICDPhoto.h"
+#endif
+
+
+#ifdef use_SDW_Cache
+//  #import "UIImageView+WebCache.h"
+    #import "SDWebImageManager.h"
+#endif
+
+#ifdef use_Haneke_Cache
+    #import "Haneke.h"
+#endif
+
 
 
 @interface Test3_VC ()
@@ -65,7 +79,10 @@
 }
 
 - (IBAction)pressBut3:(id)sender {
-    [self loadWithCache:@"https://v1.std3.ru/c4/6f/1430398852-c46ff5fde79cc7ff952235910138ecea.jpg"]; //еда
+//    [self loadWithCache:@"https://v1.std3.ru/c4/6f/1430398852-c46ff5fde79cc7ff952235910138ecea.jpg"]; //еда
+    
+    [self loadWithCache:@"https://v1.std3.ru/7a/6c/1430750460-7a6cc25367d7cb48eaf012f8e14e9688.gif"]; //gif
+    
 }
 
 
@@ -75,18 +92,41 @@
     self.imageView.image = nil;
     self.imageView2.image = nil;
     
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    [manager downloadImageWithURL:[NSURL URLWithString:requestUrl]
-                          options:0
-                         progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                         }
-                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                            if (image && finished) {
-                                NSLog(@"loaded image /%d/ (%.1f %.1f)",cacheType,image.size.width,image.size.height);
-                                self.imageView.image = image;
-                                self.imageView2.image = image;
-                            }
-                        }];
+#ifdef use_SDW_Cache
+//    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+//    [manager downloadImageWithURL:[NSURL URLWithString:requestUrl]
+//                          options:0
+//                         progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//                         }
+//                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+//                            if (image && finished) {
+//                                NSLog(@"loaded image /%d/ (%.1f %.1f)",cacheType,image.size.width,image.size.height);
+//                                self.imageView.image = image;
+//                                self.imageView2.image = image;
+//                            }
+//                        }];
+//    return;
+#endif
+    
+    
+#ifdef use_Haneke_Cache
+//  [self.imageView hnk_setImageFromURL:[NSURL URLWithString:requestUrl]];
+    UIImageView *im;
+    HNKCacheFormat *format = [HNKCache sharedCache].formats[@"thumbnail_110"];
+    self.imageView2.hnk_cacheFormat = format;
+    [self.imageView2  hnk_setImageFromURL:[NSURL URLWithString:requestUrl]
+                            placeholder:nil
+                                success:^(UIImage *image){
+                                    self.imageView.image = image;
+                                    self.imageView2.image = image;
+                                }
+                                failure:^(NSError *error){
+                                    NSLog(@"!!! ERROR!!!!");
+                                }];
+
+    return;
+#endif
+    
     
 }
 

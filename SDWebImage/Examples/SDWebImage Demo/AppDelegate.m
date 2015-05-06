@@ -23,6 +23,21 @@
     //Add a custom read-only cache path
     NSString *bundledPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"CustomPathImages"];
     [[SDImageCache sharedImageCache] addReadOnlyCachePath:bundledPath];
+    NSUInteger m1 = [SDImageCache sharedImageCache].maxCacheSize;
+    NSUInteger m2 = [SDImageCache sharedImageCache].maxCacheAge;
+    NSLog(@"cache=%u %u",m1,m2);
+    [SDImageCache sharedImageCache].maxCacheSize = (1024*1024) * 10; //10 mb
+    [SDImageCache sharedImageCache].maxCacheAge = (60*60*24*10); //10 days
+    
+    m1 = [[SDImageCache sharedImageCache] getDiskCount];
+    m2 = [[SDImageCache sharedImageCache] getSize];
+    NSLog(@"cache1=%u files   %u bytes",m1,m2);
+    
+    [[SDImageCache sharedImageCache] cleanDisk];
+    m1 = [[SDImageCache sharedImageCache] getDiskCount];
+    m2 = [[SDImageCache sharedImageCache] getSize];
+    NSLog(@"cache1=%u files   %u bytes",m1,m2);
+   
     
     NSLog(@"app_path=/%@/",NSHomeDirectory()); //zs
 

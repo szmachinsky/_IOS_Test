@@ -14,7 +14,8 @@
     #import <objc/message.h>
 
     #import "SDImageCache.h"
-    #import "UIImageView+WebCache.h"
+
+//    #import "UIImageView+WebCache.h"
 #endif
 
 
@@ -90,6 +91,10 @@
 #define use_FIC_Cache
 
 #define use_SDW_Cache
+
+#define use_Haneke_Cache
+
+
 
 
 
