@@ -27,6 +27,8 @@
     #import "Haneke.h"
 #endif
 
+#include <mach/mach.h>
+#include <mach/mach_time.h>
 
 
 //#define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
@@ -83,12 +85,31 @@
 @end
 
 
+uint64_t getTickCount(void)
+{
+    static mach_timebase_info_data_t sTimebaseInfo;
+    uint64_t machTime = mach_absolute_time();
+    
+    // Convert to nanoseconds - if this is the first time we've run, get the timebase.
+    if (sTimebaseInfo.denom == 0 )
+    {
+        (void) mach_timebase_info(&sTimebaseInfo);
+    }
+    
+    // Convert the mach time to milliseconds
+    uint64_t millis = ((machTime / 1000000) * sTimebaseInfo.numer) / sTimebaseInfo.denom;
+    return millis;
+}
+
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSLog(@"---0----");
+    uint64_t t1 = getTickCount();
+    
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 
@@ -106,6 +127,11 @@
 //    NSString *s2 = NSHomeDirectory();
     NSLog(@"Home_path=%@",NSHomeDirectory());
     
+    { // exclude dir from backup
+        NSURL* rootPathURL = [NSURL fileURLWithPath:NSTemporaryDirectory()];
+        [rootPathURL setResourceValue:@(YES) forKey:NSURLIsExcludedFromBackupKey error:NULL];
+    }
+    
     [Test1_VC RP_toggleSwizzDealloc]; //set custom dealloc!!!
     
 #ifdef use_FIC_Cache
@@ -120,6 +146,11 @@
 //    [self initHanekeCache];
 #endif
  
+    uint64_t t2 = getTickCount();
+    NSLog(@">-time to start app = (%llu)ms",(t2-t1));
+    
+    [[UIApplication sharedApplication] keyWindow].tintColor = [UIColor orangeColor];
+    
     return YES;
 }
 

@@ -49,6 +49,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+#ifdef use_SDW_Cache
+    
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    [manager.imageCache clearMemory];
+//    [manager.imageCache clearDisk];
+    
+#endif
+}
+
 /*
 #pragma mark - Navigation
 
@@ -76,13 +90,37 @@
 
 - (IBAction)pressBut2:(id)sender {
     [self loadWithCache:@"http://www.reactionimage.org/img/gallery/9642880587.jpg"]; //цирк
+//    [self loadWithCache_SD:@"http://www.reactionimage.org/img/gallery/9642880587.jpg"]; //цирк
 }
 
 - (IBAction)pressBut3:(id)sender {
 //    [self loadWithCache:@"https://v1.std3.ru/c4/6f/1430398852-c46ff5fde79cc7ff952235910138ecea.jpg"]; //еда
     
-    [self loadWithCache:@"https://v1.std3.ru/7a/6c/1430750460-7a6cc25367d7cb48eaf012f8e14e9688.gif"]; //gif
+//  [self loadWithCache:@"https://v1.std3.ru/7a/6c/1430750460-7a6cc25367d7cb48eaf012f8e14e9688.gif"]; //gif
     
+    [self loadWithCache:@"https://v1.std3.ru/85/10/1425725923-8510581837d0f1243797007779fa8211.gif"]; //gif - medved + guitar
+//    [self loadWithCache:@"https://v1.std3.ru/7d/01/1425652504-7d01380112043d0c149b307fc8d17cd1.gif"]; //gif - putin
+}
+
+
+-(void)loadWithCache_SD:(NSString *)requestUrl
+{
+    self.imageView.image = nil;
+    self.imageView2.image = nil;
+    NSLog(@"\n\n---begin---");
+    
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    NSURL *url = [NSURL URLWithString:requestUrl];
+    NSString *key = [manager cacheKeyForURL:url];
+    BOOL isInMemoryCache = ([manager.imageCache imageFromMemoryCacheForKey:key] != nil);
+    
+    UIImage *im = [manager.imageCache imageFromDiskCacheForKey:key];
+    
+
+    
+    NSLog(@"\n---end---");
+    
+    [self loadWithCache:requestUrl];
 }
 
 
@@ -92,20 +130,46 @@
     self.imageView.image = nil;
     self.imageView2.image = nil;
     
+    
 #ifdef use_SDW_Cache
-//    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-//    [manager downloadImageWithURL:[NSURL URLWithString:requestUrl]
-//                          options:0
-//                         progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-//                         }
-//                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-//                            if (image && finished) {
-//                                NSLog(@"loaded image /%d/ (%.1f %.1f)",cacheType,image.size.width,image.size.height);
-//                                self.imageView.image = image;
-//                                self.imageView2.image = image;
-//                            }
-//                        }];
-//    return;
+    
+    NSLog(@"\n\n---begin---");
+//    BOOL ex1 = [[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:requestUrl]];
+//    NSLog(@"---exist_1=%d---",ex1);
+//    
+//    [[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:requestUrl]
+//                                                               completion:^(BOOL isInCache){
+//                                                                   NSLog(@"---exist_2=%d---",isInCache);
+//                                                               }];
+    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        [manager downloadImageWithURL:[NSURL URLWithString:requestUrl]
+                              options:0
+                             progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                             }
+                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                NSLog(@"---completed---");
+                                if (image && finished) {
+                                    NSLog(@"loaded image /%d/ (%.1f %.1f)",cacheType,image.size.width,image.size.height);
+                                    
+                                    if (cacheType == SDImageCacheTypeMemory) {
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            NSLog(@"******* async completion");
+                                            self.imageView.image = image;
+                                            self.imageView2.image = image;
+                                        });
+                                    } else {
+                                        self.imageView.image = image;
+                                        self.imageView2.image = image;
+                                    }
+                                    
+                                }
+                            }];
+//    });
+    
+    NSLog(@"\n---end---");
+    return;
 #endif
     
     

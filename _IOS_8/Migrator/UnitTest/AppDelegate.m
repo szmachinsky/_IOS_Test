@@ -52,7 +52,7 @@
 {
     if (mode>=3)
         return;
-#ifdef USE_TEST_MIGRATION_DELAY
+#if USE_TEST_MIGRATION_DELAY
     sleep(1);
 #endif
     [self applicationDocumentsDirectory];
@@ -84,8 +84,10 @@
         if (ok)
         {
             NSLog(@">>>>>>> Migration_was_OK <<<<<<<<<<");
-            controller.managedObjectContext = [weakSelf managedObjectContext]; //create Core Date stack
+//  create Core Date stack if migration was OK to check base is right
+            controller.managedObjectContext = [weakSelf managedObjectContext];
             [controller infoText:[NSString stringWithFormat:@"MIGRATION %d WAS OK",mode]];
+//  run next test iteration
             [[NSOperationQueue mainQueue] addOperationWithBlock: ^{
                 [self runTest:mode+1];
             }];
@@ -135,7 +137,7 @@
     
     switch (mode) {
         case 0:
-            migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"}, @{@"name":@"TestMigrator 4"},];
+            migrator.modelsList = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"}, @{@"name":@"TestMigrator 4"}];
             migrator.migrationClass = [CDMigrationManager class];
 //          migrator.modelsUrl = modelUrl;//[[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ModelDataDir/"];
     

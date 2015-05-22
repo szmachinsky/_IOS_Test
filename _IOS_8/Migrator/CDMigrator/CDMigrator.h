@@ -14,7 +14,7 @@
 
 -(instancetype)init;
 
-@property (nonatomic, strong) NSArray *models;
+@property (nonatomic, strong) NSArray *modelsList;
 
 @property (nonatomic, copy) void (^initHud)();
 @property (nonatomic, copy) void (^dismissHud)();

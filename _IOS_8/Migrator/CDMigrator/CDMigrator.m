@@ -134,7 +134,7 @@ static volatile float _progressRange = 0.f;
                         subdirectory:[modelName stringByAppendingPathExtension:@"momd"]];  
         NSLog(@"%@",url);
         NSDictionary *dic = [NSDictionary dictionaryWithContentsOfURL:url];
-//      NSLog(@"DIC=%@",dic);
+        NSLog(@"Momd_Dic=%@",dic);
         NSString *nameOfDestinationModel = dic[@"NSManagedObjectModel_CurrentVersionName"];
         NSLog(@"dest_model_name=(%@)",nameOfDestinationModel);
         NSDictionary *d = dic[@"NSManagedObjectModel_VersionHashes"];
@@ -144,7 +144,7 @@ static volatile float _progressRange = 0.f;
             [arrModels addObjectsFromArray:a];
         }
         
-//      NSLog(@"arrModels=%@",arrModels);
+        NSLog(@"models list (from mom) = %@",arrModels);
         [arrModels sortUsingComparator:^(id a, id b) {
             NSInteger x1 = [self lastNumberFromString:(NSString*)a];
             NSInteger x2 = [self lastNumberFromString:(NSString*)b];
@@ -156,8 +156,7 @@ static volatile float _progressRange = 0.f;
             return (NSComparisonResult)NSOrderedSame;
         }];
         
-        NSLog(@"arrModels=%@",arrModels);
-        if (!self.models && arrModels.count) {
+        if (!self.modelsList && arrModels.count) {
             NSMutableArray *res = [NSMutableArray array];
             for (NSString *str in arrModels) {
                 [res addObject:@{@"name":str}];
@@ -165,7 +164,8 @@ static volatile float _progressRange = 0.f;
                     break;
                 }
            }
-            self.models = res;
+            NSLog(@"set list of models (sorted) from = %@",arrModels);
+            self.modelsList = res; //fill list of models
 //          NSLog(@"%@",self.models);
         }
         
@@ -214,18 +214,18 @@ static volatile float _progressRange = 0.f;
                 
                 mappingModel = [NSMappingModel mappingModelFromBundles:bundles forSourceModel:sourceModel destinationModel:destinationModel];
                 if (mappingModel) {
-                    NSLog(@"====== direct migration ======");
+                    NSLog(@"====== there is a direct migration model ======");
                     arraySteps = @[ @{@"sourceModel":sourceModel, @"destModel":destinationModel, @"mapModel":mappingModel, @"sourceName":@"?", @"destName":@"?" } ];
                 }
                 NSManagedObjectModel *finalModel = destinationModel;
                 
                 //build  array with migration chain steps descriptios
                 if (arraySteps.count == 0) {
-                    arraySteps = [self migrationChainFor:self.models metadata:sourceMetadata];
+                    arraySteps = [self migrationChainFor:self.modelsList metadata:sourceMetadata];
                 }
-                NSLog(@"found %d migration chain steps",arraySteps.count);
+                NSLog(@"found %d migration(s) in chain",arraySteps.count);
                 if (arraySteps.count == 0) {
-                    NSLog(@"Current model in not found!!!");
+                    NSLog(@"Current model is not found - exit!!!");
                     return result;
                 }
                 float delta = (arraySteps.count > 0 ? 1./arraySteps.count : 1.) - 0.00001;
@@ -235,7 +235,7 @@ static volatile float _progressRange = 0.f;
                 @autoreleasepool
                 {
                     int iterationNumber = (i+1);
-                    NSLog(@"======================= iteration %d ========================",iterationNumber);
+                    NSLog(@"======================= run iteration %d ========================",iterationNumber);
                     NSDictionary *dic = (NSDictionary*)arraySteps[i];
                     NSManagedObjectModel *sModel = dic[@"sourceModel"];
                     NSManagedObjectModel *dModel = dic[@"destModel"];
@@ -316,7 +316,7 @@ static volatile float _progressRange = 0.f;
         } else {
             NSLog(@"Migration is NOT needed"); // Migration is not needed
             result = YES;
-            return result;
+            return result;  //exit
         }
         
         id ok = [_persistentStoreCoordinator addPersistentStoreWithType:kCoreDataStoreType configuration:nil URL:storeURL options:options error:&error];
@@ -393,7 +393,7 @@ static volatile float _progressRange = 0.f;
 
     id ok = [persistentStoreCoordinator addPersistentStoreWithType:kCoreDataStoreType configuration:nil URL:storeURL options:options error:&error];
     if (!ok) {
-        NSLog(@"Unresolved LM error %@, %@", error, [error userInfo]);
+        NSLog(@"Unresolved Light Migration error %@, %@", error, [error userInfo]);
         return NO;
     }
     [self showProgress:delta];

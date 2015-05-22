@@ -35,7 +35,7 @@
 //#define CORE_MIGR_DIR  @"Tmp/Migration_Models/"
 
 
-#define USE_TEST_MIGRATION_DELAY
+#define USE_TEST_MIGRATION_DELAY 1
 
 
 #endif
