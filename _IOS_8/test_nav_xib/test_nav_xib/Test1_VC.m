@@ -8,6 +8,22 @@
 
 #import "Test1_VC.h"
 
+
+#define RunOnMainThread0()              \
+if (![NSThread isMainThread])\
+{\
+[self performSelectorOnMainThread:_cmd withObject:nil waitUntilDone:YES];\
+return;\
+}
+
+#define RunOnMainThread1(arg1)          \
+if (![NSThread isMainThread])\
+{\
+[self performSelectorOnMainThread:_cmd withObject:(arg1) waitUntilDone:YES];\
+return;\
+}
+
+
 @interface Test1_VC ()
 
 @end
@@ -74,13 +90,20 @@
 }
 
 
-
+//- (void)viewDidUnload {
+//    [super viewDidUnload];
+//    
+//    NSLog(@"\n\n -- DidUNLoad_test_1 --\n");
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"-----begin-----");
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"_TEST_01_";
     [self setupTapRecognizers];
+    
+    NSLog(@"\n\n -- DidLoad_test_1 --\n");
     
 //#ifdef DEBUG
 //    NSLog(@"-debug-");
@@ -97,11 +120,41 @@
 //    NSLog(@"--1-");
 //    NSAssert(false,@"!!!!!");
 //    NSLog(@"--2-");
+    
+    
+    NSLog(@"-----run tests-----");
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//    dispatch_async(dispatch_get_main_queue(), ^{
+        [self runTest1];
+        [self runTest2:@"-test-"];
+ });
+
+    NSLog(@"-----end-----");
 }
+
+
+-(void)runTest1
+{
+    RunOnMainThread0();
+    NSLog(@"\n\n -- runTest1 --\n");
+//    int i = 0;
+    return;
+}
+
+-(void)runTest2:(NSString*)str
+{
+    RunOnMainThread1(str);
+    NSLog(@"\n\n -- runTest2:(%@) --\n",str);
+//    int i = 0;
+    return;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    NSLog(@"\n\n -- MemoryWarning_test_1 --\n");
 }
 
 /*

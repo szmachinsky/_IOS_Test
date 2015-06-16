@@ -146,6 +146,13 @@ uint64_t getTickCount(void)
 //    [self initHanekeCache];
 #endif
  
+    
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)])
+    {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+    }
+    
+    
     uint64_t t2 = getTickCount();
     NSLog(@">-time to start app = (%llu)ms",(t2-t1));
     

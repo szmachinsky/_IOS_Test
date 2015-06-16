@@ -277,4 +277,35 @@
 }
 
 
+
+
+- (IBAction)press_Notif:(id)sender {
+    [self notif];
+//    [self performSelector:@selector(notif) withObject:nil afterDelay:3.0];
+}
+
+-(void)notif
+{
+//    UILocalNotification* ln = [UILocalNotification new];
+//    ln.alertBody = @"Time for another cup of coffee!";
+//    ln.fireDate = [NSDate dateWithTimeIntervalSinceNow:0.0];
+//    ln.soundName = UILocalNotificationDefaultSoundName;
+//    [[UIApplication sharedApplication] scheduleLocalNotification:ln];
+////    [[UIApplication sharedApplication] presentLocalNotificationNow:ln]; //show immediatelly
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+                   {
+                       UILocalNotification *notification = [UILocalNotification new];
+                       notification.timeZone  = [NSTimeZone systemTimeZone];
+                       notification.fireDate  = [[NSDate date] dateByAddingTimeInterval:10.01f];
+                       notification.alertAction = nil;
+                       notification.alertBody = [NSString stringWithFormat:@"ALERT BODY"];
+//                       notification.alertTitle = @"title";
+                       notification.soundName = UILocalNotificationDefaultSoundName;
+                       [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+                   });
+    
+    
+}
+
 @end

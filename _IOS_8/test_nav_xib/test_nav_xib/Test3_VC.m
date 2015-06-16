@@ -29,10 +29,15 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIView *blureView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView2;
+@property (weak, nonatomic) IBOutlet UIVisualEffectView *effectView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView3;
 
 @property (weak, nonatomic) IBOutlet UIButton *but1;
 @property (weak, nonatomic) IBOutlet UIButton *but2;
 @property (weak, nonatomic) IBOutlet UIButton *but3;
+
+@property (weak, nonatomic) IBOutlet UIButton *remButt;
+
 
 @end
 
@@ -42,11 +47,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"_TEST_03_";
+    
+    NSLog(@"\n\n -- DidLoad_test_3 --\n");
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    NSLog(@"\n\n -- MemoryWarning_test_3 --\n");
 }
 
 
@@ -107,6 +115,7 @@
 {
     self.imageView.image = nil;
     self.imageView2.image = nil;
+    self.imageView3.image = nil;
     NSLog(@"\n\n---begin---");
     
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
@@ -129,6 +138,7 @@
 {
     self.imageView.image = nil;
     self.imageView2.image = nil;
+    self.imageView3.image = nil;
     
     
 #ifdef use_SDW_Cache
@@ -158,11 +168,13 @@
                                             NSLog(@"******* async completion");
                                             self.imageView.image = image;
                                             self.imageView2.image = image;
-                                        });
+                                            self.imageView3.image = image;
+                                       });
                                     } else {
                                         self.imageView.image = image;
                                         self.imageView2.image = image;
-                                    }
+                                        self.imageView3.image = image;
+                                   }
                                     
                                 }
                             }];
@@ -198,6 +210,45 @@
 - (IBAction)clearCache:(id)sender {
     [SDWebImageManager.sharedManager.imageCache clearMemory];
     [SDWebImageManager.sharedManager.imageCache clearDisk];
+}
+
+
+- (IBAction)presssRemButton:(id)sender {
+    [self rem1];
+//    [self rem2];
+}
+
+-(void)rem1
+{
+    [UIView animateWithDuration:1.0
+                          delay:0
+                        options:UIViewAnimationCurveEaseIn | UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
+                         self.effectView.transform = CGAffineTransformScale(self.effectView.transform, 0.2, 0.2);
+                         self.effectView.alpha = 0;
+                     }
+                     completion:^(BOOL finished){
+                         if(finished) {
+//                           self.effectView.alpha = 0;
+                             [self.effectView removeFromSuperview];
+                          }
+                     }];
+    
+}
+
+-(void)rem2
+{
+    [UIView animateWithDuration:1.0 animations:^ {
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+            self.effectView.alpha = 0.;
+        }
+        else{
+            self.effectView.transform = CGAffineTransformMakeTranslation(0, 300);
+        }
+    } completion:^ (BOOL finished){
+        [self.effectView removeFromSuperview];
+    }];
+
 }
 
 @end

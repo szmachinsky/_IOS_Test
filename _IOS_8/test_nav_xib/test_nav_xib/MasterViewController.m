@@ -25,6 +25,9 @@
 @end
 
 @implementation MasterViewController
+{
+    Test1_VC *vc1;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -149,16 +152,16 @@
     }
     
     cell.textLabel.alpha = 0.1;
-    [UIView animateWithDuration:2.0
+    [UIView animateWithDuration:1.0
                      animations:^{
-                         NSLog(@"anim beg");
+//                         NSLog(@"anim beg");
                          cell.textLabel.alpha = 0.9;
                      } completion:^(BOOL finished) {
-                         NSLog(@"%d %f",finished,cell.textLabel.alpha);
+//                         NSLog(@"%d %f",finished,cell.textLabel.alpha);
                      }];
     
 
-    NSLog(@"cell end");
+//    NSLog(@"cell end");
     
     return cell;
 }
@@ -203,8 +206,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
-        Test1_VC *vc = [[Test1_VC alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        if (!vc1) {
+            vc1 = [[Test1_VC alloc] init];
+        }
+        [self.navigationController pushViewController:vc1 animated:YES];
     }
     if (indexPath.row == 1) {
         Test2_VC *vc = [[Test2_VC alloc] init];
