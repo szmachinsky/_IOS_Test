@@ -21,7 +21,7 @@ static NSString *const APHDealloc = @"dealloc";
 }
 
 #pragma mark - Util methods
-
+//============================= swizzInstance() ==================================
 static void swizzInstance(Class class, SEL originalSel, SEL newSel)
 {
     Method origMethod = class_getInstanceMethod(class, originalSel);
@@ -31,7 +31,7 @@ static void swizzInstance(Class class, SEL originalSel, SEL newSel)
 }
 
 #pragma mark - Printing info
-
+//----------------------------- printDeallocatedObject -----------------------------------
 - (void)printDeallocatedObject
 {
     NSString *classDescription = [[self class] description];
@@ -56,7 +56,7 @@ static void swizzInstance(Class class, SEL originalSel, SEL newSel)
 }
 
 #pragma mark - Swizzled methods
-
+//----------------------------- RP_fakeDealloc -----------------------------------
 - (void)RP_fakeDealloc
 {
     [self printDeallocatedObject];
@@ -64,7 +64,7 @@ static void swizzInstance(Class class, SEL originalSel, SEL newSel)
 }
 
 #pragma mark - Public Methods
-
+//----------------------------- RP_toggleSwizzDealloc -----------------------------------
 + (void)RP_toggleSwizzDealloc
 {
     NSString *classDescription = [[self class] description];

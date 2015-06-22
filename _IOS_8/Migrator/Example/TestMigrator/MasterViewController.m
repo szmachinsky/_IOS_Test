@@ -56,15 +56,19 @@
         
     // If appropriate, configure the new managed object.
     // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
+//    NSLog(@"\n   **1* insert:setValue\n");
     [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
         
     // Save the context.
     NSError *error = nil;
+//    NSLog(@"\n   **2* insert:start_save\n");
     if (![context save:&error]) {
         // Replace this implementation with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        NSLog(@"!!!! Unresolved error %@, %@", error, [error userInfo]);
         abort();
+    } else {
+//        NSLog(@"\n   **3* insert:save_OK\n");
     }
 }
 
@@ -171,12 +175,14 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
+//    NSLog(@"\n -1- fetch:WillChangeContent + beginUpdates --\n");
     [self.tableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
 {
+//    NSLog(@"\n -2- fetch:didChangeSection --\n");
     switch(type) {
         case NSFetchedResultsChangeInsert:
             [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
@@ -195,6 +201,7 @@
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
+//    NSLog(@"\n -3- fetch:didChangeObject_%d --\n",type);
     UITableView *tableView = self.tableView;
     
     switch(type) {
@@ -219,6 +226,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
+//    NSLog(@"\n -4- fetch:DidChangeContent + endUpdates --\n");
     [self.tableView endUpdates];
 }
 
