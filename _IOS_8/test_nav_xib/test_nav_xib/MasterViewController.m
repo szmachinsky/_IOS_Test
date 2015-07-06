@@ -53,17 +53,83 @@
 //    _NSLog0(@"test - _NSLog0");
 //    printf("test1 %d\n",def_rows);
 //    printf("test2 %d\n",def_rows);
+    
+//    Class ALSdkClass = NSClassFromString(@"TstNew2_VC");
+//    ALSdkClass = nil;
+    
+    BOOL b = self.navigationController.interactivePopGestureRecognizer.enabled;
+    NSLog(@"\n viewDidLoad-end :%d++",b);
+    b = NO;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    NSLog(@"\n -1-viewWillAppear-begin--");
     [super viewWillAppear:animated];
 
     void (*msg)(id,SEL) = (void(*)(id,SEL))objc_msgSend;
     SEL sel1 =  NSSelectorFromString(@"reloadData");
-//    SEL sel2 = @selector(reloadData);
+//  SEL sel2 = @selector(reloadData);
     msg(self.tableView,sel1);
+    
+////    dispatch_async(dispatch_get_main_queue(), ^{ //zs4
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^{
+//        NSLog(@"\n -3!-viewWillAppear-end--");
+//    [NSThread sleepForTimeInterval:2.0];
+//        NSLog(@"\n -3!!!!-viewWillAppear-end--");
+//        });
+
+    
+    BOOL b = self.navigationController.interactivePopGestureRecognizer.enabled;
+    NSLog(@"\n -1-viewWillAppear-end :%d--",b);
+    b = NO;
 }
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    NSLog(@"\n +2+viewDidAppear-begin++");
+    [super viewDidAppear:animated];
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{ //zs4
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^{
+    });
+    
+    BOOL b = self.navigationController.interactivePopGestureRecognizer.enabled;
+    NSLog(@"\n +2+viewDidAppear-end :%d++",b);
+    b = NO;
+}
+
+//-(void)viewWillLayoutSubviews
+//{
+//    NSLog(@"\n =1=viewWillLayoutSubviews-begin==");
+//    [super viewWillLayoutSubviews];
+////    dispatch_async(dispatch_get_main_queue(), ^{ //zs4
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^{
+//        NSLog(@"\n =3!=viewWillLayoutSubviews-end==");
+//    [NSThread sleepForTimeInterval:1.0];
+//        NSLog(@"\n =3!!!!=viewWillLayoutSubviews-end==");
+//    });
+//    NSLog(@"\n =1=viewWillLayoutSubviews-end==");
+//}
+//
+//-(void)viewDidLayoutSubviews
+//{
+//    NSLog(@"\n =2=viewDidLayoutSubviews-begin==");
+//   [super viewDidLayoutSubviews];
+////    dispatch_async(dispatch_get_main_queue(), ^{ //zs4
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_main_queue(), ^{
+//        NSLog(@"\n =3!=viewDidLayoutSubviews-end==");
+//    [NSThread sleepForTimeInterval:1.0];
+//        NSLog(@"\n =3!!!!=viewDidLayoutSubviews-end==");
+//    });
+//    NSLog(@"\n =2=viewDidLayoutSubviews-end==");
+//}
+
 
 - (void)didReceiveMemoryWarning
 {
