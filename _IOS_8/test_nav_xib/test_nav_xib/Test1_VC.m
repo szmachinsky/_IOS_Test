@@ -131,8 +131,21 @@ return;\
  });
 
     NSLog(@"-----end-----");
+    
 }
 
+
+-(void)viewDidAppear:(BOOL)animated
+{
+     [super viewDidAppear:animated];
+    
+    id id1 = self;
+    id id2 = self.navigationController.interactivePopGestureRecognizer.delegate;
+    id id3 = self.navigationController;
+    NSLog(@"\n\n 1))) self=(%p)  delegate=(%p)  nav=(%p)",id1,id2,id3);
+    id1 = id2;
+    
+}
 
 -(void)runTest1
 {

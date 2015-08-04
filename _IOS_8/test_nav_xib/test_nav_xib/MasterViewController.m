@@ -100,7 +100,15 @@
     BOOL b = self.navigationController.interactivePopGestureRecognizer.enabled;
     NSLog(@"\n +2+viewDidAppear-end :%d++",b);
     b = NO;
+    
+    id id1 = self;
+    id id2 = self.navigationController.interactivePopGestureRecognizer.delegate;
+    id id3 = self.navigationController;
+    NSLog(@"\n\n 0))) self=(%p)  delegate=(%p)  nav=(%p)",id1,id2,id3);
+    id1 = id2;
+    
 }
+
 
 //-(void)viewWillLayoutSubviews
 //{

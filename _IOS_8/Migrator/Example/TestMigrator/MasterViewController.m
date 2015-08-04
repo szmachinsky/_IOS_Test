@@ -32,8 +32,8 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if (_managedObjectContext)
-        [self update];
+    
+    [self update];
 }
 
 
@@ -69,16 +69,6 @@
         abort();
     } else {
 //        NSLog(@"\n   **3* insert:save_OK\n");
-    }
-}
-
-#pragma mark - Segues
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [[segue destinationViewController] setDetailItem:object];
     }
 }
 

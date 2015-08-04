@@ -42,11 +42,16 @@
 @end
 
 @implementation Test3_VC
+{
+    NSArray *urlGif;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.title = @"_TEST_03_";
+    
+    urlGif = @[@"https://v1.std3.ru/7a/6c/1430750460-7a6cc25367d7cb48eaf012f8e14e9688.gif",@"https://v1.std3.ru/85/10/1425725923-8510581837d0f1243797007779fa8211.gif",@"https://v1.std3.ru/d7/89/1391082728-d789d657b879d6f0ad256a194cf8f73f.gif"];
     
     NSLog(@"\n\n -- DidLoad_test_3 --\n");
 }
@@ -99,15 +104,22 @@
 - (IBAction)pressBut2:(id)sender {
     [self loadWithCache:@"http://www.reactionimage.org/img/gallery/9642880587.jpg"]; //цирк
 //    [self loadWithCache_SD:@"http://www.reactionimage.org/img/gallery/9642880587.jpg"]; //цирк
+//    [self loadWithCache:@"https://v1.std3.ru/c4/6f/1430398852-c46ff5fde79cc7ff952235910138ecea.jpg"]; //еда
+    
+    //https://v1.std3.ru/d7/89/1391082728-d789d657b879d6f0ad256a194cf8f73f.gif //котик
 }
 
 - (IBAction)pressBut3:(id)sender {
-//    [self loadWithCache:@"https://v1.std3.ru/c4/6f/1430398852-c46ff5fde79cc7ff952235910138ecea.jpg"]; //еда
+    static int i3 = 0;
+    int ind = (i3++ % urlGif.count);
+    [self loadWithCache:urlGif[ind]];
     
 //  [self loadWithCache:@"https://v1.std3.ru/7a/6c/1430750460-7a6cc25367d7cb48eaf012f8e14e9688.gif"]; //gif
     
-    [self loadWithCache:@"https://v1.std3.ru/85/10/1425725923-8510581837d0f1243797007779fa8211.gif"]; //gif - medved + guitar
-//    [self loadWithCache:@"https://v1.std3.ru/7d/01/1425652504-7d01380112043d0c149b307fc8d17cd1.gif"]; //gif - putin
+//  [self loadWithCache:@"https://v1.std3.ru/85/10/1425725923-8510581837d0f1243797007779fa8211.gif"]; //gif - medved + guitar
+//  [self loadWithCache:@"https://v1.std3.ru/7d/01/1425652504-7d01380112043d0c149b307fc8d17cd1.gif"]; //gif - putin
+    
+    
 }
 
 
