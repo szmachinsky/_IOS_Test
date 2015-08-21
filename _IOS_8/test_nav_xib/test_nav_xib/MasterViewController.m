@@ -63,6 +63,40 @@
     
 }
 
+
+-(void)configureRefresh
+{
+    self.refreshControl = [UIRefreshControl new];
+    [self.refreshControl addTarget:self action:@selector(doRefresh:)
+                  forControlEvents:UIControlEventValueChanged];
+    
+    
+    NSString *s = @"Refreshing table...";
+    NSMutableAttributedString* content = [[NSMutableAttributedString alloc] initWithString:s
+                                                                                attributes:
+                                          @{
+                                            NSFontAttributeName:
+                                                [UIFont fontWithName:@"Arial-BoldMT" size:15],
+                                            NSForegroundColorAttributeName:
+                                                [UIColor colorWithRed:0.251 green:0.000 blue:0.502 alpha:1]
+                                            }];
+    
+    NSRange r = [s rangeOfString:@"table"];
+    [content addAttributes:
+     @{
+       NSStrokeColorAttributeName:[UIColor redColor],
+       NSStrokeWidthAttributeName: @-2.0
+       } range:r];
+    self.refreshControl.attributedTitle = content;
+    
+    
+//    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:s];
+    
+    self.refreshControl.tintColor = [UIColor redColor];
+    //    self.refreshControl.backgroundColor = [UIColor yellowColor];
+    //    [self.refreshControl endRefreshing];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     NSLog(@"\n -1-viewWillAppear-begin--");
@@ -107,6 +141,7 @@
     NSLog(@"\n\n 0))) self=(%p)  delegate=(%p)  nav=(%p)",id1,id2,id3);
     id1 = id2;
     
+    [self configureRefresh];
 }
 
 
@@ -307,7 +342,12 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
   
-    if (indexPath.row > 5) {
+    if (indexPath.row == 6) {
+        [self manualRefresh];
+//        [self performSelector:@selector(manualRefresh) withObject:nil afterDelay:0.1];
+    }
+    
+    if (indexPath.row > 6) {
         if (!self.detailViewController) {
             self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
         }
@@ -318,5 +358,46 @@
     
     
 }
+
+//===========================REFRESH CONTROL===========================================
+#pragma mark - -REFRESH CONTROL
+
+
+-(void)doRefresh:(UIRefreshControl*) sender {
+    // ... refresh the table data ...
+//    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refresh_1"];
+
+    NSLog(@"\n\n =1= REFRESH BEGIN ==\n");
+    sleep(2);
+    NSLog(@"\n\n =1= REFRESH END ==\n");
+   [sender endRefreshing];
+}
+
+
+-(void)manualRefresh
+{
+//    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refresh_2"];
+
+    CGPoint p1 = [self.tableView contentOffset];
+    p1.y -= self.refreshControl.bounds.size.height;
+
+//  CGPoint p2 = CGPointMake(0,0);//(0,-self.refreshControl.bounds.size.height);
+    [self.tableView setContentOffset:p1
+                            animated:YES];
+    
+    
+    NSLog(@"\n\n =2= REFRESH BEGIN ==\n");
+    [self.refreshControl beginRefreshing];
+    
+    [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:2.0];
+ }
+
+-(void)stopRefresh
+{
+    NSLog(@"\n\n =2= REFRESH END ==\n");
+    [self.refreshControl endRefreshing];
+    
+}
+
 
 @end
