@@ -4,9 +4,10 @@
 
 #import <Availability.h>
 
-#ifndef __IPHONE_4_0
-#warning "This project uses features only available in iOS SDK 4.0 and later."
+#ifndef __IPHONE_7_0
+#warning "This project uses features only available in iOS SDK 7.0 and later."
 #endif
+
 
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
@@ -15,8 +16,13 @@
 
     #import "SDImageCache.h"
 
-//    #import "UIImageView+WebCache.h"
+//  #import "UIImageView+WebCache.h"
+
+    #import "iSmartObjectSwizzling.h"
 #endif
+
+
+#import "Defines.h"
 
 
 #define DOCUMENTS [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]

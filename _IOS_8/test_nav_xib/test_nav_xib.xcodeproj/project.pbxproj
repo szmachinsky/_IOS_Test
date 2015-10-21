@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		230787571BC5616D00731419 /* iSmartObjectSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 230787561BC5616D00731419 /* iSmartObjectSwizzling.m */; };
 		23579B881AF25BA500C49E42 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 23579B681AF25BA500C49E42 /* MKAnnotationView+WebCache.m */; };
 		23579B891AF25BA500C49E42 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 23579B6A1AF25BA500C49E42 /* NSData+ImageContentType.m */; };
 		23579B8A1AF25BA500C49E42 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 23579B6C1AF25BA500C49E42 /* SDImageCache.m */; };
@@ -55,6 +56,8 @@
 		23BF1EF01AF8C7FD00B1FDD5 /* UIButton+Haneke.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BF1EE61AF8C7FD00B1FDD5 /* UIButton+Haneke.m */; };
 		23BF1EF11AF8C7FD00B1FDD5 /* UIImageView+Haneke.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BF1EE81AF8C7FD00B1FDD5 /* UIImageView+Haneke.m */; };
 		23BF1EF21AF8C7FD00B1FDD5 /* UIView+Haneke.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BF1EEA1AF8C7FD00B1FDD5 /* UIView+Haneke.m */; };
+		23CE04F11B906B4200D78F4C /* back_to_reality.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 23CE04F01B906B4200D78F4C /* back_to_reality.jpg */; };
+		23CFA3951BD7CB0200569152 /* UIRefreshControl+FixOffset.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CFA3941BD7CB0200569152 /* UIRefreshControl+FixOffset.m */; settings = {ASSET_TAGS = (); }; };
 		23EA78471A9F013900EACAE4 /* NSObject+Dealloc.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EA78451A9F013900EACAE4 /* NSObject+Dealloc.m */; };
 		23EA78481A9F013900EACAE4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 23EA78461A9F013900EACAE4 /* README.md */; };
 		D5083C2A19F3F7C900C8F00C /* Test1_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5083C2819F3F7C900C8F00C /* Test1_VC.m */; };
@@ -90,6 +93,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		23063D491B947BA000D494A9 /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
+		230787551BC5616D00731419 /* iSmartObjectSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iSmartObjectSwizzling.h; sourceTree = "<group>"; };
+		230787561BC5616D00731419 /* iSmartObjectSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iSmartObjectSwizzling.m; sourceTree = "<group>"; };
 		23579B671AF25BA500C49E42 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		23579B681AF25BA500C49E42 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		23579B691AF25BA500C49E42 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -173,6 +179,9 @@
 		23BF1EE81AF8C7FD00B1FDD5 /* UIImageView+Haneke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Haneke.m"; sourceTree = "<group>"; };
 		23BF1EE91AF8C7FD00B1FDD5 /* UIView+Haneke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Haneke.h"; sourceTree = "<group>"; };
 		23BF1EEA1AF8C7FD00B1FDD5 /* UIView+Haneke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Haneke.m"; sourceTree = "<group>"; };
+		23CE04F01B906B4200D78F4C /* back_to_reality.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = back_to_reality.jpg; sourceTree = "<group>"; };
+		23CFA3931BD7CB0200569152 /* UIRefreshControl+FixOffset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIRefreshControl+FixOffset.h"; sourceTree = "<group>"; };
+		23CFA3941BD7CB0200569152 /* UIRefreshControl+FixOffset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+FixOffset.m"; sourceTree = "<group>"; };
 		23EA78441A9F013900EACAE4 /* NSObject+Dealloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Dealloc.h"; sourceTree = "<group>"; };
 		23EA78451A9F013900EACAE4 /* NSObject+Dealloc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Dealloc.m"; sourceTree = "<group>"; };
 		23EA78461A9F013900EACAE4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -238,6 +247,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		230787541BC5616D00731419 /* Swizzling */ = {
+			isa = PBXGroup;
+			children = (
+				230787551BC5616D00731419 /* iSmartObjectSwizzling.h */,
+				230787561BC5616D00731419 /* iSmartObjectSwizzling.m */,
+			);
+			path = Swizzling;
+			sourceTree = "<group>";
+		};
 		23579B661AF25BA500C49E42 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,10 +345,13 @@
 		23EA78421A9F00ED00EACAE4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				230787541BC5616D00731419 /* Swizzling */,
 				23BF1ED91AF8C7FD00B1FDD5 /* Haneke */,
 				23579B661AF25BA500C49E42 /* SDWebImage */,
 				23667B031ADE75C5007F78D8 /* FastImageCache */,
 				23EA78431A9F00FA00EACAE4 /* Dealloc */,
+				23CFA3931BD7CB0200569152 /* UIRefreshControl+FixOffset.h */,
+				23CFA3941BD7CB0200569152 /* UIRefreshControl+FixOffset.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -348,6 +369,7 @@
 		D5083C2519F3F53F00C8F00C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				23063D491B947BA000D494A9 /* Defines.h */,
 				D58ADFD21A8A9B84004D9E91 /* Test_New */,
 				D508F42E1A23502C00C3776B /* YandexTest_VC */,
 				D58CB55C1A0D3B8C00041966 /* LoadFiles_VC */,
@@ -419,6 +441,7 @@
 		D508500C19F3139400857C18 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				23CE04F01B906B4200D78F4C /* back_to_reality.jpg */,
 				23902F0D1B29CC3200675B43 /* Icon-29.png */,
 				23902F0E1B29CC3200675B43 /* Icon-29@2x.png */,
 				23902F0F1B29CC3200675B43 /* Icon-29@3x.png */,
@@ -577,6 +600,7 @@
 				D5083C2B19F3F7C900C8F00C /* Test1_VC.xib in Resources */,
 				23902F2C1B29CC3200675B43 /* Icon-76@2x.png in Resources */,
 				D50B5FD11A2244F000AC0713 /* CustomView.xib in Resources */,
+				23CE04F11B906B4200D78F4C /* back_to_reality.jpg in Resources */,
 				23902F211B29CC3200675B43 /* Icon-40@2x.png in Resources */,
 				D508502519F3139400857C18 /* MasterViewController.xib in Resources */,
 				D508F4331A23507500C3776B /* YandexTest_VC.xib in Resources */,
@@ -625,6 +649,8 @@
 				23579B921AF25BA500C49E42 /* UIImage+GIF.m in Sources */,
 				23579B971AF25BA500C49E42 /* UIView+WebCacheOperation.m in Sources */,
 				23BF1EF01AF8C7FD00B1FDD5 /* UIButton+Haneke.m in Sources */,
+				230787571BC5616D00731419 /* iSmartObjectSwizzling.m in Sources */,
+				23CFA3951BD7CB0200569152 /* UIRefreshControl+FixOffset.m in Sources */,
 				D58CB5601A0D3BCB00041966 /* LoadFiles_VC.m in Sources */,
 				D50B5FCF1A2244D200AC0713 /* CustomView.m in Sources */,
 				23579B931AF25BA500C49E42 /* UIImage+MultiFormat.m in Sources */,
@@ -742,7 +768,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Aliaksei Shlovikau (AKC9H535F6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "test_nav_xib/test_nav_xib-Prefix.pch";
 				INFOPLIST_FILE = "test_nav_xib/test_nav_xib-Info.plist";
