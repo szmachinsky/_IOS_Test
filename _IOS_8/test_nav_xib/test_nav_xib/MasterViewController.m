@@ -197,7 +197,8 @@ static const char offsetForControl;
 
 -(void)configureRefresh
 {
-    self.refreshControl = [UIRefreshControl new];
+    self.refreshControl = [FX_UIRefreshControl new];
+    
     [self.refreshControl addTarget:self action:@selector(doRefresh:)
                   forControlEvents:UIControlEventValueChanged];
     

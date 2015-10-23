@@ -32,6 +32,7 @@
 		23667B161ADE75C5007F78D8 /* FICImageTableChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B0D1ADE75C5007F78D8 /* FICImageTableChunk.m */; };
 		23667B171ADE75C5007F78D8 /* FICImageTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B0F1ADE75C5007F78D8 /* FICImageTableEntry.m */; };
 		23667B181ADE75C5007F78D8 /* FICUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B121ADE75C5007F78D8 /* FICUtilities.m */; };
+		238FF5BE1BD920FF006840AF /* UIRefreshControl+FixOffset.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FF5BD1BD920FF006840AF /* UIRefreshControl+FixOffset.m */; settings = {ASSET_TAGS = (); }; };
 		23902F1D1B29CC3200675B43 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 23902F0D1B29CC3200675B43 /* Icon-29.png */; };
 		23902F1E1B29CC3200675B43 /* Icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23902F0E1B29CC3200675B43 /* Icon-29@2x.png */; };
 		23902F1F1B29CC3200675B43 /* Icon-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23902F0F1B29CC3200675B43 /* Icon-29@3x.png */; };
@@ -57,7 +58,6 @@
 		23BF1EF11AF8C7FD00B1FDD5 /* UIImageView+Haneke.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BF1EE81AF8C7FD00B1FDD5 /* UIImageView+Haneke.m */; };
 		23BF1EF21AF8C7FD00B1FDD5 /* UIView+Haneke.m in Sources */ = {isa = PBXBuildFile; fileRef = 23BF1EEA1AF8C7FD00B1FDD5 /* UIView+Haneke.m */; };
 		23CE04F11B906B4200D78F4C /* back_to_reality.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 23CE04F01B906B4200D78F4C /* back_to_reality.jpg */; };
-		23CFA3951BD7CB0200569152 /* UIRefreshControl+FixOffset.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CFA3941BD7CB0200569152 /* UIRefreshControl+FixOffset.m */; settings = {ASSET_TAGS = (); }; };
 		23EA78471A9F013900EACAE4 /* NSObject+Dealloc.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EA78451A9F013900EACAE4 /* NSObject+Dealloc.m */; };
 		23EA78481A9F013900EACAE4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 23EA78461A9F013900EACAE4 /* README.md */; };
 		D5083C2A19F3F7C900C8F00C /* Test1_VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5083C2819F3F7C900C8F00C /* Test1_VC.m */; };
@@ -146,6 +146,8 @@
 		23667B101ADE75C5007F78D8 /* FICImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICImports.h; sourceTree = "<group>"; };
 		23667B111ADE75C5007F78D8 /* FICUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICUtilities.h; sourceTree = "<group>"; };
 		23667B121ADE75C5007F78D8 /* FICUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICUtilities.m; sourceTree = "<group>"; };
+		238FF5BC1BD920FF006840AF /* UIRefreshControl+FixOffset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIRefreshControl+FixOffset.h"; sourceTree = "<group>"; };
+		238FF5BD1BD920FF006840AF /* UIRefreshControl+FixOffset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+FixOffset.m"; sourceTree = "<group>"; };
 		23902F0D1B29CC3200675B43 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
 		23902F0E1B29CC3200675B43 /* Icon-29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29@2x.png"; sourceTree = "<group>"; };
 		23902F0F1B29CC3200675B43 /* Icon-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29@3x.png"; sourceTree = "<group>"; };
@@ -180,8 +182,6 @@
 		23BF1EE91AF8C7FD00B1FDD5 /* UIView+Haneke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Haneke.h"; sourceTree = "<group>"; };
 		23BF1EEA1AF8C7FD00B1FDD5 /* UIView+Haneke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Haneke.m"; sourceTree = "<group>"; };
 		23CE04F01B906B4200D78F4C /* back_to_reality.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = back_to_reality.jpg; sourceTree = "<group>"; };
-		23CFA3931BD7CB0200569152 /* UIRefreshControl+FixOffset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIRefreshControl+FixOffset.h"; sourceTree = "<group>"; };
-		23CFA3941BD7CB0200569152 /* UIRefreshControl+FixOffset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+FixOffset.m"; sourceTree = "<group>"; };
 		23EA78441A9F013900EACAE4 /* NSObject+Dealloc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Dealloc.h"; sourceTree = "<group>"; };
 		23EA78451A9F013900EACAE4 /* NSObject+Dealloc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Dealloc.m"; sourceTree = "<group>"; };
 		23EA78461A9F013900EACAE4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -345,13 +345,13 @@
 		23EA78421A9F00ED00EACAE4 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				238FF5BC1BD920FF006840AF /* UIRefreshControl+FixOffset.h */,
+				238FF5BD1BD920FF006840AF /* UIRefreshControl+FixOffset.m */,
 				230787541BC5616D00731419 /* Swizzling */,
 				23BF1ED91AF8C7FD00B1FDD5 /* Haneke */,
 				23579B661AF25BA500C49E42 /* SDWebImage */,
 				23667B031ADE75C5007F78D8 /* FastImageCache */,
 				23EA78431A9F00FA00EACAE4 /* Dealloc */,
-				23CFA3931BD7CB0200569152 /* UIRefreshControl+FixOffset.h */,
-				23CFA3941BD7CB0200569152 /* UIRefreshControl+FixOffset.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -650,7 +650,7 @@
 				23579B971AF25BA500C49E42 /* UIView+WebCacheOperation.m in Sources */,
 				23BF1EF01AF8C7FD00B1FDD5 /* UIButton+Haneke.m in Sources */,
 				230787571BC5616D00731419 /* iSmartObjectSwizzling.m in Sources */,
-				23CFA3951BD7CB0200569152 /* UIRefreshControl+FixOffset.m in Sources */,
+				238FF5BE1BD920FF006840AF /* UIRefreshControl+FixOffset.m in Sources */,
 				D58CB5601A0D3BCB00041966 /* LoadFiles_VC.m in Sources */,
 				D50B5FCF1A2244D200AC0713 /* CustomView.m in Sources */,
 				23579B931AF25BA500C49E42 /* UIImage+MultiFormat.m in Sources */,
