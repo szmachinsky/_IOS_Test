@@ -68,7 +68,7 @@
     [NSString stringWithFormat:__VA_ARGS__])
 
     #define ALog(...) {                             \
-    NSLog(@"%s(%p) %@", __PRETTY_FUNCTION__, self,  \
+    NSLog(@".assert.%s.(%p) %@", __PRETTY_FUNCTION__, self,  \
     [NSString stringWithFormat:__VA_ARGS__]);       \
     [[NSAssertionHandler currentHandler] handleFailureInFunction:[NSString   \
     stringWithCString:__PRETTY_FUNCTION__ encoding:NSUTF8StringEncoding]     \
@@ -93,6 +93,13 @@
 } while(0) \
 
 
+#if !DEBUG
+# define NSLog(...)     ((void)0)
+# ifdef assert
+#  undef assert
+# endif
+# define assert(...)    ((void)0)
+#endif
 
 
 #define use_FIC_Cache

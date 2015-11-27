@@ -145,6 +145,15 @@ return;\
     NSLog(@"\n\n 1))) self=(%p)  delegate=(%p)  nav=(%p)",id1,id2,id3);
     id1 = id2;
     
+    
+//    DLog(@"test_Dl_log:%d",1);
+//    
+//    ZAssert((id1==id2),@"Z-assert_test");
+//    
+//    NSAssert(1!=2, @"Print this statement.");
+//    id1 = id2;
+//    
+//    assert((id1!=id2));
 }
 
 -(void)runTest1
