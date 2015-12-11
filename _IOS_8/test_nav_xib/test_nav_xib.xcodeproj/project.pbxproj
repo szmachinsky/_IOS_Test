@@ -32,6 +32,7 @@
 		23667B161ADE75C5007F78D8 /* FICImageTableChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B0D1ADE75C5007F78D8 /* FICImageTableChunk.m */; };
 		23667B171ADE75C5007F78D8 /* FICImageTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B0F1ADE75C5007F78D8 /* FICImageTableEntry.m */; };
 		23667B181ADE75C5007F78D8 /* FICUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B121ADE75C5007F78D8 /* FICUtilities.m */; };
+		236E64301C1B037400196BD1 /* TestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 236E642F1C1B037400196BD1 /* TestClass.m */; };
 		238FF5BE1BD920FF006840AF /* UIRefreshControl+FixOffset.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FF5BD1BD920FF006840AF /* UIRefreshControl+FixOffset.m */; };
 		23902F1D1B29CC3200675B43 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 23902F0D1B29CC3200675B43 /* Icon-29.png */; };
 		23902F1E1B29CC3200675B43 /* Icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23902F0E1B29CC3200675B43 /* Icon-29@2x.png */; };
@@ -146,6 +147,8 @@
 		23667B101ADE75C5007F78D8 /* FICImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICImports.h; sourceTree = "<group>"; };
 		23667B111ADE75C5007F78D8 /* FICUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FICUtilities.h; sourceTree = "<group>"; };
 		23667B121ADE75C5007F78D8 /* FICUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FICUtilities.m; sourceTree = "<group>"; };
+		236E642E1C1B037400196BD1 /* TestClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestClass.h; sourceTree = "<group>"; };
+		236E642F1C1B037400196BD1 /* TestClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestClass.m; sourceTree = "<group>"; };
 		238FF5BC1BD920FF006840AF /* UIRefreshControl+FixOffset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIRefreshControl+FixOffset.h"; sourceTree = "<group>"; };
 		238FF5BD1BD920FF006840AF /* UIRefreshControl+FixOffset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+FixOffset.m"; sourceTree = "<group>"; };
 		23902F0D1B29CC3200675B43 /* Icon-29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-29.png"; sourceTree = "<group>"; };
@@ -352,6 +355,8 @@
 				23579B661AF25BA500C49E42 /* SDWebImage */,
 				23667B031ADE75C5007F78D8 /* FastImageCache */,
 				23EA78431A9F00FA00EACAE4 /* Dealloc */,
+				236E642E1C1B037400196BD1 /* TestClass.h */,
+				236E642F1C1B037400196BD1 /* TestClass.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -658,6 +663,7 @@
 				23579B8C1AF25BA500C49E42 /* SDWebImageDecoder.m in Sources */,
 				23BF1EF21AF8C7FD00B1FDD5 /* UIView+Haneke.m in Sources */,
 				23579B891AF25BA500C49E42 /* NSData+ImageContentType.m in Sources */,
+				236E64301C1B037400196BD1 /* TestClass.m in Sources */,
 				D508501F19F3139400857C18 /* MasterViewController.m in Sources */,
 				23579B8E1AF25BA500C49E42 /* SDWebImageDownloaderOperation.m in Sources */,
 				23BF1EEE1AF8C7FD00B1FDD5 /* HNKNetworkFetcher.m in Sources */,

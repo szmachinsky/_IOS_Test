@@ -18,6 +18,8 @@
 #import "LoadFiles_VC.h"
 #import "YandexTest_VC.h"
 
+#import "TestClass.h"
+#import <objc/message.h>
 
 
 /*
@@ -280,6 +282,29 @@ static const char offsetForControl;
     
     NSLog(@" DID APPEAR_2 offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
     b=NO;
+    
+//    TestClass *tst = [TestClass new];
+    
+    typedef void(*InitFun)(id,SEL,id);
+    InitFun initFun = NULL;
+    
+    Class MyClass = NSClassFromString(@"TestClass");
+    SEL   selector1     = NSSelectorFromString(@"testClassMethod:");
+    SEL   selector2     = NSSelectorFromString(@"testRunMethod:");
+    
+    
+    Method initMethod1 = class_getClassMethod(MyClass, selector1);
+    Method initMethod2 = class_getInstanceMethod(MyClass, selector2);
+   
+//    initFun = (void (*)(id,SEL,NSString*))objc_msgSend; //A will call initialize now
+    initFun = (InitFun)method_getImplementation(initMethod1); //B will NOT call initialize now!!!
+    
+    initFun(MyClass, selector1, @"_string_Param_");
+
+    TestClass *tst = [TestClass new]; //A - not inizialize - init //B - inizialize - init
+    
+    b=NO;
+    return;
 }
 
 
