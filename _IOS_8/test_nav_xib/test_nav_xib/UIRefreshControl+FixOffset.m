@@ -209,6 +209,7 @@ static const char enable_RefreshControl_BusyKey;
 
 - (void)beginRefreshing
 {
+    NSLog(@"\n\n ___beginRefreshing_2___");
     _busy = YES;
     [super beginRefreshing];
 }
@@ -216,6 +217,7 @@ static const char enable_RefreshControl_BusyKey;
 
 - (void)endRefreshing
 {
+    NSLog(@"\n\n ___endRefreshing_2___");
     _busy = NO;
     UITableView *tableView = [self selfTableView];
     
@@ -231,14 +233,14 @@ static const char enable_RefreshControl_BusyKey;
             time = [tim floatValue];
         };
         
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)((time+0.05) * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^{
-            [self correctOffset];
-        });
-        
-        NSLog(@" -.-REFR WILL CHECK offset=(%@) inset=(%@)", NSStringFromCGPoint(tableView.contentOffset),NSStringFromUIEdgeInsets(tableView.contentInset));
+//        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+//        
+//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)((time+0.05) * NSEC_PER_SEC));
+//        dispatch_after(popTime, dispatch_get_main_queue(), ^{
+//            [self correctOffset];
+//        });
+//        
+//        NSLog(@" -.-REFR WILL CHECK offset=(%@) inset=(%@)", NSStringFromCGPoint(tableView.contentOffset),NSStringFromUIEdgeInsets(tableView.contentInset));
     } else {
         NSNotification *anote = [NSNotification notificationWithName:@"k_endRefreshing" object:nil userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:anote];
@@ -250,7 +252,7 @@ static const char enable_RefreshControl_BusyKey;
 -(void)correctOffset
 {
     @try
-    {
+    {        
         UITableView *tableView = [self selfTableView];
         if (!tableView)
             return;
@@ -285,6 +287,81 @@ static const char enable_RefreshControl_BusyKey;
 
 @end
 
+#endif
+
+
+//=================================================================================================================
+#define USE_iSmartPullToRefreshUtilitiesUIRefreshControl        1
+
+#if USE_iSmartPullToRefreshUtilitiesUIRefreshControl
+@interface iSmartPullToRefreshUtilitiesUIRefreshControl : UIRefreshControl
+@end
+
+@implementation iSmartPullToRefreshUtilitiesUIRefreshControl //zs222
+
+- (UITableView*)selfTableView
+{
+    UITableView *tableView;
+    UIView* v = [self superview];
+    if ([v isKindOfClass:[UITableView class]]) {
+        tableView = (UITableView*)v;
+    }
+    return tableView;
+}
+
+- (void)beginRefreshing
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(correctOffset) object:nil];
+    [super beginRefreshing];
+}
+
+- (void)endRefreshing
+{
+    NSLog(@"\n\n ___endRefreshing____");
+    [super endRefreshing];
+    
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(correctOffset) object:nil];
+    
+    UITableView *tableView = [self selfTableView];
+    if (!tableView){
+        return;
+    }
+    
+    float time = 0.3;
+    NSNumber *tim = [tableView valueForKey:@"contentOffsetAnimationDuration"];
+    if (tim) {
+        time = [tim floatValue];
+    }
+    
+    [self performSelector:@selector(correctOffset) withObject:nil afterDelay:time + 0.05];
+}
+
+- (void)correctOffset
+{
+    if ([self isRefreshing]){
+        return;
+    }
+    
+    UITableView *tableView = [self selfTableView];
+    if (!tableView){
+        return;
+    }
+    
+    CGPoint p = [tableView contentOffset];
+    float offY = p.y;
+    float insTop = tableView.contentInset.top;
+    float sum = offY + insTop;
+    
+    if ((fabsf(sum) > 10.0) && (offY < 0.0))
+    {
+        p.y = (insTop > FLT_EPSILON)?(-insTop):0.0;
+        [tableView setContentOffset:p animated:YES];
+    }
+}
+
+@end
+#else
+# define iSmartPullToRefreshUtilitiesUIRefreshControl UIRefreshControl
 #endif
 
 

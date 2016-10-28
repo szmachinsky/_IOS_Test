@@ -106,7 +106,7 @@ uint64_t getTickCount(void)
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSLog(@"---0----");
+    NSLog(@"\n\n---didFinishLaunchingWithOptions--0--\n\n");
     uint64_t t1 = getTickCount();
     
     
@@ -157,6 +157,29 @@ uint64_t getTickCount(void)
     NSLog(@">-time to start app = (%llu)ms",(t2-t1));
     
     [[UIApplication sharedApplication] keyWindow].tintColor = [UIColor orangeColor];
+    
+    NSArray *arr = [[UIApplication sharedApplication] shortcutItems];
+    NSLog(@"\n\n arr=(%@) \n\n",arr);
+    
+    
+    if([[UIApplicationShortcutItem class] respondsToSelector:@selector(new)]){
+        
+        [self configDynamicShortcutItems];
+    }
+    
+    if ( (launchOptions) && ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) )
+    {        
+        NSLog(@"\n\n launchOptions(%@)",launchOptions);
+        UIApplicationShortcutItem *shortcutItem =launchOptions[@"UIApplicationLaunchOptionsShortcutItemKey"];
+        if ([shortcutItem  isKindOfClass:[UIApplicationShortcutItem class]]) 
+        {
+            NSLog(@"\n shortcutItem:(%@) (%@)\n\n",shortcutItem.localizedTitle,shortcutItem.type);
+            [self handleShortcutItem:shortcutItem];
+            return NO;
+        }
+    }
+
+    NSLog(@"\n\n---0--end--\n\n");
     
     return YES;
 }
@@ -409,6 +432,62 @@ uint64_t getTickCount(void)
     NSLog(@"%@", errorMessage);
 }
 
+
+
+/**
+ *  @brief config dynamic shortcutItems
+ *  @discussion after first launch, users can see dynamic shortcutItems
+ */
+- (void)configDynamicShortcutItems 
+{
+    
+    NSLog(@"\n\n configDynamicShortcutItems \n\n");
+    
+    
+    // config image shortcut items
+    // if you want to use custom image in app bundles, use iconWithTemplateImageName method
+    UIApplicationShortcutIcon *shortcutSearchIcon = [UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeSearch];
+    UIApplicationShortcutIcon *shortcutFavoriteIcon = [UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeLove];
+    
+    UIApplicationShortcutItem *shortcutSearch = [[UIApplicationShortcutItem alloc]
+                                                 initWithType:@".Search"
+                                                 localizedTitle:@"Item Search"
+                                                 localizedSubtitle:nil
+                                                 icon:shortcutSearchIcon
+                                                 userInfo:nil];
+    
+    UIApplicationShortcutItem *shortcutFavorite = [[UIApplicationShortcutItem alloc]
+                                                   initWithType:@".Favorite"
+                                                   localizedTitle:@"Item Favorite"
+                                                   localizedSubtitle:nil
+                                                   icon:shortcutFavoriteIcon
+                                                   userInfo:nil];
+    
+    
+    // add all items to an array
+    NSArray *items = @[shortcutSearch, shortcutFavorite];
+    
+    // add the array to our app
+    [UIApplication sharedApplication].shortcutItems = items;
+}
+
+
+- (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem
+                                                            completionHandler:(void (^)(BOOL succeeded))completionHandler
+{
+    NSLog(@"\n\n 3D TOUCH:(%@) (%@)\n\n",shortcutItem.localizedTitle,shortcutItem.type);
+    [self handleShortcutItem:shortcutItem];
+//    if (completionHandler) {
+//        completionHandler(NO);
+//    }
+    
+}
+
+
+- (void)handleShortcutItem:(UIApplicationShortcutItem *)shortcutItem
+{
+    NSLog(@"\n\n HANDLE (%@) \n\n",shortcutItem);
+}
 
 
 @end

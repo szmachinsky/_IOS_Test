@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Test3_VC">
@@ -24,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jBi-my-gAZ">
-                    <rect key="frame" x="8" y="65" width="240" height="21"/>
+                    <rect key="frame" x="40" y="8" width="240" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="1" green="0.56078431370000004" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -65,7 +66,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="an5-eu-JHI">
-                    <rect key="frame" x="8" y="101" width="200" height="200"/>
+                    <rect key="frame" x="35" y="37" width="200" height="200"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.98708481520000002" green="1" blue="0.34395314770000002" alpha="1" colorSpace="calibratedRGB"/>
                 </imageView>
@@ -91,43 +92,38 @@
                         <action selector="clearCache:" destination="-1" eventType="touchUpInside" id="SiX-20-U1M"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ejL-B1-DHT">
-                    <rect key="frame" x="28" y="407" width="59" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.2752118892" green="1" blue="0.96885218370000004" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="Remove">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="presssRemButton:" destination="-1" eventType="touchUpInside" id="LaR-3o-fGv"/>
-                    </connections>
-                </button>
                 <visualEffectView opaque="NO" contentMode="scaleToFill" id="0Tn-W4-a6w">
-                    <rect key="frame" x="18" y="214" width="180" height="180"/>
+                    <rect key="frame" x="55" y="37" width="180" height="180"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="yJ5-Q0-bl9">
                         <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back_to_reality.jpg" id="QeH-hf-ONZ">
-                                <rect key="frame" x="22" y="30" width="150" height="150"/>
+                                <rect key="frame" x="-30" y="-40" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                         </subviews>
                     </view>
                     <blurEffect style="light"/>
                 </visualEffectView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ejL-B1-DHT">
+                    <rect key="frame" x="247" y="18" width="59" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.2752118892" green="1" blue="0.96885218370000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Remove">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="presssRemButton:" destination="-1" eventType="touchDown" id="dnY-Hj-78C"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.88831313779999999" green="0.84540636550000003" blue="0.59909837430000001" alpha="1" colorSpace="calibratedRGB"/>
-            <point key="canvasLocation" x="562" y="245"/>
+            <point key="canvasLocation" x="-315" y="213"/>
         </view>
     </objects>
     <resources>
         <image name="back_to_reality.jpg" width="900" height="600"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

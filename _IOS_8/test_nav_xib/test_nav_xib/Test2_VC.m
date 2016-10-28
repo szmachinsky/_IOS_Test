@@ -8,7 +8,8 @@
 
 #import "Test2_VC.h"
 #import <objc/runtime.h>
-
+#import "Test1_VC.h"
+#import "Test3_VC.h"
 @interface Test2_VC ()
 
 @end
@@ -28,6 +29,19 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Refrech) name:@"kRefreshAfterBackgroundState" object:nil];
 //    
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleOrientationChangeNotification:) name:UIDeviceOrientationDidChangeNotification object:nil];
+    
+//    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
+//        NSUInteger ed = self.edgesForExtendedLayout;
+//        self.edgesForExtendedLayout = UIRectEdgeNone;    
+//    }
+//    self.navigationController.navigationBar.translucent = NO;
+    
+    UIView *ww = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    [self.view addSubview:ww];
+    ww.backgroundColor = [UIColor greenColor];
+    ww.layer.borderWidth = 2.0;
+    CGRect fr = ww.frame;
+    fr = CGRectZero;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -145,29 +159,55 @@
 }
 
 - (IBAction)pressButton3:(UIButton *)sender {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil
-                                                                   message:nil
-                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController* alertVC = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:@"This is an alert."
+                                                            preferredStyle:UIAlertControllerStyleActionSheet]; //UIAlertControllerStyleActionSheet UIAlertControllerStyleAlert
+    
+    NSMutableAttributedString *hogan = [[NSMutableAttributedString alloc] initWithString:@"Presenting the great... Hulk Hogan!"];
+    [hogan addAttribute:NSFontAttributeName
+                  value:[UIFont systemFontOfSize:30.0]
+                  range:NSMakeRange(24, 11)];
+    [alertVC setValue:hogan forKey:@"attributedTitle"];  
+    
+    
+    UIViewController *vc = [[Test3_VC alloc] init]; //[[UIViewController alloc] init];
+//    vc.view.backgroundColor = [UIColor cyanColor];  
+//    [alertVC setValue:vc forKey:@"contentViewController"];
+    
     
     UIAlertAction* defaultAction1 = [UIAlertAction actionWithTitle:@"CItem1" style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * action) {}];
+                                                          handler:^(UIAlertAction * action) {}];    
+    [defaultAction1 setValue:vc forKey:@"contentViewController"];
+    
     UIAlertAction* defaultAction2 = [UIAlertAction actionWithTitle:@"CItem2" style:UIAlertActionStyleDefault
                                                            handler:^(UIAlertAction * action) {}];
+    
+    UIImage *accessoryImage = [UIImage imageNamed:@"hist"];
+    [defaultAction2 setValue:accessoryImage forKey:@"image"];
+    
     
     UIAlertAction* canceltAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
                                                           handler:^(UIAlertAction * action) {}];
    
-    [alert addAction:defaultAction1];
-    [alert addAction:defaultAction2];
-    [alert addAction:canceltAction];
+    [alertVC addAction:defaultAction1];
+    [alertVC addAction:defaultAction2];
+    [alertVC addAction:canceltAction];
+    
+    alertVC.view.tintColor = [UIColor redColor];  
+    
+    UIView *subView = alertVC.view.subviews.firstObject;
+    UIView *alertContentView = subView.subviews.firstObject;
+    [alertContentView setBackgroundColor:[UIColor lightGrayColor]]; //[UIColor colorWithPatternImage:[UIImage imageNamed:@"tired_cat.jpg"]]];    
+    alertContentView.layer.cornerRadius = 5;    
 
 //    [self presentViewController:alert animated:YES completion:nil];
+    
     [self setModalPresentationStyle:UIModalPresentationPopover];
-    [alert.popoverPresentationController setSourceView:sender];
+    [alertVC.popoverPresentationController setSourceView:sender];
     
-    [self presentViewController:alert animated:YES completion:nil];
+    [self presentViewController:alertVC animated:YES completion:nil];
     
-    act_Alert = alert;
+    act_Alert = alertVC;
 }
 
 

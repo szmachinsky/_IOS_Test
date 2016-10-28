@@ -22,135 +22,6 @@
 #import <objc/message.h>
 
 
-/*
-#import <objc/runtime.h>
-#import "iSmartObjectSwizzling.h"
-
-@interface UIRefreshControl (test_swizz)
-+ (void)load;
-@end
-
-static const char offsetForControl;
-
-@implementation UIRefreshControl (test_swizz)
-
-+ (void)load
-{
-    NSLog(@"\n\n --SWIZZLE-- for UIRefreshControl \n\n");
-    [self swizzleInstanceMethod:self oldSelector:@selector(beginRefreshing) newSelector:@selector(ZS_beginRefreshing)];
-    [self swizzleInstanceMethod:self oldSelector:@selector(endRefreshing) newSelector:@selector(ZS_endRefreshing)];
-}
-
-- (void)ZS_beginRefreshing
-{
-    UITableView *tableView = [self selfTableView];
-    UIScrollView *s = tableView;
-    float off = tableView.contentOffset.y;
-//    float offStart = s.s
-    NSNumber *val1 = [tableView valueForKey:@"startOffsetY"];
-    NSNumber *val2 = [tableView valueForKey:@"lastUpdateOffsetY"];
-    NSNumber *tim = [tableView valueForKey:@"contentOffsetAnimationDuration"];
-    NSArray *a = [tableView valueForKey:@"animation"];
-    
-    NSLog(@"");
-    NSLog(@" --SWIZZLE-- ZS_beginRefreshing offset.y=%f   of1=%.2f of2=%.2f tim=%.2f anim=%d  \n\n",off,[val1 floatValue],[val2 floatValue],[tim floatValue],a.count);
-    objc_setAssociatedObject(self, &offsetForControl, @(off), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    
-    NSLog(@" --offset=(%@) inset=(%@)", NSStringFromCGPoint(tableView.contentOffset),NSStringFromUIEdgeInsets(tableView.contentInset));
-    NSLog(@" -------- super beginRefreshing--------");
-    [self ZS_beginRefreshing];
-    NSLog(@" --offset=(%@) inset=(%@)", NSStringFromCGPoint(tableView.contentOffset),NSStringFromUIEdgeInsets(tableView.contentInset));
-}
-
-- (void)ZS_endRefreshing
-{
-    UITableView *tableView = [self selfTableView];
-    float off = [objc_getAssociatedObject(self, &offsetForControl) floatValue];
-    
-    NSLog(@"");
-    NSLog(@" --SWIZZLE-- ZS_1-endRefreshing offset.y=%f  Off=%f\n\n",tableView.contentOffset.y,off);
-    
-    //    [[self selfTableView] scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop
-    //                                        animated:NO];
-    //    NSLog(@"\n\n --SWIZZLE-- ZS_2-endRefreshing offset.y=%f\n\n",[self selfTableView].contentOffset.y);
-    
-    NSLog(@" --offset=(%@) inset=(%@)", NSStringFromCGPoint(tableView.contentOffset),NSStringFromUIEdgeInsets(tableView.contentInset));
-    NSLog(@" -------- super endRefreshing -------");
-    [self ZS_endRefreshing];
-    NSLog(@" --offset=(%@) inset=(%@)", NSStringFromCGPoint(tableView.contentOffset),NSStringFromUIEdgeInsets(tableView.contentInset)); //zs1
-    
-//    if (fabs(off - tableView.contentOffset.y) > 1.0) {
-//        NSLog(@" --SWIZZLE-- >>> change offset to = %f \n\n",off);
-// //       UITableView *tableView = [self selfTableView];
-//        CGPoint p = tableView.contentOffset;
-//        p.y = off;
-//        [tableView setContentOffset:p animated:YES];
-//    }
-    
-//    CGPoint p1 = [tableView contentOffset];
-//    UIEdgeInsets ins = [tableView  contentInset];
-//    p1.y = - ins.top;
-//    [tableView setContentOffset:p1 animated:YES];
-    
-    float time = 0.3;
-    NSNumber *tim = [tableView valueForKey:@"contentOffsetAnimationDuration"];
-    if (tim) {
-        time = [tim floatValue];
-    };
-    
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [self performSelector:@selector(correctOffset) withObject:nil afterDelay:time+0.05]; //0.3
-    NSLog(@" --SWIZZLE-- ZS_2-endRefreshing offset.y=%f\n\n",tableView.contentOffset.y);
-}
-
--(UITableView*)selfTableView
-{
-    UITableView *tableView;
-    UIView* v = [self superview];
-    if ([v isKindOfClass:[UITableView class]]) {
-        tableView = (UITableView*)v;
-    }
-    return tableView;
-}
-
--(void)correctOffset
-{
-@try
-  {
-    UITableView *tableView = [self selfTableView];
-    if (!tableView)
-        return;
-    
-    BOOL drgn = tableView.isDragging;
-    BOOL dec = tableView.isDecelerating;
-    
-    CGPoint p = [tableView contentOffset];
-    float offY = p.y;
-    float insTop = tableView.contentInset.top;
-    float sum = offY + insTop;
-    
-    NSLog(@".");
-    NSLog(@" --SWIZZ-- ??? CHECK  correctOffset offset.y=%.3f  inset.top=%.3f  sum=%.3f / drgn=%d  decel=%d",offY,insTop,sum,drgn,dec);
-    if ((fabsf(sum) > 10.0)&&(offY < 0.0))
-    {
-        p.y = (insTop>0.0)?(-insTop):0.0;  //- insTop;
-        NSLog(@" --SWIZZ-- !!! CORRECT offset to:%f",p.y);
-        [tableView setContentOffset:p animated:YES];
-    }
-    
-  }
-@finally
-  {
-    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-  }
-}
-
-
-@end
-
-*/
-
-
 @interface MasterViewController () {
     NSMutableArray *_objects;
     NSInteger def_rows;
@@ -194,6 +65,17 @@ static const char offsetForControl;
     NSLog(@"\n viewDidLoad-end :%d++",b);
     b = NO;
     
+    
+    [self configureRefresh];
+    
+    
+    //3D 
+    if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)] &&
+        (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable))
+    {
+        [self registerForPreviewingWithDelegate:self sourceView:self.view];
+    }    
+    
 }
 
 
@@ -226,7 +108,8 @@ static const char offsetForControl;
     
 //    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:s];
     
-    self.refreshControl.tintColor = [UIColor redColor];
+//    self.refreshControl.tintColor = [UIColor redColor];
+    
     //    self.refreshControl.backgroundColor = [UIColor yellowColor];
     //    [self.refreshControl endRefreshing];
 }
@@ -253,6 +136,53 @@ static const char offsetForControl;
     BOOL b = self.navigationController.interactivePopGestureRecognizer.enabled;
     NSLog(@" -1-viewWillAppear-end :%d--",b);
     b = NO;
+    
+    
+    
+    Class cls = NSClassFromString(@"UIRefreshControl");
+    Block_Check block = ^UIView*(UIView* v) {
+        if ([v isKindOfClass:cls]) {
+            UIRefreshControl *ref = (UIRefreshControl*)v;
+            if (!ref.isHidden && ref.refreshing) {
+                return v;                
+            }
+        }
+        return nil;
+    };
+    UIRefreshControl *ref = (UIRefreshControl*)[self findInSubviews:self.view block:block];
+    if (ref) 
+    {
+        CGPoint p = self.tableView.contentOffset;
+        NSLog(@"\n\n !!!!!!!!!! RELOAD REFRESH 1 : %f !!!!!!!!! \n",self.tableView.contentOffset.y);
+        [ref endRefreshing];
+//        [self performSelector:@selector(reststartREfresh) withObject:nil afterDelay:0.01];
+        [ref beginRefreshing];
+        
+//        CGPoint p1 = [self.tableView contentOffset];
+//        UIEdgeInsets ins = [self.tableView  contentInset];
+//        //  p1.y -= self.refreshControl.bounds.size.height;
+//        p1.y = (ins.top>0.0)?(-ins.top):0.0; //- ins.top;
+//        [self.tableView setContentOffset:p1 animated:NO];  
+        [self.tableView setContentOffset:p animated:NO];
+        NSLog(@"\n\n !!!!!!!!!! RELOAD REFRESH 2 : %f !!!!!!!!! \n",self.tableView.contentOffset.y);
+    }
+    
+}
+
+-(void)reststartREfresh
+{
+    UIRefreshControl *cont = self.refreshControl;
+    [cont beginRefreshing];
+    return;
+    
+    
+    self.refreshControl = nil;
+    self.refreshControl = cont;
+    
+//    [self.refreshControl addTarget:self action:@selector(doRefresh:) forControlEvents:UIControlEventValueChanged];
+
+//    [self configureRefresh];
+    [self manualRefresh];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -278,7 +208,7 @@ static const char offsetForControl;
 
     NSLog(@" DID APPEAR_1 offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
     
-    [self configureRefresh];
+//    [self configureRefresh];
     
     NSLog(@" DID APPEAR_2 offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
     b=NO;
@@ -475,42 +405,86 @@ static const char offsetForControl;
 }
 */
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(UIViewController*)controllerToCall:(NSIndexPath *)indexPath
+{   
+    UIViewController *cont = nil;
     if (indexPath.row == 0) {
         if (!vc1) {
             vc1 = [[Test1_VC alloc] init];
         }
-        [self.navigationController pushViewController:vc1 animated:YES];
+        cont = vc1;
     }
     if (indexPath.row == 1) {
         Test2_VC *vc = [[Test2_VC alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        cont = vc;
     }
     if (indexPath.row == 2) {
         Test3_VC *vc = [[Test3_VC alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        cont = vc;
     }
     if (indexPath.row == 3) {
         LoadFiles_VC *vc = [[LoadFiles_VC alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        cont = vc;
     }
     if (indexPath.row == 4) {
         YandexTest_VC *vc = [[YandexTest_VC alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        cont = vc;
     }
     if (indexPath.row == 5) {
         TstNew1_VC *vc = [[TstNew1_VC alloc] init];
-//        TstNew2_VC *vc = [[TstNew2_VC alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        //        TstNew2_VC *vc = [[TstNew2_VC alloc] init];
+        cont = vc;
     }
+
+    return cont;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIViewController *cont = [self controllerToCall:indexPath];
+    if (cont) {
+        [self.navigationController pushViewController:cont animated:YES];
+    }
+    
+//    if (indexPath.row == 0) {
+//        if (!vc1) {
+//            vc1 = [[Test1_VC alloc] init];
+//        }
+//        [self.navigationController pushViewController:vc1 animated:YES];
+//    }
+//    if (indexPath.row == 1) {
+//        Test2_VC *vc = [[Test2_VC alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
+//    if (indexPath.row == 2) {
+//        Test3_VC *vc = [[Test3_VC alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
+//    if (indexPath.row == 3) {
+//        LoadFiles_VC *vc = [[LoadFiles_VC alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
+//    if (indexPath.row == 4) {
+//        YandexTest_VC *vc = [[YandexTest_VC alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
+//    if (indexPath.row == 5) {
+//        TstNew1_VC *vc = [[TstNew1_VC alloc] init];
+////        TstNew2_VC *vc = [[TstNew2_VC alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
   
+    
     if (indexPath.row == 6) {
         [self manualRefresh];
 //        [self performSelector:@selector(manualRefresh) withObject:nil afterDelay:0.1];
     }
-    
-    if (indexPath.row > 6) {
+    if (indexPath.row == 7) {
+//        [self testSubview];
+        [self performSelector:@selector(testSubview) withObject:nil afterDelay:0.1];
+    }
+   
+    if (indexPath.row > 7) {
         if (!self.detailViewController) {
             self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
         }
@@ -530,37 +504,41 @@ static const char offsetForControl;
     // ... refresh the table data ...
 //    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refresh_1"];
 
-    NSLog(@" =DO= REFRESH BEGIN offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
+    NSLog(@" =====DO= REFRESH BEGIN offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
 //    sleep(2);
 //    NSLog(@"\n\n =1= REFRESH END ==\n");
 //   [sender endRefreshing];
-    [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:2.0];
+    [self testSubview];
+    
+    [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:10.0];
 }
 
 
 -(void)manualRefresh
 {
 //    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refresh_2"];
-    NSLog(@" =20= MANUAL REFRESH BEGIN offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
+///    NSLog(@" =20= MANUAL REFRESH BEGIN offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
     
-    BOOL anim = NO;
+    BOOL anim = YES;
     
 //    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop
 //                                  animated:anim];
     
-    NSLog(@" =21= MANUAL REFRESH BEGIN offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
+///    NSLog(@" =21= MANUAL REFRESH BEGIN offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
 
 //    CGPoint p1 = [self.tableView contentOffset];
 //    p1.y -= self.refreshControl.bounds.size.height;
 //    [self.tableView setContentOffset:p1 animated:anim];
     
     
-    NSLog(@" =22= MANUAL REFRESH BEGIN offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
+///    NSLog(@" =22= MANUAL REFRESH BEGIN offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
     
     NSLog(@"--------- beginRefreshing ----------");
+//    [self testSubview];
     [self.refreshControl beginRefreshing];
+//    [self testSubview];
     
-    NSLog(@" =23= MANUAL REFRESH BEGIN offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
+///    NSLog(@" =23= MANUAL REFRESH BEGIN offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
     
     CGPoint p1 = [self.tableView contentOffset];
     UIEdgeInsets ins = [self.tableView  contentInset];
@@ -568,9 +546,9 @@ static const char offsetForControl;
     p1.y = (ins.top>0.0)?(-ins.top):0.0; //- ins.top;
     [self.tableView setContentOffset:p1 animated:anim];
     
-    NSLog(@" =24= MANUAL REFRESH BEGIN offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
+///    NSLog(@" =24= MANUAL REFRESH BEGIN offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
     
-    [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:2.0];
+    [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:10.0];
  }
 
 -(void)stopRefresh
@@ -579,7 +557,12 @@ static const char offsetForControl;
     NSAssert([NSThread isMainThread], @"Should called only from main thread!");
     
     NSLog(@"--------- endRefreshing ----------");
+    
+//    [self testSubview];
+    
     [self.refreshControl endRefreshing];
+    
+//    [self testSubview];
     
     NSLog(@" REFRESH END_2 offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
     
@@ -595,8 +578,10 @@ static const char offsetForControl;
 -(void)checkOffsetAfterRefrechControl
 {
 //    NSLog(@"\n\n REFRESH CONTROL_1 offset=%f %d\n",self.tableView.contentOffset.y,self.refreshControl.isRefreshing);
-    NSLog(@"_");
-    NSLog(@" CHECK REFRESH CONTROL offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
+    NSLog(@"===");
+    NSLog(@"=============== CHECK REFRESH CONTROL offset=(%@) inset=(%@)",NSStringFromCGPoint(self.tableView.contentOffset),NSStringFromUIEdgeInsets(self.tableView.contentInset));
+
+    [self testSubview];
     
 //    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop
 //                                  animated:NO];
@@ -605,4 +590,207 @@ static const char offsetForControl;
 }
 
 
+
+
+//===========================================================================================================
+
+typedef UIView* (^Block_Check)(UIView* v);
+#define max_search_dip_level 25
+
+
+-(void)testSubview
+{    
+    Class cl1 = [UIRefreshControl class];
+    Class cl2 = NSClassFromString(@"UIRefreshControl");
+    Class cl3 = NSClassFromString(@"FX_UIRefreshControl");
+    Class cl4 = NSClassFromString(@"_UIRefreshControlModernReplicatorView");
+    Block_Check block = ^UIView*(UIView* v) {
+        if ([v isKindOfClass:cl2]) {
+            return v;
+        }
+        return nil;
+    };
+    
+//    UIView *v = self.tableView.refr
+    
+    UIRefreshControl *aViev = (UIRefreshControl*)[self findInSubviews:self.view block:block];
+    if (aViev) {
+        NSString *scl = NSStringFromClass([aViev class]);
+        BOOL bol = aViev.superview;
+        NSString *ss = NSStringFromClass([aViev.superview class]);
+        NSLog(@"----------- found0(%@) hidden:%d  superview:%d(%@) refreshing=%d-------------",scl,aViev.isHidden,bol,ss,aViev.refreshing);
+        
+        UIView *v0 = (UIView*)[aViev valueForKeyPath:@"_contentView"];
+        scl = NSStringFromClass([v0 class]);
+ //       NSLog(@"-- found1:(%@) --",scl);
+        CALayer *lay0 = v0.layer;
+        NSArray *anim0 = [lay0 animationKeys];
+                
+        UIView *v1 = (UIView*)[aViev valueForKeyPath:@"_contentView._replicatorView"];
+        scl = NSStringFromClass([v1 class]);
+//        NSLog(@"-- found2:(%@) --",scl);
+        CALayer *lay1 = v1.layer;
+        NSArray *anim1 = [lay1 animationKeys];
+                
+        NSLog(@">>>>>>>>>>> anim1=%@",anim1);
+        v0 = nil;
+    } else {
+        NSLog(@"-- not found --");        
+    }
+    
+}
+
+
+-(UIView*)findInSubviews:(UIView*)v block:(Block_Check)find_block
+{
+    static int level = 0;
+    NSArray *subviews = v.subviews;
+    __block UIView *findView = nil;
+    
+    @try
+    {
+        level++;
+        NSLog(@"\n\n  --------------->> find in:%@  /subviews=%lu --level=%d-------\n",NSStringFromClass([v class]),(unsigned long)v.subviews.count,level);
+        if (level > max_search_dip_level) {
+            return findView;
+        }
+        [subviews enumerateObjectsUsingBlock:^(UIView* view, NSUInteger idx, BOOL *stop) {
+            if (find_block(view)) {
+                NSLog(@" >>> YES FOUND in (%@) at level %d!!!! \n",NSStringFromClass([view class]),level);
+                *stop = YES;
+                findView = view;
+            }
+        }];
+        if (!findView) {
+            for (UIView *v in subviews) {
+                if (v.subviews.count) {
+                    UIView *vi = [self findInSubviews:v block:find_block];
+                    if (vi) {
+                        findView = vi;
+                        break;
+                    }
+                }
+            }
+        }
+    } //try
+    @finally {
+        level--;
+        return findView;
+    }
+    
+}
+
+
+//=============================================================================
+#pragma mark - 3d touch
+
+- (BOOL)isForceTouchAvailable 
+{
+    BOOL isForceTouchAvailable = NO;
+    if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)]) 
+    {
+        isForceTouchAvailable = self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable;
+    }
+    return isForceTouchAvailable;
+}
+
+
+
+//- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection 
+//{ 
+//    [super traitCollectionDidChange:previousTraitCollection];
+//    if ([self isForceTouchAvailable]) 
+//    {
+//        if (!self.previewingContext) {
+//            self.previewingContext = [self registerForPreviewingWithDelegate:self 
+//                                         sourceView:self.view];
+//        }
+//    } else {
+//        if (self.previewingContext) {
+//            [self unregisterForPreviewingWithContext:self.previewingContext];
+//            self.previewingContext = nil;
+//        }
+//    }
+//}
+
+
+- (nullable UIViewController *)previewingContext:(id <UIViewControllerPreviewing>)previewingContext 
+                       viewControllerForLocation:(CGPoint)location 
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:location];
+    
+    if (indexPath) {
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        
+//        id *content = self.data[indexPath.row];
+        
+        UIViewController *previewController = [self controllerToCall:indexPath];
+        
+//        previewController.content = content;
+        
+        previewingContext.sourceRect = cell.frame;
+        
+        return previewController;
+    }
+    return nil;
+}
+
+- (void)previewingContext:(id<UIViewControllerPreviewing>)previewingContext
+     commitViewController:(UIViewController *)viewControllerToCommit 
+{
+    if (viewControllerToCommit) {
+        [self.navigationController pushViewController:viewControllerToCommit animated:YES];
+    }
+}
+
+
+
+- (NSArray<id<UIPreviewActionItem>> *)___previewActionItems 
+{
+    __weak typeof(self) weakSelf = self;
+    UIPreviewAction *shareAction1 = [UIPreviewAction actionWithTitle:@"Share1" 
+                                                               style:UIPreviewActionStyleDefault 
+                                                             handler:^(UIPreviewAction *action, UIViewController *previewViewController){
+                                                                 NSLog(@"ACTION 1");
+                                                             }];
+    UIPreviewAction *shareAction2 = [UIPreviewAction actionWithTitle:@"Share2" 
+                                                               style:UIPreviewActionStyleDefault 
+                                                             handler:^(UIPreviewAction *action, UIViewController *previewViewController){
+                                                                 NSLog(@"ACTION 2");
+                                                             }];
+    UIPreviewAction *shareAction3 = [UIPreviewAction actionWithTitle:@"Share3" 
+                                                               style:UIPreviewActionStyleDefault 
+                                                             handler:^(UIPreviewAction *action, UIViewController *previewViewController){
+                                                                 NSLog(@"ACTION 3");
+                                                             }];
+    
+    return @[shareAction1,shareAction2,shareAction3];
+}
+
+
+- (NSArray<id> *)previewActionItems {
+    
+    // setup a list of preview actions
+    UIPreviewAction *action1 = [UIPreviewAction actionWithTitle:@"Action 1" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        NSLog(@"Action 1 triggered");
+    }];
+    
+    UIPreviewAction *action2 = [UIPreviewAction actionWithTitle:@"Destructive Action" style:UIPreviewActionStyleDestructive handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        NSLog(@"Destructive Action triggered");
+    }];
+    
+    UIPreviewAction *action3 = [UIPreviewAction actionWithTitle:@"Selected Action" style:UIPreviewActionStyleSelected handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        NSLog(@"Selected Action triggered");
+    }];
+    
+    // add them to an arrary
+    NSArray *actions = @[action1, action2, action3];
+    
+    // and return them
+    return actions;
+}
+
 @end
+
+
+

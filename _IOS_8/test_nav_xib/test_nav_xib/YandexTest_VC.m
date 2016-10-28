@@ -126,6 +126,81 @@ char mostFrequentCharacter(char* str, int size)
 
 
 
+//==============================================================================
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self testSubview];
+};
+
+
+
+typedef UIView* (^Block_Check)(UIView* v);
+#define max_search_dip_level 25
+
+
+-(void)testSubview
+{
+    NSString *s = self.navigationItem.prompt;
+    
+    Block_Check block = ^UIView*(UIView* v) {
+        if ([v isKindOfClass:[UIActivityIndicatorView class]]) {
+//            if ([((UILabel*)(v)).text isEqual:s]) {
+                return v;
+//            }
+        }
+        return nil;
+    };
+    
+    UIActivityIndicatorView *aViev = (UIActivityIndicatorView*)[self findInSubviews:self.view block:block];
+    if (aViev) {
+        NSLog(@"-- found --");
+    } else {
+        NSLog(@"-- not found --");        
+    }
+    
+}
+
+
+-(UIView*)findInSubviews:(UIView*)v block:(Block_Check)find_block
+{
+    static int level = 0;
+    NSArray *subviews = v.subviews;
+    __block UIView *findView = nil;
+    
+    @try
+    {
+        level++;
+    NSLog(@"\n\n  --------------->> find in:%@  /subviews=%lu --level=%d-------\n",NSStringFromClass([v class]),(unsigned long)v.subviews.count,level);
+        if (level > max_search_dip_level) {
+            return findView;
+        }
+        [subviews enumerateObjectsUsingBlock:^(UIView* view, NSUInteger idx, BOOL *stop) {
+            if (find_block(view)) {
+                NSLog(@" >>> YES FOUND in (%@) at level %d!!!! \n",NSStringFromClass([view class]),level);
+                *stop = YES;
+                findView = view;
+            }
+        }];
+        if (!findView) {
+            for (UIView *v in subviews) {
+                if (v.subviews.count) {
+                    UIView *vi = [self findInSubviews:v block:find_block];
+                    if (vi) {
+                        findView = vi;
+                        break;
+                    }
+                }
+            }
+        }
+    } //try
+    @finally {
+        level--;
+        return findView;
+    }
+
+}
+
 
 @end
 

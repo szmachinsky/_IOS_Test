@@ -10,4 +10,8 @@
 
 @interface YandexTest_VC : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *butt;
+
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activ;
+
 @end
