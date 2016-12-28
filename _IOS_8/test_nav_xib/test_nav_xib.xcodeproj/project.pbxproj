@@ -39,8 +39,11 @@
 		23667B161ADE75C5007F78D8 /* FICImageTableChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B0D1ADE75C5007F78D8 /* FICImageTableChunk.m */; };
 		23667B171ADE75C5007F78D8 /* FICImageTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B0F1ADE75C5007F78D8 /* FICImageTableEntry.m */; };
 		23667B181ADE75C5007F78D8 /* FICUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B121ADE75C5007F78D8 /* FICUtilities.m */; };
+<<<<<<< Updated upstream
 		236E64301C1B037400196BD1 /* TestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 236E642F1C1B037400196BD1 /* TestClass.m */; };
 		238379CB1CEA000B000D6016 /* test_nav_xib-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 238379CA1CEA000B000D6016 /* test_nav_xib-Info.plist */; };
+=======
+>>>>>>> Stashed changes
 		238FF5BE1BD920FF006840AF /* UIRefreshControl+FixOffset.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FF5BD1BD920FF006840AF /* UIRefreshControl+FixOffset.m */; };
 		23902F1D1B29CC3200675B43 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 23902F0D1B29CC3200675B43 /* Icon-29.png */; };
 		23902F1E1B29CC3200675B43 /* Icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23902F0E1B29CC3200675B43 /* Icon-29@2x.png */; };
@@ -814,7 +817,11 @@
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< Updated upstream
 				PROVISIONING_PROFILE = "e19c127c-78fa-4de8-b46d-58643d11f6c7";
+=======
+				PROVISIONING_PROFILE = "c0fd3441-6a1b-4e3c-80ec-95394082f652";
+>>>>>>> Stashed changes
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -833,7 +840,11 @@
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+<<<<<<< Updated upstream
 				PROVISIONING_PROFILE = "";
+=======
+				PROVISIONING_PROFILE = "c0fd3441-6a1b-4e3c-80ec-95394082f652";
+>>>>>>> Stashed changes
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
