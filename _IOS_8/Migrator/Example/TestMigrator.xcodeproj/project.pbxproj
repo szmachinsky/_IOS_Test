@@ -188,6 +188,7 @@
 				TargetAttributes = {
 					239A20C01ACC10E700A4AEF4 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 68XV6NYX8A;
 					};
 				};
 			};
@@ -345,6 +346,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 68XV6NYX8A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TestMigrator/TestMigrator.pch;
 				INFOPLIST_FILE = TestMigrator/Info.plist;
@@ -358,6 +360,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 68XV6NYX8A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TestMigrator/TestMigrator.pch;
 				INFOPLIST_FILE = TestMigrator/Info.plist;
