@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		230787571BC5616D00731419 /* iSmartObjectSwizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 230787561BC5616D00731419 /* iSmartObjectSwizzling.m */; };
-		234E33681D19277D00331BAB /* hist.png in Resources */ = {isa = PBXBuildFile; fileRef = 234E33661D19277D00331BAB /* hist.png */; };
-		234E33691D19277D00331BAB /* hist@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 234E33671D19277D00331BAB /* hist@2x.png */; };
-		234E336C1D192D8F00331BAB /* door-cat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 234E336A1D192D8F00331BAB /* door-cat.jpg */; };
-		234E336D1D192D8F00331BAB /* tired_cat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 234E336B1D192D8F00331BAB /* tired_cat.jpg */; };
 		23579B881AF25BA500C49E42 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 23579B681AF25BA500C49E42 /* MKAnnotationView+WebCache.m */; };
 		23579B891AF25BA500C49E42 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 23579B6A1AF25BA500C49E42 /* NSData+ImageContentType.m */; };
 		23579B8A1AF25BA500C49E42 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 23579B6C1AF25BA500C49E42 /* SDImageCache.m */; };
@@ -39,11 +35,8 @@
 		23667B161ADE75C5007F78D8 /* FICImageTableChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B0D1ADE75C5007F78D8 /* FICImageTableChunk.m */; };
 		23667B171ADE75C5007F78D8 /* FICImageTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B0F1ADE75C5007F78D8 /* FICImageTableEntry.m */; };
 		23667B181ADE75C5007F78D8 /* FICUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 23667B121ADE75C5007F78D8 /* FICUtilities.m */; };
-<<<<<<< Updated upstream
 		236E64301C1B037400196BD1 /* TestClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 236E642F1C1B037400196BD1 /* TestClass.m */; };
 		238379CB1CEA000B000D6016 /* test_nav_xib-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 238379CA1CEA000B000D6016 /* test_nav_xib-Info.plist */; };
-=======
->>>>>>> Stashed changes
 		238FF5BE1BD920FF006840AF /* UIRefreshControl+FixOffset.m in Sources */ = {isa = PBXBuildFile; fileRef = 238FF5BD1BD920FF006840AF /* UIRefreshControl+FixOffset.m */; };
 		23902F1D1B29CC3200675B43 /* Icon-29.png in Resources */ = {isa = PBXBuildFile; fileRef = 23902F0D1B29CC3200675B43 /* Icon-29.png */; };
 		23902F1E1B29CC3200675B43 /* Icon-29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23902F0E1B29CC3200675B43 /* Icon-29@2x.png */; };
@@ -108,10 +101,6 @@
 		23063D491B947BA000D494A9 /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
 		230787551BC5616D00731419 /* iSmartObjectSwizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iSmartObjectSwizzling.h; sourceTree = "<group>"; };
 		230787561BC5616D00731419 /* iSmartObjectSwizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iSmartObjectSwizzling.m; sourceTree = "<group>"; };
-		234E33661D19277D00331BAB /* hist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hist.png; path = ../../../../../../Downloads/hist.png; sourceTree = "<group>"; };
-		234E33671D19277D00331BAB /* hist@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hist@2x.png"; path = "../../../../../../Downloads/hist@2x.png"; sourceTree = "<group>"; };
-		234E336A1D192D8F00331BAB /* door-cat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "door-cat.jpg"; path = "../../../../../../Downloads/door-cat.jpg"; sourceTree = "<group>"; };
-		234E336B1D192D8F00331BAB /* tired_cat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = tired_cat.jpg; path = ../../../../../../Downloads/tired_cat.jpg; sourceTree = "<group>"; };
 		23579B671AF25BA500C49E42 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		23579B681AF25BA500C49E42 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
 		23579B691AF25BA500C49E42 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
@@ -467,10 +456,6 @@
 				235B4D571D2E545800486BBF /* Group.png */,
 				235B4D581D2E545800486BBF /* Group@2x.png */,
 				235B4D591D2E545800486BBF /* Group@3x.png */,
-				234E336A1D192D8F00331BAB /* door-cat.jpg */,
-				234E336B1D192D8F00331BAB /* tired_cat.jpg */,
-				234E33661D19277D00331BAB /* hist.png */,
-				234E33671D19277D00331BAB /* hist@2x.png */,
 				238379CA1CEA000B000D6016 /* test_nav_xib-Info.plist */,
 				23CE04F01B906B4200D78F4C /* back_to_reality.jpg */,
 				23902F0D1B29CC3200675B43 /* Icon-29.png */,
@@ -585,7 +570,7 @@
 				ORGANIZATIONNAME = Sergei;
 				TargetAttributes = {
 					D508500119F3139400857C18 = {
-						DevelopmentTeam = XFKLL3K2Z3;
+						DevelopmentTeam = 68XV6NYX8A;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -629,13 +614,10 @@
 				235B4D5B1D2E545800486BBF /* Group@2x.png in Resources */,
 				D58ADFD71A8A9BD7004D9E91 /* TstNew1_VC.xib in Resources */,
 				23902F251B29CC3200675B43 /* Icon-57.png in Resources */,
-				234E33681D19277D00331BAB /* hist.png in Resources */,
 				23902F1E1B29CC3200675B43 /* Icon-29@2x.png in Resources */,
 				D5083C2B19F3F7C900C8F00C /* Test1_VC.xib in Resources */,
 				23902F2C1B29CC3200675B43 /* Icon-76@2x.png in Resources */,
-				234E336D1D192D8F00331BAB /* tired_cat.jpg in Resources */,
 				D50B5FD11A2244F000AC0713 /* CustomView.xib in Resources */,
-				234E33691D19277D00331BAB /* hist@2x.png in Resources */,
 				23CE04F11B906B4200D78F4C /* back_to_reality.jpg in Resources */,
 				23902F211B29CC3200675B43 /* Icon-40@2x.png in Resources */,
 				D508502519F3139400857C18 /* MasterViewController.xib in Resources */,
@@ -652,7 +634,6 @@
 				23902F261B29CC3200675B43 /* Icon-57@2x.png in Resources */,
 				D58ADFDC1A8AA5C6004D9E91 /* TstNew2_VC.xib in Resources */,
 				23902F1D1B29CC3200675B43 /* Icon-29.png in Resources */,
-				234E336C1D192D8F00331BAB /* door-cat.jpg in Resources */,
 				23902F281B29CC3200675B43 /* Icon-60@3x.png in Resources */,
 				23902F221B29CC3200675B43 /* Icon-40@3x.png in Resources */,
 				23902F201B29CC3200675B43 /* Icon-40.png in Resources */,
@@ -808,8 +789,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 68XV6NYX8A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "test_nav_xib/test_nav_xib-Prefix.pch";
 				INFOPLIST_FILE = "test_nav_xib/test_nav_xib-Info.plist";
@@ -817,11 +799,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-<<<<<<< Updated upstream
-				PROVISIONING_PROFILE = "e19c127c-78fa-4de8-b46d-58643d11f6c7";
-=======
-				PROVISIONING_PROFILE = "c0fd3441-6a1b-4e3c-80ec-95394082f652";
->>>>>>> Stashed changes
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -833,6 +812,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 68XV6NYX8A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "test_nav_xib/test_nav_xib-Prefix.pch";
 				INFOPLIST_FILE = "test_nav_xib/test_nav_xib-Info.plist";
@@ -840,11 +820,8 @@
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-<<<<<<< Updated upstream
 				PROVISIONING_PROFILE = "";
-=======
-				PROVISIONING_PROFILE = "c0fd3441-6a1b-4e3c-80ec-95394082f652";
->>>>>>> Stashed changes
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
