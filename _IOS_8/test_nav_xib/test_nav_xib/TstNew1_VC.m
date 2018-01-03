@@ -39,11 +39,11 @@
 - (NSUInteger)supportedInterfaceOrientations
 {
     NSLog(@"-ask-dev_supportedInterfaceOrientations");
-    return UIInterfaceOrientationMaskPortrait |
-    UIInterfaceOrientationMaskLandscapeLeft |
-    UIInterfaceOrientationMaskLandscapeRight;
+//    return UIInterfaceOrientationMaskPortrait |
+//    UIInterfaceOrientationMaskLandscapeLeft |
+//    UIInterfaceOrientationMaskLandscapeRight;
 //    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft;
-    //    return UIInterfaceOrientationMaskPortrait;
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 /*
@@ -89,21 +89,16 @@
 }
 
 - (IBAction)pressBut2:(id)sender {
-//    CGRect b2 = self.view2.bounds;
-//    CGRect f1 = self.view1.frame;
-//    CGRect f2 = self.view2.frame;
-//    
-//    b2.size.width +=10;
-//    b2.size.height +=10;
-//    self.view2.bounds = b2;
-//    
-//    f1 = self.view1.frame;
-//    f2 = self.view2.frame;
-    
+   
 //    self.view1.transform = CGAffineTransformMakeRotation(45 * M_PI/180.0);
     
-    self.view2.transform = CGAffineTransformMakeTranslation(100, 0);
+//    self.view2.transform = CGAffineTransformMakeTranslation(100, 0);
     self.view2.transform = CGAffineTransformRotate(self.view2.transform, 45 * M_PI/180.0);
+    
+    
+//    self.view1.transform = CGAffineTransformScale(self.view1.transform, 1.0, 0.5);
+    
+    
     
     
     

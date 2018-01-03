@@ -24,6 +24,33 @@ return;\
 }
 
 
+@interface NSArray (FixOffset)     //use Category
++ (void)setFixEnabled:(BOOL)isON;
+- (BOOL)refreshIsBusy;
+@end
+
+@implementation NSArray (FixOffset)
+@end
+
+//=========================================================
+
+@interface FX_NSArray:NSArray     //use subClass
+- (instancetype)init;
+- (void)removeAllObjects;
+@end
+
+@implementation FX_NSArray
+- (instancetype)init
+{   self = [super init];
+    return self;
+}
+- (void)removeAllObjects
+{
+    
+}
+@end
+
+
 @interface Test1_VC ()
 
 @end
@@ -31,7 +58,7 @@ return;\
 @implementation Test1_VC
 
 - (NSString *)deallocDescription{ //custom dealloc message!!!!
-    return @"DEALLOC_TEST1_VC";
+    return @"custom string_DEALLOC_TEST1_VC";
 }
 
 -(void)dealloc
@@ -220,7 +247,7 @@ return;\
 
 
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     NSLog(@"d1---dev_supportedInterfaceOrientations");
     

@@ -226,10 +226,10 @@
     Method initMethod1 = class_getClassMethod(MyClass, selector1);
     Method initMethod2 = class_getInstanceMethod(MyClass, selector2);
    
-//    initFun = (void (*)(id,SEL,NSString*))objc_msgSend; //A will call initialize now
+    //initFun = (void (*)(id,SEL,NSString*))objc_msgSend; /////A will call initialize now
     initFun = (InitFun)method_getImplementation(initMethod1); //B will NOT call initialize now!!!
     
-    initFun(MyClass, selector1, @"_string_Param_");
+    initFun(MyClass, selector1, @"_string_Param_"); //A will call initialize now
 
     TestClass *tst = [TestClass new]; //A - not inizialize - init //B - inizialize - init
     
@@ -408,6 +408,7 @@
 -(UIViewController*)controllerToCall:(NSIndexPath *)indexPath
 {   
     UIViewController *cont = nil;
+    //Test1_VC *vc1 = nil;
     if (indexPath.row == 0) {
         if (!vc1) {
             vc1 = [[Test1_VC alloc] init];

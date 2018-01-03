@@ -18,6 +18,31 @@
 #endif
 
 
+//@interface NSArray (FixOffset)     //use Category
+//+ (void)setFixEnabled:(BOOL)isON;
+//- (BOOL)refreshIsBusy;
+//@end
+//
+//@implementation NSArray (FixOffset)
+//@end
+//
+//@interface FX_NSArray:NSArray     //use subClass
+//- (instancetype)init;
+//- (void)removeAllObjects;
+//@end
+//
+//@implementation FX_NSArray
+//- (instancetype)init
+//{   self = [super init];
+//    return self;
+//}
+//- (void)removeAllObjects
+//{
+//    
+//}
+//@end
+
+
 #if Use_Category_UIRefreshControl_FixOffset_Not_Subclass
 
 //============================================== UIRefreshControl (FixOffset) =============================================================================

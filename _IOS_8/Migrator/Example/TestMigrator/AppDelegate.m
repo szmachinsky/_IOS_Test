@@ -51,7 +51,7 @@
     
 //   migrator.models = @[ @{@"name":@"TestMigrator"}, @{@"name":@"TestMigrator 2"}, @{@"name":@"TestMigrator 3"}, @{@"name":@"TestMigrator 4"},];
     migrator.migrationClass = [CDMigrationManager class];
-//  migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ModelDataDir/"];
+    migrator.modelsUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"ModelDataDir/"];
     
     
     migrator.checkAfterMigration = ^BOOL(NSManagedObjectContext *context) {

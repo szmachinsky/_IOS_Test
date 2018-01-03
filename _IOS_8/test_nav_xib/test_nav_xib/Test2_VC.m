@@ -34,6 +34,9 @@
 //        NSUInteger ed = self.edgesForExtendedLayout;
 //        self.edgesForExtendedLayout = UIRectEdgeNone;    
 //    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.navigationController.navigationBar.translucent = !(self.navigationController.navigationBar.translucent);
+    });
 //    self.navigationController.navigationBar.translucent = NO;
     
     UIView *ww = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];

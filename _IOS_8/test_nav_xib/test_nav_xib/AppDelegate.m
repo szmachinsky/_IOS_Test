@@ -66,23 +66,23 @@
 
 
 
-@implementation UINavigationController (OrientationSettings_IOS6)
-
--(BOOL)shouldAutorotate {
-    NSLog(@"-1-Main_shouldAutorotate");
-    return [[self.viewControllers lastObject] shouldAutorotate];
-}
-
--(NSUInteger)supportedInterfaceOrientations {
-    NSLog(@"-2-Main_supportedInterfaceOrientations");
-   return [[self.viewControllers lastObject] supportedInterfaceOrientations];
-}
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    NSLog(@"-3-Main_preferredInterfaceOrientationForPresentation");
-    return [[self.viewControllers lastObject] preferredInterfaceOrientationForPresentation];
-}
-@end
+//@implementation UINavigationController (OrientationSettings_IOS6)
+//
+//-(BOOL)shouldAutorotate {
+//    NSLog(@"-1-Main_shouldAutorotate");
+//    return [[self.viewControllers lastObject] shouldAutorotate];
+//}
+//
+//-(NSUInteger)supportedInterfaceOrientations {
+//    NSLog(@"-2-Main_supportedInterfaceOrientations");
+//   return [[self.viewControllers lastObject] supportedInterfaceOrientations];
+//}
+//
+//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+//    NSLog(@"-3-Main_preferredInterfaceOrientationForPresentation");
+//    return [[self.viewControllers lastObject] preferredInterfaceOrientationForPresentation];
+//}
+//@end
 
 
 uint64_t getTickCount(void)
